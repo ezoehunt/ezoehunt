@@ -1,6 +1,6 @@
 <img class="image-me" src="<?php echo esc_url( home_url('/images/me.jpg') ); ?>">
 
-<h1>Thinker Designer Maker Doer</h1>
+<h2>Thinker Designer Maker Doer</h2>
 
 <p>Inspired by the ways great UX simplifies the complex. Equally committed to making things and thinking about them. Theory and practice, with a healthy dose of creativity and imagination.</p>
 

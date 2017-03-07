@@ -1,6 +1,4 @@
 <?php
-
-
 $args = array(
   'post_type'       =>  'work',
   'post_status'     =>  'publish',
@@ -13,9 +11,7 @@ $find = new WP_Query($args );
 
 if ( $find->have_posts() ) : ?>
 
-<div id="posts-featured" class="row">
-
-  <div class="row featured-wrapper">
+<div class="row featured-wrapper" style="border:1px solid green;">
 
 <?php
 while ( $find->have_posts() ) : $find->the_post();
@@ -62,7 +58,7 @@ echo '</pre>';
 <?php
 endwhile;
 ?>
-  </div>
+
 
 </div>
 

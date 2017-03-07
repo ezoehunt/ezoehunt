@@ -8,7 +8,7 @@
 
   <br/><a class="noborder icon-contact" href="mailto:<?php echo antispambot("eh@ezoehunt.com"); ?>" title="Email me"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>
 
-  <a class="noborder icon-contact" href="http://twitter.com/#!/ezoehunt" target="_blank" title="Find me on Twitter" rel="me"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+  <a class="noborder icon-contact" href="https://twitter.com/ezoehunt" target="_blank" title="Find me on Twitter" rel="me"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
 
   <a class="noborder icon-contact" href="http://www.linkedin.com/in/ezoehunt" target="_blank" title="Find me on LinkedIn" rel="me"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
 

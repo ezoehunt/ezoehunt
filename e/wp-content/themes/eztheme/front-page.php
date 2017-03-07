@@ -8,17 +8,46 @@ get_header();
 
 ?>
 
-<div id="main-about" class="hidden-sm-down" style="border:1px solid blue;">
+<!--
+<div main content - same for all>
+  <div about not visible on small>
+  </div>
+  <div home loop - includes border top on med only - loop is used on all other pages too>
+    <div blurb - has margin bottom 2 rem blurb is used on SOME other pages>
+    <div featured items has margintop 0 padding top 2rem with border top - wbordertop class for the border and the paddingtop>
+  </div>
+</div>
+-->
 
-<?php include '_about_blurb.php'; ?>
+<div id="main-content" class="main-content">
 
-</div><!-- end #main-about -->
+  <div id="blurb-about" class="hidden-sm-down subsection subsection-noborder">
 
-<div id="main-content" class="" style="border:1px solid red;">
+    <?php include '_blurb_about.php'; ?>
 
-<?php include '_loop_home.php'; ?>
+  </div>
 
-</div><!-- end #main-content -->
+  <div id="page-block">
+
+    <div id="blurb-work" class="subsection">
+      <?php include '_blurb_work.php'; ?>
+    </div>
+
+    <div id="grid-work" class="subsection">
+      <?php include '_loop_home.php'; ?>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
 
 <div id="main-footer">
 
