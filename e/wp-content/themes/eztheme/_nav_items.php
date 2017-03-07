@@ -1,23 +1,19 @@
 <ul class="navbar-nav mr-auto">
 
 <li class="nav-item active">
-  <a title="" class="nav-link" href="">Home</a>
+  <a title="Go to home page" class="nav-link" href="<?php echo home_url('/'); ?>">Home</a>
 </li>
 
 <li class="nav-item">
-  <a title="" class="nav-link" href="">Resume</a>
+  <a title="Go to Work section" class="nav-link" href="<?php echo home_url('/work'); ?>">Work</a>
 </li>
 
 <li class="nav-item">
-  <a title="" class="nav-link" href="">Work</a>
+  <a title="Go to Words section" class="nav-link" href="<?php echo home_url('/words'); ?>">Words</a>
 </li>
 
 <li class="nav-item">
-  <a title="" class="nav-link" href="">Words</a>
-</li>
-
-<li class="nav-item">
-  <a title="" class="nav-link" href="">Contact</a>
+  <a title="Email me" class="nav-link" href="mailto:<?php echo antispambot("eh@ezoehunt.com"); ?>">Contact</a>
 </li>
 
 </ul>
