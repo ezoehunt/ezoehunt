@@ -9,15 +9,22 @@
 *
 */
 
-// REMOVE WP ADMIN BAR FROM SITE
+// UPDATES TO WORDPRESS DEFAULTS
+/* --- Remove admin bar from site --- */
 add_filter('show_admin_bar', '__return_false');
 
-
-// INLCUDE PROJECT IMAGES
-include 'project_images.php';
-
-// ADD SUPPORT FOR POST THUMBNAILS - APPLIES EVERYWHERE
+/* --- Add featured image to posts --- */
 add_theme_support( 'post-thumbnails' );
+
+/* --- Update Admin CSS --- */
+function admin_style() {
+  wp_enqueue_style('admin-styles', get_template_directory_uri().'/admin_eztheme.css');
+}
+add_action('admin_enqueue_scripts', 'admin_style');
+
+
+// INLCUDE NEW FIELDS FOR CUSTOM POST TYPE = PROJECT
+include '_project_details.php';
 
 
 // CREATE NEW CUSTOM POST TYPE = PROJECT
@@ -63,10 +70,15 @@ register_taxonomy("project_tags", array("work"), array(
 ));
 
 
+
+// OLD add custom fields for CPT
+/*
 // ADD CUSTOM FIELDS TO CUSTOM POST TYPE = PROJECT
 function add_project_meta_boxes() {
 	add_meta_box("project_details_meta", "Project Details", "add_project_details_meta_box", "work", "normal", "high");
 }
+add_action( 'admin_init', 'add_project_meta_boxes' );
+
 
 function add_project_details_meta_box()
 {
@@ -117,7 +129,8 @@ function save_project_custom_fields(){
     update_post_meta($post->ID, "contribution", @$_POST["contribution"]);
   }
 }
-add_action( 'admin_init', 'add_project_meta_boxes' );
+
 add_action( 'save_post', 'save_project_custom_fields' );
+*/
 
 ?>

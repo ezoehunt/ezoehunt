@@ -1,4 +1,4 @@
-<img class="me img-fluid" src="<?php echo esc_url( home_url('/images/me.jpg') ); ?>">
+<img class="image-me" src="<?php echo esc_url( home_url('/images/me.jpg') ); ?>">
 
 <h1>Thinker Designer Maker Doer</h1>
 

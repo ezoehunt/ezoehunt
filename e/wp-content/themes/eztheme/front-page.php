@@ -12,19 +12,19 @@ get_header();
 
 <?php include '_about_blurb.php'; ?>
 
-</div>
+</div><!-- end #main-about -->
 
 <div id="main-content" class="" style="border:1px solid red;">
 
-  include home page content here
+<?php include '_loop_home.php'; ?>
 
-</div><!-- end #content-main -->
+</div><!-- end #main-content -->
 
 <div id="main-footer">
 
 <?php get_footer(); ?>
 
-</div>
+</div><!-- end #main-footer -->
 
 </div><!-- end #wrapper -->
 
