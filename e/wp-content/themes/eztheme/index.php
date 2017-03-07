@@ -12,7 +12,9 @@ get_header();
   <?php include '_sidebar.php'; ?>
 
   <div id="main-column" class="col-md-8" style="border:1px solid red;">
-    sldfjslkdf
+
+    include archive or single content here based on urls and such
+
   </div><!-- end #main-column -->
 
 </div><!-- end #content-main -->
