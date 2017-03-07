@@ -8,15 +8,15 @@ get_header();
 
 ?>
 
-<div id="content-main" class="row">
+<div id="main-about" class="hidden-sm-down">
 
-  <?php include '_sidebar.php'; ?>
+<?php include '_about_blurb.php'; ?>
 
-  <div id="main-column" class="col-md-8" style="border:1px solid red;">
+</div><!-- end #main-about -->
 
-    include home page content here
+<div id="content-main" class="row" style="border:1px solid red;">
 
-  </div><!-- end #main-column -->
+  include home page content here
 
 </div><!-- end #content-main -->
 

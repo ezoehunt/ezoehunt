@@ -22,9 +22,12 @@
   <link rel="icon" type="image/x-icon" href="<?php echo home_url('/images/favicon.ico'); ?>" />
 
   <!-- Font + Style -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:300,400,500,700,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
+  
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+
   <link rel="stylesheet" href="<?php echo home_url('/css/application.min.css'); ?>">
 
   <!-- Scripts -->
