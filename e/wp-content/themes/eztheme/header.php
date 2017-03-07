@@ -25,7 +25,7 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
-  
+
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
 
   <link rel="stylesheet" href="<?php echo home_url('/css/application.min.css'); ?>">
@@ -74,7 +74,7 @@
   </div>
 
   <div id="logo">
-    <img class="logo" src="/images/logo.png">
+    <a href="" class="noborder hvr-wobble-vertical"><img class="logo" src="/images/logo.png"></a>
     <h1>Elizabeth Hunt</h1>
   </div>
 
