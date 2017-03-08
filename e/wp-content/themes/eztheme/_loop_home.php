@@ -1,4 +1,4 @@
-  <?php
+<?php
 $args = array(
   'post_type'       =>  'work',
   'post_status'     =>  'publish',

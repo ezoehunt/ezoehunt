@@ -1,6 +1,7 @@
 <?php
 /**
 * @package eztheme
+*
 * Home Page
 */
 
@@ -10,7 +11,7 @@ get_header();
 
 <div id="main-content" class="main-content">
 
-  <div id="page-block" class="page-block-lesspad">
+  <div id="page-block" class="page-block-forgrid">
 
     <div id="blurb-about" class="subsection">
       <?php include '_blurb_about.php'; ?>

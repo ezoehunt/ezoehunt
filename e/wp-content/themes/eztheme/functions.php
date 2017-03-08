@@ -10,6 +10,7 @@
 */
 
 // UPDATES TO WORDPRESS DEFAULTS
+
 /* --- Remove admin bar from site --- */
 add_filter('show_admin_bar', '__return_false');
 
@@ -21,6 +22,20 @@ function admin_style() {
   wp_enqueue_style('admin-styles', get_template_directory_uri().'/admin_eztheme.css');
 }
 add_action('admin_enqueue_scripts', 'admin_style');
+
+/* --- Add Categories to bodyclass for Single Posts --- */
+add_filter('body_class','add_category_to_single');
+function add_category_to_single($classes) {
+  if (is_single() ) {
+    global $post;
+    foreach((get_the_category($post->ID)) as $category) {
+      // add category slug to the $classes array
+      $classes[] = $category->category_nicename;
+    }
+  }
+  // return the $classes array
+  return $classes;
+}
 
 
 // INLCUDE NEW FIELDS FOR CUSTOM POST TYPE = PROJECT
@@ -132,5 +147,27 @@ function save_project_custom_fields(){
 
 add_action( 'save_post', 'save_project_custom_fields' );
 */
+
+// Misc Functions
+function sluggify($url)
+{
+  # Prep string with some basic normalization
+  $url = strtolower($url);
+  $url = strip_tags($url);
+  $url = stripslashes($url);
+  $url = html_entity_decode($url);
+
+  # Remove quotes (can't, etc.)
+  $url = str_replace('\'', '', $url);
+
+  # Replace non-alpha numeric with hyphens
+  $match = '/[^a-z0-9]+/';
+  $replace = '-';
+  $url = preg_replace($match, $replace, $url);
+
+  $url = trim($url, '-');
+
+  return $url;
+}
 
 ?>

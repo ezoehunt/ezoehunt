@@ -7,7 +7,7 @@
 $bodyclass = get_body_class();
 
 // Connect to DB
-include('/Users/ezoehunt/Sites/ezoehunt/connectToWP.php');
+include('/Users/mozilla/Sites/ezoehunt/connectToWP.php');
 //include('/home/rkxgktjc/db/connectToWP.php');
 
 // Remove some things from wp_head()
@@ -27,7 +27,7 @@ $generalKeys ='Elizabeth Hunt, Making Things and Thinking About Them, UX, UX des
 <html <?php language_attributes(); ?>>
 
 <head>
-<?php include '_head_meta.php'; ?>
+<?php include '_content_head_meta.php'; ?>
 
 <!-- Wordpress included stuff -->
 <?php wp_head(); ?>

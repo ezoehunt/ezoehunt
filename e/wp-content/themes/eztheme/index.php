@@ -1,22 +1,58 @@
 <?php
 /**
 * @package eztheme
+*
+* Main Index Page
 */
+?>
 
-get_header();
+<?php get_header(); ?>
+
+<div id="main-content" class="main-content">
+
+<?php
+// Assign templates for all pages except for
+// Front Page, which is static
+
+if ( is_single() ) {
+  $post_categories = wp_get_post_categories( $post->ID );
+  $cats = array();
+  foreach ( $post_categories as $c ) {
+    $cat = get_category( $c );
+    $cat_slug = $cat->slug;
+  }
+  include '_content_single_'.$cat_slug.'.php';
+}
+
+if ( is_category() ) {
+  $cat_slug = sluggify( single_cat_title('', false) );
+  include '_content_category_'.$cat_slug.'.php';
+}
+
+if ( is_page('about') ) {
+  include '_content_about.php';
+}
+
+if ( is_404() ) {
+  include '_content_404.php';
+}
+
+/*if ( is_search() ) {
+  include '_content_search_results.php';
+}
+*/
 
 ?>
 
-<div id="content-main" class="row">
+</div><!-- end #main-content -->
 
-  <?php include '_sidebar.php'; ?>
+<div id="main-footer">
+  <?php get_footer(); ?>
+</div><!-- end #main-footer -->
 
-  <div id="main-column" class="col-md-8" style="border:1px solid red;">
+</div><!-- end #wrapper -->
 
-    include archive or single content here based on urls and such
+<script src="<?php echo home_url('/js/application.min.js'); ?>"></script>
 
-  </div><!-- end #main-column -->
-
-</div><!-- end #content-main -->
-
-<?php get_footer(); ?>
+</body>
+</html>
