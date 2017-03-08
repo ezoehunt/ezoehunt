@@ -1,15 +1,15 @@
 <ul class="navbar-nav mr-auto">
 
-<li class="nav-item active">
+<li class="nav-item<?php if ( in_array('home',$bodyclass) OR is_search() OR is_404() ) { echo ' active'; } ?>">
   <a title="Go to home page" class="nav-link" href="<?php echo home_url('/'); ?>">Home</a>
 </li>
 
-<li class="nav-item">
+<li class="nav-item<?php if (in_array('category-work',$bodyclass)) { echo ' active'; } ?>">
   <a title="Go to Work section" class="nav-link" href="<?php echo home_url('/work'); ?>">Work</a>
 </li>
 
-<!--li class="nav-item">
-  <a title="Go to Words section" class="nav-link" href="<?php echo home_url('/words'); ?>">Words</a>
+<!--li class="nav-item<?php //if (in_array('category-words',$bodyclass)) { echo ' active'; } ?>">
+  <a title="Go to Words section" class="nav-link" href="<?php //echo home_url('/words'); ?>">Words</a>
 </li-->
 
 <li class="nav-item">
