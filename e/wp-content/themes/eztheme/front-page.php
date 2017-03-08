@@ -24,29 +24,21 @@ get_header();
       <?php include '_loop_home.php'; ?>
     </div>
 
+    <div id="blurb-words" class="subsection">
+      <?php include '_blurb_words.php'; ?>
+    </div>
+
   </div>
 
 </div>
 
-
-
-
-
-
-
-
-
 <div id="main-footer">
-
-<?php get_footer(); ?>
-
+  <?php get_footer(); ?>
 </div><!-- end #main-footer -->
 
 </div><!-- end #wrapper -->
 
 <script src="<?php echo home_url('/js/application.min.js'); ?>"></script>
-
-<script src="<?php echo home_url('/js/holder.js'); ?>"></script>
 
 <?php wp_footer(); ?>
 

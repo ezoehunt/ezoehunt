@@ -2,7 +2,7 @@
 $args = array(
   'post_type'       =>  'work',
   'post_status'     =>  'publish',
-  'posts_per_page'  =>  6,
+  'posts_per_page'  =>  2,
   'orderby'         =>  'date',
   'order'           =>  'DESC'
 );
@@ -10,7 +10,7 @@ $args = array(
 $find = new WP_Query($args );
 ?>
 
-<div class="grid-home">
+<div id="grid-home">
 
   <?php include '_blurb_portfolio.php'; ?>
 
@@ -26,8 +26,15 @@ $title = get_the_title();
 ?>
 
     <li>
-      <a href="<?php echo $post->ID; ?>">
+      <a title="" href="<?php echo $post->ID; ?>">
+
         <img class="grid-image img-fluid" src="<?php echo $featuredImage[0];?>">
+
+        <figcaption class="ez-caption">
+          <p><?php echo the_title(); ?>
+          <br/><span>&#8212; view project &#8212;</span></p>
+        </figcaption>
+
       </a>
     </li>
 
