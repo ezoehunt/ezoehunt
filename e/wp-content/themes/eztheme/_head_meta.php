@@ -20,7 +20,7 @@
 <meta name="rating" content="general" />
 <meta name="keywords" content="<?php
   if ( is_single() )
-  { $keyw = get_custom($post->ID,'ez-keyw'); echo $generalKeys.', '.$keyw; }
+  { $keys = rwmb_meta( 'project_details_keywords' ); echo $generalKeys.', '.$keys; }
   else { echo $generalKeys; }?>"/>
 
 <!-- Meta Social -->

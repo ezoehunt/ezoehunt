@@ -1,4 +1,4 @@
-<?php
+  <?php
 $args = array(
   'post_type'       =>  'work',
   'post_status'     =>  'publish',
@@ -26,7 +26,7 @@ $title = get_the_title();
 ?>
 
     <li>
-      <a title="" href="<?php echo $post->ID; ?>">
+      <a title="View project" href="<?php the_permalink() ?>">
 
         <img class="grid-image img-fluid" src="<?php echo $featuredImage[0];?>">
 

@@ -4,7 +4,7 @@
 */
 ?>
 
-<p class="contacts">GET IN TOUCH
+<p id="contacts" class="contacts">GET IN TOUCH
 
   <br/><a class="noborder icon-contact" href="mailto:<?php echo antispambot("eh@ezoehunt.com"); ?>" title="Email me"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>
 
