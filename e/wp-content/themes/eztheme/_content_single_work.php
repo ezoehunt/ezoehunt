@@ -7,15 +7,15 @@
 global $post;
 ?>
 
-<div id="page-block" class="page-block-forgrid">
+<p id="breadcrumb" class="breadcrumb">
+  <a href="/" title="Return to home page">Home</a>
+  &nbsp; <span class="therefore">&#8756;</span> &nbsp;
+  <a href="/work" title="Go to Work section"><?php echo mygetcatname($post->ID);?></a>
+  &nbsp; <span class="therefore">&#8756;</span> &nbsp;
+  </li><span style="font-weight:500;"><?php echo get_the_title(); ?></span>
+</p>
 
-  <p id="breadcrumb" class="breadcrumb">
-    <a href="/" title="Return to home page">Home</a>
-    &nbsp; / &nbsp;
-    <a href="/work" title="Go to Work section"><?php echo mygetcatname($post->ID);?></a>
-    &nbsp; / &nbsp;
-    </li><span style="font-weight:500;"><?php echo get_the_title(); ?></span>
-  </p>
+<div id="page-block" class="page-block-forgrid">
 
 <?php if ( have_posts() ) : ?>
 
