@@ -22,7 +22,7 @@ get_header();
     </div>
 
     <div id="grid-image" class="subsection">
-      <?php include '_loop_home.php'; ?>
+      <?php include '_content_home.php'; ?>
     </div>
 
     <div id="blurb-words" class="subsection">

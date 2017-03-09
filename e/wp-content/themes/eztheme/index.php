@@ -15,12 +15,7 @@
 // Front Page, which is static
 
 if ( is_single() ) {
-  $post_categories = wp_get_post_categories( $post->ID );
-  $cats = array();
-  foreach ( $post_categories as $c ) {
-    $cat = get_category( $c );
-    $cat_slug = $cat->slug;
-  }
+  $cat_slug = mygetcatslug($post->ID);
   include '_content_single_'.$cat_slug.'.php';
 }
 
@@ -46,9 +41,9 @@ if ( is_404() ) {
 
 </div><!-- end #main-content -->
 
-<div id="main-footer">
-  <?php get_footer(); ?>
-</div><!-- end #main-footer -->
+<!--div id="main-footer">
+  <?php //get_footer(); ?>
+</div--><!-- end #main-footer -->
 
 </div><!-- end #wrapper -->
 

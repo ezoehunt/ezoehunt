@@ -85,89 +85,87 @@ register_taxonomy("project_tags", array("work"), array(
 ));
 
 
-
-// OLD add custom fields for CPT
-/*
-// ADD CUSTOM FIELDS TO CUSTOM POST TYPE = PROJECT
-function add_project_meta_boxes() {
-	add_meta_box("project_details_meta", "Project Details", "add_project_details_meta_box", "work", "normal", "high");
-}
-add_action( 'admin_init', 'add_project_meta_boxes' );
-
-
-function add_project_details_meta_box()
-{
-	global $post;
-	$custom = get_post_custom( $post->ID );
-
-	?>
-	<style>.width99 {width:99%;}</style>
-	<p>
-		<label><b>Keywords:</b></label><br />
-		<input type="text" name="keywords" value="<?= @$custom["keywords"][0] ?>" class="width99" />
-	</p>
-  <p>
-		<label><b>Website:</b></label><br />
-		<input type="text" name="website" value="<?= @$custom["website"][0] ?>" class="width99" />
-	</p>
-  <p>
-		<label><b>Headline:</b></label><br />
-		<textarea rows="5" name="headline" class="width99"><?= @$custom["headline"][0] ?></textarea>
-	</p>
-  <p>
-		<label><b>Challenge:</b></label><br />
-		<textarea rows="5" name="challenge" class="width99"><?= @$custom["challenge"][0] ?></textarea>
-	</p>
-  <p>
-		<label><b>Solution:</b></label><br />
-		<textarea rows="5" name="solution" class="width99"><?= @$custom["solution"][0] ?></textarea>
-	</p>
-  <p>
-		<label><b>Contribution:</b></label><br />
-		<textarea rows="5" name="contribution" class="width99"><?= @$custom["contribution"][0] ?></textarea>
-	</p>
-	<?php
-}
-
-
-// SAVE CUSTOM FIELD DATA WHEN CREATING/UPDATING CUSTOM POST TYPE = PROJECT
-function save_project_custom_fields(){
-  global $post;
-
-  if ( $post )
-  {
-    update_post_meta($post->ID, "keywords", @$_POST["keywords"]);
-    update_post_meta($post->ID, "website", @$_POST["website"]);
-    update_post_meta($post->ID, "headline", @$_POST["headline"]);
-    update_post_meta($post->ID, "challenge", @$_POST["challenge"]);
-    update_post_meta($post->ID, "solution", @$_POST["solution"]);
-    update_post_meta($post->ID, "contribution", @$_POST["contribution"]);
-  }
-}
-
-add_action( 'save_post', 'save_project_custom_fields' );
-*/
-
 // Misc Functions
-function sluggify($url)
+function sluggify($string)
 {
   # Prep string with some basic normalization
-  $url = strtolower($url);
-  $url = strip_tags($url);
-  $url = stripslashes($url);
-  $url = html_entity_decode($url);
+  $string = strtolower($string);
+  $string = strip_tags($string);
+  $string = stripslashes($string);
+  $string = html_entity_decode($string);
 
   # Remove quotes (can't, etc.)
-  $url = str_replace('\'', '', $url);
+  $string = str_replace('\'', '', $string);
 
   # Replace non-alpha numeric with hyphens
   $match = '/[^a-z0-9]+/';
   $replace = '-';
-  $url = preg_replace($match, $replace, $url);
+  $string = preg_replace($match, $replace, $string);
 
-  $url = trim($url, '-');
+  $string = trim($string, '-');
 
-  return $url;
+  return $string;
 }
+
+
+function mygetcatname($post_id) {
+  $post_categories = wp_get_post_categories( $post_id );
+  $cats = array();
+  foreach ( $post_categories as $c ) {
+    $cat = get_category( $c );
+    $cat_name = $cat->name;
+  }
+  return $cat_name;
+}
+
+
+function mygetcatslug($post_id) {
+  $post_categories = wp_get_post_categories( $post_id );
+  $cats = array();
+  foreach ( $post_categories as $c ) {
+    $cat = get_category( $c );
+    $cat_slug = $cat->slug;
+  }
+  return $cat_slug;
+}
+
+
+function mynextprevious( $post_id, $type ) {
+  global $post;
+  // Get the category
+  $cat_name = mygetcatname($post_id);
+  // Adjust output
+  if ( $cat_name == 'Work' ) {
+    $cat_alt = $type.' Porfolio project';
+  }
+  if ( $cat_name == 'Words' ) {
+    $cat_alt = $type.' post in Words';
+  }
+  // Match type to icons + function
+  if ( $type == 'previous' ) {
+    $function = get_previous_post();
+    $icon = '<i class="fa fa-arrow-circle-left" aria-hidden="true"></i>';
+  }
+  elseif ( $type == 'next' ) {
+    $function = get_next_post();
+    $icon = '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>';
+  }
+  // If none, return false (empty)
+  if( $function ) {
+    return '<a class="noborder" title="See '.$cat_alt.'" href="'.get_post_permalink($function->ID).'">'.$icon.'</a>';
+  }
+  else {
+    return false;
+  }
+}
+
+
+function mygetimageid($image_url) {
+	global $wpdb;
+	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));
+  return $attachment;
+}
+
+
 
 ?>

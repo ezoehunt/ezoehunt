@@ -24,7 +24,8 @@ function project_details_register_meta_boxes( $meta_boxes ) {
       ),
       array(
         'id'   => $prefix.'website',
-        'name' => __( 'Website', 'rwmb' ),
+        //esc_html__( 'URL', 'your-prefix' ),
+        'name' => esc_html__( 'Website', 'rwmb' ),
         'type' => 'url',
         'class'   => 'ez-admin-text'
       ),
@@ -91,7 +92,7 @@ function project_details_register_meta_boxes( $meta_boxes ) {
             ),
 					),
           array(
-    				'id'      => $prefix.'image',
+    				'id'      => $prefix.'image_images',
             'name'    => esc_html__( 'Image', 'rwmb' ),
     				'type'    => 'image_advanced',
             'class'  => 'ez-admin-imginput',
