@@ -5,34 +5,61 @@
 * Content to be included on Single Work pages
 */
 global $post;
-//$post = get_post($post_id);
-//var_dump($post);
 ?>
 
 <div id="page-block" class="page-block-forgrid">
 
-  <p id="breadcrumb" style="border:1px solid red;">
-    <a class="" href="/" title="Return to home page">&#171; Home</a> &nbsp;<?php echo mygetcatname($post->ID);?> </li><span class="active"><?php echo get_the_title(); ?></span>
+  <p id="breadcrumb" class="breadcrumb">
+    <a href="/" title="Return to home page">Home</a>
+    &nbsp; / &nbsp;
+    <a href="/work" title="Go to Work section"><?php echo mygetcatname($post->ID);?></a>
+    &nbsp; / &nbsp;
+    </li><span style="font-weight:500;"><?php echo get_the_title(); ?></span>
   </p>
 
 <?php if ( have_posts() ) : ?>
 
 <?php while ( have_posts() ) : the_post(); ?>
 
-  <div id="<?php echo 'post-';echo the_ID();?>" style="border:1px solid red;">
-    <p class="myprevious"><?php echo mynextprevious($post->ID, 'previous');?></p>
-    <h1 style="text-align:center;" id="project-headline"><?php echo get_post_meta($post->ID,'project_details_headline',true); ?></h1>
-    <p class="mynext"><?php echo mynextprevious($post->ID, 'next');?></p>
+  <div id="project-header" class="<?php echo 'post-';echo the_ID();?>">
+
+    <p class="myprevious">
+      <?php
+        if ( mynextprevious($post->ID, 'previous') ) {
+            echo mynextprevious($post->ID, 'previous');
+        }
+        else {
+          echo '&nbsp;';
+        }
+      ?>
+    </p>
+
+    <h1 id="project-headline"><?php echo get_post_meta($post->ID,'project_details_headline',true); ?></h1>
+
+    <p class="mynext">
+      <?php
+        if ( mynextprevious($post->ID, 'next') ) {
+            echo mynextprevious($post->ID, 'next');
+        }
+        else {
+          echo '&nbsp;';
+        }
+      ?>
+    </p>
   </div>
 
-  <div id="project-overview" style="border:1px solid red;">
-    <p id="project-challenge">
-      <?php echo get_post_meta($post->ID,'project_details_challenge',true); ?>
+  <div id="project-overview" style="width:100%;display:inline-block;margin-bottom:0;margin-bottom:1rem;">
+
+    <p id="project-challenge" style="float:left;width:32%;border:1px solid #58414b;padding:1rem;background-color:#FCFAFB;margin-bottom:0;margin-right:2%;">
+      <span style="font-weight:500;">Challenge</span>
+      <br/><?php echo get_post_meta($post->ID,'project_details_challenge',true); ?>
     </p>
-    <p id="project-solution">
+
+    <p id="project-solution" style="float:left;width:32%;border:1px solid blue;margin-bottom:0;margin-right:2%;">
       <?php echo get_post_meta($post->ID,'project_details_solution',true); ?>
     </p>
-    <p id="project-contribution">
+
+    <p id="project-contribution" style="float:right;width:32%;border:1px solid blue;margin-bottom:0;">
       <?php echo get_post_meta($post->ID,'project_details_contribution',true); ?>
     </p>
   </div>
@@ -55,9 +82,9 @@ if ( ! empty($images) ) {
 }
 ?>
 
-  <div id="project-content" style="border:1px solid red;">
+  <div id="project-content" style="padding-top:1rem;border-top:1px dotted red;">
 
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-pills" role="tablist" style="justify-content: center;padding-bottom:1rem;border-bottom:1px dotted red;">
       <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="#design" role="tab">Design</a>
       </li>
