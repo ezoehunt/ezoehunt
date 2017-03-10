@@ -1,6 +1,6 @@
 <img class="image-me img-fluid" src="<?php echo esc_url( home_url('/images/me.jpg') ); ?>">
 
-<h2>Thinker Designer Maker Doer</h2>
+<h1 class="home-headline">Thinker Designer Maker Doer</h1>
 
 <p>Inspired by the ways great UX simplifies the complex. Equally committed to making things and thinking about them. Theory and practice, with a healthy dose of creativity and imagination.</p>
 
