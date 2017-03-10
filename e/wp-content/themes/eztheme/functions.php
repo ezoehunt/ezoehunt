@@ -152,7 +152,7 @@ function mynextprevious( $post_id, $type ) {
   }
   // If none, return false (empty)
   if( $function ) {
-    return '<a class="noborder" title="See '.$cat_alt.'" href="'.get_post_permalink($function->ID).'">'.$icon.'</a>';
+    return '<a class="noborder nohash" title="See '.$cat_alt.'" href="'.get_post_permalink($function->ID).'">'.$icon.'</a>';
   }
   else {
     return false;

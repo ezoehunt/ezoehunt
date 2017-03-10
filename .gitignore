@@ -5,3 +5,4 @@ _assets
 /node_modules
 gulpfile.js
 package.json
+/e/wp-content/uploads

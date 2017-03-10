@@ -41,9 +41,9 @@ if ( is_404() ) {
 
 </div><!-- end #main-content -->
 
-<!--div id="main-footer">
-  <?php //get_footer(); ?>
-</div--><!-- end #main-footer -->
+<div id="main-footer">
+  <?php get_footer(); ?>
+</div><!-- end #main-footer -->
 
 </div><!-- end #wrapper -->
 

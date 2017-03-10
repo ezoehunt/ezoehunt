@@ -98,8 +98,8 @@ _gaq.push(['_trackPageview']);
   </div>
 
   <div id="logo">
-    <a title="Go to home page" href="<?php echo esc_url( home_url('/') ); ?>" class="noborder hvr-wobble-vertical"><img class="logo" src="/images/logo.png"></a>
-    <h1>Elizabeth Hunt</h1>
+    <a title="Go to home page" href="<?php echo esc_url( home_url('/') ); ?>" class="noborder hvr-wobble-vertical"><img class="logo" src="/images/logo.png">
+    <h1>Elizabeth Hunt</h1></a>
   </div>
 
   <div id="nav-medium">
