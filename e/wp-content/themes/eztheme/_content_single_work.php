@@ -21,7 +21,7 @@ global $post;
 
 <?php while ( have_posts() ) : the_post(); ?>
 
-<div id="project-header" class="<?php echo 'post-';echo the_ID();?> row">
+<div id="project-header" class="row">
 
   <div class="col-6 col-sm-1 myprevious">
     <?php
@@ -45,7 +45,7 @@ global $post;
     ?>
   </div>
 
-  <h1 id="project-headline" class="col-12 col-sm-10 pull-sm-1"><?php echo get_post_meta($post->ID,'project_details_headline',true); ?></h1>
+  <h1 id="page-headline" class="col-12 col-sm-10 pull-sm-1 <?php echo 'post-';echo the_ID();?>"><?php echo get_post_meta($post->ID,'project_details_headline',true); ?></h1>
 
 </div>
 

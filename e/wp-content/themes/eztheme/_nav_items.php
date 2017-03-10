@@ -13,10 +13,11 @@
 </li>
 
 <li class="nav-item<?php if ( is_page('about') ) { echo ' active'; } ?>">
-  <a title="Get in touch !" class="nav-link" href="<?php echo home_url('/about'); ?>">Contact</a>
+  <a title="About Me" class="nav-link" href="<?php echo home_url('/about'); ?>">About Me</a>
 </li>
-<!--li class="nav-item">
-  <a title="Email me" class="nav-link" href="mailto:<?php echo antispambot("eh@ezoehunt.com"); ?>">Contact</a>
-</li-->
+
+<li class="nav-item">
+  <a title="Email me" class="nav-link" href="mailto:<?php echo antispambot("eh@ezoehunt.com"); ?>">Contact <i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+</li>
 
 </ul>

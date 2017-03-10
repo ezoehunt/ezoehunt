@@ -26,11 +26,7 @@ $find = new WP_Query($args);
 
 <div id="page-block" class="row page-block-bread">
 
-  <div id="project-header" class="<?php echo 'post-';echo the_ID();?> row">
-
-    <h1 id="project-headline" class="col-12">Portfolio Projects</h1>
-
-  </div>
+  <h1 id="page-headline" class="col-12 <?php echo 'post-';echo the_ID();?>">Portfolio Projects</h1>
 
   <div id="grid-work">
 
