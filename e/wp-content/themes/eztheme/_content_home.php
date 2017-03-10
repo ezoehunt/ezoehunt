@@ -2,6 +2,7 @@
 $args = array(
   'post_type'       =>  'work',
   'post_status'     =>  'publish',
+  'project_tags'    =>  'featured',
   'posts_per_page'  =>  2,
   'orderby'         =>  'date',
   'order'           =>  'DESC'

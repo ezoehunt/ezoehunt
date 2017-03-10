@@ -9,9 +9,9 @@ get_header();
 
 ?>
 
-<div id="main-content" class="main-content">
+<div id="main-content" class="main-content-nobread">
 
-  <div id="page-block" class="page-block-forgrid">
+  <div id="page-block" class="page-block">
 
     <div id="blurb-about" class="subsection">
       <?php include '_blurb_about.php'; ?>
