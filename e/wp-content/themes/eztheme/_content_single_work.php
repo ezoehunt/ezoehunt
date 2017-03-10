@@ -15,12 +15,11 @@ global $post;
   <?php echo get_the_title(); ?>
 </p>
 
-<div id="page-block" class="page-block row">
+<div id="page-block" class="row page-block-bread">
 
 <?php if ( have_posts() ) : ?>
 
 <?php while ( have_posts() ) : the_post(); ?>
-
 
 <div id="project-header" class="<?php echo 'post-';echo the_ID();?> row">
 
@@ -210,14 +209,3 @@ foreach ( $process as $image ) :
 <?php endif; ?>
 
 </div><!-- end #page-block -->
-
-
-
-<script>
-/*
-$(document).ready(function() {
-  var offsetSize = $("nav").innerHeight();
-  $("html, body").animate({scrollTop:$(window.location.hash).offset().top-offsetSize }, 500);
-});
-*/
-</script>

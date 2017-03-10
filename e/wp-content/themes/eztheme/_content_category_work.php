@@ -18,57 +18,57 @@ $args = array(
 $find = new WP_Query($args);
 ?>
 
-<div id="page-block" class="page-block-forgrid">
+<p id="breadcrumb" class="breadcrumb">
+  <a href="/" title="Return to home page">Home</a>
+  &nbsp; / &nbsp;
+  Work
+</p>
+
+<div id="page-block" class="row page-block-bread">
+
+  <div id="project-header" class="<?php echo 'post-';echo the_ID();?> row">
+
+    <h1 id="project-headline" class="col-12">Portfolio Projects</h1>
+
+  </div>
+
+  <div id="grid-work">
 
 <?php if ( $find->have_posts() ) : ?>
 
+  <ul class="d-flex flex-row flex-wrap justify-content-between">
+
 <?php while ( $find->have_posts() ) : $find->the_post(); ?>
 
-  <?php
-    // inlcude date time
-    if ( is_single() ) {
-      the_title( '<h1 class="entry-title">', '</h1>' );
-    } else {
-      the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-    }
-  ?>
-
-  <?php if ( '' !== get_the_post_thumbnail() && ! is_single() ) : ?>
-		<div class="post-thumbnail">
-			<a href="<?php the_permalink(); ?>">
-				<?php the_post_thumbnail( 'twentyseventeen-featured-image' ); ?>
-			</a>
-		</div><!-- .post-thumbnail -->
-	<?php endif; ?>
-
-  <?php
-    /* translators: %s: Name of current post */
-    the_content( sprintf(
-      __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ),
-      get_the_title()
-    ) );
-
-    wp_link_pages( array(
-      'before'      => '<div class="page-links">' . __( 'Pages:', 'twentyseventeen' ),
-      'after'       => '</div>',
-      'link_before' => '<span class="page-number">',
-      'link_after'  => '</span>',
-    ) );
-  ?>
-
-  <?php
-    the_posts_pagination( array(
-      'prev_text' => '< <span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
-      'next_text' => '<span class="screen-reader-text">' . __( 'Next page', 'twentyseventeen' ) . '</span> > <span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyseventeen' ) . ' </span>',
-    ) );
+<?php
+// Get featured image
+$featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
+$title = get_the_title();
 ?>
+
+    <li class="">
+      <a title="View project" href="<?php the_permalink() ?>">
+
+        <img class="grid-image img-fluid" src="<?php echo $featuredImage[0];?>">
+
+        <figcaption class="ez-caption">
+          <p><?php echo the_title(); ?>
+          <br/><span>&#8212; view project &#8212;</span></p>
+        </figcaption>
+
+      </a>
+    </li>
 
 <?php endwhile; ?>
 
+  </ul>
+
 <?php else : ?>
 
-No posts !
+<p><b>No portfolio items to show right now !</b></p>
 
 <?php endif; ?>
+
+  </div><!-- end #div-work -->
 
 </div><!-- end #page-block -->
