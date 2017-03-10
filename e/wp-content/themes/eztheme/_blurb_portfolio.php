@@ -1,10 +1,10 @@
-<?php if ( $find->have_posts() ) : ?>
-  <p class="see-all hidden-sm-down"><a title="See all Work" href="<?php echo esc_url( home_url('/work') ); ?>">See all Work</a> <span class="link-like">&raquo;</span></p>
-<?php endif; ?>
+<div class="row">
 
-<h2 class="see-all">Portfolio</h2>
+  <h2 class="see-all col-xs-12 col-md-8">Portfolio</h2>
 
-<p class="hidden-md-up"><a title="See all Work" href="<?php echo esc_url( home_url('/work') ); ?>">See all Work</a> <span class="link-like">&raquo;</span></p>
+  <p class="see-all col-xs-12 col-md-4"><a title="See all Work" href="<?php echo esc_url( home_url('/work') ); ?>">See all Work</a> <span class="link-like">&raquo;</span></p>
+
+</div>
 
 <p>During my career, I've designed websites, mobile websites, mobile applications, IoT devices, and even a travel program.</p>
 

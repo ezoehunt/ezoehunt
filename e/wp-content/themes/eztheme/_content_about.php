@@ -20,7 +20,17 @@
 
 <?php while ( have_posts() ) : the_post(); ?>
 
-<?php echo get_the_content(); ?>
+  <div id="page-content">
+    <p><?php echo get_the_content(); ?></p>
+
+    <div class="entry-thumbnail">
+<?php the_post_thumbnail(''); ?> <!-- This displays the featured image -->
+<?php if ( $caption = get_post( get_post_thumbnail_id() )->post_excerpt ) : ?>
+    <p class="caption"><?php echo $caption; ?></p>
+<?php endif; ?><!-- This displays the caption below the featured image -->
+</div>
+
+  </div>
 
 <?php endwhile; ?>
 

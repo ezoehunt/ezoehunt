@@ -1,8 +1,10 @@
-<p class="see-all hidden-sm-down"><a title="View my resume" target="_blank" href="http://ezoehunt.com/files/ehunt_resume.pdf">View my resume</a> <span class="link-like">&raquo;</span></p>
+<div class="row">
 
-<h2 class="see-all">Work Experience</h2>
+  <h2 class="see-all col-xs-12 col-md-8">Work Experience</h2>
 
-<p class="hidden-md-up"><a title="View my resume" target="_blank" href="http://ezoehunt.com/files/ehunt_resume.pdf">View my resume</a> <span class="link-like">&raquo;</span></p>
+  <p class="see-all col-xs-12 col-md-4"><a title="View my resume" target="_blank" href="http://ezoehunt.com/files/ehunt_resume.pdf">View my resume</a> <span class="link-like">&raquo;</span></p>
+
+</div>
 
 <p>I began my career in technology as a front-end web developer. I quickly realized that I wanted to have greater impact on the product I was building, so I began learning about design and user experience. My self&#8209;education led to other roles where I learned even more: instructional designer, information architect, interaction designer, and creative director.</p>
 

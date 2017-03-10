@@ -11,11 +11,19 @@
 
 // UPDATES TO WORDPRESS DEFAULTS
 
+add_theme_support( 'html5', array(
+  'post-thumbnails',
+  'comment-form',
+  'comment-list',
+  'gallery',
+  'caption',
+) );
+
 /* --- Remove admin bar from site --- */
 add_filter('show_admin_bar', '__return_false');
 
 /* --- Add featured image to posts --- */
-add_theme_support( 'post-thumbnails' );
+
 
 /* --- Update Admin CSS --- */
 function admin_style() {
@@ -36,6 +44,10 @@ function add_category_to_single($classes) {
   // return the $classes array
   return $classes;
 }
+
+/* --- Filter image caption --- */
+
+
 
 
 // INLCUDE NEW FIELDS FOR CUSTOM POST TYPE = PROJECT
