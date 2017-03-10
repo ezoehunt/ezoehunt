@@ -1,30 +1,25 @@
 <?php
 /**
- * Template part for displaying page content in page.php
- *
- * @link https://codex.wordpress.org/Template_Hierarchy
- *
- * @package WordPress
- * @subpackage Twenty_Seventeen
- * @since 1.0
- * @version 1.0
- */
-
+* @package ehtheme
+*
+* Based on Twentyseventeen Wordpress theme
+*
+* Content Template for Pages (not post types)
+*/
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-		<?php //twentyseventeen_edit_link( get_the_ID() ); ?>
-	</header><!-- .entry-header -->
-	<div class="entry-content">
-		<?php
-			the_content();
+<p id="breadcrumb" class="breadcrumb">
+  <a href="/" title="Return to home page">Home</a>
+  &nbsp; / &nbsp;
+  <?php the_title(); ?>
+</p>
 
-			wp_link_pages( array(
-				'before' => '<div class="page-links">' . __( 'Pages:', 'twentyseventeen' ),
-				'after'  => '</div>',
-			) );
-		?>
-	</div><!-- .entry-content -->
-</article><!-- #post-## -->
+<div id="page-block" class="row page-block-bread">
+
+  <h1 id="page-headline" class="col-12 <?php echo 'post-';echo the_ID();?>"><?php the_title();?></h1>
+
+  <div id="page-content">
+    <p><?php the_content();?></p>
+  </div>
+
+</div><!-- end #page-block -->

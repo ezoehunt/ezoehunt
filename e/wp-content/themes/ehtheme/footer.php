@@ -1,47 +1,30 @@
 <?php
 /**
- * The template for displaying the footer
- *
- * Contains the closing of the #content div and all content after.
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package WordPress
- * @subpackage Twenty_Seventeen
- * @since 1.0
- * @version 1.0
- */
+* @package ehtheme
+*
+* Based on Twentyseventeen Wordpress theme
+*
+* Footer template
+*/
 
 ?>
 
-		</div><!-- #content -->
+<!--p id="contacts" class="contacts">GET IN TOUCH
 
-		<footer id="colophon" class="site-footer" role="contentinfo">
-			<div class="wrap">
-				<?php
-				get_template_part( 'template-parts/footer/footer', 'widgets' );
+  <br/><a class="noborder icon-contact" href="mailto:<?php echo antispambot("eh@ezoehunt.com"); ?>" title="Email me"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>
 
-				if ( has_nav_menu( 'social' ) ) : ?>
-					<nav class="social-navigation" role="navigation" aria-label="<?php _e( 'Footer Social Links Menu', 'twentyseventeen' ); ?>">
-						<?php
-							wp_nav_menu( array(
-								'theme_location' => 'social',
-								'menu_class'     => 'social-links-menu',
-								'depth'          => 1,
-								'link_before'    => '<span class="screen-reader-text">',
-								'link_after'     => '</span>' . twentyseventeen_get_svg( array( 'icon' => 'chain' ) ),
-							) );
-						?>
-					</nav><!-- .social-navigation -->
-				<?php endif;
+  <a class="noborder icon-contact" href="https://twitter.com/ezoehunt" target="_blank" title="Find me on Twitter" rel="me"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
 
-				get_template_part( 'template-parts/footer/site', 'info' );
-				?>
-			</div><!-- .wrap -->
-		</footer><!-- #colophon -->
-	</div><!-- .site-content-contain -->
-</div><!-- #page -->
-<?php wp_footer(); ?>
+  <a class="noborder icon-contact" href="http://www.linkedin.com/in/ezoehunt" target="_blank" title="Find me on LinkedIn" rel="me"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
 
-</body>
-</html>
+  <a class="noborder icon-contact" href="https://github.com/ezoehunt" target="_blank" title="Find me on Github" rel="me"><i class="fa fa-github-square" aria-hidden="true"></i></a>
+
+</p-->
+
+<p class="copyright">
+
+  <a title="Email me" href="mailto:<?php echo antispambot("eh@ezoehunt.com"); ?>"><?php echo antispambot("eh@ezoehunt.com"); ?></a>
+  <br/>&#169;2006-<?php echo date('Y');?> <a title="Elizabeth Hunt&#39;s website" href="http://www.ezoehunt.com">Elizabeth Hunt</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;All rights reserved.
+  <br/>Powered by <a title="Go to Wordpress" href="https://wordpress.org/" target="_blank">Wordpress</a>
+
+</p>

@@ -4,7 +4,7 @@
 *
 * Based on Twentyseventeen Wordpress theme
 *
-* Main Index Page
+* Header template
 *
 */
 //Get bodyclasses for comparison in _nav_items

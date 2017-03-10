@@ -4,7 +4,7 @@
 *
 * Based on Twentyseventeen Wordpress theme
 *
-* Main Index Page
+* Main Index template
 */
 
 get_header();
@@ -16,7 +16,8 @@ get_header();
 <?php
 // Assign templates for all pages
 
-if ( in_array('home',$bodyclass) ) {
+//if ( in_array('home',$bodyclass) ) {
+if ( is_front_page() ) {
   include 'template-parts/post/content_home.php';
 }
 
@@ -28,10 +29,6 @@ if ( is_single() ) {
 if ( is_category() ) {
   $cat_slug = sluggify( single_cat_title('', false) );
   include '_content_category_'.$cat_slug.'.php';
-}
-
-if ( is_page('about') ) {
-  include '_content_about.php';
 }
 
 if ( is_404() ) {
