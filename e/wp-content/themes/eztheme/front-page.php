@@ -9,7 +9,7 @@ get_header();
 
 ?>
 
-<div id="main-content" class="main-content-nobread">
+<div id="main-content" class="main-content main-content-nobread">
 
   <div id="page-block" class="page-block">
 
