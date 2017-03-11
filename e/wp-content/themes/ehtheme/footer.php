@@ -5,8 +5,8 @@
 * Based on Twentyseventeen Wordpress theme
 *
 * Footer template
+*
 */
-
 ?>
 
 <!--p id="contacts" class="contacts">GET IN TOUCH

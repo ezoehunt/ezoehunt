@@ -1,62 +1,99 @@
 <?php
 /**
- * The template for displaying search results pages
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
- *
- * @package WordPress
- * @subpackage Twenty_Seventeen
- * @since 1.0
- * @version 1.0
- */
+* @package ehtheme
+*
+* Based on Twentyseventeen Wordpress theme
+*
+* Search Results template
+*
+*/
 
-get_header(); ?>
+get_header();
 
-<div class="wrap">
+?>
 
-	<header class="page-header">
-		<?php if ( have_posts() ) : ?>
-			<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'twentyseventeen' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
-		<?php else : ?>
-			<h1 class="page-title"><?php _e( 'Nothing Found', 'twentyseventeen' ); ?></h1>
-		<?php endif; ?>
-	</header><!-- .page-header -->
+<div id="main-content" class="main-content">
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main" role="main">
+  <p id="breadcrumb" class="breadcrumb">
+    <a href="/" title="Return to home page">Home</a>
+    &nbsp; / &nbsp;
+    Search Results
+  </p>
 
-		<?php
-		if ( have_posts() ) :
-			/* Start the Loop */
-			while ( have_posts() ) : the_post();
+  <div id="page-block" class="row page-block-bread">
 
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/post/content', 'excerpt' );
+    <div id="page-content" class="page-content-search">
 
-			endwhile; // End of the loop.
+      <div style="margin-top:.5rem;width:100%;margin-bottom:1rem;">
+        <?php get_search_form(); ?>
+      </div>
 
-			the_posts_pagination( array(
-				'prev_text' => twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
-				'next_text' => '<span class="screen-reader-text">' . __( 'Next page', 'twentyseventeen' ) . '</span>' . twentyseventeen_get_svg( array( 'icon' => 'arrow-right' ) ),
-				'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyseventeen' ) . ' </span>',
-			) );
+<?php if ( have_posts() ) :
+$count_posts = $wp_query->found_posts;
+?>
 
-		else : ?>
+      <h1 id="page-headline" class="col-12 page-headline-search" style="text-align:left !important;padding-left:0;padding-right:0;margin-bottom:.75rem;padding-top:.1rem;">
+      <?php
+        printf( _n( '%s result', '%s results', $count_posts, 'ehtheme' ), $count_posts );
+        echo ' for <span class="search-query">' . get_search_query() . '</span></h1>';
+      ?>
 
-			<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'twentyseventeen' ); ?></p>
-			<?php
-				get_search_form();
+<?php else : ?>
 
-		endif;
-		?>
+      <h1 id="page-headline" class="col-12 page-headline-search" style="text-align:left !important;padding-left:0;padding-right:0;margin-bottom:.5rem;padding-top:.1rem;">
+      <?php
+        printf( __( 'No Results for %s', 'ehtheme' ), '<span class="search-query">' . get_search_query() . '</span></h1>' ); 
+      ?>
 
-		</main><!-- #main -->
-	</div><!-- #primary -->
-	<?php get_sidebar(); ?>
-</div><!-- .wrap -->
+<?php endif; ?>
 
-<?php get_footer();
+<?php if ( have_posts() ) : ?>
+
+<?php while ( have_posts() ) : the_post(); ?>
+
+      <article class="mysearch" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+        <?php the_date('','<p class="entry-meta">','</p>'); ?>
+
+        <p class="entry-title">
+          <?php the_title( sprintf( '<a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a>' ); ?>
+        </p>
+
+        <p class="entry-excerpt">
+          <?php echo get_the_excerpt(); ?>
+        </p>
+
+      </article>
+
+<?php endwhile; ?>
+
+      <div id="ezpagination">
+<?php
+the_posts_pagination( array(
+  'prev_text'   => '<span class="screen-reader-text">' . __( 'Previous page', 'ehtheme' ) . '</span>',
+  'next_text'   => '<span class="screen-reader-text">' . __( 'Next page', 'ehtheme' ) . '</span>',
+	'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'ehtheme' ) . ' </span>',
+) );
+?>
+      </div>
+
+<?php else : ?>
+
+			<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'ehtheme' ); ?></p>
+
+<?php endif; ?>
+
+    </div><!-- end #page-content -->
+  </div><!-- end #page-block -->
+</div><!-- end #main-content -->
+
+<div id="main-footer">
+  <?php get_footer(); ?>
+</div><!-- end #main-footer -->
+
+</div><!-- end #wrapper -->
+
+<script src="<?php echo home_url('/js/application.min.js'); ?>"></script>
+
+</body>
+</html>

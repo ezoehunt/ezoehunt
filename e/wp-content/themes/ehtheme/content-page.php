@@ -5,6 +5,7 @@
 * Based on Twentyseventeen Wordpress theme
 *
 * Content Template for Pages (not post types)
+*
 */
 ?>
 

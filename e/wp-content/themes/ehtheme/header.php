@@ -32,7 +32,7 @@ $generalKeys ='Elizabeth Hunt, Making Things and Thinking About Them, UX, UX des
 <html <?php language_attributes(); ?>>
 
 <head>
-<?php include 'template-parts/header/_content_head_meta.php'; ?>
+<?php include '_content_head_meta.php'; ?>
 
 <!-- Wordpress included stuff -->
 <?php wp_head(); ?>
@@ -42,6 +42,7 @@ $generalKeys ='Elizabeth Hunt, Making Things and Thinking About Them, UX, UX des
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo home_url('/css/application.min.css'); ?>">
+<!--link rel="stylesheet" href="<?php //echo home_url('/css/style.css'); ?>"-->
 
 <!-- Scripts -->
 <!--[if lt IE 9]>
@@ -87,7 +88,7 @@ _gaq.push(['_trackPageview']);
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
-<?php include 'template-parts/header/_nav_items.php'; ?>
+<?php include '_nav_items.php'; ?>
 
   </div>
 
@@ -106,7 +107,7 @@ _gaq.push(['_trackPageview']);
   </div>
 
   <div id="nav-medium">
-<?php include 'template-parts/header/_nav_items.php'; ?>
+<?php include '_nav_items.php'; ?>
   </div>
 
 </nav>
