@@ -13,7 +13,7 @@ $find = new WP_Query($args );
 
 <div id="grid-home">
 
-  <?php include '_blurb-portfolio-copy.php'; ?>
+  <?php include '_blurb-portfolio-txt.php'; ?>
 
 <?php if ( $find->have_posts() ) : ?>
 
