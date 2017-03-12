@@ -79,7 +79,7 @@ _gaq.push(['_trackPageview']);
 <!-- nav for SMALL devices -->
 <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse hidden-md-up">
 
-  <div class="navbar-header" style="">
+  <div class="navbar-header">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="noborder"><img class="navicon" src="/images/navicon.png" style=""></span>
     </button>
