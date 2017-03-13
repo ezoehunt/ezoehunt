@@ -31,9 +31,11 @@ $title = get_the_title();
 
         <img class="grid-image img-fluid" src="<?php echo $featuredImage[0];?>">
 
-        <figcaption class="ez-caption">
-          <p><?php echo the_title(); ?>
-          <br/><span>&#8212; view project &#8212;</span></p>
+        <figcaption class="grid-caption">
+          <p>
+            <?php echo the_title(); ?>
+            <br/><span>&#8212; view project &#8212;</span>
+          </p>
         </figcaption>
 
       </a>

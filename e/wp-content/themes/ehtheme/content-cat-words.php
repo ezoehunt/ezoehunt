@@ -3,61 +3,68 @@
 * @package eztheme
 *
 * Content to be included on Words Category page
-* 
+*
 */
 ?>
 
-<div id="page-block" class="">
+<p id="breadcrumb" class="breadcrumb">
+  <a href="/" title="Return to home page">Home</a>
+  &nbsp; / &nbsp;
+  <?php echo mygetcatname($post->ID);?>
+</p>
 
-<?php if ( have_posts() ) : ?>
+<div id="page-block" class="row page-block-bread">
 
-<?php while ( have_posts() ) : the_post(); ?>
+  <div id="page-content" class="page-content-list">
 
-  <?php
-    // inlcude date time
-    if ( is_single() ) {
-      the_title( '<h1 class="entry-title">', '</h1>' );
-    } else {
-      the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-    }
-  ?>
+    <h1 id="page-headline" class="col-12 <?php echo 'post-';echo the_ID();?>">Thinking about Things</h1>
 
-  <?php if ( '' !== get_the_post_thumbnail() && ! is_single() ) : ?>
-		<div class="post-thumbnail">
-			<a href="<?php the_permalink(); ?>">
-				<?php the_post_thumbnail( 'twentyseventeen-featured-image' ); ?>
-			</a>
-		</div><!-- .post-thumbnail -->
-	<?php endif; ?>
-
-  <?php
-    /* translators: %s: Name of current post */
-    the_content( sprintf(
-      __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ),
-      get_the_title()
-    ) );
-
-    wp_link_pages( array(
-      'before'      => '<div class="page-links">' . __( 'Pages:', 'twentyseventeen' ),
-      'after'       => '</div>',
-      'link_before' => '<span class="page-number">',
-      'link_after'  => '</span>',
-    ) );
-  ?>
-
-  <?php
-    the_posts_pagination( array(
-      'prev_text' => '< <span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
-      'next_text' => '<span class="screen-reader-text">' . __( 'Next page', 'twentyseventeen' ) . '</span> > <span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyseventeen' ) . ' </span>',
-    ) );
+<?php if ( have_posts() ) :
+$count_posts = $wp_query->found_posts;
 ?>
+
+    <ul class="entries">
+
+<?php while ( have_posts() ) : the_post();
+$featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
+?>
+
+      <li class="row entry-foto" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+      <div class="col-3 fotos fotos-img">
+        <a href="<?php the_permalink(); ?>">
+          <img class="img-fluid" src="<?php echo $featuredImage[0];?>">
+    	  </a>
+      </div>
+
+      <div class="col-9 fotos fotos-text">
+        <?php the_title( sprintf( '<a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a>' ); ?>
+
+        <br/><span class="entry-excerpt"><?php echo get_the_excerpt(); ?></span>
+      </div>
+
+      </li>
 
 <?php endwhile; ?>
 
+    </ul>
+
+<?php if ($count_posts > 10) : ?>
+    <div id="ezpagination">
+<?php the_posts_pagination( array(
+  'prev_text' => '< <span class="screen-reader-text">' . __( 'Previous page', 'ehtheme' ) . '</span>',
+  'next_text' => '<span class="screen-reader-text">' . __( 'Next page', 'ehtheme' ) . '</span> > <span class="meta-nav screen-reader-text">' . __( 'Page', 'ehtheme' ) . ' </span>',
+) );
+?>
+    </div>
+<?php endif; ?>
+
 <?php else : ?>
 
-No posts !
+    <p>Sorry there are no posts right now !</p>
 
 <?php endif; ?>
+
+  </div><!-- end #page-content -->
 
 </div><!-- end #page-block -->

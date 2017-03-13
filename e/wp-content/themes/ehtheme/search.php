@@ -22,9 +22,9 @@ get_header();
 
   <div id="page-block" class="row page-block-bread">
 
-    <div id="page-content" class="page-content-search">
+    <div id="page-content" class="page-content-list">
 
-      <div style="margin-top:.5rem;width:100%;margin-bottom:1rem;">
+      <div id="mysearch" style="">
         <?php get_search_form(); ?>
       </div>
 
@@ -42,31 +42,40 @@ $count_posts = $wp_query->found_posts;
 
       <h1 id="page-headline" class="col-12 page-headline-search" style="text-align:left !important;padding-left:0;padding-right:0;margin-bottom:.5rem;padding-top:.1rem;">
       <?php
-        printf( __( 'No Results for %s', 'ehtheme' ), '<span class="search-query">' . get_search_query() . '</span></h1>' ); 
+        printf( __( 'No Results for %s', 'ehtheme' ), '<span class="search-query">' . get_search_query() . '</span></h1>' );
       ?>
 
 <?php endif; ?>
 
 <?php if ( have_posts() ) : ?>
 
-<?php while ( have_posts() ) : the_post(); ?>
+      <ul class="entries">
 
-      <article class="mysearch" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<?php while ( have_posts() ) : the_post();
+$featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
+?>
 
-        <?php the_date('','<p class="entry-meta">','</p>'); ?>
+        <li class="row entry-foto" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-        <p class="entry-title">
+        <div class="col-3 fotos fotos-img">
+          <a href="<?php the_permalink(); ?>">
+            <img class="img-fluid" src="<?php echo $featuredImage[0];?>">
+          </a>
+        </div>
+
+        <div class="col-9 fotos fotos-text">
           <?php the_title( sprintf( '<a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a>' ); ?>
-        </p>
 
-        <p class="entry-excerpt">
-          <?php echo get_the_excerpt(); ?>
-        </p>
+          <br/><span class="entry-excerpt"><?php echo get_the_excerpt(); ?></span>
+        </div>
 
-      </article>
+        </li>
 
 <?php endwhile; ?>
 
+      </ul>
+
+<?php if ($count_posts > 10) : ?>
       <div id="ezpagination">
 <?php
 the_posts_pagination( array(
@@ -76,10 +85,13 @@ the_posts_pagination( array(
 ) );
 ?>
       </div>
+<?php endif; ?>
 
 <?php else : ?>
 
-			<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'ehtheme' ); ?></p>
+			<p>
+        <?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'ehtheme' ); ?>
+      </p>
 
 <?php endif; ?>
 

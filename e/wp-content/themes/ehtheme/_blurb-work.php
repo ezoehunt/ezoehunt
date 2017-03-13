@@ -8,9 +8,9 @@
 
 <p>I began my career in technology as a front-end web developer. I quickly realized that I wanted to have greater impact on the product I was building, so I began learning about design and user experience. My self&#8209;education led to other roles where I learned even more: instructional designer, information architect, interaction designer, and creative director.</p>
 
-<p class="quote hidden-sm-down">To design is <br/>to transform <br/>prose into poetry.
+<!--p class="quote hidden-sm-down">To design is <br/>to transform <br/>prose into poetry.
   <br/><span>– Paul Rand</span>
-</p>
+</p-->
 
 <p>Over the past ten years, I've worked with both agencies and product companies/start-ups, and my work covers several industries, including e&#8209;commerce, automotive, financial services, lifestyle, and travel.</p>
 

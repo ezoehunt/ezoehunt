@@ -83,7 +83,7 @@ _gaq.push(['_trackPageview']);
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="noborder"><img class="navicon" src="/images/navicon.png" style=""></span>
     </button>
-    <a title="Go to home page" class="navbar-brand noborder" href="<?php echo esc_url( home_url('/') ); ?>"><img src="<?php echo home_url('/images/logo.png'); ?>" alt="<?php esc_attr(bloginfo('name')); ?>" width="50" height="50" /> <span>Elizabeth Hunt</span></a>
+    <a title="Go to home page" class="navbar-brand noborder" href="<?php echo esc_url( home_url('/') ); ?>"><img src="<?php echo home_url('/images/logo-mobile.png'); ?>" alt="<?php esc_attr(bloginfo('name')); ?>" width="50" height="50" /> <span>Elizabeth Hunt</span></a>
   </div>
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">

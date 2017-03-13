@@ -5,35 +5,72 @@
 * Content to be included on Single Words pages
 *
 */
+global $post;
 ?>
 
-<div id="page-block" class="">
+<p id="breadcrumb" class="breadcrumb">
+  <a href="/" title="Return to home page">Home</a>
+  &nbsp; / &nbsp;
+  <a href="/words" title="Go to <?php echo mygetcatname($post->ID);?> section"><?php echo mygetcatname($post->ID);?></a>
+  &nbsp; / &nbsp;
+  <?php echo get_the_title(); ?>
+</p>
+
+<div id="page-block" class="row page-block-bread">
+
+  <div id="page-content">
+
+<?php if ( have_posts() ) : ?>
+
+<?php while ( have_posts() ) : the_post(); ?>
+
+  <div id="single-header" class="row">
+
+    <div class="col-6 col-sm-1 myprevious">
+      <?php
+        if ( mynextprevious($post->ID, 'previous') ) {
+            echo mynextprevious($post->ID, 'previous');
+        }
+        else {
+          echo '&nbsp;';
+        }
+      ?>
+    </div>
+
+    <div class="col-6 col-sm-1 push-sm-10 mynext">
+      <?php
+        if ( mynextprevious($post->ID, 'next') ) {
+            echo mynextprevious($post->ID, 'next');
+        }
+        else {
+          echo '&nbsp;';
+        }
+      ?>
+    </div>
+
+    <h1 id="page-headline" class="col-12 col-sm-10 pull-sm-1 <?php echo 'post-';echo the_ID();?>"><?php echo get_the_title(); ?></h1>
+
+  </div>
+
+  <div>
+    <?php the_content(); ?>
+  </div>
 
 <?php
-if ( have_posts() ) :
-  while ( have_posts() ) : the_post(); ?>
-
-	here is the loop of content
-
-<?php
-// If comments are open or we have at least one comment, load up the comment template.
-    if ( comments_open() || get_comments_number() ) :
-    	comments_template();
-    endif;
-
-    // Navigation is through all posts - but causes error
-    // if there is no cat template for the post
-    // Make sure all cats have templates
-    the_post_navigation( array(
-    	'prev_text' => '<span class="screen-reader-text">' . __( 'Previous Post', 'twentyseventeen' ) . '</span><span aria-hidden="true" class="nav-subtitle">' . __( 'Previous', 'twentyseventeen' ) . '</span> <span class="nav-title"><span class="nav-title-icon-wrapper"> < </span>%title</span>',
-    	'next_text' => '<span class="screen-reader-text">' . __( 'Next Post', 'twentyseventeen' ) . '</span><span aria-hidden="true" class="nav-subtitle">' . __( 'Next', 'twentyseventeen' ) . '</span> <span class="nav-title">%title<span class="nav-title-icon-wrapper"> > </span></span>',
-    ) );
-
-  endwhile;
-else :
+// If comments are open or at least one comment
+if ( comments_open() || get_comments_number() ) :
+	comments_template();
+endif;
 ?>
-No posts !
+
+<?php endwhile; ?>
+
+<?php else : ?>
+
+<p>Sorry there are no posts right now !</p>
 
 <?php endif; ?>
+
+  </div><!-- end #page-content -->
 
 </div><!-- end #page-block -->

@@ -11,7 +11,7 @@ global $post;
 <p id="breadcrumb" class="breadcrumb">
   <a href="/" title="Return to home page">Home</a>
   &nbsp; / &nbsp;
-  <a href="/work" title="Go to Work section"><?php echo mygetcatname($post->ID);?></a>
+  <a href="/work" title="Go to <?php echo mygetcatname($post->ID);?> section"><?php echo mygetcatname($post->ID);?></a>
   &nbsp; / &nbsp;
   <?php echo get_the_title(); ?>
 </p>
@@ -22,7 +22,7 @@ global $post;
 
 <?php while ( have_posts() ) : the_post(); ?>
 
-<div id="project-header" class="row">
+<div id="single-header" class="row">
 
   <div class="col-6 col-sm-1 myprevious">
     <?php
@@ -53,11 +53,11 @@ global $post;
 <ul id="mypills" class="nav nav-pills" role="tablist">
 
   <li class="nav-item">
-    <a class="nav-link active" data-toggle="tab" href="#design" role="tab">See Design</a>
+    <a title="See Design" class="nav-link active" data-toggle="tab" href="#design" role="tab">See Design</a>
   </li>
 
   <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#process" role="tab">See Process</a>
+    <a title="See Process" class="nav-link" data-toggle="tab" href="#process" role="tab">See Process</a>
   </li>
 
 </ul>
