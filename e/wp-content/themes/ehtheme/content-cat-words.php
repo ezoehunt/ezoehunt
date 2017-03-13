@@ -7,13 +7,13 @@
 */
 ?>
 
-<p id="breadcrumb" class="breadcrumb">
-  <a href="/" title="Return to home page">Home</a>
-  &nbsp; / &nbsp;
-  <?php echo mygetcatname($post->ID);?>
-</p>
+<div id="page-block" class="row">
 
-<div id="page-block" class="row page-block-bread">
+  <p id="breadcrumb" class="breadcrumb">
+    <a href="/" title="Return to home page">Home</a>
+    &nbsp; / &nbsp;
+    <?php echo mygetcatname($post->ID);?>
+  </p>
 
   <div id="page-content" class="page-content-list">
 

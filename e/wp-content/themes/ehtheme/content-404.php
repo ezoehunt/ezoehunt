@@ -9,21 +9,27 @@
 */
 ?>
 
-<p id="breadcrumb" class="breadcrumb">
-  <a href="/" title="Return to home page">Home</a>
-  &nbsp; / &nbsp;
-  Page not found
-</p>
 
-<div id="page-block" class="page-block-bread">
+<div id="page-block">
 
-  <h1 id="page-headline" class="col-12">Oops! Page Not Found!</h1>
+  <p id="breadcrumb" class="breadcrumb">
+    <a href="/" title="Return to home page">Home</a>
+    &nbsp; / &nbsp;
+    Page not found
+  </p>
 
   <div id="page-content">
-    <p>That page can't be found. Maybe try a search?</p>
 
-    <?php get_search_form(); ?>
+    <h1 id="page-headline" class="col-12">Oops...</h1>
 
-  </div>
+    <div id="post-content">
 
-</div>
+      <p>That page couldn't be found. Maybe try a search?</p>
+
+      <?php get_search_form(); ?>
+
+    </div>
+
+  </div><!-- end #page-content -->
+
+</div><!-- end #page-block -->

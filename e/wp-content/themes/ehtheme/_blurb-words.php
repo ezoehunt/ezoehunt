@@ -2,7 +2,7 @@
 
   <h2 class="see-all col-xs-12 col-md-8">Words</h2>
 
-  <p class="see-all col-xs-12 col-md-4"><a title="See all Words" href="<?php echo esc_url( home_url('/words') );?>">See all Words</a> <span class="link-like">&raquo;</span></p>
+  <p class="see-all col-xs-12 col-md-4"><a title="See all Words" href="<?php echo esc_url( home_url('/words') );?>">See all Words</a> <span class="link-raquo">&raquo;</span></p>
 
 </div>
 

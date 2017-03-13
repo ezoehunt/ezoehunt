@@ -14,17 +14,17 @@ get_header();
 
 <div id="main-content" class="main-content">
 
-  <p id="breadcrumb" class="breadcrumb">
-    <a href="/" title="Return to home page">Home</a>
-    &nbsp; / &nbsp;
-    Search Results
-  </p>
+  <div id="page-block" class="row">
 
-  <div id="page-block" class="row page-block-bread">
+    <p id="breadcrumb" class="breadcrumb">
+      <a href="/" title="Return to home page">Home</a>
+      &nbsp; / &nbsp;
+      Search Results
+    </p>
 
     <div id="page-content" class="page-content-list">
 
-      <div id="mysearch" style="">
+      <div id="mysearch">
         <?php get_search_form(); ?>
       </div>
 
@@ -32,7 +32,7 @@ get_header();
 $count_posts = $wp_query->found_posts;
 ?>
 
-      <h1 id="page-headline" class="col-12 page-headline-search" style="text-align:left !important;padding-left:0;padding-right:0;margin-bottom:.75rem;padding-top:.1rem;">
+      <h1 id="page-headline" class="col-12 page-headline-search">
       <?php
         printf( _n( '%s result', '%s results', $count_posts, 'ehtheme' ), $count_posts );
         echo ' for <span class="search-query">' . get_search_query() . '</span></h1>';
@@ -96,7 +96,9 @@ the_posts_pagination( array(
 <?php endif; ?>
 
     </div><!-- end #page-content -->
+
   </div><!-- end #page-block -->
+  
 </div><!-- end #main-content -->
 
 <div id="main-footer">

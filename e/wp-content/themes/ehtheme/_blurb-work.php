@@ -2,7 +2,7 @@
 
   <h2 class="see-all col-xs-12 col-md-8">Work Experience</h2>
 
-  <p class="see-all col-xs-12 col-md-4"><a title="View my resume" target="_blank" href="http://ezoehunt.com/files/ehunt_resume.pdf">View my resume</a> <span class="link-like">&raquo;</span></p>
+  <p class="see-all col-xs-12 col-md-4"><a title="View my resume" target="_blank" href="http://ezoehunt.com/files/ehunt_resume.pdf">View my resume</a> <span class="link-raquo">&raquo;</span></p>
 
 </div>
 
