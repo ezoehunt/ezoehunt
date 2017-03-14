@@ -10,7 +10,7 @@ global $post;
 
 <div id="mybread" class="row <?php echo 'post-';echo the_ID();?>" style="height:40px;">
 
-  <div class="col-md-2 mycol" style="2px solid blue;">
+  <div class="col-md-2 mycol" style="">
   </div>
 
   <div class="col-md-8 mycol" style="background-color:#FFFFFF;">

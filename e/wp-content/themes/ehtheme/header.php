@@ -42,7 +42,6 @@ $generalKeys ='Elizabeth Hunt, Making Things and Thinking About Them, UX, UX des
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
 <link rel="stylesheet" href="<?php echo home_url('/css/application.min.css'); ?>">
-<!--link rel="stylesheet" href="<?php //echo home_url('/css/style.css'); ?>"-->
 
 <!-- Scripts -->
 <!--[if lt IE 9]>
@@ -74,40 +73,55 @@ _gaq.push(['_trackPageview']);
 	<p style="margin:0 0 12px 30px;">You can continue, but to experience this website as it was designed, please enable Javascript in your browser.</p>
 </div></noscript>
 
-<div id="wrapper" class="container-fluid">
+<div id="wrapper" class="container">
 
 <!-- nav for SMALL devices -->
-<nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse hidden-md-up">
+<nav id="nav-smalldown" class="row navbar">
 
-  <div class="navbar-header">
+  <div id="header">
+
+    <a title="Go to home page" href="<?php echo esc_url( home_url('/') ); ?>" class="hvr-wobble-vertical">
+    <h3>Elizabeth Hunt</h3></a>
+
+    <div class="nav-box">
+      <img class="toggler" data-toggle="collapse" href="#nav-items" aria-expanded="false" aria-controls="#nav-items" aria-label="Toggle navigation" src="/images/navicon.png">
+    </div>
+
+  </div>
+
+  <div id="nav-items" class="collapse nav-items-collapse">
+    <?php include '_nav_items.php'; ?>
+  </div>
+
+  <!--div class="navbar-header">
+
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="noborder"><img class="navicon" src="/images/navicon.png" style=""></span>
     </button>
+
     <a title="Go to home page" class="navbar-brand noborder" href="<?php echo esc_url( home_url('/') ); ?>"><img src="<?php echo home_url('/images/logo-mobile.png'); ?>" alt="<?php esc_attr(bloginfo('name')); ?>" width="50" height="50" /> <span>Elizabeth Hunt</span></a>
+
   </div>
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-
-<?php include '_nav_items.php'; ?>
-
-  </div>
+    <?php //include '_nav_items.php'; ?>
+  </div-->
 
 </nav>
 
+
 <!-- nav for MEDIUM+ devices -->
-<nav class="hidden-sm-down">
+<nav id="nav-mediumup" class="row hidden-sm-down">
 
-  <div id="page-top">
-    <!--div class="page-top-arrow"></div-->
-  </div>
+  <div id="header">
 
-  <div id="logo">
-    <a title="Go to home page" href="<?php echo esc_url( home_url('/') ); ?>" class="noborder hvr-wobble-vertical"><!--img class="logo" src="/images/logo.png"-->
+    <a title="Go to home page" href="<?php echo esc_url( home_url('/') ); ?>" class="hvr-wobble-vertical">
     <h3>Elizabeth Hunt</h3></a>
-  </div>
 
-  <div id="nav-medium">
-<?php include '_nav_items.php'; ?>
+    <div id="nav-items">
+      <?php include '_nav_items.php'; ?>
+    </div>
+
   </div>
 
 </nav>
