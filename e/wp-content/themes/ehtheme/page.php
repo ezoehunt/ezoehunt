@@ -1,4 +1,4 @@
-<?php
+  <?php
 /**
 * @package ehtheme
 *
@@ -10,7 +10,7 @@
 
 get_header(); ?>
 
-<div id="main-content" class="main-content">
+<div id="main-content" class="testrow" style="border:6px solid red;">
 
 <?php
 while ( have_posts() ) : the_post();

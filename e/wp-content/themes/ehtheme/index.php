@@ -16,6 +16,7 @@ get_header();
 
 <?php
 // Assign templates for all pages
+/* Wordpress has already assigned page.php to page-type pages, so no need to assign them. */
 
 //if ( in_array('home',$bodyclass) ) {
 if ( is_front_page() ) {
@@ -39,8 +40,6 @@ if ( is_404() ) {
 if ( is_search() ) {
   include 'search.php';
 }
-
-
 ?>
 
 </div><!-- end #main-content -->
