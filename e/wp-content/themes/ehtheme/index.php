@@ -12,7 +12,8 @@ get_header();
 
 ?>
 
-<div id="main-content" class="main-content">
+<!--div id="main-content"-->
+<div id="content-wrapper" style="border:6px solid red;">
 
 <?php
 // Assign templates for all pages

@@ -167,15 +167,18 @@ function mynextprevious( $post_id, $type ) {
   // Match type to icons + function
   if ( $type == 'previous' ) {
     $function = get_previous_post(true,'');
-    $icon = '<i class="fa fa-arrow-circle-left" aria-hidden="true"></i>';
+    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a" aria-hidden="true"></i><i class="fa fa-arrow-left fa-stack-1x icon-b" aria-hidden="true"></i></span>';
+    //$icon = 'older &raquo;';
   }
   elseif ( $type == 'next' ) {
     $function = get_next_post(true,'');
-    $icon = '<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>';
+    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a" aria-hidden="true"></i><i class="fa fa-arrow-right fa-stack-1x icon-b" aria-hidden="true"></i></span>';
+    //$icon = '&laquo; newer';
+
   }
   // If none, return false (empty)
   if( $function ) {
-    return '<a class="noborder nohash" title="See '.$cat_alt.'" href="'.esc_url(get_permalink($function->ID)).'">'.$icon.'</a>';
+    return '<a class="" title="See '.$cat_alt.'" href="'.esc_url(get_permalink($function->ID)).'">'.$icon.'</a>';
   }
   else {
     return false;

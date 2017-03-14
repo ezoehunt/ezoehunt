@@ -10,7 +10,7 @@
 ?>
 
 <!-- breadcrumb -->
-<div class="testrow" style="height:40px;">
+<div class="myrow" style="height:40px;">
 
   <div id="" class="testdiv" style="width:20%;border:2px solid blue;">
   </div>
@@ -32,7 +32,7 @@
 
 
 <!-- title + pagination -->
-<div class="testrow" style="">
+<div class="myrow" style="">
 
   <div id="" class="testdiv" style="width:10%;border:2px solid blue;">
   </div>
