@@ -75,10 +75,10 @@ global $post;
 
     <ul class="nav nav-tabs" role="tablist">
       <li class="nav-item">
-        <a class="nav-link laquo active" data-toggle="tab" data-target="#design" role="tab">Viewing Designs</a>
+        <a class="nav-link laquo active" data-toggle="tab" data-target="#design" role="tab" onclick="changeIt('see-design');">Viewing Designs</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link raquo" data-toggle="tab" data-target="#process" role="tab">See Process</a>
+        <a class="nav-link raquo" data-toggle="tab" data-target="#process" role="tab" onclick="changeIt('see-process');">See Process</a>
       </li>
     </ul>
 
@@ -226,11 +226,3 @@ foreach ( $process as $image ) :
 
   <div class="col col-sm-5 col-md-10"></div>
 </div>
-
-
-
-<!-- include in app.js -->
-<script>
-
-
-</script>
