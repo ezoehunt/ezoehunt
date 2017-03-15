@@ -61,6 +61,7 @@ global $post;
 
   </div>
 
+  <!--div class="col col-sm-5 col-md-5 col-bg-white hidden-sm-down"></div-->
   <div class="col col-sm-5 col-md-10"></div>
 
 </div>
@@ -70,18 +71,14 @@ global $post;
 
   <div class="col col-sm-5 col-md-15"></div>
 
-  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
+  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white page-column-notop">
 
-    <div id="mytabs"><!-- SKEW -->
+    <div id="mytabs">
+      <a id="tab-design" class="floatleft tab-active" data-target="#design" data-toggle="tab" role="tab" onclick="changeIt('design');">See Designs</a>
 
-      <p class="" style="float:left;">
-        <a id="tab-design" data-target="#design" data-toggle="tab" role="tab" onclick="changeIt('design');">Currently viewing Designs</a>
-      </p>
-
-      <p class="" style="float:right;">
-        <a id="tab-process" data-target="#process" data-toggle="tab" role="tab" onclick="changeIt('process');">See Process</a>
-      </p>
-
+      <a id="tab-process" class="floatright" data-target="#process" data-toggle="tab" role="tab" onclick="changeIt('process');">
+        See Process
+      </a>
     </div>
 
 <?php
@@ -104,7 +101,7 @@ if ( have_posts() ) :
   }
 ?>
 
-    <div class="tab-content" style="clear:both;">
+    <div class="tab-content">
 
       <div id="design" class="tab-pane active" role="tabpanel">
 
@@ -165,7 +162,7 @@ foreach ( $design as $image ) :
 
       </div><!-- end #design tab -->
 
-      <div id="process" class="tab-pane active" role="tabpanel">
+      <div id="process" class="tab-pane" role="tabpanel">
 
 <?php if ( ! empty($process) ) : ?>
 
@@ -242,13 +239,17 @@ function changeIt(item) {
 
   if ( item === 'process' )
   {
-    $('#tab-design').text('See Design');
-    $('#tab-process').text('Currently viewing Process');
+    $('#tab-design').text('See Designs');
+    $('#tab-process').text('See Process');
+    $('#tab-process').addClass( 'tab-active' )
+    $('#tab-design').removeClass( 'tab-active' )
   }
   if ( item === "design" )
   {
     $('#tab-process').text('See Process');
-    $('#tab-design').text('Currently viewing Design');
+    $('#tab-design').text('See Designs');
+    $('#tab-design').addClass( 'tab-active' )
+    $('#tab-process').removeClass( 'tab-active' )
   }
 }
 
