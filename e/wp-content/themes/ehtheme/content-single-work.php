@@ -71,15 +71,19 @@ global $post;
 
   <div class="col col-sm-5 col-md-15"></div>
 
-  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white page-column-notop">
+  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
 
-    <div id="mytabs">
-      <a id="tab-design" class="floatleft tab-active" data-target="#design" data-toggle="tab" role="tab" onclick="changeIt('design');">See Designs</a>
+    <p class="overview floatright">
+      <span>
+        <a id="tab-process" class="floatright" data-target="#process" data-toggle="tab" role="tab" onclick="changeIt('process');">See Process</a>
+      </span>
+    </p>
 
-      <a id="tab-process" class="floatright" data-target="#process" data-toggle="tab" role="tab" onclick="changeIt('process');">
-        See Process
-      </a>
-    </div>
+    <p class="overview">
+      <span>
+        <a id="tab-design" class="floatleft active" data-target="#design" data-toggle="tab" role="tab" onclick="changeIt('design');">Currently Viewing Designs</a>
+      </span>
+    </p>
 
 <?php
 if ( have_posts() ) :
