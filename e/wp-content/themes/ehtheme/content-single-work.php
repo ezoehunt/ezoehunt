@@ -230,27 +230,6 @@ foreach ( $process as $image ) :
 
 <!-- include in app.js -->
 <script>
-$('#mytabs a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-});
 
-function changeIt(item) {
-
-  if ( item === 'process' )
-  {
-    $('#tab-design').text('See Designs');
-    $('#tab-process').text('See Process');
-    $('#tab-process').addClass( 'tab-active' )
-    $('#tab-design').removeClass( 'tab-active' )
-  }
-  if ( item === "design" )
-  {
-    $('#tab-process').text('See Process');
-    $('#tab-design').text('See Designs');
-    $('#tab-design').addClass( 'tab-active' )
-    $('#tab-process').removeClass( 'tab-active' )
-  }
-}
 
 </script>
