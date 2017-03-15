@@ -33,35 +33,33 @@ global $post;
 
   <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1">
 
-    <!--div id="testit" style=""-->
+    <ul class="page-pagination">
+      <li class="item-1">
+        <?php
+          if ( mynextprevious($post->ID, 'previous') ) {
+            echo mynextprevious($post->ID, 'previous');
+          }
+          else {
+            echo '&nbsp;';
+          }
+        ?>
+      </li>
 
-      <ul class="page-pagination">
-        <li class="item-1">
-          <?php
-            if ( mynextprevious($post->ID, 'previous') ) {
-              echo mynextprevious($post->ID, 'previous');
-            }
-            else {
-              echo '&nbsp;';
-            }
-          ?>
-        </li>
+      <li class="item-2">
+        <?php
+          if ( mynextprevious($post->ID, 'next') ) {
+            echo mynextprevious($post->ID, 'next');
+          }
+          else {
+            echo '&nbsp;';
+          }
+        ?>
+      </li>
 
-        <li class="item-2">
-          <?php
-            if ( mynextprevious($post->ID, 'next') ) {
-              echo mynextprevious($post->ID, 'next');
-            }
-            else {
-              echo '&nbsp;';
-            }
-          ?>
-        </li>
-
-        <li class="item-3">
-          <h1 class="page-headline">headline headline headline headline more goes here and more and more and more</h1>
-        </li>
-      </ul>
+      <li class="item-3">
+        <h1 class="page-headline">headline headline headline headline more goes here and more and more and more</h1>
+      </li>
+    </ul>
 
   </div>
 
@@ -229,4 +227,5 @@ foreach ( $process as $image ) :
   </div><!-- end #page-column -->
 
   <div class="col col-sm-5 col-md-10"></div>
-</div>
+
+</div><!-- end #page-content -->

@@ -15,61 +15,90 @@ $args = array(
   'orderby'         =>  'date',
   'order'           =>  'DESC'
 );
-
 $find = new WP_Query($args);
 ?>
 
-<div id="page-block" class="row">
+<div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
+  <div class="col col-sm-5 col-md-15"></div>
 
-  <p id="breadcrumb" class="breadcrumb">
-    <a href="/" title="Return to home page">Home</a>
-    &nbsp; / &nbsp;
-    <?php echo mygetcatname($post->ID);?>
-  </p>
+  <div class="col col-sm-90 col-md-75 col-bg-white">
 
-  <div id="page-content">
+    <p class="page-breadcrumb">
+      <a href="/" title="Return to home page">Home</a>
+      &nbsp; / &nbsp;
+      <?php echo mygetcatname($post->ID);?>
+    </p>
 
-    <h1 id="page-headline" class="col-12 <?php echo 'post-';echo the_ID();?>">Making Things</h1>
+  </div>
 
-    <div id="grid-work">
+  <div class="col col-sm-5 col-md-10"></div>
+</div>
+
+
+<div id="page-title" class="row row-120">
+
+  <div class="col col-sm-5 col-md-5"></div>
+
+  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1">
+
+    <ul class="page-pagination">
+      <li class="item-1"></li>
+
+      <li class="item-2"></li>
+
+      <li class="item-3">
+        <h1 class="page-headline">Making Things</h1>
+      </li>
+    </ul>
+
+  </div>
+
+  <div class="col col-sm-5 col-md-10"></div>
+
+</div>
+
+
+<div id="page-content" class="row">
+
+  <div class="col col-sm-5 col-md-15"></div>
+
+  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
 
 <?php if ( $find->have_posts() ) : ?>
 
-    <ul class="d-flex flex-row flex-wrap justify-content-between">
+      <ul class="grid-work">
 
 <?php while ( $find->have_posts() ) : $find->the_post(); ?>
 
 <?php
-// Get featured image
 $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
 $title = get_the_title();
 ?>
+        <li>
+          <a title="View project" href="<?php the_permalink() ?>">
 
-      <li>
-      <a title="View project" href="<?php the_permalink() ?>">
+          <img class="grid-image" src="<?php echo $featuredImage[0];?>">
 
-        <img class="grid-image img-fluid" src="<?php echo $featuredImage[0];?>">
+          <figcaption class="grid-img-overlay">
+            <p><?php echo the_title(); ?>
+            <br/><span>&#8212; view project &#8212;</span></p>
+          </figcaption>
 
-        <figcaption class="grid-img-overlay">
-          <p><?php echo the_title(); ?>
-          <br/><span>&#8212; view project &#8212;</span></p>
-        </figcaption>
+          </a>
+        </li>
 
-      </a>
-      </li>
-
-  <?php endwhile; ?>
+<?php endwhile; ?>
 
       </ul>
 
 <?php else : ?>
 
-<p><b>No portfolio items to show right now !</b></p>
+      <p><b>No portfolio items to show right now !</b></p>
 
 <?php endif; ?>
 
-    </div><!-- end #grid-work -->
+  </div><!-- end #page-column -->
 
-  </div><!-- end #page-content -->
+  <div class="col col-sm-5 col-md-10"></div>
 
-</div><!-- end #page-block -->
+</div>
