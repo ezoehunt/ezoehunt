@@ -73,17 +73,14 @@ global $post;
 
   <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
 
-    <p class="overview floatright">
-      <span>
-        <a id="tab-process" class="floatright" data-target="#process" data-toggle="tab" role="tab" onclick="changeIt('process');">See Process</a>
-      </span>
-    </p>
-
-    <p class="overview">
-      <span>
-        <a id="tab-design" class="floatleft active" data-target="#design" data-toggle="tab" role="tab" onclick="changeIt('design');">Currently Viewing Designs</a>
-      </span>
-    </p>
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link laquo active" data-toggle="tab" data-target="#design" role="tab">Viewing Designs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link raquo" data-toggle="tab" data-target="#process" role="tab">See Process</a>
+      </li>
+    </ul>
 
 <?php
 if ( have_posts() ) :
