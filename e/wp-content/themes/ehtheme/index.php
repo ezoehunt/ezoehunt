@@ -12,7 +12,6 @@ get_header();
 
 ?>
 
-<!--div id="main-content"-->
   <div id="content-wrapper">
 
 <?php
@@ -45,9 +44,7 @@ if ( is_search() ) {
 
   </div><!-- end #content-wrapper -->
 
-  <div id="main-footer">
-    <?php get_footer(); ?>
-  </div><!-- end #main-footer -->
+  <?php get_footer(); ?>
 
 </div><!-- end #wrapper -->
 
