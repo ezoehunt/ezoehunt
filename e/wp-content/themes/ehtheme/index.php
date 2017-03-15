@@ -13,7 +13,7 @@ get_header();
 ?>
 
 <!--div id="main-content"-->
-<div id="content-wrapper">
+  <div id="content-wrapper">
 
 <?php
 // Assign templates for all pages
@@ -43,11 +43,11 @@ if ( is_search() ) {
 }
 ?>
 
-</div><!-- end #main-content -->
+  </div><!-- end #content-wrapper -->
 
-<div id="main-footer">
-  <?php get_footer(); ?>
-</div><!-- end #main-footer -->
+  <div id="main-footer">
+    <?php get_footer(); ?>
+  </div><!-- end #main-footer -->
 
 </div><!-- end #wrapper -->
 
