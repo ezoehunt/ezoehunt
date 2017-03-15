@@ -1,4 +1,4 @@
-<ul class="navbar-nav mr-auto">
+<ul class="navbar-nav">
 
 <li class="nav-item<?php if ( is_front_page() OR is_search() OR is_404() ) { echo ' active'; } ?>">
   <a title="Go to home page" class="nav-link" href="<?php echo home_url('/'); ?>">Home</a>

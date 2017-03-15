@@ -75,53 +75,31 @@ _gaq.push(['_trackPageview']);
 
 <div id="wrapper" class="container">
 
-<!-- nav for SMALL devices -->
-<nav id="nav-smalldown" class="row navbar">
+<nav class="row navbar navbar-toggleable-sm">
 
-  <div id="header">
+  <div class="navbar-brand">
 
-    <a title="Go to home page" href="<?php echo esc_url( home_url('/') ); ?>" class="hvr-wobble-vertical">
-    <h3>Elizabeth Hunt</h3></a>
-
-    <div class="nav-box">
-      <img class="toggler" data-toggle="collapse" href="#nav-items" aria-expanded="false" aria-controls="#nav-items" aria-label="Toggle navigation" src="/images/navicon.png">
-    </div>
-
-  </div>
-
-  <div id="nav-items" class="collapse nav-items-collapse">
-    <?php include '_nav_items.php'; ?>
-  </div>
-
-  <!--div class="navbar-header">
-
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="noborder"><img class="navicon" src="/images/navicon.png" style=""></span>
+    <!-- for Small down -->
+    <button class="hidden-md-up navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <img class="navicon" src="/images/navicon.png">
     </button>
-
-    <a title="Go to home page" class="navbar-brand noborder" href="<?php echo esc_url( home_url('/') ); ?>"><img src="<?php echo home_url('/images/logo-mobile.png'); ?>" alt="<?php esc_attr(bloginfo('name')); ?>" width="50" height="50" /> <span>Elizabeth Hunt</span></a>
-
-  </div>
-
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <?php //include '_nav_items.php'; ?>
-  </div-->
-
-</nav>
-
-
-<!-- nav for MEDIUM+ devices -->
-<nav id="nav-mediumup" class="row hidden-sm-down">
-
-  <div id="header">
+    <!-- end for Small down -->
 
     <a title="Go to home page" href="<?php echo esc_url( home_url('/') ); ?>" class="hvr-wobble-vertical">
-    <h3>Elizabeth Hunt</h3></a>
+      <h3>Elizabeth Hunt</h3>
+    </a>
 
-    <div id="nav-items">
+    <!-- for Medium up -->
+    <div id="nav-items" class="hidden-sm-down">
       <?php include '_nav_items.php'; ?>
     </div>
+    <!-- end for Medium up -->
 
   </div>
 
+  <!-- for Small down -->
+  <div class="hidden-md-up collapse navbar-collapse" id="navbarsExampleDefault">
+    <?php include '_nav_items.php'; ?>
+  </div>
+  <!-- end for Small down -->
 </nav>
