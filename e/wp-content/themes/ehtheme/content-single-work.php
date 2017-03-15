@@ -33,31 +33,35 @@ global $post;
 
   <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1">
 
-    <p class="arrows-np floatleft col-sm-50 col-md-10">
-      <?php
-        if ( mynextprevious($post->ID, 'previous') ) {
-            echo mynextprevious($post->ID, 'previous');
-            // . "<span style='font-size:.9rem;color:white;'>previous project</span>";
-        }
-        else {
-          echo '&nbsp;';
-        }
-      ?>
-    </p>
+    <!--div id="testit" style=""-->
 
-    <p class="arrows-np floatright alignright col-sm-50 col-md-10">
-      <?php
-        if ( mynextprevious($post->ID, 'next') ) {
-            //echo "<span style='font-size:.9rem;color:white;'>next project</span>" .
-            echo mynextprevious($post->ID, 'next');
-        }
-        else {
-          echo '&nbsp;';
-        }
-      ?>
-    </p>
+      <ul class="page-pagination">
+        <li class="item-1">
+          <?php
+            if ( mynextprevious($post->ID, 'previous') ) {
+              echo mynextprevious($post->ID, 'previous');
+            }
+            else {
+              echo '&nbsp;';
+            }
+          ?>
+        </li>
 
-    <h1 class="page-headline floatleft col-sm-100 col-md-80 <?php echo 'post-';echo the_ID();?>"><?php echo get_post_meta($post->ID,'project_details_headline',true); ?></h1>
+        <li class="item-2">
+          <?php
+            if ( mynextprevious($post->ID, 'next') ) {
+              echo mynextprevious($post->ID, 'next');
+            }
+            else {
+              echo '&nbsp;';
+            }
+          ?>
+        </li>
+
+        <li class="item-3">
+          <h1 class="page-headline">headline headline headline headline more goes here and more and more and more</h1>
+        </li>
+      </ul>
 
   </div>
 
