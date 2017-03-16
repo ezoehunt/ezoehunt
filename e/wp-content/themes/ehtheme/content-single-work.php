@@ -11,7 +11,7 @@ global $post;
 <div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
   <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div class="col col-sm-90 col-md-75">
+  <div class="col col-sm-90 col-md-75 col-bg-white">
 
     <p class="page-breadcrumb">
       <a href="/" title="Return to home page">Home</a>
@@ -31,7 +31,7 @@ global $post;
 
   <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
 
-  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1">
+  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1 col-bg-white">
 
     <ul class="page-pagination">
       <li class="item-1">
@@ -57,7 +57,7 @@ global $post;
       </li>
 
       <li class="item-3">
-        <h1 class="page-headline">headline headline headline headline more goes here and more and more and more</h1>
+        <h1 class="page-headline"><?php echo get_post_meta($post->ID,'project_details_headline',true); ?></h1>
       </li>
     </ul>
 
@@ -73,7 +73,7 @@ global $post;
 
   <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1">
+  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
 
     <ul class="nav nav-tabs" role="tablist">
       <li class="nav-item">
@@ -135,9 +135,12 @@ foreach ( $design as $image ) :
     $image_id = mygetimageid($image_url);
     $image_id = $image_id[0];
 
+    // Get url to the attachment page for the image
+    // Note: images can't be shared across Portfolio posts, otherwise the "back to project" link breaks
+    $attach_url = get_permalink($image_id);
+
     $image_alt = $image[$prefix.'alt'];
 
-    $image_link = '<img style="max-width:300px;" class="" alt="'.$image_alt.'" src="'.$image_url.'">';
 ?>
 <?php endforeach; ?>
 
@@ -153,11 +156,11 @@ foreach ( $design as $image ) :
 
           <div class="col-sm-100 col-md-60 floatleft item-image">
 
-            <a title="View larger" href="<?php echo $image_url;?>"><img style="width:100%;" alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
+            <a title="View larger" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
 
           </div>
 
-        </div><!-- end .item-row -->
+        </div>
 
 <?php endforeach; ?>
 
@@ -184,9 +187,10 @@ foreach ( $process as $image ) :
     $image_id = mygetimageid($image_url);
     $image_id = $image_id[0];
 
-    $image_alt = $image[$prefix.'alt'];
+    // Get url to the attachment page for the image
+    $attach_url = get_permalink($image_id);
 
-    $image_link = '<img style="max-width:300px;" class="" alt="'.$image_alt.'" src="'.$image_url.'">';
+    $image_alt = $image[$prefix.'alt'];
 ?>
 <?php endforeach; ?>
 
@@ -202,11 +206,11 @@ foreach ( $process as $image ) :
 
           <div class="col-sm-100 col-md-60 floatleft item-image">
 
-            <a title="View larger" href="<?php echo $image_url;?>"><img style="width:100%;" alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
+            <a title="View larger" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
 
           </div>
 
-        </div><!-- end .item-row -->
+        </div>
 
 <?php endforeach; ?>
 
@@ -224,8 +228,8 @@ foreach ( $process as $image ) :
 
 <?php endif; ?>
 
-  </div><!-- end #page-column -->
+  </div>
 
   <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 
-</div><!-- end #page-content -->
+</div><!-- end #page-content row -->

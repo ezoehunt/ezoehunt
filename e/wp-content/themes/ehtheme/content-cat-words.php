@@ -11,7 +11,7 @@ global $post;
 <div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
   <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div class="col col-sm-90 col-md-75">
+  <div class="col col-sm-90 col-md-75 col-bg-white">
 
     <p class="page-breadcrumb">
       <a href="/" title="Return to home page">Home</a>
@@ -29,7 +29,7 @@ global $post;
 
   <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
 
-  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1">
+  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1 col-bg-white">
 
     <ul class="page-pagination">
       <li class="item-1"></li>
@@ -52,7 +52,7 @@ global $post;
 
   <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1">
+  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
 
 <?php if ( have_posts() ) :
 $count_posts = $wp_query->found_posts;
@@ -72,7 +72,7 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
       	  </a>
         </div>
 
-        <div class="col-sm-80 floatright fotos fotos-text">
+        <div class="col-sm-80 floatleft fotos fotos-text">
           <p>
             <a title="View <?php echo the_title(); ?>" href="<?php the_permalink() ?>"><?php echo get_the_title(); ?></a>
           </p>
@@ -90,15 +90,12 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
     </ul>
 
 <?php if ($count_posts > 10) : ?>
-
     <div id="ezpagination">
-
 <?php the_posts_pagination( array(
   'prev_text' => '< <span class="screen-reader-text">' . __( 'Previous page', 'ehtheme' ) . '</span>',
   'next_text' => '<span class="screen-reader-text">' . __( 'Next page', 'ehtheme' ) . '</span> > <span class="meta-nav screen-reader-text">' . __( 'Page', 'ehtheme' ) . ' </span>',
 ) );
 ?>
-
     </div>
 
 <?php endif; ?>
@@ -109,8 +106,8 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
 
 <?php endif; ?>
 
-  </div><!-- end #page-column -->
+  </div>
 
   <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 
-</div>
+</div><!-- end #page-content row-->

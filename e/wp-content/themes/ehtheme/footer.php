@@ -26,4 +26,4 @@
     Powered by <a title="Go to Wordpress" href="https://wordpress.org/" target="_blank">Wordpress</a>
   </p>
 
-</div><!-- end #main-footer -->
+</div>

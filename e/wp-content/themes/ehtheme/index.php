@@ -44,7 +44,7 @@ if ( is_search() ) {
 
   </div><!-- end #content-wrapper -->
 
-  <?php get_footer(); ?>
+<?php get_footer(); ?>
 
 </div><!-- end #wrapper -->
 

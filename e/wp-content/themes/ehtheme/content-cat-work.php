@@ -21,7 +21,7 @@ $find = new WP_Query($args);
 <div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
   <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div class="col col-sm-90 col-md-75">
+  <div class="col col-sm-90 col-md-75 col-bg-white">
 
     <p class="page-breadcrumb">
       <a href="/" title="Return to home page">Home</a>
@@ -39,7 +39,7 @@ $find = new WP_Query($args);
 
   <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
 
-  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1">
+  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1 col-bg-white">
 
     <ul class="page-pagination">
       <li class="item-1"></li>
@@ -62,7 +62,7 @@ $find = new WP_Query($args);
 
   <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1">
+  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
 
 <?php if ( $find->have_posts() ) : ?>
 
@@ -97,8 +97,8 @@ $title = get_the_title();
 
 <?php endif; ?>
 
-  </div><!-- end #page-column -->
+  </div>
 
   <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 
-</div>
+</div><!-- end #page-content row -->

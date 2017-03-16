@@ -8,51 +8,77 @@
 global $post;
 ?>
 
-<div id="page-block" class="row">
+<div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
+  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <p id="breadcrumb" class="breadcrumb">
-    <a href="/" title="Return to home page">Home</a>
-    &nbsp; / &nbsp;
-    <a href="/<?php echo mygetcatslug($post->ID);?>" title="Go to <?php echo mygetcatname($post->ID);?> section"><?php echo mygetcatname($post->ID);?></a>
-    &nbsp; / &nbsp;
-    <?php echo get_the_title(); ?>
-  </p>
+  <div class="col col-sm-90 col-md-75 col-bg-white">
 
-  <div id="page-content">
+    <p class="page-breadcrumb">
+      <a href="/" title="Return to home page">Home</a>
+      &nbsp; / &nbsp;
+      <a href="/<?php echo mygetcatslug($post->ID);?>" title="Go to <?php echo mygetcatname($post->ID);?> section"><?php echo mygetcatname($post->ID);?></a>
+      &nbsp; / &nbsp;
+      <?php echo get_the_title(); ?>
+    </p>
+
+  </div>
+
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+</div>
+
+
+<div id="page-title" class="row row-120">
+
+  <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
+
+  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1 col-bg-white">
+
+    <ul class="page-pagination">
+      <li class="item-1">
+        <?php
+          if ( mynextprevious($post->ID, 'previous') ) {
+            echo mynextprevious($post->ID, 'previous');
+          }
+          else {
+            echo '&nbsp;';
+          }
+        ?>
+      </li>
+
+      <li class="item-2">
+        <?php
+          if ( mynextprevious($post->ID, 'next') ) {
+            echo mynextprevious($post->ID, 'next');
+          }
+          else {
+            echo '&nbsp;';
+          }
+        ?>
+      </li>
+
+      <li class="item-3">
+        <h1 class="page-headline"><?php echo get_the_title(); ?></h1>
+      </li>
+    </ul>
+
+  </div>
+
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+
+</div>
+
+
+<div id="page-content" class="row">
+
+  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
+
+  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
 
 <?php if ( have_posts() ) : ?>
 
 <?php while ( have_posts() ) : the_post(); ?>
 
-    <div id="single-header" class="row">
-
-      <div class="col-6 col-sm-1 myprevious">
-        <?php
-          if ( mynextprevious($post->ID, 'previous') ) {
-              echo mynextprevious($post->ID, 'previous');
-          }
-          else {
-            echo '&nbsp;';
-          }
-        ?>
-      </div>
-
-      <div class="col-6 col-sm-1 push-sm-10 mynext">
-        <?php
-          if ( mynextprevious($post->ID, 'next') ) {
-              echo mynextprevious($post->ID, 'next');
-          }
-          else {
-            echo '&nbsp;';
-          }
-        ?>
-      </div>
-
-      <h1 id="page-headline" class="col-12 col-sm-10 pull-sm-1 <?php echo 'post-';echo the_ID();?>"><?php echo get_the_title(); ?></h1>
-
-    </div>
-
-    <div id="post-content">
+    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
       <?php the_content(); ?>
     </div>
 
@@ -73,6 +99,8 @@ endif;
 
 <?php endif; ?>
 
-  </div><!-- end #page-content -->
+  </div>
 
-</div><!-- end #page-block -->
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+
+</div><!-- end #page-content row -->
