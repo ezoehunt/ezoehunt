@@ -31,13 +31,13 @@ global $post;
 
   <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1 col-bg-white">
 
-    <ul class="page-pagination">
+    <ul class="page-pagination ">
       <li class="item-1"></li>
 
       <li class="item-2"></li>
 
       <li class="item-3">
-        <h1 class="page-headline">Thinking About Things</h1>
+        <h1 class="page-headline ">Thinking About Things</h1>
       </li>
     </ul>
 

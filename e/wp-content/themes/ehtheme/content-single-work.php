@@ -65,7 +65,6 @@ global $post;
 
   </div>
 
-  <!--div class="col col-sm-5 col-md-5 col-bg-white hidden-sm-down"></div-->
   <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 
 </div>

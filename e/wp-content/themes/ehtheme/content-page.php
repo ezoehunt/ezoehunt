@@ -7,91 +7,80 @@
 * Content Template for Pages (not post types)
 *
 */
+global $post;
 ?>
 
-<!-- breadcrumb -->
-<div class="myrow" style="height:40px;">
+<div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
+  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div id="" class="testdiv" style="width:20%;border:2px solid blue;">
-  </div>
+  <div class="col col-sm-90 col-md-75 col-bg-white">
 
-  <div id="" class="testdiv" style="width:60%;border:2px solid blue;background-color:#FFFFFF;">
-
-    <p id="breadcrumb" class="newbreadc">
+    <p class="page-breadcrumb">
       <a href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
-      <?php the_title(); ?>
+      <?php echo get_the_title(); ?>
     </p>
 
   </div>
 
-  <div id="" class="testdiv" style="width:20%;border:2px solid blue;">
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+</div>
+
+
+<div id="page-title" class="row row-120">
+
+  <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
+
+  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1 col-bg-white">
+
+    <ul class="page-nopagination">
+
+      <!--li class="item-1"></li>
+
+      <li class="item-2"></li-->
+
+      <li class="">
+        <h1 class="page-headline nopagination"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></h1>
+      </li>
+
+    </ul>
+
   </div>
+
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 
 </div>
 
 
-<!-- title + pagination -->
-<div class="myrow" style="">
+<div id="page-content" class="row">
 
-  <div id="" class="testdiv" style="width:10%;border:2px solid blue;">
-  </div>
+  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div id="" class="testdiv" style="width:60%;border:2px solid blue;background-color:black;padding:1rem;">
+  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
 
-    <h1 id="" style="color:white;text-align:center;margin:0 auto 0 auto;text-transform:none;font-size:1.35rem !important;line-height:1.5rem;font-weight: 500;" class="tmpit <?php echo 'post-';echo the_ID();?>"><?php //the_title();?>A New Way to Travel with American Express and more and more and more and more and more</h1>
-
-  </div>
-
-  <div id="" class="testdiv" style="width:10%;border:2px solid blue;background-color:#FFFFFF;font-size:.85rem;text-align:center;line-height:1;">
-
-      <p style="position:absolute;top:.5rem;left:.5rem;border:1px solid red;">
-        <span style="">&laquo; next</span>
+    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
+<?php if ( get_post_meta($post->ID,'eh_subhead') ) : ?>
+      <p class="subhead">
+        <?php echo get_post_meta($post->ID,'eh_subhead',true); ?>
       </p>
-      <p style="margin-bottom:0;border:1px solid red;position:absolute;bottom:.5rem;right:.5rem;">previous &raquo;</p>
+<? endif; ?>
+      <p>
+        <?php the_content(); ?>
+      </p>
 
-      <!--i style="position: relative;top: 50%;transform: translateY(-50%);" class="fa fa-arrow-circle-left" aria-hidden="true"></i>
-      &nbsp;&nbsp;<i style="position: relative;top: 50%;transform: translateY(-50%);" class="fa fa-arrow-circle-right" aria-hidden="true"></i-->
+    </div>
+
+    <div id="post-comments">
+    <?php
+    // If comments are open or at least one comment
+    if ( comments_open() || get_comments_number() ) :
+    comments_template();
+    endif;
+    ?>
+    </div>
 
   </div>
 
-  <div id="" class="testdiv" style="width:20%;border:2px solid blue;">
-  </div>
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 
-</div>
-
-
-
-
-
-
-<!-- PAGE CONTENT -->
-<!--div class="" style="width: 100%;"-->
-
-<div id="" class="testdiv" style="width:20%;border:2px solid blue;">
-</div>
-
-<div class="testdiv" style="width:60%;background-color:white;padding:2rem; border:2px solid blue;">
-
-  <div id="post-content" style="width:">
-    <p><?php the_content();?></p>
-  </div>
-
-</div>
-
-<div class="testdiv" style="width:10%;border:2px solid blue;">
-
-  <div style="background-color:yellow;color:black;padding:.5rem;">
-    View Design
-  </div>
-
-  <div style="background-color:fuchsia;color:black;padding:.5rem;">
-    View Process
-  </div>
-
-</div>
-
-<div class="testdiv" style="width:10%;border:2px solid blue;">
-</div>
-
-<!--/div-->
+</div><!-- end #page-content row -->

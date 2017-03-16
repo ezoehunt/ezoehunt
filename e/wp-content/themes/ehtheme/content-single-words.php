@@ -60,7 +60,7 @@ global $post;
           }
         ?>
       </li>
-  
+
     </ul>
 
   </div>
