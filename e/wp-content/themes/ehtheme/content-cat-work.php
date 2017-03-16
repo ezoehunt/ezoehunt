@@ -41,13 +41,13 @@ $find = new WP_Query($args);
 
   <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1 col-bg-white">
 
-    <ul class="page-pagination">
+    <ul class="page-nopag">
       <li class="item-1"></li>
 
       <li class="item-2"></li>
 
       <li class="item-3">
-        <h1 class="page-headline">Making Things</h1>
+        <h1 class="page-headline-nopag">Making Things</h1>
       </li>
     </ul>
 
