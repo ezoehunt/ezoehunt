@@ -19,9 +19,9 @@ $find = new WP_Query($args);
 ?>
 
 <div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
-  <div class="col col-sm-5 col-md-15"></div>
+  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div class="col col-sm-90 col-md-75 col-bg-white">
+  <div class="col col-sm-90 col-md-75">
 
     <p class="page-breadcrumb">
       <a href="/" title="Return to home page">Home</a>
@@ -31,13 +31,13 @@ $find = new WP_Query($args);
 
   </div>
 
-  <div class="col col-sm-5 col-md-10"></div>
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 </div>
 
 
 <div id="page-title" class="row row-120">
 
-  <div class="col col-sm-5 col-md-5"></div>
+  <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
 
   <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1">
 
@@ -53,20 +53,20 @@ $find = new WP_Query($args);
 
   </div>
 
-  <div class="col col-sm-5 col-md-10"></div>
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 
 </div>
 
 
 <div id="page-content" class="row">
 
-  <div class="col col-sm-5 col-md-15"></div>
+  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
+  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1">
 
 <?php if ( $find->have_posts() ) : ?>
 
-      <ul class="grid-work">
+    <ul class="grid-work">
 
 <?php while ( $find->have_posts() ) : $find->the_post(); ?>
 
@@ -74,7 +74,7 @@ $find = new WP_Query($args);
 $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
 $title = get_the_title();
 ?>
-        <li>
+      <li <?php post_class(); ?> id="post-<?php the_ID(); ?>">
           <a title="View project" href="<?php the_permalink() ?>">
 
           <img class="grid-image" src="<?php echo $featuredImage[0];?>">
@@ -89,16 +89,16 @@ $title = get_the_title();
 
 <?php endwhile; ?>
 
-      </ul>
+    </ul>
 
 <?php else : ?>
 
-      <p><b>No portfolio items to show right now !</b></p>
+    <p><b>No portfolio items to show right now !</b></p>
 
 <?php endif; ?>
 
   </div><!-- end #page-column -->
 
-  <div class="col col-sm-5 col-md-10"></div>
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 
 </div>

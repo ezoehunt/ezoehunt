@@ -5,19 +5,54 @@
 * Content to be included on Words Category page
 *
 */
+global $post;
 ?>
 
-<div id="page-block" class="row">
+<div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
+  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <p id="breadcrumb" class="breadcrumb">
-    <a href="/" title="Return to home page">Home</a>
-    &nbsp; / &nbsp;
-    <?php echo mygetcatname($post->ID);?>
-  </p>
+  <div class="col col-sm-90 col-md-75">
 
-  <div id="page-content" class="page-content-list">
+    <p class="page-breadcrumb">
+      <a href="/" title="Return to home page">Home</a>
+      &nbsp; / &nbsp;
+      <?php echo mygetcatname($post->ID);?>
+    </p>
 
-    <h1 id="page-headline" class="col-12 <?php echo 'post-';echo the_ID();?>">Thinking about Things</h1>
+  </div>
+
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+</div>
+
+
+<div id="page-title" class="row row-120">
+
+  <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
+
+  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1">
+
+    <ul class="page-pagination">
+      <li class="item-1"></li>
+
+      <li class="item-2"></li>
+
+      <li class="item-3">
+        <h1 class="page-headline">Thinking About Things</h1>
+      </li>
+    </ul>
+
+  </div>
+
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+
+</div>
+
+
+<div id="page-content" class="row">
+
+  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
+
+  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1">
 
 <?php if ( have_posts() ) :
 $count_posts = $wp_query->found_posts;
@@ -29,19 +64,24 @@ $count_posts = $wp_query->found_posts;
 $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
 ?>
 
-      <li class="row entry-foto" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+      <li <?php post_class('entry-foto'); ?> id="post-<?php the_ID(); ?>">
 
-      <div class="col-3 fotos fotos-img">
-        <a href="<?php the_permalink(); ?>">
-          <img class="img-fluid" src="<?php echo $featuredImage[0];?>">
-    	  </a>
-      </div>
+        <div class="col-sm-20 floatleft fotos fotos-img">
+          <a title="View <?php echo the_title(); ?>" href="<?php the_permalink(); ?>">
+            <img src="<?php echo $featuredImage[0];?>">
+      	  </a>
+        </div>
 
-      <div class="col-9 fotos fotos-text">
-        <?php the_title( sprintf( '<a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a>' ); ?>
+        <div class="col-sm-80 floatright fotos fotos-text">
+          <p>
+            <a title="View <?php echo the_title(); ?>" href="<?php the_permalink() ?>"><?php echo get_the_title(); ?></a>
+          </p>
 
-        <br/><span class="entry-excerpt"><?php echo get_the_excerpt(); ?></span>
-      </div>
+          <p class="entry-excerpt">
+            <?php echo get_the_excerpt(); ?>
+          </p>
+
+        </div>
 
       </li>
 
@@ -50,13 +90,17 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
     </ul>
 
 <?php if ($count_posts > 10) : ?>
+
     <div id="ezpagination">
+
 <?php the_posts_pagination( array(
   'prev_text' => '< <span class="screen-reader-text">' . __( 'Previous page', 'ehtheme' ) . '</span>',
   'next_text' => '<span class="screen-reader-text">' . __( 'Next page', 'ehtheme' ) . '</span> > <span class="meta-nav screen-reader-text">' . __( 'Page', 'ehtheme' ) . ' </span>',
 ) );
 ?>
+
     </div>
+
 <?php endif; ?>
 
 <?php else : ?>
@@ -65,6 +109,8 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
 
 <?php endif; ?>
 
-  </div><!-- end #page-content -->
+  </div><!-- end #page-column -->
 
-</div><!-- end #page-block -->
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+
+</div>

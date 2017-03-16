@@ -9,9 +9,9 @@ global $post;
 ?>
 
 <div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
-  <div class="col col-sm-5 col-md-15"></div>
+  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div class="col col-sm-90 col-md-75 col-bg-white">
+  <div class="col col-sm-90 col-md-75">
 
     <p class="page-breadcrumb">
       <a href="/" title="Return to home page">Home</a>
@@ -23,13 +23,13 @@ global $post;
 
   </div>
 
-  <div class="col col-sm-5 col-md-10"></div>
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 </div>
 
 
 <div id="page-title" class="row row-120">
 
-  <div class="col col-sm-5 col-md-5"></div>
+  <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
 
   <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1">
 
@@ -64,16 +64,16 @@ global $post;
   </div>
 
   <!--div class="col col-sm-5 col-md-5 col-bg-white hidden-sm-down"></div-->
-  <div class="col col-sm-5 col-md-10"></div>
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 
 </div>
 
 
 <div id="page-content" class="row">
 
-  <div class="col col-sm-5 col-md-15"></div>
+  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
+  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1">
 
     <ul class="nav nav-tabs" role="tablist">
       <li class="nav-item">
@@ -226,6 +226,6 @@ foreach ( $process as $image ) :
 
   </div><!-- end #page-column -->
 
-  <div class="col col-sm-5 col-md-10"></div>
+  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 
 </div><!-- end #page-content -->
