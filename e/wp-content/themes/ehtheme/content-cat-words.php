@@ -74,7 +74,7 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
 
         <div class="col-sm-80 floatleft fotos fotos-text">
           <p>
-            <a title="View <?php echo the_title(); ?>" href="<?php the_permalink() ?>"><?php echo get_the_title(); ?></a>
+            <a title="View <?php echo the_title(); ?>" href="<?php the_permalink() ?>"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></a>
           </p>
 
           <p class="entry-excerpt">

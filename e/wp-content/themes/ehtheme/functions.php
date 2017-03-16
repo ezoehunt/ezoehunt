@@ -45,7 +45,9 @@ function admin_style() {
 add_action('admin_enqueue_scripts', 'admin_style');
 
 
-/* --- Add Categories to bodyclass for Single Posts --- */
+/* --- Add Categories to bodyclass for Single Posts
+* Needed because I use bodyclass to indicate "active" state in nav for all posts. By default Wordpress doesn't include category name for Single Posts in bodyclass.
+*/
 add_filter('body_class','add_category_to_single');
 function add_category_to_single($classes) {
   if (is_single() ) {
@@ -191,3 +193,39 @@ function mygetimageid($image_url) {
 	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));
   return $attachment;
 }
+
+
+
+function eh_register_meta_boxes( $meta_boxes ) {
+    $prefix = 'eh_';
+
+    $meta_boxes[] = array(
+        'id'         => 'titles',
+        'title'      => __( 'Post Titles', 'textdomain' ),
+        'post_types' => array( 'post', 'page' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'fields' => array(
+            array(
+                'name'  => __( 'Post Headline', 'textdomain' ),
+                'desc'  => 'The Post Headline appears in magazine header area.',
+                'id'    => $prefix . 'headline',
+                'type'  => 'text',
+                //'std'   => 'Anh Tran',
+                //'class' => 'custom-class',
+                'clone' => false,
+            ),
+            array(
+                'name'  => __( 'Post Subhead', 'textdomain' ),
+                'desc'  => 'The Post Subhead appears in the body copy aera.',
+                'id'    => $prefix . 'subhead',
+                'type'  => 'text',
+                //'std'   => 'Anh Tran',
+                //'class' => 'custom-class',
+                'clone' => false,
+            ),
+        )
+    );
+    return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'eh_register_meta_boxes' );

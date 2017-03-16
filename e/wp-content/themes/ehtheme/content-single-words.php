@@ -57,7 +57,7 @@ global $post;
       </li>
 
       <li class="item-3">
-        <h1 class="page-headline"><?php echo get_the_title(); ?></h1>
+        <h1 class="page-headline"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></h1>
       </li>
     </ul>
 
@@ -79,7 +79,15 @@ global $post;
 <?php while ( have_posts() ) : the_post(); ?>
 
     <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
-      <?php the_content(); ?>
+<?php if ( get_post_meta($post->ID,'eh_subhead') ) : ?>
+      <p class="subhead">
+        <?php echo get_post_meta($post->ID,'eh_subhead',true); ?>
+      </p>
+<? endif; ?>
+      <p>
+        <?php the_content(); ?>
+      </p>
+
     </div>
 
     <div id="post-comments">
