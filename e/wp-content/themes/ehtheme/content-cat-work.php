@@ -13,7 +13,7 @@ $args = array(
   'post_status'     =>  'publish',
   'posts_per_page'  =>  20,
   'orderby'         =>  'date',
-  'order'           =>  'DESC'
+  'order'           =>  'ASC'
 );
 $find = new WP_Query($args);
 ?>
