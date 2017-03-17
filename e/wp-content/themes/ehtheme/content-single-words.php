@@ -76,38 +76,39 @@ global $post;
 
   <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
 
-<?php if ( have_posts() ) : ?>
+    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
 
+<?php if ( have_posts() ) : ?>
 <?php while ( have_posts() ) : the_post(); ?>
 
-    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
 <?php if ( get_post_meta($post->ID,'eh_subhead') ) : ?>
+
       <p class="subhead">
-        <?php echo get_post_meta($post->ID,'eh_subhead',true); ?>
+
+<?php echo get_post_meta($post->ID,'eh_subhead',true); ?>
       </p>
+
 <? endif; ?>
+
       <p>
         <?php the_content(); ?>
       </p>
 
-    </div>
-
-    <div id="post-comments">
+      <div id="post-comments">
 <?php
 // If comments are open or at least one comment
 if ( comments_open() || get_comments_number() ) :
 	comments_template();
 endif;
 ?>
-    </div>
+      </div>
 
 <?php endwhile; ?>
-
 <?php else : ?>
-
-    <p>Sorry there are no posts right now !</p>
-
+      <p>Sorry there are no posts right now !</p>
 <?php endif; ?>
+
+    </div>
 
   </div>
 

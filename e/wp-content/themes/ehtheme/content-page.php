@@ -35,9 +35,9 @@ global $post;
 
     <ul class="page-nopag">
 
-      <!--li class="item-1"></li>
+      <li class="item-1"></li>
 
-      <li class="item-2"></li-->
+      <li class="item-2"></li>
 
       <li class="">
         <h1 class="page-headline-nopag"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></h1>
@@ -59,24 +59,30 @@ global $post;
   <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
 
     <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
+
 <?php if ( get_post_meta($post->ID,'eh_subhead') ) : ?>
+
       <p class="subhead">
-        <?php echo get_post_meta($post->ID,'eh_subhead',true); ?>
+
+<?php echo get_post_meta($post->ID,'eh_subhead',true); ?>
+
       </p>
+
 <? endif; ?>
+
       <p>
         <?php the_content(); ?>
       </p>
 
-    </div>
+      <div id="post-comments">
+      <?php
+      // If comments are open or at least one comment
+      if ( comments_open() || get_comments_number() ) :
+      comments_template();
+      endif;
+      ?>
+      </div>
 
-    <div id="post-comments">
-    <?php
-    // If comments are open or at least one comment
-    if ( comments_open() || get_comments_number() ) :
-    comments_template();
-    endif;
-    ?>
     </div>
 
   </div>

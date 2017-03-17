@@ -57,9 +57,13 @@
 
   <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
 
+    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
+
       <p>That page couldn't be found. Maybe try a search?</p>
 
       <?php get_search_form(); ?>
+
+    </div>
 
   </div>
 
