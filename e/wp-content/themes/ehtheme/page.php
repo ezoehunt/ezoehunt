@@ -10,7 +10,7 @@
 
 get_header(); ?>
 
-  <!--div id="content-wrapper"-->
+<div id="content-wrapper" class="row">
 
 <?php
 while ( have_posts() ) : the_post();
@@ -20,13 +20,10 @@ get_template_part( 'content', 'page' );
 endwhile;
 ?>
 
-  <!--/div--><!-- end #content-wrapper -->
+</div>
+<!-- end #content-wrapper -->
 
 <?php get_footer(); ?>
-
-<!--/div--><!-- end #wrapper -->
-
-
 
 <script src="<?php echo home_url('/js/application.min.js'); ?>"></script>
 

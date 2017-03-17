@@ -12,7 +12,7 @@ get_header();
 
 ?>
 
-  <div id="content-wrapper">
+  <div id="content-wrapper" class="row">
 
 <?php
 // Assign templates for all pages

@@ -40,7 +40,7 @@ $generalKeys ='Elizabeth Hunt, Making Things and Thinking About Them, UX, UX des
 <!-- Favicon, Fonts, and Style -->
 <link rel="icon" type="image/x-icon" href="<?php echo home_url('/images/favicon.ico'); ?>" />
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+<!--link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet"-->
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
 
 <link rel="stylesheet" href="<?php echo home_url('/css/application.min.css'); ?>">
@@ -75,36 +75,33 @@ _gaq.push(['_trackPageview']);
 	<p style="margin:0 0 12px 30px;">You can continue, but to experience this website as it was designed, please enable Javascript in your browser.</p>
 </div></noscript>
 
-<!--div id="wrapper" class="mywrap"-->
+<!--div id="wrapper" class="container"-->
 
-  <nav class="row navbar navbar-toggleable-sm HolyGrail-header">
+<nav class="row navbar navbar-toggleable-sm">
 
-    <div class="navbar-brand">
+  <div class="navbar-brand">
 
+    <!-- for Small down -->
+    <button class="hidden-md-up navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <img class="navicon" src="/images/navicon.png">
+    </button>
+    <!-- end for Small down -->
 
-      <button class="hidden-md-up navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <!-- for Small down -->
-        <img class="navicon" src="/images/navicon.png">
-        <!-- end for Small down -->
-      </button>
+    <a title="Go to home page" href="<?php echo esc_url( home_url('/') ); ?>" class="hvr-wobble-vertical">
+      <h3>Elizabeth Hunt</h3>
+    </a>
 
-
-      <a title="Go to home page" href="<?php echo esc_url( home_url('/') ); ?>" class="hvr-wobble-vertical">
-        <h3>Elizabeth Hunt</h3>
-      </a>
-
-      <div id="nav-items" class="hidden-sm-down">
-        <!-- for Medium up -->
-        <?php include '_nav_items.php'; ?>
-        <!-- end for Medium up -->
-      </div>
-
-    </div>
-
-    <div class="hidden-md-up collapse navbar-collapse" id="navbarsExampleDefault">
-      <!-- for Small down -->
+    <!-- for Medium up -->
+    <div id="nav-items" class="hidden-sm-down">
       <?php include '_nav_items.php'; ?>
-      <!-- end for Small down -->
     </div>
+    <!-- end for Medium up -->
 
-  </nav>
+  </div>
+
+  <!-- for Small down -->
+  <div class="hidden-md-up collapse navbar-collapse" id="navbarsExampleDefault">
+    <?php include '_nav_items.php'; ?>
+  </div>
+  <!-- end for Small down -->
+</nav>
