@@ -41,6 +41,8 @@ $generalKeys ='Elizabeth Hunt, Making Things and Thinking About Them, UX, UX des
 <link rel="icon" type="image/x-icon" href="<?php echo home_url('/images/favicon.ico'); ?>" />
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
+
 <link rel="stylesheet" href="<?php echo home_url('/css/application.min.css'); ?>">
 
 <!-- Scripts -->

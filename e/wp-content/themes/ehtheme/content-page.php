@@ -10,7 +10,84 @@
 global $post;
 ?>
 
-<div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
+<style>
+.testit {
+  display: -webkit-flex;
+  display: flex;
+}
+.item-5 {
+  order: 3;
+}
+.item-6 {
+  order: 2;
+}
+
+
+</style>
+
+<div class="testit row <?php echo 'post-';echo the_ID();?>" style="border:2px solid blue;">
+
+  <div class="item-4 floatleft col col-sm-5 col-md-10 col-bg-orange" style="border:2px solid blue;"></div>
+
+  <div class="item-5 floatright col col-sm-5 col-md-10 col-bg-orange" style="border:2px solid blue;"></div>
+
+  <div class="item-6 floatleft col col-sm-90 col-md-80 col-bg-white" style="border:2px solid blue;min-height:300px;">
+
+    <div style="height:40px;">
+      <p class="page-breadcrumb" style="">
+        <a href="/" title="Return to home page">Home</a>
+        &nbsp; / &nbsp;
+        <?php echo get_the_title(); ?>
+      </p>
+    </div>
+
+    <ul class="" style="border:2px solid blue;background-color:black;height:120px;margin-left:-70px;">
+
+      <li class="item-1"></li>
+
+      <li class="item-2"></li>
+
+      <li class="item-3">
+        <h1 class="page-headline-nopag"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></h1>
+      </li>
+
+    </ul>
+
+    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
+      <?php if ( get_post_meta($post->ID,'eh_subhead') ) : ?>
+
+      <p class="subhead">
+      <?php echo get_post_meta($post->ID,'eh_subhead',true); ?>
+
+      </p>
+      <? endif; ?>
+
+      <p>
+        <?php the_content(); ?>
+      </p>
+
+      <div id="post-comments">
+      <?php
+      // If comments are open or at least one comment
+      if ( comments_open() || get_comments_number() ) :
+      comments_template();
+      endif;
+      ?>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!--div class="col col-sm-5 col-md-10 col-bg-orange" style="border:2px solid blue;"></div-->
+
+</div>
+
+
+
+
+
+<!--div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
   <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
   <div class="col col-sm-90 col-md-70 col-bg-white">
@@ -24,10 +101,10 @@ global $post;
   </div>
 
   <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
-</div>
+</div-->
 
 
-<div id="page-title" class="row row-120">
+<!--div id="page-title" class="row row-120">
 
   <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
 
@@ -49,10 +126,10 @@ global $post;
 
   <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-</div>
+</div-->
 
 
-<div id="page-content" class="row">
+<!--div id="page-content" class="row">
 
   <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
@@ -89,4 +166,4 @@ global $post;
 
   <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-</div><!-- end #page-content row -->
+</div--><!-- end #page-content row -->
