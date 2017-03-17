@@ -13,7 +13,7 @@ global $post;
 <div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
   <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div class="col col-sm-90 col-md-75 col-bg-white">
+  <div class="col col-sm-90 col-md-70 col-bg-white">
 
     <p class="page-breadcrumb">
       <a href="/" title="Return to home page">Home</a>
@@ -23,7 +23,7 @@ global $post;
 
   </div>
 
-  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 </div>
 
 
@@ -31,7 +31,7 @@ global $post;
 
   <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
 
-  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1 col-bg-white">
+  <div class="col col-sm-90 col-md-80 col-bg-black col-pad-1 col-bg-white">
 
     <ul class="page-nopag">
 
@@ -47,7 +47,7 @@ global $post;
 
   </div>
 
-  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
 </div>
 
@@ -56,7 +56,7 @@ global $post;
 
   <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
+  <div id="page-column" class="col col-sm-90 col-md-70 col-pad-1 col-bg-white">
 
     <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
 
@@ -87,6 +87,6 @@ global $post;
 
   </div>
 
-  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
 </div><!-- end #page-content row -->
