@@ -5,17 +5,18 @@
 * Content to be included on Work Category page
 *
 */
-?>
+$paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 
-<?php
 $args = array(
   'post_type'       =>  'work',
   'post_status'     =>  'publish',
-  'posts_per_page'  =>  20,
+  'posts_per_page'  =>  2,
   'orderby'         =>  'date',
-  'order'           =>  'ASC'
+  'order'           =>  'ASC',
+  'paged'           =>  $paged
 );
 $find = new WP_Query($args);
+
 ?>
 
 <div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
@@ -26,7 +27,7 @@ $find = new WP_Query($args);
     <p class="page-breadcrumb">
       <a href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
-      <?php echo mygetcatname($post->ID);?>
+      Words
     </p>
 
   </div>
@@ -90,6 +91,19 @@ $title = get_the_title();
 <?php endwhile; ?>
 
     </ul>
+
+<?php
+$big = 999999999;
+$translated = __( 'Page', 'mytextdomain' );
+
+echo paginate_links( array(
+	'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+	'format' => '?paged=%#%',
+	'current' => max( 1, get_query_var('paged') ),
+	'total' => $find->max_num_pages,
+        'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
+) );
+?>
 
 <?php else : ?>
 

@@ -16,7 +16,7 @@ global $post;
     <p class="page-breadcrumb">
       <a href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
-      <?php echo mygetcatname($post->ID);?>
+      <?php echo mygetcatname($post->ID); ?>
     </p>
 
   </div>
@@ -75,12 +75,17 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
           </div>
 
           <div class="col-sm-80 floatleft fotos fotos-text">
+
+            <p class="entry-meta">
+              <?php echo get_the_date( 'j M Y' ); ?>
+            </p>
+
             <p>
               <a title="View <?php echo get_post_meta($post->ID,'eh_headline',true); ?>" href="<?php the_permalink() ?>"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></a>
             </p>
 
             <p class="entry-excerpt">
-              <?php echo get_the_title(); ?>
+              <?php echo get_the_excerpt(); ?>
             </p>
 
           </div>
@@ -90,6 +95,12 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
 <?php endwhile; ?>
 
       </ul>
+
+<?php else : ?>
+
+      <p>Sorry there are no posts right now !</p>
+
+<?php endif; ?>
 
 <?php if ($count_posts > 10) : ?>
       <div id="list-pagination">
@@ -106,12 +117,6 @@ echo paginate_links( array(
 ) );
 ?>
       </div>
-<?php endif; ?>
-
-<?php else : ?>
-
-      <p>Sorry there are no posts right now !</p>
-
 <?php endif; ?>
 
     </div>

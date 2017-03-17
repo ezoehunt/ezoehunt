@@ -103,13 +103,19 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
             </div>
 
             <div class="col-sm-80 floatleft fotos fotos-text">
-              <p>
-<?php if ( get_post_meta($post->ID,'project_details_headline') ) : ?>
-                <a title="View <?php echo get_post_meta($post->ID,'project_details_headline',true); ?>" href="<?php the_permalink() ?>"><?php echo get_post_meta($post->ID,'project_details_headline',true); ?></a>
 
-<?php endif; ?>
-<?php if ( get_post_meta($post->ID,'eh_headline') ) : ?>
-                <a title="View <?php echo get_post_meta($post->ID,'eh_headline',true); ?>" href="<?php the_permalink() ?>"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></a>
+              <p class="entry-meta">
+                <?php echo get_the_date( 'j M Y' ); ?>
+              </p>
+
+              <p>
+<?php
+$projectit = get_post_meta($post->ID,'project_details_headline',true);
+$postit = get_post_meta($post->ID,'eh_headline',true);
+if ( !empty($projectit) ) : ?>
+                <a title="View <?php echo $projectit; ?>" href="<?php the_permalink() ?>"><?php echo $projectit; ?></a>
+<?php elseif ( !empty($postit) ) : ?>
+                <a title="View <?php echo $postit; ?>" href="<?php the_permalink() ?>"><?php echo $postit; ?></a>
 <?php endif; ?>
               </p>
 
