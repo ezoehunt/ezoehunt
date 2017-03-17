@@ -7,163 +7,80 @@
 * Content Template for Pages (not post types)
 *
 */
-global $post;
+//global $post;
 ?>
 
 <style>
+
 .testit {
-  display: -webkit-flex;
   display: flex;
+  height: 100%; /* 1, 3 */
+  flex-direction: column;
 }
-.item-5 {
-  order: 3;
+
+.HolyGrail-header,
+.HolyGrail-footer {
+  flex: none; /* 2 */
 }
-.item-6 {
+
+.HolyGrail-body {
+  /*display: flex;
+  /*flex: 1;
+  min-height: 100%;
+
+  flex-direction: row;
+  /*padding: var(--space); */
+  display: flex;
+  flex: 1 0 auto; /* 2 */;
+  flex-direction: row;
+}
+
+.HolyGrail-content {
+  /*flex: 1;*/
+  /*flex: 1 0 auto;*/
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+
+.HolyGrail-nav, .HolyGrail-ads {
+  /* 12em is the width of the columns */
+  flex: 10%;
+}
+.HolyGrail-nav {
+  order: 1;
+}
+.HolyGrail-content {
+  /* put the nav on the left */
   order: 2;
+  width: 80%;
+}
+.HolyGrail-ads {
+  order: 3;
 }
 
 
 </style>
 
-<div class="testit row <?php echo 'post-';echo the_ID();?>" style="border:2px solid blue;">
 
-  <div class="item-4 floatleft col col-sm-5 col-md-10 col-bg-orange" style="border:2px solid blue;"></div>
 
-  <div class="item-5 floatright col col-sm-5 col-md-10 col-bg-orange" style="border:2px solid blue;"></div>
+<?php get_header(); ?>
 
-  <div class="item-6 floatleft col col-sm-90 col-md-80 col-bg-white" style="border:2px solid blue;min-height:300px;">
+<div class="HolyGrail-body">
 
-    <div style="height:40px;">
-      <p class="page-breadcrumb" style="">
-        <a href="/" title="Return to home page">Home</a>
-        &nbsp; / &nbsp;
-        <?php echo get_the_title(); ?>
-      </p>
-    </div>
-
-    <ul class="" style="border:2px solid blue;background-color:black;height:120px;margin-left:-70px;">
-
-      <li class="item-1"></li>
-
-      <li class="item-2"></li>
-
-      <li class="item-3">
-        <h1 class="page-headline-nopag"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></h1>
-      </li>
-
-    </ul>
-
-    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
-      <?php if ( get_post_meta($post->ID,'eh_subhead') ) : ?>
-
-      <p class="subhead">
-      <?php echo get_post_meta($post->ID,'eh_subhead',true); ?>
-
-      </p>
-      <? endif; ?>
-
-      <p>
-        <?php the_content(); ?>
-      </p>
-
-      <div id="post-comments">
-      <?php
-      // If comments are open or at least one comment
-      if ( comments_open() || get_comments_number() ) :
-      comments_template();
-      endif;
-      ?>
-      </div>
-
-    </div>
-
+  <div class="HolyGrail-content" style="background-color:red;">
+    main column here main column here main column here main column here main column here main column here main column here main column here
   </div>
 
-  <!--div class="col col-sm-5 col-md-10 col-bg-orange" style="border:2px solid blue;"></div-->
+  <div class="HolyGrail-nav" style="background-color:blue;">
+    side left
+  </div>
 
+  <div class="HolyGrail-ads" style="background-color:yellow;">
+    side right
+  </div>
 </div>
 
-
-
-
-
-<!--div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
-  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
-
-  <div class="col col-sm-90 col-md-70 col-bg-white">
-
-    <p class="page-breadcrumb">
-      <a href="/" title="Return to home page">Home</a>
-      &nbsp; / &nbsp;
-      <?php echo get_the_title(); ?>
-    </p>
-
-  </div>
-
-  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
-</div-->
-
-
-<!--div id="page-title" class="row row-120">
-
-  <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
-
-  <div class="col col-sm-90 col-md-80 col-bg-black col-pad-1 col-bg-white">
-
-    <ul class="page-nopag">
-
-      <li class="item-1"></li>
-
-      <li class="item-2"></li>
-
-      <li class="">
-        <h1 class="page-headline-nopag"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></h1>
-      </li>
-
-    </ul>
-
-  </div>
-
-  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
-
-</div-->
-
-
-<!--div id="page-content" class="row">
-
-  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
-
-  <div id="page-column" class="col col-sm-90 col-md-70 col-pad-1 col-bg-white">
-
-    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
-
-<?php if ( get_post_meta($post->ID,'eh_subhead') ) : ?>
-
-      <p class="subhead">
-
-<?php echo get_post_meta($post->ID,'eh_subhead',true); ?>
-
-      </p>
-
-<? endif; ?>
-
-      <p>
-        <?php the_content(); ?>
-      </p>
-
-      <div id="post-comments">
-      <?php
-      // If comments are open or at least one comment
-      if ( comments_open() || get_comments_number() ) :
-      comments_template();
-      endif;
-      ?>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
-
-</div--><!-- end #page-content row -->
+<!--footer class="" style="background-color:pink;">
+  foooter here
+</footer-->

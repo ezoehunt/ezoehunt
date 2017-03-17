@@ -75,33 +75,36 @@ _gaq.push(['_trackPageview']);
 	<p style="margin:0 0 12px 30px;">You can continue, but to experience this website as it was designed, please enable Javascript in your browser.</p>
 </div></noscript>
 
-<div id="wrapper" class="container">
+<!--div id="wrapper" class="mywrap"-->
 
-<nav class="row navbar navbar-toggleable-sm">
+  <nav class="row navbar navbar-toggleable-sm HolyGrail-header">
 
-  <div class="navbar-brand">
+    <div class="navbar-brand">
 
-    <!-- for Small down -->
-    <button class="hidden-md-up navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <img class="navicon" src="/images/navicon.png">
-    </button>
-    <!-- end for Small down -->
 
-    <a title="Go to home page" href="<?php echo esc_url( home_url('/') ); ?>" class="hvr-wobble-vertical">
-      <h3>Elizabeth Hunt</h3>
-    </a>
+      <button class="hidden-md-up navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- for Small down -->
+        <img class="navicon" src="/images/navicon.png">
+        <!-- end for Small down -->
+      </button>
 
-    <!-- for Medium up -->
-    <div id="nav-items" class="hidden-sm-down">
-      <?php include '_nav_items.php'; ?>
+
+      <a title="Go to home page" href="<?php echo esc_url( home_url('/') ); ?>" class="hvr-wobble-vertical">
+        <h3>Elizabeth Hunt</h3>
+      </a>
+
+      <div id="nav-items" class="hidden-sm-down">
+        <!-- for Medium up -->
+        <?php include '_nav_items.php'; ?>
+        <!-- end for Medium up -->
+      </div>
+
     </div>
-    <!-- end for Medium up -->
 
-  </div>
+    <div class="hidden-md-up collapse navbar-collapse" id="navbarsExampleDefault">
+      <!-- for Small down -->
+      <?php include '_nav_items.php'; ?>
+      <!-- end for Small down -->
+    </div>
 
-  <!-- for Small down -->
-  <div class="hidden-md-up collapse navbar-collapse" id="navbarsExampleDefault">
-    <?php include '_nav_items.php'; ?>
-  </div>
-  <!-- end for Small down -->
-</nav>
+  </nav>

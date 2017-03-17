@@ -8,7 +8,7 @@
 *
 */
 ?>
-<div id="main-footer" class="row">
+<div id="main-footer" class="row HolyGrail-footer">
 
   <p class="copyright">
     <a title="Email me" href="mailto:<?php echo antispambot("eh@ezoehunt.com"); ?>"><?php echo antispambot("eh@ezoehunt.com"); ?></a>
