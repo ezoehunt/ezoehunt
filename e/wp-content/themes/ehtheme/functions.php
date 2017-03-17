@@ -195,7 +195,7 @@ function mygetimageid($image_url) {
 }
 
 
-
+// Add Headline and Subhead boxes to regular Post and Page Types
 function eh_register_meta_boxes( $meta_boxes ) {
     $prefix = 'eh_';
 
@@ -211,8 +211,6 @@ function eh_register_meta_boxes( $meta_boxes ) {
                 'desc'  => 'The Post Headline appears in magazine header area.',
                 'id'    => $prefix . 'headline',
                 'type'  => 'text',
-                //'std'   => 'Anh Tran',
-                //'class' => 'custom-class',
                 'clone' => false,
             ),
             array(
@@ -220,8 +218,6 @@ function eh_register_meta_boxes( $meta_boxes ) {
                 'desc'  => 'The Post Subhead appears in the body copy aera.',
                 'id'    => $prefix . 'subhead',
                 'type'  => 'text',
-                //'std'   => 'Anh Tran',
-                //'class' => 'custom-class',
                 'clone' => false,
             ),
         )
@@ -229,19 +225,3 @@ function eh_register_meta_boxes( $meta_boxes ) {
     return $meta_boxes;
 }
 add_filter( 'rwmb_meta_boxes', 'eh_register_meta_boxes' );
-
-
-
-
-/*
-function remove_category( $string, $type ) {
-  if ( $type != 'single' && $type == 'category' && ( strpos( $string, 'category' ) !== false ) )
-  {
-      $url_without_category = str_replace( "/category/", "/", $string );
-      return trailingslashit( $url_without_category );
-  }
-  return $string;
-}
-
-add_filter( 'user_trailingslashit', 'remove_category', 100, 2);
-*/

@@ -9,6 +9,7 @@ $paged = ( get_query_var('paged') ) ? get_query_var('paged') : 1;
 
 $args = array(
   'post_type'       =>  'work',
+  'category_name'   =>  'work',
   'post_status'     =>  'publish',
   'posts_per_page'  =>  2,
   'orderby'         =>  'date',
@@ -16,7 +17,7 @@ $args = array(
   'paged'           =>  $paged
 );
 $find = new WP_Query($args);
-
+//var_dump($find);
 ?>
 
 <div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
@@ -27,7 +28,7 @@ $find = new WP_Query($args);
     <p class="page-breadcrumb">
       <a href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
-      Words
+      <?php //echo mygetcatname($find->ID); ?>
     </p>
 
   </div>
@@ -65,9 +66,13 @@ $find = new WP_Query($args);
 
   <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
 
-<?php if ( $find->have_posts() ) : ?>
+    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
 
-    <ul class="grid-work">
+<?php if ( $find->have_posts() ) :
+$count_posts = $find->found_posts;
+?>
+
+      <ul class="grid-work">
 
 <?php while ( $find->have_posts() ) : $find->the_post(); ?>
 
@@ -75,7 +80,7 @@ $find = new WP_Query($args);
 $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
 $title = get_the_title();
 ?>
-      <li <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+        <li <?php post_class(); ?> id="post-<?php the_ID(); ?>">
           <a title="View project" href="<?php the_permalink() ?>">
 
           <img class="grid-image" src="<?php echo $featuredImage[0];?>">
@@ -90,8 +95,10 @@ $title = get_the_title();
 
 <?php endwhile; ?>
 
-    </ul>
+      </ul>
 
+<?php if ($count_posts > 3) : ?>
+      <div id="list-pagination">
 <?php
 $big = 999999999;
 $translated = __( 'Page', 'mytextdomain' );
@@ -104,12 +111,17 @@ echo paginate_links( array(
         'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
 ) );
 ?>
+      </div>
+<?php endif; ?>
 
-<?php else : ?>
+<?php
+wp_reset_postdata();
+else : ?>
 
-    <p><b>No portfolio items to show right now !</b></p>
+      <p><b>Sorry there are no projects to show right now !</b></p>
 
 <?php endif; ?>
+    </div>
 
   </div>
 

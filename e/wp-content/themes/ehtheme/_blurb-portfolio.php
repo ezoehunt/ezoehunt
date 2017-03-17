@@ -5,7 +5,7 @@ $args = array(
   'project_tags'    =>  'featured',
   'posts_per_page'  =>  2,
   'orderby'         =>  'date',
-  'order'           =>  'DESC'
+  'order'           =>  'ASC'
 );
 
 $find = new WP_Query($args );

@@ -80,9 +80,7 @@ $count_posts = $wp_query->found_posts;
 
         <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
 
-<?php if ( have_posts() ) :
-//$count_posts = $wp_query->found_posts;
-?>
+<?php if ( have_posts() ) : ?>
 
           <div id="mysearch">
             <?php get_search_form(); ?>
@@ -148,7 +146,9 @@ echo paginate_links( array(
           </div>
 <?php endif; ?>
 
-<?php else : ?>
+<?php
+wp_reset_postdata();
+else : ?>
 
           <p>Sorry, but nothing matched your search terms. Please try again with some different keywords.</p>
 

@@ -96,12 +96,6 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
 
       </ul>
 
-<?php else : ?>
-
-      <p>Sorry there are no posts right now !</p>
-
-<?php endif; ?>
-
 <?php if ($count_posts > 10) : ?>
       <div id="list-pagination">
 <?php
@@ -117,6 +111,14 @@ echo paginate_links( array(
 ) );
 ?>
       </div>
+<?php endif; ?>
+
+<?php
+wp_reset_postdata();
+else : ?>
+
+      <p><b>Sorry there are no posts right now !</b></p>
+
 <?php endif; ?>
 
     </div>
