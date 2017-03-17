@@ -85,7 +85,8 @@ function create_project_post_type() {
 				'parent_item_colon' => ''
 			),
 			'public' => true,
-			'publicly_queryable' => true,
+      'has_archive' => true,
+      'publicly_queryable' => true,
 			'show_ui' => true,
 			'query_var' => true,
 			'rewrite' => true,

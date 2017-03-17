@@ -4,7 +4,7 @@
   <a title="Go to home page" class="nav-link" href="<?php echo home_url('/'); ?>">Home</a>
 </li>
 
-<li class="nav-item<?php if ( is_category('work') OR in_array('work',$bodyclass) ) { echo ' active'; } ?>">
+<li class="nav-item<?php if ( is_category('work') OR in_array('post-type-archive-work',$bodyclass) ) { echo ' active'; } ?>">
   <a title="Go to Work section" class="nav-link" href="<?php echo home_url('/work'); ?>">Work</a>
 </li>
 

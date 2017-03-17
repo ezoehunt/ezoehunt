@@ -4,9 +4,10 @@
 *
 * Based on Twentyseventeen Wordpress theme
 *
-* Search Results template
+* Archive Template for Custom Post Type = Work
 *
 */
+global $post;
 
 get_header();
 
@@ -22,7 +23,7 @@ get_header();
         <p class="page-breadcrumb">
           <a href="/" title="Return to home page">Home</a>
           &nbsp; / &nbsp;
-          Search Results
+          <?php echo mygetcatname($post->ID); ?>
         </p>
 
       </div>
@@ -44,23 +45,7 @@ get_header();
           <li class="item-2"></li>
 
           <li class="item-3">
-<?php if ( have_posts() ) :
-$count_posts = $wp_query->found_posts;
-?>
-            <h1 class="page-headline-nopag">
-<?php
-  printf( _n( '%s result', '%s results', $count_posts, 'ehtheme' ), $count_posts );
-  echo ' for <br/><span class="search-query">' . get_search_query() . '</span>';
-?>
-              </h1>
-<?php else : ?>
-
-            <h1 class="page-headline">
-<?php
-  printf( __( 'No Results for<br/>%s', 'ehtheme' ), '<span class="search-query">' . get_search_query() . '</span>' );
-?>
-            </h1>
-<?php endif; ?>
+            <h1 class="page-headline-nopag">Making Things</h1>
           </li>
 
         </ul>
@@ -80,56 +65,33 @@ $count_posts = $wp_query->found_posts;
 
         <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
 
-<?php if ( have_posts() ) : ?>
+<?php if ( have_posts() ) :
+$count_posts = $wp_query->found_posts;
+?>
 
-          <div id="mysearch">
-            <?php get_search_form(); ?>
-          </div>
-
-          <ul class="entries entries-search">
+          <ul class="grid-work">
 
 <?php while ( have_posts() ) : the_post();
 $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
 ?>
 
-            <li <?php post_class('entry-foto'); ?> id="post-<?php the_ID(); ?>">
+            <li <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+              <a title="View project" href="<?php the_permalink() ?>">
 
-            <div class="col-sm-20 floatleft fotos fotos-img">
-              <a title="View <?php echo the_title(); ?>" href="<?php the_permalink(); ?>">
-                <img title="Image of this post" src="<?php echo $featuredImage[0];?>">
+                <img class="grid-image" src="<?php echo $featuredImage[0];?>">
+
+                <figcaption class="grid-img-overlay">
+                  <p><?php echo the_title(); ?>
+                    <br/><span>&#8212; view project &#8212;</span></p>
+                </figcaption>
               </a>
-            </div>
-
-            <div class="col-sm-80 floatleft fotos fotos-text">
-
-              <p class="entry-meta">
-                <?php echo get_the_date( 'j M Y' ); ?>
-              </p>
-
-              <p>
-<?php
-$projectit = get_post_meta($post->ID,'project_details_headline',true);
-$postit = get_post_meta($post->ID,'eh_headline',true);
-if ( !empty($projectit) ) : ?>
-                <a title="View <?php echo $projectit; ?>" href="<?php the_permalink() ?>"><?php echo $projectit; ?></a>
-<?php elseif ( !empty($postit) ) : ?>
-                <a title="View <?php echo $postit; ?>" href="<?php the_permalink() ?>"><?php echo $postit; ?></a>
-<?php endif; ?>
-              </p>
-
-              <p class="entry-excerpt">
-                <?php echo get_the_excerpt(); ?>
-              </p>
-
-            </div>
-
-          </li>
+            </li>
 
 <?php endwhile; ?>
 
           </ul>
 
-<?php if ($count_posts > 10) : ?>
+<?php if ($count_posts > 3) : ?>
           <div id="list-pagination">
 <?php
 $big = 999999999;
@@ -150,11 +112,7 @@ echo paginate_links( array(
 wp_reset_postdata();
 else : ?>
 
-          <p>Sorry, but nothing matched your search terms. Please try again with some different keywords.</p>
-
-          <div id="mysearch">
-            <?php get_search_form(); ?>
-          </div>
+          <p>Sorry there are no projects to show right now !</p>
 
 <?php endif; ?>
 
