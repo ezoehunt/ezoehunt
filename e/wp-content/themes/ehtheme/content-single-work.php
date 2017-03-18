@@ -8,11 +8,9 @@
 global $post;
 ?>
 
-<div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
-  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
+<div id="colmain" class="col col-sm-90 col-md-70 bg-white <?php echo 'post-';echo the_ID();?>">
 
-  <div class="col col-sm-90 col-md-75 col-bg-white">
-
+  <div id="breadcrumb">
     <p class="page-breadcrumb">
       <a href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
@@ -20,26 +18,18 @@ global $post;
       &nbsp; / &nbsp;
       <?php echo get_the_title(); ?>
     </p>
-
   </div>
 
-  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
-</div>
 
-
-<div id="page-title" class="row row-120">
-
-  <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
-
-  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1 col-bg-white">
+  <div id="page-title">
 
     <ul class="page-pagination">
 
-      <li class="item-3">
+      <li class="item-middle">
         <h1 class="page-headline"><?php echo get_post_meta($post->ID,'project_details_headline',true); ?></h1>
       </li>
 
-      <li class="item-1">
+      <li class="item-left">
         <?php
           if ( mynextprevious($post->ID, 'previous') ) {
             echo mynextprevious($post->ID, 'previous');
@@ -50,7 +40,7 @@ global $post;
         ?>
       </li>
 
-      <li class="item-2">
+      <li class="item-right">
         <?php
           if ( mynextprevious($post->ID, 'next') ) {
             echo mynextprevious($post->ID, 'next');
@@ -65,25 +55,19 @@ global $post;
 
   </div>
 
-  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 
-</div>
+  <div id="page-column">
 
+    <div class="blog-center col-sm-95">
 
-<div id="page-content" class="row">
-
-  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
-
-  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
-
-    <ul class="nav nav-tabs" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link laquo active" data-toggle="tab" data-target="#design" role="tab" onclick="changeIt('see-design');">Viewing Designs</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link raquo" data-toggle="tab" data-target="#process" role="tab" onclick="changeIt('see-process');">See Process</a>
-      </li>
-    </ul>
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link laquo active" data-toggle="tab" data-target="#design" role="tab" onclick="changeIt('see-design');">Viewing Designs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link raquo" data-toggle="tab" data-target="#process" role="tab" onclick="changeIt('see-process');">See Process</a>
+        </li>
+      </ul>
 
 <?php
 if ( have_posts() ) :
@@ -105,26 +89,26 @@ if ( have_posts() ) :
   }
 ?>
 
-    <div class="tab-content">
+      <div class="tab-content">
 
-      <div id="design" class="tab-pane active" role="tabpanel">
+        <div id="design" class="tab-pane active" role="tabpanel">
 
 <?php if ( ! empty($design) ) : ?>
 
-        <p class="overview">
-          <span>Challenge</span>
-          <br/><?php echo get_post_meta($post->ID,'project_details_challenge',true); ?>
-        </p>
+          <p class="overview">
+            <span>Challenge</span>
+            <br/><?php echo get_post_meta($post->ID,'project_details_challenge',true); ?>
+          </p>
 
-        <p class="overview">
-          <span>Solution</span>
-          <br/><?php echo get_post_meta($post->ID,'project_details_solution',true); ?>
-        </p>
+          <p class="overview">
+            <span>Solution</span>
+            <br/><?php echo get_post_meta($post->ID,'project_details_solution',true); ?>
+          </p>
 
-        <p class="overview">
-          <span>Contribution</span>
-          <br/><?php echo get_post_meta($post->ID,'project_details_contribution',true); ?>
-        </p>
+          <p class="overview">
+            <span>Contribution</span>
+            <br/><?php echo get_post_meta($post->ID,'project_details_contribution',true); ?>
+          </p>
 
 <?php
 foreach ( $design as $image ) :
@@ -145,38 +129,40 @@ foreach ( $design as $image ) :
 ?>
 <?php endforeach; ?>
 
-        <div class="row item-row">
+          <div class="row item-row">
 
-          <div class="col-sm-100 col-md-40 floatleft item-text">
+            <div class="col-sm-100 col-md-40 floatleft item-text">
 
-            <p class="item-text-title"><?php echo $image[$prefix.'title']; ?></p>
+              <p class="item-text-title"><?php echo $image[$prefix.'title']; ?></p>
 
-            <p class="item-text-copy"><?php echo $image[$prefix.'description']?></p>
+              <p class="item-text-copy"><?php echo $image[$prefix.'description']?></p>
+
+              <p class="item-text-copy"><a title="View larger image" href="<?php echo $attach_url;?>">View larger image &raquo;</a></p>
+
+            </div>
+
+            <div class="col-sm-100 col-md-60 floatleft item-image">
+
+              <a title="View larger image" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
+
+            </div>
 
           </div>
-
-          <div class="col-sm-100 col-md-60 floatleft item-image">
-
-            <a title="View larger" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
-
-          </div>
-
-        </div>
 
 <?php endforeach; ?>
 
 <?php endif; ?>
 
-      </div><!-- end #design tab -->
+        </div><!-- end #design tab -->
 
-      <div id="process" class="tab-pane" role="tabpanel">
+        <div id="process" class="tab-pane" role="tabpanel">
 
 <?php if ( ! empty($process) ) : ?>
 
-        <p class="overview">
-          <span>Overview</span>
-          <br/><?php echo get_the_content(); ?>
-        </p>
+          <p class="overview">
+            <span>Overview</span>
+            <br/><?php echo get_the_content(); ?>
+          </p>
 
 <?php
 foreach ( $process as $image ) :
@@ -195,42 +181,49 @@ foreach ( $process as $image ) :
 ?>
 <?php endforeach; ?>
 
-        <div class="row item-row">
+          <div class="row item-row">
 
-          <div class="col-sm-100 col-md-40 floatleft item-text">
+            <div class="col-sm-100 col-md-40 floatleft item-text">
 
-            <p class="item-text-title"><?php echo $image[$prefix.'title']; ?></p>
+              <p class="item-text-title"><?php echo $image[$prefix.'title']; ?></p>
 
-            <p class="item-text-copy"><?php echo $image[$prefix.'description']?></p>
+              <p class="item-text-copy"><?php echo $image[$prefix.'description']?></p>
+
+            </div>
+
+            <div class="col-sm-100 col-md-60 floatleft item-image">
+
+              <a title="View larger" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
+
+            </div>
 
           </div>
-
-          <div class="col-sm-100 col-md-60 floatleft item-image">
-
-            <a title="View larger" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
-
-          </div>
-
-        </div>
 
 <?php endforeach; ?>
 
 <?php endif; ?>
 
-      </div><!-- end #process tab -->
+        </div><!-- end #process tab -->
 
-    </div><!-- end .tab-content -->
+      </div><!-- end .tab-content -->
 
 <?php endwhile; ?>
 
 <?php else : ?>
 
-    <p>Nothing here !</p>
+      <p><b>Nothing here !</b></p>
 
 <?php endif; ?>
 
-  </div>
+    </div><!-- end .blog-center -->
 
-  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+  </div><!-- end #page-column -->
 
-</div><!-- end #page-content row -->
+
+</div><!-- end #colmain -->
+
+
+<div id="leftcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>
+
+
+<div id="rightcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>
