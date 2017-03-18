@@ -28,27 +28,30 @@ global $post;
       <li class="item-middle">
         <h1 class="page-headline"><?php echo get_post_meta($post->ID,'project_details_headline',true); ?></h1>
       </li>
-
+<?php
+$myprev = mynextprevious($post->ID, 'previous');
+$mynext = mynextprevious($post->ID, 'next');
+?>
       <li class="item-left">
-        <?php
-          if ( mynextprevious($post->ID, 'previous') ) {
-            echo mynextprevious($post->ID, 'previous');
-          }
-          else {
-            echo '&nbsp;';
-          }
-        ?>
+<?php
+  if ( !empty( $myprev ) ) {
+    echo $myprev;
+  }
+  else {
+    echo '&nbsp;';
+  }
+?>
       </li>
 
       <li class="item-right">
-        <?php
-          if ( mynextprevious($post->ID, 'next') ) {
-            echo mynextprevious($post->ID, 'next');
-          }
-          else {
-            echo '&nbsp;';
-          }
-        ?>
+<?php
+  if ( !empty( $mynext ) ) {
+    echo $mynext;
+  }
+  else {
+    echo '&nbsp;';
+  }
+?>
       </li>
 
     </ul>

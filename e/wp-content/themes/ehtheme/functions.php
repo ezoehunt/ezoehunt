@@ -191,6 +191,8 @@ function mynextprevious( $post_id, $type ) {
   global $post;
   // Get the category
   $cat_name = mygetcatname($post_id);
+  $cat_slug = sluggify($cat_name);
+
   // Adjust output
   if ( $cat_name == 'Work' ) {
     $cat_alt = $type.' Porfolio project';
@@ -202,13 +204,11 @@ function mynextprevious( $post_id, $type ) {
   // Match type to icons + function
   if ( $type == 'previous' ) {
     $function = get_previous_post(true,'');
-    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a" aria-hidden="true"></i><i class="fa fa-arrow-left fa-stack-1x icon-b" aria-hidden="true"></i></span>';
-    //$icon = 'older &raquo;';
+    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat_slug.'" aria-hidden="true"></i><i class="fa fa-arrow-left fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
   }
   elseif ( $type == 'next' ) {
     $function = get_next_post(true,'');
-    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a" aria-hidden="true"></i><i class="fa fa-arrow-right fa-stack-1x icon-b" aria-hidden="true"></i></span>';
-    //$icon = '&laquo; newer';
+    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat_slug.'" aria-hidden="true"></i><i class="fa fa-arrow-right fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
 
   }
   // If none, return false (empty)
