@@ -8,6 +8,10 @@
 *
 */
 ?>
+
+</div>
+<!-- end #content-wrapper -->
+
 <div id="main-footer" class="row">
 
   <p class="copyright">
@@ -27,3 +31,8 @@
   </p>
 
 </div>
+
+<script src="<?php echo home_url('/js/application.min.js'); ?>"></script>
+
+</body>
+</html>

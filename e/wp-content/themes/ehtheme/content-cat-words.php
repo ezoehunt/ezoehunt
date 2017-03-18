@@ -9,12 +9,14 @@ global $post;
 
 ?>
 
+<div id="leftcol" class="col col-sm-5 col-md-15 bg-words"></div>
+
 
 <div id="colmain" class="col col-sm-90 col-md-70 bg-white">
 
   <div id="breadcrumb">
     <p class="page-breadcrumb">
-      <a href="/" title="Return to home page">Home</a>
+      <a class="words" href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
       <?php echo mygetcatname($post->ID); ?>
     </p>
@@ -49,7 +51,7 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
         <li <?php post_class('entry-foto'); ?> id="post-<?php the_ID(); ?>">
 
           <div class="col-sm-20 floatleft fotos fotos-img">
-            <a title="View <?php echo the_title(); ?>" href="<?php the_permalink(); ?>">
+            <a class="words" title="View <?php echo the_title(); ?>" href="<?php the_permalink(); ?>">
               <img title="Image of this post" src="<?php echo $featuredImage[0];?>">
             </a>
           </div>
@@ -61,7 +63,7 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
             </p>
 
             <p>
-              <a title="View <?php echo get_post_meta($post->ID,'eh_headline',true); ?>" href="<?php the_permalink() ?>"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></a>
+              <a class="words" title="View <?php echo get_post_meta($post->ID,'eh_headline',true); ?>" href="<?php the_permalink() ?>"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></a>
             </p>
 
             <p class="entry-excerpt">
@@ -78,7 +80,7 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
 
 <?php if ($count_posts > 10) : ?>
       <div id="list-pagination">
-        <?php echo mypaginate($wp_query); ?>
+        <?php echo wpbeginner_numeric_posts_nav(); ?>
       </div>
 <?php endif; ?>
 
@@ -95,9 +97,6 @@ else : ?>
   </div><!-- end #pagecolumn -->
 
 </div><!-- end #colmain -->
-
-
-<div id="leftcol" class="col col-sm-5 col-md-15 bg-words"></div>
 
 
 <div id="rightcol" class="col col-sm-5 col-md-15 bg-words"></div>

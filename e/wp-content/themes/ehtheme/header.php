@@ -23,7 +23,7 @@ remove_action('wp_head', 'wp_generator');
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
-$generalKeys ='Elizabeth Hunt, Making Things and Thinking About Them, UX, UX designer, user experience designer, interaction designer, experience designer, Code for America, Mozilla';
+$generalKeys ='Elizabeth Hunt, Making Things and Thinking About Them, UX, UX designer, user experience designer, interaction designer, experience designer';
 
 ?>
 <!doctype html>
@@ -39,8 +39,8 @@ $generalKeys ='Elizabeth Hunt, Making Things and Thinking About Them, UX, UX des
 
 <!-- Favicon, Fonts, and Style -->
 <link rel="icon" type="image/x-icon" href="<?php echo home_url('/images/favicon.ico'); ?>" />
+
 <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
-<!--link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet"-->
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,900" rel="stylesheet">
 
 <link rel="stylesheet" href="<?php echo home_url('/css/application.min.css'); ?>">
@@ -85,7 +85,7 @@ _gaq.push(['_trackPageview']);
     </button>
     <!-- end for Small down -->
 
-    <a title="Go to home page" href="<?php echo esc_url( home_url('/') ); ?>" class="hvr-wobble-vertical">
+    <a title="Go to home page" href="<?php echo esc_url( home_url('/') ); ?>" class="hvr-wobble-vertical noborder">
       <h3>Elizabeth Hunt</h3>
     </a>
 
@@ -103,3 +103,6 @@ _gaq.push(['_trackPageview']);
   </div>
   <!-- end for Small down -->
 </nav>
+<!-- end nav -->
+
+<div id="content-wrapper" class="row">

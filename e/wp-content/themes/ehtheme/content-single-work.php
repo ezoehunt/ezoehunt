@@ -8,13 +8,16 @@
 global $post;
 ?>
 
+<div id="leftcol" class="col col-sm-5 col-md-15 bg-work"></div>
+
+
 <div id="colmain" class="col col-sm-90 col-md-70 bg-white <?php echo 'post-';echo the_ID();?>">
 
   <div id="breadcrumb">
     <p class="page-breadcrumb">
-      <a href="/" title="Return to home page">Home</a>
+      <a class="work" href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
-      <a href="/<?php echo mygetcatslug($post->ID);?>" title="Go to <?php echo mygetcatname($post->ID);?> section"><?php echo mygetcatname($post->ID);?></a>
+      <a class="work" href="/<?php echo mygetcatslug($post->ID);?>" title="Go to <?php echo mygetcatname($post->ID);?> section"><?php echo mygetcatname($post->ID);?></a>
       &nbsp; / &nbsp;
       <?php echo get_the_title(); ?>
     </p>
@@ -140,13 +143,13 @@ foreach ( $design as $image ) :
 
               <p class="item-text-copy"><?php echo $image[$prefix.'description']?></p>
 
-              <p class="item-text-copy"><a title="View larger image" href="<?php echo $attach_url;?>">View larger image &raquo;</a></p>
+              <p class="item-text-copy"><a class="work" title="View larger image" href="<?php echo $attach_url;?>">View larger image &raquo;</a></p>
 
             </div>
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
 
-              <a title="View larger image" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
+              <a class="work" title="View larger image" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
 
             </div>
 
@@ -196,7 +199,7 @@ foreach ( $process as $image ) :
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
 
-              <a title="View larger" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
+              <a class="work" title="View larger" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
 
             </div>
 
@@ -222,11 +225,7 @@ foreach ( $process as $image ) :
 
   </div><!-- end #page-column -->
 
-
 </div><!-- end #colmain -->
-
-
-<div id="leftcol" class="col col-sm-5 col-md-15 bg-work"></div>
 
 
 <div id="rightcol" class="col col-sm-5 col-md-15 bg-work"></div>

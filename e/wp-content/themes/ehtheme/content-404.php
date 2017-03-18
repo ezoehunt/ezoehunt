@@ -9,11 +9,14 @@
 */
 ?>
 
+<div id="leftcol" class="col col-sm-5 col-md-15 bg-other"></div>
+
+
 <div id="colmain" class="col col-sm-90 col-md-70 bg-white">
 
   <div id="breadcrumb">
     <p class="page-breadcrumb">
-      <a href="/" title="Return to home page">Home</a>
+      <a class="other" href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
       Page Not Found
     </p>
@@ -44,9 +47,6 @@
   </div>
 
 </div><!-- end main column -->
-
-
-<div id="leftcol" class="col col-sm-5 col-md-15 bg-other"></div>
 
 
 <div id="rightcol" class="col col-sm-5 col-md-15 bg-other"></div>

@@ -14,11 +14,6 @@
 
 get_header();
 
-?>
-
-<div id="content-wrapper" class="row">
-
-<?php
 //if ( in_array('home',$bodyclass) ) {
 if ( is_front_page() ) {
   include 'content-home.php';
@@ -41,14 +36,7 @@ if ( is_404() ) {
 if ( is_search() ) {
   include 'search.php';
 }
+
+get_footer();
+
 ?>
-
-</div>
-<!-- end #content-wrapper -->
-
-<?php get_footer(); ?>
-
-<script src="<?php echo home_url('/js/application.min.js'); ?>"></script>
-
-</body>
-</html>

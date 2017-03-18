@@ -8,13 +8,16 @@
 global $post;
 ?>
 
+<div id="leftcol" class="col col-sm-5 col-md-15 bg-words"></div>
+
+
 <div id="colmain" class="col col-sm-90 col-md-70 bg-white <?php echo 'post-';echo the_ID();?>">
 
   <div id="breadcrumb">
     <p class="page-breadcrumb">
-      <a href="/" title="Return to home page">Home</a>
+      <a class="words" href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
-      <a href="/<?php echo mygetcatslug($post->ID);?>" title="Go to <?php echo mygetcatname($post->ID);?> section"><?php echo mygetcatname($post->ID);?></a>
+      <a class="words" href="/<?php echo mygetcatslug($post->ID);?>" title="Go to <?php echo mygetcatname($post->ID);?> section"><?php echo mygetcatname($post->ID);?></a>
       &nbsp; / &nbsp;
       <?php echo get_the_title(); ?>
     </p>
@@ -96,14 +99,11 @@ endif;
 
 <?php endif; ?>
 
-    </div><!-- end blog -->
+    </div><!-- end .blog-center -->
 
   </div><!-- end #page-column -->
 
 </div><!-- end #colmain -->
-
-
-<div id="leftcol" class="col col-sm-5 col-md-15 bg-words"></div>
 
 
 <div id="rightcol" class="col col-sm-5 col-md-15 bg-words"></div>

@@ -8,6 +8,7 @@
 *
 */
 global $post;
+
 ?>
 
 <div id="leftcol" class="floatleft col col-sm-5 col-md-15 bg-about"></div>
@@ -17,7 +18,7 @@ global $post;
 
   <div id="breadcrumb">
     <p class="page-breadcrumb">
-      <a href="/" title="Return to home page">Home</a>
+      <a class="about" href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
       <?php echo get_the_title(); ?>
     </p>
