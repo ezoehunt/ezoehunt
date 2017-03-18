@@ -17,7 +17,7 @@
     <span class="screen-reader-text"><?php echo _x( 'Search for:', 'label', 'ehtheme' ); ?></span>
   </label>
 
-  <div class="row" style="position:relative;">
+  <div class="row" style="width:100%;position:relative;">
 
     <button class="btn-search" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
       <span class="screen-reader-text"><?php echo _x( 'Search', 'submit button', 'ehtheme' ); ?></span></button>

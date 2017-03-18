@@ -62,7 +62,7 @@ global $post;
 </div><!-- end main column -->
 
 
-<div id="leftcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>
+<div id="leftcol" class="col col-sm-5 col-md-15 bg-about"></div>
 
 
-<div id="rightcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>
+<div id="rightcol" class="col col-sm-5 col-md-15 bg-about"></div>

@@ -77,18 +77,7 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
 
 <?php if ($count_posts > 10) : ?>
       <div id="list-pagination">
-<?php
-$big = 999999999;
-$translated = __( 'Page', 'mytextdomain' );
-
-echo paginate_links( array(
-	'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-	'format' => '?paged=%#%',
-	'current' => max( 1, get_query_var('paged') ),
-	'total' => $wp_query->max_num_pages,
-        'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
-) );
-?>
+        <?php echo mypaginate($wp_query); ?>
       </div>
 <?php endif; ?>
 
@@ -107,7 +96,7 @@ else : ?>
 </div><!-- end #colmain -->
 
 
-<div id="leftcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>
+<div id="leftcol" class="col col-sm-5 col-md-15 bg-words"></div>
 
 
-<div id="rightcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>
+<div id="rightcol" class="col col-sm-5 col-md-15 bg-words"></div>

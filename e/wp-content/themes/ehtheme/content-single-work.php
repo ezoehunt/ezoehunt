@@ -223,7 +223,7 @@ foreach ( $process as $image ) :
 </div><!-- end #colmain -->
 
 
-<div id="leftcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>
+<div id="leftcol" class="col col-sm-5 col-md-15 bg-work"></div>
 
 
-<div id="rightcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>
+<div id="rightcol" class="col col-sm-5 col-md-15 bg-work"></div>

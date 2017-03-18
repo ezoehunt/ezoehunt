@@ -110,6 +110,38 @@ register_taxonomy("project_tags", array("work"), array(
 ));
 
 
+// Add Headline and Subhead boxes to regular Post and Page Types
+function eh_register_meta_boxes( $meta_boxes ) {
+    $prefix = 'eh_';
+
+    $meta_boxes[] = array(
+        'id'         => 'titles',
+        'title'      => __( 'Post Titles', 'textdomain' ),
+        'post_types' => array( 'post', 'page' ),
+        'context'    => 'normal',
+        'priority'   => 'high',
+        'fields' => array(
+            array(
+                'name'  => __( 'Post Headline', 'textdomain' ),
+                'desc'  => 'The Post Headline appears in magazine header area.',
+                'id'    => $prefix . 'headline',
+                'type'  => 'text',
+                'clone' => false,
+            ),
+            array(
+                'name'  => __( 'Post Subhead', 'textdomain' ),
+                'desc'  => 'The Post Subhead appears in the body copy aera.',
+                'id'    => $prefix . 'subhead',
+                'type'  => 'text',
+                'clone' => false,
+            ),
+        )
+    );
+    return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'eh_register_meta_boxes' );
+
+
 // Misc Functions
 function sluggify($string)
 {
@@ -196,33 +228,15 @@ function mygetimageid($image_url) {
 }
 
 
-// Add Headline and Subhead boxes to regular Post and Page Types
-function eh_register_meta_boxes( $meta_boxes ) {
-    $prefix = 'eh_';
+function mypaginate($query) {
+  $big = 999999999;
+  $translated = __( 'Page', 'mytextdomain' );
 
-    $meta_boxes[] = array(
-        'id'         => 'titles',
-        'title'      => __( 'Post Titles', 'textdomain' ),
-        'post_types' => array( 'post', 'page' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-            array(
-                'name'  => __( 'Post Headline', 'textdomain' ),
-                'desc'  => 'The Post Headline appears in magazine header area.',
-                'id'    => $prefix . 'headline',
-                'type'  => 'text',
-                'clone' => false,
-            ),
-            array(
-                'name'  => __( 'Post Subhead', 'textdomain' ),
-                'desc'  => 'The Post Subhead appears in the body copy aera.',
-                'id'    => $prefix . 'subhead',
-                'type'  => 'text',
-                'clone' => false,
-            ),
-        )
-    );
-    return $meta_boxes;
+  return paginate_links( array (
+  	'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+  	'format' => '?paged=%#%',
+  	'current' => max( 1, get_query_var('paged') ),
+  	'total' => $query->max_num_pages,
+          'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
+    ) );
 }
-add_filter( 'rwmb_meta_boxes', 'eh_register_meta_boxes' );
