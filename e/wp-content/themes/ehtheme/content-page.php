@@ -23,10 +23,6 @@ global $post;
   <div id="page-title">
 
     <ul class="page-nopag">
-      <!--li class="item-left"></li>
-
-      <li class="item-right"></li-->
-
       <li class="item-middle">
         <h1 class="page-headline-nopag"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></h1>
       </li>

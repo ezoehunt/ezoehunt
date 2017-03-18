@@ -6,20 +6,19 @@
 *
 * Main Index template
 *
+* Assign templates for all pages
+* Wordpress has already assigned page.php to page-type pages, so no need to assign them.
+* Wordpress has already assigned templates for archive pages.
+*
 */
 
 get_header();
 
 ?>
 
-  <div id="content-wrapper" class="row">
+<div id="content-wrapper" class="row">
 
 <?php
-// Assign templates for all pages
-/* Wordpress has already assigned page.php to page-type pages, so no need to assign them.
-* Wordpress has already assigned templates for archive pages.
-*/
-
 //if ( in_array('home',$bodyclass) ) {
 if ( is_front_page() ) {
   include 'content-home.php';
@@ -44,11 +43,10 @@ if ( is_search() ) {
 }
 ?>
 
-  </div><!-- end #content-wrapper -->
+</div>
+<!-- end #content-wrapper -->
 
 <?php get_footer(); ?>
-
-</div><!-- end #wrapper -->
 
 <script src="<?php echo home_url('/js/application.min.js'); ?>"></script>
 

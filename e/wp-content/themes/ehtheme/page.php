@@ -8,7 +8,9 @@
 *
 */
 
-get_header(); ?>
+get_header();
+
+?>
 
 <div id="content-wrapper" class="row">
 

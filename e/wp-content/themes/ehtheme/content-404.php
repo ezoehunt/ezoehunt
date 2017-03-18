@@ -9,55 +9,29 @@
 */
 ?>
 
-<div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
-  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
+<div id="colmain" class="col col-sm-90 col-md-70 bg-white">
 
-  <div class="col col-sm-90 col-md-75 col-bg-white">
-
+  <div id="breadcrumb">
     <p class="page-breadcrumb">
       <a href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
       Page Not Found
     </p>
-
   </div>
 
-  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
-</div>
-
-
-<div id="page-title" class="row row-120">
-
-  <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
-
-  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1 col-bg-white">
+  <div id="page-title">
 
     <ul class="page-nopag">
-
-      <li class="item-1"></li>
-
-      <li class="item-2"></li>
-
-      <li class="item-3">
+      <li class="item-middle">
         <h1 class="page-headline-nopag">Oops...page not found...</h1>
       </li>
-
     </ul>
 
   </div>
 
-  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+  <div id="page-column">
 
-</div>
-
-
-<div id="page-content" class="row">
-
-  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
-
-  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
-
-    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
+    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80">
 
       <p>That page couldn't be found. Maybe try a search?</p>
 
@@ -67,6 +41,10 @@
 
   </div>
 
-  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+</div><!-- end main column -->
 
-</div><!-- end #page-content row-->
+
+<div id="leftcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>
+
+
+<div id="rightcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>

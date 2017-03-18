@@ -8,53 +8,32 @@
 global $post;
 ?>
 
-<div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
-  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
 
-  <div class="col col-sm-90 col-md-75 col-bg-white">
+<div id="colmain" class="col col-sm-90 col-md-70 bg-white">
 
+  <div id="breadcrumb">
     <p class="page-breadcrumb">
       <a href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
       <?php echo mygetcatname($post->ID); ?>
     </p>
-
   </div>
 
-  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
-</div>
 
-
-<div id="page-title" class="row row-120">
-
-  <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
-
-  <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1 col-bg-white">
+  <div id="page-title">
 
     <ul class="page-nopag">
-      <li class="item-1"></li>
-
-      <li class="item-2"></li>
-
-      <li class="item-3">
+      <li class="item-middle">
         <h1 class="page-headline-nopag">Thinking About Things</h1>
       </li>
     </ul>
 
   </div>
 
-  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
 
-</div>
+  <div id="page-column">
 
-
-<div id="page-content" class="row">
-
-  <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
-
-  <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
-
-    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
+    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80">
 
 <?php if ( have_posts() ) :
 $count_posts = $wp_query->found_posts;
@@ -71,7 +50,7 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
           <div class="col-sm-20 floatleft fotos fotos-img">
             <a title="View <?php echo the_title(); ?>" href="<?php the_permalink(); ?>">
               <img title="Image of this post" src="<?php echo $featuredImage[0];?>">
-        	  </a>
+            </a>
           </div>
 
           <div class="col-sm-80 floatleft fotos fotos-text">
@@ -121,10 +100,14 @@ else : ?>
 
 <?php endif; ?>
 
-    </div>
+    </div><!-- end .blog-center -->
 
-  </div>
+  </div><!-- end #pagecolumn -->
 
-  <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+</div><!-- end #colmain -->
 
-</div><!-- end #page-content row-->
+
+<div id="leftcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>
+
+
+<div id="rightcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>

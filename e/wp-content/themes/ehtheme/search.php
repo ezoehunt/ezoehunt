@@ -12,87 +12,62 @@ get_header();
 
 ?>
 
-  <div id="content-wrapper">
+<div id="content-wrapper" class="row">
 
-    <div id="page-breadcrumb" class="row row-40 <?php echo 'post-';echo the_ID();?>">
-      <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
+  <div id="colmain" class="col col-sm-90 col-md-70 bg-white">
 
-      <div class="col col-sm-90 col-md-75 col-bg-white">
-
-        <p class="page-breadcrumb">
-          <a href="/" title="Return to home page">Home</a>
-          &nbsp; / &nbsp;
-          Search Results
-        </p>
-
-      </div>
-
-      <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+    <div id="breadcrumb">
+      <p class="page-breadcrumb">
+        <a href="/" title="Return to home page">Home</a>
+        &nbsp; / &nbsp;
+        Search Results
+      </p>
     </div>
 
 
-    <div id="page-title" class="row row-120">
+    <div id="page-title">
 
-      <div class="col col-sm-5 col-md-5 col-bg-orange"></div>
-
-      <div class="col col-sm-90 col-md-85 col-bg-black col-pad-1 col-bg-white">
-
-        <ul class="page-nopag">
-
-          <li class="item-1"></li>
-
-          <li class="item-2"></li>
-
-          <li class="item-3">
-<?php if ( have_posts() ) :
-$count_posts = $wp_query->found_posts;
-?>
-            <h1 class="page-headline-nopag">
-<?php
-  printf( _n( '%s result', '%s results', $count_posts, 'ehtheme' ), $count_posts );
-  echo ' for <br/><span class="search-query">' . get_search_query() . '</span>';
-?>
-              </h1>
-<?php else : ?>
-
-            <h1 class="page-headline">
-<?php
-  printf( __( 'No Results for<br/>%s', 'ehtheme' ), '<span class="search-query">' . get_search_query() . '</span>' );
-?>
-            </h1>
-<?php endif; ?>
-          </li>
-
-        </ul>
-
-      </div>
-
-      <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+      <ul class="page-nopag">
+        <li class="item-middle">
+          <?php if ( have_posts() ) :
+            $count_posts = $wp_query->found_posts;
+          ?>
+          <h1 class="page-headline-nopag">
+            <?php
+              printf( _n( '%s result', '%s results', $count_posts, 'ehtheme' ), $count_posts );
+              echo ' for <br/><span class="search-query">' . get_search_query() . '</span>';
+            ?>
+          </h1>
+          <?php else : ?>
+          <h1 class="page-headline-nopag">
+            <?php
+              printf( __( 'No Results for<br/>%s', 'ehtheme' ), '<span class="search-query">' . get_search_query() . '</span>' );
+            ?>
+          </h1>
+          <?php endif; ?>
+        </li>
+      </ul>
 
     </div>
 
 
-    <div id="page-content" class="row">
+    <div id="page-column">
 
-      <div class="col col-sm-5 col-md-15 col-bg-orange"></div>
-
-      <div id="page-column" class="col col-sm-90 col-md-75 col-pad-1 col-bg-white">
-
-        <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80" id="post-content">
+      <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80">
 
 <?php if ( have_posts() ) : ?>
 
-          <div id="mysearch">
-            <?php get_search_form(); ?>
-          </div>
+        <div id="mysearch">
+          <?php get_search_form(); ?>
+        </div>
 
-          <ul class="entries entries-search">
+        <ul class="entries entries-search">
 
 <?php while ( have_posts() ) : the_post();
-$featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
-?>
+        $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
+        ?>
 
-            <li <?php post_class('entry-foto'); ?> id="post-<?php the_ID(); ?>">
+          <li <?php post_class('entry-foto'); ?> id="post-<?php the_ID(); ?>">
 
             <div class="col-sm-20 floatleft fotos fotos-img">
               <a title="View <?php echo the_title(); ?>" href="<?php the_permalink(); ?>">
@@ -111,9 +86,9 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
 $projectit = get_post_meta($post->ID,'project_details_headline',true);
 $postit = get_post_meta($post->ID,'eh_headline',true);
 if ( !empty($projectit) ) : ?>
-                <a title="View <?php echo $projectit; ?>" href="<?php the_permalink() ?>"><?php echo $projectit; ?></a>
+              <a title="View <?php echo $projectit; ?>" href="<?php the_permalink() ?>"><?php echo $projectit; ?></a>
 <?php elseif ( !empty($postit) ) : ?>
-                <a title="View <?php echo $postit; ?>" href="<?php the_permalink() ?>"><?php echo $postit; ?></a>
+              <a title="View <?php echo $postit; ?>" href="<?php the_permalink() ?>"><?php echo $postit; ?></a>
 <?php endif; ?>
               </p>
 
@@ -127,10 +102,10 @@ if ( !empty($projectit) ) : ?>
 
 <?php endwhile; ?>
 
-          </ul>
+        </ul>
 
 <?php if ($count_posts > 10) : ?>
-          <div id="list-pagination">
+        <div id="list-pagination">
 <?php
 $big = 999999999;
 $translated = __( 'Page', 'mytextdomain' );
@@ -143,34 +118,37 @@ echo paginate_links( array(
         'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
 ) );
 ?>
-          </div>
+        </div>
 <?php endif; ?>
 
 <?php
 wp_reset_postdata();
 else : ?>
 
-          <p>Sorry, but nothing matched your search terms. Please try again with some different keywords.</p>
+        <p>Sorry, but nothing matched your search terms. Please try again with some different keywords.</p>
 
-          <div id="mysearch">
-            <?php get_search_form(); ?>
-          </div>
+        <div id="mysearch">
+          <?php get_search_form(); ?>
+        </div>
 
 <?php endif; ?>
 
-        </div>
+      </div><!-- end .blog-center -->
 
-      </div>
+    </div><!-- end #page-column -->
 
-      <div class="col col-sm-5 col-md-10 col-bg-orange"></div>
+  </div><!-- end #colmain -->
 
-    </div><!-- end #page-content row-->
 
-  </div><!-- end #content-wrapper -->
+  <div id="leftcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>
 
-  <?php get_footer(); ?>
 
-</div><!-- end #wrapper -->
+  <div id="rightcol" class="col col-sm-5 col-md-15 bg-turquoise"></div>
+
+
+</div><!-- end #content-wrapper -->
+
+<?php get_footer(); ?>
 
 <script src="<?php echo home_url('/js/application.min.js'); ?>"></script>
 
