@@ -75,8 +75,6 @@ _gaq.push(['_trackPageview']);
 	<p style="margin:0 0 12px 30px;">You can continue, but to experience this website as it was designed, please enable Javascript in your browser.</p>
 </div></noscript>
 
-<!--div id="wrapper" class="container"-->
-
 <nav class="row navbar navbar-toggleable-sm">
 
   <div class="navbar-brand">
