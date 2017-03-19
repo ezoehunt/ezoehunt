@@ -47,7 +47,7 @@ if ( have_posts() ) :
 $count_posts = $wp_query->found_posts;
 ?>
 
-      <ul class="grid-work">
+      <ul class="gridit">
 
 <?php while ( have_posts() ) : the_post();
 $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );

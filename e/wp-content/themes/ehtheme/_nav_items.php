@@ -13,7 +13,7 @@
 </li>
 
 <li class="nav-item<?php if ( is_page('about') ) { echo ' active'; } ?>">
-  <a title="About Me" class="nav-link noborder" href="<?php echo home_url('/about'); ?>">About Me</a>
+  <a title="Go to About Me section" class="nav-link noborder" href="<?php echo home_url('/about'); ?>">About Me</a>
 </li>
 
 <li class="nav-item">

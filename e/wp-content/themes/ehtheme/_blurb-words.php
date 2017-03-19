@@ -11,11 +11,13 @@ $args = array(
 $find = new WP_Query($args );
 ?>
 
-<div class="row">
+<div class="row section-row">
 
-  <h2 class="see-all col-xs-100 col-sm-60">Recent Thoughts</h2>
+  <h2 class="see-all col col-xs-100 col-sm-60">Recent Thoughts</h2>
 
-  <p class="see-all col col-xs-100 col-sm-40"><a class="home" title="See all Words" href="<?php echo esc_url( home_url('/words') ); ?>">See all Words</a> <span class="link-raquo">&raquo;</span></p>
+  <p class="see-all col col-xs-100 col-sm-40">
+    <a class="work" title="See all Words" href="<?php echo esc_url( home_url('/words') ); ?>">see all Words <span class="link-raquo">&raquo;</span></a>
+  </p>
 
 </div>
 
@@ -26,16 +28,23 @@ if ( $find->have_posts() ) :
 ?>
 
 <p class="article-title">
-  <?php echo get_post_meta($post->ID,'eh_headline',true); ?>
-</p>
-
-<a class="work" title="View <?php echo get_post_meta($post->ID,'eh_headline',true); ?>" href="<?php the_permalink() ?>">
-  <img title="Featured image from this article" class="floatleft image-home image-left" src="<?php echo $featuredImage[0];?>">
+  <a class="work" title="View <?php echo get_post_meta($post->ID,'eh_headline',true); ?>" href="<?php the_permalink() ?>">
+    <?php echo get_post_meta($post->ID,'eh_headline',true); ?>
   </a>
-
-<p class="last">
-  <?php echo get_the_excerpt(); ?>
 </p>
+
+<div class="row section-words" style="margin-top:-.5rem;">
+
+  <p class="last">
+    <a class="work" title="View <?php echo get_post_meta($post->ID,'eh_headline',true); ?>" href="<?php the_permalink() ?>">
+      <img title="Featured image from this article" class="floatleft image-home" src="<?php echo $featuredImage[0];?>">
+    </a>
+    <?php echo get_the_excerpt(); ?>
+    <br/>
+    <span class="smaller-90"><a class="work" title="Continue reading this article" href="<?php the_permalink() ?>">{ continue reading }</a></span>
+  </p>
+
+</div>
 
 <?php
 endwhile;
