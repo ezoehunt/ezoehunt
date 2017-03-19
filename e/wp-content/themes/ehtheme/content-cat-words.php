@@ -79,8 +79,8 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
       </ul>
 
 <?php if ($count_posts > 10) : ?>
-      <div id="list-pagination">
-        <?php echo wpbeginner_numeric_posts_nav(); ?>
+      <div id="list-pagination" class="pag-words">
+        <?php echo mypaginate($wp_query); ?>
       </div>
 <?php endif; ?>
 

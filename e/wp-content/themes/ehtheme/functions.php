@@ -228,102 +228,20 @@ function mygetimageid($image_url) {
 }
 
 
-function mypaginate($query, $class) {
+function mypaginate($query) {
   $big = 999999999;
   $translated = __( 'Page', 'mytextdomain' );
-  //$class = 'words';
 
-  /*
   return paginate_links( array (
   	'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-  	'format' => '?paged=%#%',
-    'mid_size'  => 2,
-  	'current' => max( 1, get_query_var('paged') ),
-  	'total' => $query->max_num_pages,
-    'before_page_number' => '<span class="screen-reader-text '.$class.'">'.$translated.' </span>'
+  	'format'    => '?paged=%#%',
+    'end_size'  => 1,
+    'mid_size'  => 1,
+    'prev_next' => true,
+  	'prev_text' => __('&laquo;'),
+  	'next_text' => __('&raquo;'),
+  	'current'   => max( 1, get_query_var('paged') ),
+  	'total'     => $query->max_num_pages,
+    'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
     ) );
-  */
-  $links = paginate_links( array (
-  	'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-  	'format' => '?paged=%#%',
-  	'current' => max( 1, get_query_var('paged') ),
-  	'total' => $query->max_num_pages,
-    'before_page_number' => '<span class="screen-reader-text '.$class.'">'.$translated.' </span>'
-    ) );
-
-  if ( $links ) {
-    echo 'yes';
-    //return $links;
-  }
-  else {
-    return false;
-  }
-}
-
-
-
-
-function wpbeginner_numeric_posts_nav() {
-
-	if( is_singular() )
-		return;
-
-	global $wp_query;
-
-	/** Stop execution if there's only 1 page */
-	if( $wp_query->max_num_pages <= 1 )
-		return;
-
-	$paged = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
-	$max   = intval( $wp_query->max_num_pages );
-
-	/**	Add current page to the array */
-	if ( $paged >= 1 )
-		$links[] = $paged;
-
-	/**	Add the pages around the current page to the array */
-	if ( $paged >= 3 ) {
-		$links[] = $paged - 1;
-		$links[] = $paged - 2;
-	}
-
-  if ( ( $paged + 2 ) <= $max ) {
-		$links[] = $paged + 2;
-		$links[] = $paged + 1;
-	}
-
-	/**	Previous Post Link */
-	if ( get_previous_posts_link() )
-		printf( '<span>%s</span>', get_previous_posts_link('&laquo; Back') );
-
-	/**	Link to first page, plus ellipses if necessary */
-	if ( ! in_array( 1, $links ) ) {
-		$class = 1 == $paged ? ' class="active"' : '';
-
-		printf( '<span%s><a href="%s">%s</a></span>', $class, esc_url( get_pagenum_link( 1 ) ), '1' );
-
-		if ( ! in_array( 2, $links ) )
-			echo '<span>…</span>';
-	}
-
-	/**	Link to current page, plus 2 pages in either direction if necessary */
-	sort( $links );
-	foreach ( (array) $links as $link ) {
-		$class = $paged == $link ? ' class="active"' : '';
-		printf( '<span%s><a href="%s">%s</a></span>', $class, esc_url( get_pagenum_link( $link ) ), $link );
-	}
-
-	/**	Link to last page, plus ellipses if necessary */
-	if ( ! in_array( $max, $links ) ) {
-		if ( ! in_array( $max - 1, $links ) )
-			echo '<span class="ellipsis">…</span>';
-
-		$class = $paged == $max ? ' class="active"' : '';
-		printf( '<span%s><a href="%s">%s</a></span>', $class, esc_url( get_pagenum_link( $max ) ), $max );
-	}
-
-	/**	Next Post Link */
-	if ( get_next_posts_link() )
-		printf( '<span>%s</span>', get_next_posts_link('Next &raquo;') );
-
 }
