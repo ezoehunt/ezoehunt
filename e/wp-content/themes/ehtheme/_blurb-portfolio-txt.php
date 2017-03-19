@@ -1,8 +1,8 @@
 <div class="row">
 
-  <h2 class="see-all col-xs-12 col-md-8">Portfolio</h2>
+  <h2 class="see-all col col-xs-100 col-sm-60">Recent Work</h2>
 
-  <p class="see-all col-xs-12 col-md-4"><a class="home" title="See all Work" href="<?php echo esc_url( home_url('/work') ); ?>">See all Work</a> <span class="link-raquo">&raquo;</span></p>
+  <p class="see-all col col-xs-100 col-sm-40"><a class="home" title="See all Work" href="<?php echo esc_url( home_url('/work') ); ?>">See all Work</a> <span class="link-raquo">&raquo;</span></p>
 
 </div>
 
