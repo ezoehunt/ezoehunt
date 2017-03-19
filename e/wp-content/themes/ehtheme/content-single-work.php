@@ -11,7 +11,7 @@ global $post;
 <div id="leftcol" class="col col-sm-5 col-md-15 bg-work"></div>
 
 
-<div id="colmain" class="col col-sm-90 col-md-70 bg-white <?php echo 'post-';echo the_ID();?>">
+<div id="maincol" class="col col-sm-90 col-md-70 bg-white <?php echo 'post-';echo the_ID();?>">
 
   <div id="breadcrumb">
     <p class="page-breadcrumb">
@@ -225,7 +225,7 @@ foreach ( $process as $image ) :
 
   </div><!-- end #page-column -->
 
-</div><!-- end #colmain -->
+</div><!-- end #maincol -->
 
 
 <div id="rightcol" class="col col-sm-5 col-md-15 bg-work"></div>

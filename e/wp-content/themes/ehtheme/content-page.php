@@ -14,7 +14,7 @@ global $post;
 <div id="leftcol" class="floatleft col col-sm-5 col-md-15 bg-about"></div>
 
 
-<div id="colmain" class="col col-sm-90 col-md-70 bg-white">
+<div id="maincol" class="col col-sm-90 col-md-70 bg-white">
 
   <div id="breadcrumb">
     <p class="page-breadcrumb">

@@ -12,7 +12,7 @@
 <div id="leftcol" class="col col-sm-5 col-md-15 bg-other"></div>
 
 
-<div id="colmain" class="col col-sm-90 col-md-70 bg-white">
+<div id="maincol" class="col col-sm-90 col-md-70 bg-white">
 
   <div id="breadcrumb">
     <p class="page-breadcrumb">

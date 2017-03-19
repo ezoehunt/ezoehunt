@@ -1,19 +1,15 @@
-<ul class="navbar-nav">
+  <ul class="navbar-nav">
 
-<li class="nav-item<?php if ( is_front_page() OR is_search() OR is_404() ) { echo ' active'; } ?>">
+<li class="nav-item<?php if ( is_front_page() ) { echo ' active'; } ?>">
   <a title="Go to home page" class="nav-link noborder" href="<?php echo home_url('/'); ?>">Home</a>
-</li>
-
-<!--li class="nav-item<?php if ( is_category('work') OR in_array('post-type-archive-work',$bodyclass) ) { echo ' active'; } ?>">
-  <a title="Go to Work section" class="nav-link noborder" href="<?php echo home_url('/work'); ?>">Work</a>
-</li-->
-
-<li class="nav-item<?php if ( in_array( 'work',$bodyclass ) OR in_array('post-type-archive-work',$bodyclass) ) { echo ' active'; } ?>">
-  <a title="Go to Work section" class="nav-link noborder" href="<?php echo home_url('/work'); ?>">Work</a>
 </li>
 
 <li class="nav-item<?php if ( is_category('words') OR in_array('words',$bodyclass) ) { echo ' active'; } ?>">
   <a title="Go to Words section" class="nav-link noborder" href="<?php echo home_url('/words'); ?>">Words</a>
+</li>
+
+<li class="nav-item<?php if ( in_array( 'work',$bodyclass ) OR in_array('post-type-archive-work',$bodyclass) ) { echo ' active'; } ?>">
+  <a title="Go to Work section" class="nav-link noborder" href="<?php echo home_url('/work'); ?>">Work</a>
 </li>
 
 <li class="nav-item<?php if ( is_page('about') ) { echo ' active'; } ?>">

@@ -27,7 +27,7 @@ $title = get_the_title();
 ?>
 
     <li>
-      <a title="View project" href="<?php the_permalink() ?>">
+      <a class="home" title="View project" href="<?php the_permalink() ?>">
 
         <img class="grid-image img-fluid" src="<?php echo $featuredImage[0];?>">
 

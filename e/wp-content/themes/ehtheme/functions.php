@@ -245,3 +245,15 @@ function mypaginate($query) {
     'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
     ) );
 }
+
+
+
+function break_text($text){
+    $length = 500;
+    //don't cut if too short
+    if(strlen($text)<$length+10) return $text;
+    //find next space after desired length
+    $break_pos = strpos($text, ' ', $length);
+    $visible = substr($text, 0, $break_pos);
+    return balanceTags($visible) . " […]";
+}

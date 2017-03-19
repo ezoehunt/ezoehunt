@@ -16,7 +16,7 @@ get_header();
 <div id="leftcol" class="col col-sm-5 col-md-15 bg-work"></div>
 
 
-<div id="colmain" class="col col-sm-90 col-md-70 bg-white">
+<div id="maincol" class="col col-sm-90 col-md-70 bg-white">
 
   <div id="breadcrumb">
     <p class="page-breadcrumb">
@@ -87,7 +87,7 @@ else : ?>
 
   </div><!-- end #pagecolumn -->
 
-</div><!-- end #colmain -->
+</div><!-- end #maincol -->
 
 
 <div id="rightcol" class="col col-sm-5 col-md-15 bg-work"></div>

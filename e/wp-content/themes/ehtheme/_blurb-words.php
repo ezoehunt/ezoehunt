@@ -1,17 +1,37 @@
-<div class="row">
+<?php
+$args = array(
+  'post_type'       =>  'post',
+  'post_status'     =>  'publish',
+  'category_name'   =>  'words',
+  'posts_per_page'  =>  1,
+  'orderby'         =>  'date',
+  'order'           =>  'DESC'
+);
 
-  <h2 class="see-all col-xs-12 col-md-8">Words</h2>
+$find = new WP_Query($args );
+?>
 
-  <p class="see-all col-xs-12 col-md-4"><a title="See all Words" href="<?php echo esc_url( home_url('/words') );?>">See all Words</a> <span class="link-raquo">&raquo;</span></p>
+<p style="float:right;color:white;font-size: 90%;"><a title="See all Words" href="<?php echo esc_url( home_url('/words') );?>">See all</a> <span class="link-raquo">&raquo;</span></p>
 
-</div>
+<p style="height:40px;background-color:black;color:white;font-weight:600;">Recent Thoughts</p>
 
-<p>I'm currently in the process of re&#8209;designing the Words section of this site. In the meantime, here are some links to a few articles I've written.</p>
+<?php if ( $find->have_posts() ) : ?>
+<?php while ( $find->have_posts() ) : $find->the_post();
+$featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
+$title = get_the_title();
+?>
 
-<p><a href="http://ezoehunt.com/words/a-love-letter-to-cities/"><b>A Love Letter to Cities</b></a></p>
+<p><?php echo get_post_meta($post->ID,'eh_headline',true); ?></p>
 
-<p><a href="http://ezoehunt.com/words/introducing-honolulu-answers-writeathon/"><b>Introducing Honolulu Answers + Writeathon</b></a><br/>(<i>co-authored with <a href="https://www.codeforamerica.org/people/sheba-najmi" target="_blank">Sheba Najmi</a></i>)</p>
+<a class="work" title="View project" href="<?php the_permalink() ?>">
+    <img style="float: left;
+    max-width: 130px;
+    height: auto;" class="" src="<?php echo $featuredImage[0];?>">
+  </a>
 
-<p><a href="http://ezoehunt.com/words/civic-apps-and-ecosystems/"><b>Civic Apps and Ecosystems</b></a></p>
+<?php $title = get_the_content(); ?>
+<p style=""><?php echo break_text($title); ?></p>
 
-<p><a href="http://ezoehunt.com/words/do-gooding-by-example/"><b>Do-gooding By Example</b></a></p>
+
+<?php endwhile; ?>
+<?php endif; ?>
