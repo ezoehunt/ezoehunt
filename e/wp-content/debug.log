@@ -172,3 +172,5 @@ Stack trace:
 [20-Mar-2017 03:32:09 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 56
 [20-Mar-2017 03:32:20 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 39
 [20-Mar-2017 03:32:20 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 56
+[20-Mar-2017 03:38:56 UTC] PHP Parse error:  syntax error, unexpected ',', expecting ')' in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/_project-details.php on line 59
+[20-Mar-2017 03:38:57 UTC] PHP Parse error:  syntax error, unexpected ',', expecting ')' in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/_project-details.php on line 59

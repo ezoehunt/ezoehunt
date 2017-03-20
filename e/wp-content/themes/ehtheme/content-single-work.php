@@ -113,7 +113,15 @@ if ( have_posts() ) :
 
           <p class="overview">
             <span>Contribution</span>
-            <br/><?php echo get_post_meta($post->ID,'project_details_contribution',true); ?>
+            <br/>
+            <ul>
+              <li>
+                <?php echo get_post_meta($post->ID,'project_details_role',true); ?> at <a class="work" href="<?php echo get_post_meta($post->ID,'project_details_employer_website',true);?>" title="Go to <?php echo get_post_meta($post->ID,'project_details_employer',true);?>" target="_blank"><?php echo get_post_meta($post->ID,'project_details_employer',true); ?></a>
+              </li>
+              <li>
+                For <a class="work" href="<?php echo get_post_meta($post->ID,'project_details_website',true);?>" title="Go to <?php echo get_post_meta($post->ID,'project_details_client',true);?>" target="_blank"><?php echo get_post_meta($post->ID,'project_details_client',true); ?></a>
+              </li>
+            </ul>
           </p>
 
 <?php

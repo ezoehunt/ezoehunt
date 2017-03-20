@@ -23,7 +23,6 @@ function project_details_register_meta_boxes( $meta_boxes ) {
       ),
       array(
         'id'   => $prefix.'website',
-        //esc_html__( 'URL', 'your-prefix' ),
         'name' => esc_html__( 'Website', 'rwmb' ),
         'type' => 'url',
         'class'   => 'ez-admin-text'
@@ -47,10 +46,28 @@ function project_details_register_meta_boxes( $meta_boxes ) {
         'class'   => 'ez-admin-textarea'
       ),
       array(
-        'id'   => $prefix.'contribution',
-        'name' => __( 'Contribution', 'rwmb' ),
-        'type' => 'textarea',
-        'class'   => 'ez-admin-textarea'
+        'id'   => $prefix.'role',
+        'name' => __( 'Role', 'rwmb' ),
+        'type' => 'text',
+        'class'   => 'ez-admin-text'
+      ),
+      array(
+        'id'   => $prefix.'employer',
+        'name' => __( 'Employer', 'rwmb' ),
+        'type' => 'text',
+        'class'   => 'ez-admin-text'
+      ),
+      array(
+        'id'   => $prefix.'employer_website',
+        'name' => __( 'Employer Website', 'rwmb' ),
+        'type' => 'url',
+        'class'   => 'ez-admin-text'
+      ),
+      array(
+        'id'   => $prefix.'client',
+        'name' => __( 'Client', 'rwmb' ),
+        'type' => 'text',
+        'class'   => 'ez-admin-text'
       ),
       array(
 				'id'     => $prefix.'images',
