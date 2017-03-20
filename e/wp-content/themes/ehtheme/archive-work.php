@@ -22,7 +22,7 @@ get_header();
     <p class="page-breadcrumb">
       <a class="work" href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
-      <?php echo mygetcatname($post->ID); ?>
+      Work
     </p>
   </div>
 

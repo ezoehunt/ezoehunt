@@ -63,6 +63,12 @@ function project_details_register_meta_boxes( $meta_boxes ) {
 				// Sub-fields
 				'fields' => array(
 					array(
+						'id'      => $prefix.'image_order',
+            'name'    => __( 'Image Display Order', 'rwmb' ),
+						'type'    => 'number',
+            'class'  => 'ez-admin-text'
+					),
+          array(
 						'id'      => $prefix.'image_title',
             'name'    => __( 'Image Title', 'rwmb' ),
 						'type'    => 'text',

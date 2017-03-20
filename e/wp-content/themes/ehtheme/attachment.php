@@ -1,102 +1,65 @@
+<?php
+/**
+* @package eztheme
+*
+* Template for Image Attachment Pages
+*
+*/
+?>
+
 <?php get_header(); ?>
+
 <?php
 $thispostid = $post->ID;
 $parentid = $post->post_parent;
-$parenttitle = get_the_title($parentid);
-?>
-<div class="col-xs-12">
-
-    <ol class="breadcrumb">
-        <li><a href="<?php echo get_permalink($post->post_parent); ?>" title="Back to the project page">&#171; back to the project page</a></li>
-    </ol>
-
-    <div class="ez-main-row">
-
-        <div id="<?php echo 'post-';echo the_ID();?>" class="ez-post hentry">
-<?php if ( have_posts() ) : ?>
-<?php while ( have_posts() ) : the_post(); ?>
-<?php
-$imageargs = array(
-    'media_tags'   => 'portfolio-image,portfolio-ux',
-    'numberposts' => -1,
-    'post_parent' => $post->post_parent,
-    'orderby'     => 'date',
-    'order'       => 'ASC'
-);
-/*
-$images = get_attachments_by_media_tags($imageargs);
-foreach ($images as $image) {
-    $media[] += $image->ID;
+$images = get_post_meta($parentid,'project_details_images',true);
+foreach ( $images as $image ) {
+  $title = $image['project_details_image_title'];
+  if ($title === $post->post_title ) {
+    $image_title = $title;
+  }
 }
-$prevID = ez_prev_tag($post->ID,$media);
-$nextID = ez_next_tag($post->ID,$media);
-wp_reset_postdata();
-*/
 ?>
-            <div id="project-title-small" class="visible-xs wrapper-posts">
-                <div class="arrow-wrapper">
-<?php if (!empty($prevID)) : ?>
-                <a class="nav-arrow arrow-left" href="<?php echo get_permalink($prevID);?>" title="Go to the <?php echo get_the_title($prevID);?> image"></a>
 
-<?php elseif (empty($prevID)) : ?>
-                <a class="arrow-left-none"></a>
-<?php endif; ?>
-                </div><!-- / previous -->
+<div id="leftcol" class="col col-sm-5 col-md-15 bg-work"></div>
 
-                <div class="arrow-wrapper">
-<?php if (!empty($nextID)) : ?>
-                <a class="nav-arrow arrow-right" href="<?php echo get_permalink($nextID);?>" title="Go to the <?php echo get_the_title($nextID);?> image"></a>
-<?php elseif (empty($nextID)) :  ?>
-                    <a class="arrow-left-none"></a>
-<?php endif; ?>
-                </div><!-- / next -->
+<div id="maincol" class="col col-sm-90 col-md-70 bg-white">
 
-                <div class="clearfix"></div>
+  <div id="breadcrumb">
+    <p class="page-breadcrumb">
+      <a class="work" href="<?php echo get_permalink($parentid); ?>" title="Return to Project page"><span class="link-raquo">&laquo;</span> Return to Project page</a>
+    </p>
+  </div>
 
-                <div class="col-xs-12 title-posts"><?php echo get_the_title(); ?>
-                </div>
-            </div><!-- / wrapper-posts project-title xs -->
+  <div id="page-title">
 
+    <ul class="page-pagination">
 
-            <div id="project-title-big" class="hidden-xs wrapper-posts">
-                <div class="arrow-wrapper pull-left">
-<?php if (!empty($prevID)) : ?>
-                    <a class="nav-arrow arrow-left" href="<?php echo get_permalink($prevID);?>" title="Go to the <?php echo get_the_title($prevID);?> image"></a>
-<?php elseif (empty($prevID)) :  ?>
-                    <a class="arrow-left-none">&nbsp;</a>
-<?php endif; ?>
-                </div><!-- / previous -->
+      <li class="item-middle">
+        <h1 class="page-headline"><?php echo $image_title; ?></h1>
+      </li>
 
-                <div class="arrow-wrapper pull-right">
-<?php if (!empty($nextID)) : ?>
-                    <a class="nav-arrow arrow-right" href="<?php echo get_permalink($nextID);?>" title="Go to the <?php echo get_the_title($nextID);?> image"></a>
-<?php elseif (empty($nextID)) :  ?>
-                    <a class="arrow-right-none">&nbsp;</a>
-<?php endif; ?>
-                </div><!-- / next -->
+      <li class="item-left">
+        <?php //previous_image_link('none', 'previous image' ); ?>
+      </li>
 
-                <div class="title-posts title-big"><?php echo get_the_title(); ?>
-                </div>
-            </div><!-- / wrapper-posts project-title md -->
+      <li class="item-right">
+        <?php //next_image_link('none', 'next image' ); ?>
+      </li>
 
+    </ul>
 
-
-			<div class="clearfix"></div>
-
-            <div class="portfolio-attachment wrapper-posts">
-
+  </div>
 <?php if ( wp_attachment_is_image( $post->id ) ) : $att_image = wp_get_attachment_image_src( $post->id, "full"); ?>
 
-                <div class="tab-image">
-                    <img src="<?php echo $att_image[0];?>" alt="<?php echo the_title(); ?>" />
-                </div>
-
+  <div class="image-attach">
+      <img title="<?php echo $image_title; ?>" src="<?php echo $att_image[0];?>" />
+  </div>
 <?php endif; ?>
-<?php endwhile; ?>
-<?php endif; ?>
-            </div><!-- / wrapper-posts portfolio-attachment -->
 
-        </div><!-- / ez-post -->
-    </div><!-- / ez-main-row -->
-</div><!-- / main col-xs-12 -->
+</div><!-- end #maincol -->
+
+
+<div id="rightcol" class="col col-sm-5 col-md-15 bg-work"></div>
+
 <?php get_footer(); ?>

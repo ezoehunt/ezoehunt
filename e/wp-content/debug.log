@@ -1,0 +1,174 @@
+[20-Mar-2017 00:07:29 UTC] Post type work was updated
+[20-Mar-2017 00:08:09 UTC] Post type work was updated
+[20-Mar-2017 00:10:00 UTC] Post type work was updated
+[20-Mar-2017 00:10:00 UTC] Post type work was updated
+[20-Mar-2017 00:10:00 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php:123) in /Users/mozilla/Sites/ezoehunt/e/wp-admin/post.php on line 197
+[20-Mar-2017 00:10:00 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php:123) in /Users/mozilla/Sites/ezoehunt/e/wp-includes/pluggable.php on line 1179
+[20-Mar-2017 00:10:28 UTC] Post type work was updated
+[20-Mar-2017 00:10:28 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php:123) in /Users/mozilla/Sites/ezoehunt/e/wp-admin/post.php on line 197
+[20-Mar-2017 00:10:28 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php:123) in /Users/mozilla/Sites/ezoehunt/e/wp-includes/pluggable.php on line 1179
+[20-Mar-2017 00:10:41 UTC] Post type work was updated
+[20-Mar-2017 00:20:23 UTC] Post type work was updated
+[20-Mar-2017 00:28:05 UTC] PHP Parse error:  syntax error, unexpected end of file, expecting elseif (T_ELSEIF) or else (T_ELSE) or endif (T_ENDIF) in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 70
+[20-Mar-2017 00:33:34 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 45
+[20-Mar-2017 00:33:34 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 58
+[20-Mar-2017 00:33:42 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 45
+[20-Mar-2017 00:33:42 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 58
+[20-Mar-2017 00:33:48 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 45
+[20-Mar-2017 00:33:48 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 58
+[20-Mar-2017 00:34:37 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 45
+[20-Mar-2017 00:34:37 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 58
+[20-Mar-2017 00:47:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_previous_post_id() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php:48
+Stack trace:
+#0 /Users/mozilla/Sites/ezoehunt/e/wp-includes/template-loader.php(74): include()
+#1 /Users/mozilla/Sites/ezoehunt/e/wp-blog-header.php(19): require_once('/Users/mozilla/...')
+#2 /Users/mozilla/Sites/ezoehunt/index.php(17): require('/Users/mozilla/...')
+#3 {main}
+  thrown in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 48
+[20-Mar-2017 01:11:30 UTC] PHP Notice:  Use of undefined constant date - assumed 'date' in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 52
+[20-Mar-2017 01:11:30 UTC] PHP Notice:  Use of undefined constant ASC - assumed 'ASC' in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 53
+[20-Mar-2017 01:11:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_attachments_by_media_tags() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php:56
+Stack trace:
+#0 /Users/mozilla/Sites/ezoehunt/e/wp-includes/template-loader.php(74): include()
+#1 /Users/mozilla/Sites/ezoehunt/e/wp-blog-header.php(19): require_once('/Users/mozilla/...')
+#2 /Users/mozilla/Sites/ezoehunt/index.php(17): require('/Users/mozilla/...')
+#3 {main}
+  thrown in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 56
+[20-Mar-2017 01:11:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_attachments_by_media_tags() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php:56
+Stack trace:
+#0 /Users/mozilla/Sites/ezoehunt/e/wp-includes/template-loader.php(74): include()
+#1 /Users/mozilla/Sites/ezoehunt/e/wp-blog-header.php(19): require_once('/Users/mozilla/...')
+#2 /Users/mozilla/Sites/ezoehunt/index.php(17): require('/Users/mozilla/...')
+#3 {main}
+  thrown in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 56
+[20-Mar-2017 01:13:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_attachments_by_media_tags() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php:38
+Stack trace:
+#0 /Users/mozilla/Sites/ezoehunt/e/wp-includes/template-loader.php(74): include()
+#1 /Users/mozilla/Sites/ezoehunt/e/wp-blog-header.php(19): require_once('/Users/mozilla/...')
+#2 /Users/mozilla/Sites/ezoehunt/index.php(17): require('/Users/mozilla/...')
+#3 {main}
+  thrown in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 38
+[20-Mar-2017 01:16:25 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; MediaTags has a deprecated constructor in /Users/mozilla/Sites/ezoehunt/e/wp-content/plugins/media-tags/media_tags.php on line 22
+[20-Mar-2017 01:16:26 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; MediaTags has a deprecated constructor in /Users/mozilla/Sites/ezoehunt/e/wp-content/plugins/media-tags/media_tags.php on line 22
+[20-Mar-2017 01:17:12 UTC] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; MediaTags has a deprecated constructor in /Users/mozilla/Sites/ezoehunt/e/wp-content/plugins/media-tags/media_tags.php on line 22
+[20-Mar-2017 01:17:52 UTC] PHP Warning:  An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="https://wordpress.org/support/">support forums</a>. (WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.) in /Users/mozilla/Sites/ezoehunt/e/wp-includes/update.php on line 319
+[20-Mar-2017 01:26:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_attachments_by_media_tags() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php:38
+Stack trace:
+#0 /Users/mozilla/Sites/ezoehunt/e/wp-includes/template-loader.php(74): include()
+#1 /Users/mozilla/Sites/ezoehunt/e/wp-blog-header.php(19): require_once('/Users/mozilla/...')
+#2 /Users/mozilla/Sites/ezoehunt/index.php(17): require('/Users/mozilla/...')
+#3 {main}
+  thrown in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 38
+[20-Mar-2017 01:26:34 UTC] PHP Notice:  Trying to get property of non-object in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 44
+[20-Mar-2017 01:26:34 UTC] PHP Notice:  Undefined variable: media in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 44
+[20-Mar-2017 01:26:34 UTC] PHP Notice:  Trying to get property of non-object in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 44
+[20-Mar-2017 01:26:34 UTC] PHP Notice:  Trying to get property of non-object in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 44
+[20-Mar-2017 01:26:34 UTC] PHP Notice:  Trying to get property of non-object in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 44
+[20-Mar-2017 01:26:34 UTC] PHP Notice:  Trying to get property of non-object in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 44
+[20-Mar-2017 01:26:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function ez_prev_tag() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php:46
+Stack trace:
+#0 /Users/mozilla/Sites/ezoehunt/e/wp-includes/template-loader.php(74): include()
+#1 /Users/mozilla/Sites/ezoehunt/e/wp-blog-header.php(19): require_once('/Users/mozilla/...')
+#2 /Users/mozilla/Sites/ezoehunt/index.php(17): require('/Users/mozilla/...')
+#3 {main}
+  thrown in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 46
+[20-Mar-2017 01:29:19 UTC] PHP Notice:  Undefined variable: args in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 38
+[20-Mar-2017 01:53:42 UTC] PHP Notice:  Undefined variable: cat_name in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 175
+[20-Mar-2017 01:53:56 UTC] PHP Notice:  Undefined variable: cat_name in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 175
+[20-Mar-2017 01:54:21 UTC] PHP Notice:  Undefined variable: cat_name in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 175
+[20-Mar-2017 01:54:34 UTC] PHP Notice:  Undefined variable: cat_name in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 175
+[20-Mar-2017 01:56:43 UTC] PHP Notice:  Undefined variable: cat_name in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 175
+[20-Mar-2017 02:11:28 UTC] PHP Notice:  Undefined variable: parendid in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 30
+[20-Mar-2017 02:11:30 UTC] PHP Notice:  Undefined variable: parendid in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 30
+[20-Mar-2017 02:21:52 UTC] PHP Notice:  Undefined offset: 1 in /Users/mozilla/Sites/ezoehunt/e/wp-includes/class-wp-query.php on line 3080
+[20-Mar-2017 02:21:52 UTC] PHP Notice:  Undefined offset: 2 in /Users/mozilla/Sites/ezoehunt/e/wp-includes/class-wp-query.php on line 3080
+[20-Mar-2017 02:21:52 UTC] PHP Notice:  Undefined offset: 3 in /Users/mozilla/Sites/ezoehunt/e/wp-includes/class-wp-query.php on line 3080
+[20-Mar-2017 02:21:52 UTC] PHP Notice:  Undefined offset: 4 in /Users/mozilla/Sites/ezoehunt/e/wp-includes/class-wp-query.php on line 3080
+[20-Mar-2017 02:21:52 UTC] PHP Notice:  Trying to get property of non-object in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 123
+[20-Mar-2017 02:22:25 UTC] PHP Notice:  Undefined offset: 1 in /Users/mozilla/Sites/ezoehunt/e/wp-includes/class-wp-query.php on line 3080
+[20-Mar-2017 02:22:25 UTC] PHP Notice:  Undefined offset: 2 in /Users/mozilla/Sites/ezoehunt/e/wp-includes/class-wp-query.php on line 3080
+[20-Mar-2017 02:22:25 UTC] PHP Notice:  Undefined offset: 3 in /Users/mozilla/Sites/ezoehunt/e/wp-includes/class-wp-query.php on line 3080
+[20-Mar-2017 02:22:25 UTC] PHP Notice:  Undefined offset: 4 in /Users/mozilla/Sites/ezoehunt/e/wp-includes/class-wp-query.php on line 3080
+[20-Mar-2017 02:22:25 UTC] PHP Notice:  Trying to get property of non-object in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 124
+[20-Mar-2017 02:22:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 55
+[20-Mar-2017 02:22:52 UTC] PHP Notice:  Undefined offset: 1 in /Users/mozilla/Sites/ezoehunt/e/wp-includes/class-wp-query.php on line 3080
+[20-Mar-2017 02:22:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 55
+[20-Mar-2017 02:22:52 UTC] PHP Notice:  Undefined offset: 2 in /Users/mozilla/Sites/ezoehunt/e/wp-includes/class-wp-query.php on line 3080
+[20-Mar-2017 02:22:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 55
+[20-Mar-2017 02:22:52 UTC] PHP Notice:  Undefined offset: 3 in /Users/mozilla/Sites/ezoehunt/e/wp-includes/class-wp-query.php on line 3080
+[20-Mar-2017 02:22:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 55
+[20-Mar-2017 02:22:52 UTC] PHP Notice:  Undefined offset: 4 in /Users/mozilla/Sites/ezoehunt/e/wp-includes/class-wp-query.php on line 3080
+[20-Mar-2017 02:22:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 55
+[20-Mar-2017 02:22:52 UTC] PHP Notice:  Trying to get property of non-object in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 129
+[20-Mar-2017 02:24:24 UTC] PHP Warning:  Invalid argument supplied for foreach() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 21
+[20-Mar-2017 02:24:24 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 97
+[20-Mar-2017 02:24:24 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 124
+[20-Mar-2017 02:27:35 UTC] PHP Warning:  Invalid argument supplied for foreach() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 21
+[20-Mar-2017 02:27:35 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 97
+[20-Mar-2017 02:27:35 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 124
+[20-Mar-2017 02:35:04 UTC] PHP Notice:  Undefined offset: 1 in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 277
+[20-Mar-2017 02:36:11 UTC] PHP Notice:  Undefined offset: 1 in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 282
+[20-Mar-2017 02:37:22 UTC] PHP Notice:  Undefined variable: attachmentIDs in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 51
+[20-Mar-2017 02:45:55 UTC] PHP Notice:  Undefined variable: attachmentIDs in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 51
+[20-Mar-2017 02:45:55 UTC] PHP Notice:  Undefined variable: newlink in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 280
+[20-Mar-2017 02:45:55 UTC] PHP Notice:  Undefined variable: newlink in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 280
+[20-Mar-2017 02:45:55 UTC] PHP Notice:  Undefined variable: newlink in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 280
+[20-Mar-2017 02:45:55 UTC] PHP Notice:  Undefined variable: newlink in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 280
+[20-Mar-2017 02:45:55 UTC] PHP Notice:  Undefined variable: mynextimage in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 109
+[20-Mar-2017 02:45:55 UTC] PHP Fatal error:  Uncaught Error: Function name must be a string in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php:109
+Stack trace:
+#0 /Users/mozilla/Sites/ezoehunt/e/wp-includes/template-loader.php(74): include()
+#1 /Users/mozilla/Sites/ezoehunt/e/wp-blog-header.php(19): require_once('/Users/mozilla/...')
+#2 /Users/mozilla/Sites/ezoehunt/index.php(17): require('/Users/mozilla/...')
+#3 {main}
+  thrown in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 109
+[20-Mar-2017 02:46:12 UTC] PHP Parse error:  syntax error, unexpected 'endwhile' (T_ENDWHILE), expecting end of file in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 67
+[20-Mar-2017 02:46:36 UTC] PHP Notice:  Undefined variable: mynextimage in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 110
+[20-Mar-2017 02:46:36 UTC] PHP Fatal error:  Uncaught Error: Function name must be a string in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php:110
+Stack trace:
+#0 /Users/mozilla/Sites/ezoehunt/e/wp-includes/template-loader.php(74): include()
+#1 /Users/mozilla/Sites/ezoehunt/e/wp-blog-header.php(19): require_once('/Users/mozilla/...')
+#2 /Users/mozilla/Sites/ezoehunt/index.php(17): require('/Users/mozilla/...')
+#3 {main}
+  thrown in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 110
+[20-Mar-2017 02:47:19 UTC] PHP Notice:  Undefined variable: attachmentIDs in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 31
+[20-Mar-2017 02:47:19 UTC] PHP Notice:  Undefined variable: newlink in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 280
+[20-Mar-2017 02:47:19 UTC] PHP Notice:  Undefined variable: mynextimage in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 63
+[20-Mar-2017 02:47:19 UTC] PHP Fatal error:  Uncaught Error: Function name must be a string in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php:63
+Stack trace:
+#0 /Users/mozilla/Sites/ezoehunt/e/wp-includes/template-loader.php(74): include()
+#1 /Users/mozilla/Sites/ezoehunt/e/wp-blog-header.php(19): require_once('/Users/mozilla/...')
+#2 /Users/mozilla/Sites/ezoehunt/index.php(17): require('/Users/mozilla/...')
+#3 {main}
+  thrown in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 63
+[20-Mar-2017 02:47:29 UTC] PHP Notice:  Undefined variable: attachmentIDs in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 31
+[20-Mar-2017 02:47:29 UTC] PHP Notice:  Undefined variable: newlink in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 280
+[20-Mar-2017 02:47:56 UTC] PHP Notice:  Undefined variable: newlink in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 280
+[20-Mar-2017 02:49:34 UTC] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 280
+[20-Mar-2017 03:13:47 UTC] PHP Parse error:  syntax error, unexpected ')' in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 320
+[20-Mar-2017 03:22:27 UTC] PHP Parse error:  syntax error, unexpected '}' in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 330
+[20-Mar-2017 03:22:49 UTC] PHP Parse error:  syntax error, unexpected '}' in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/functions.php on line 330
+[20-Mar-2017 03:30:47 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 39
+[20-Mar-2017 03:30:47 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 56
+[20-Mar-2017 03:31:35 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 39
+[20-Mar-2017 03:31:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function prev_image_link() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php:43
+Stack trace:
+#0 /Users/mozilla/Sites/ezoehunt/e/wp-includes/template-loader.php(74): include()
+#1 /Users/mozilla/Sites/ezoehunt/e/wp-blog-header.php(19): require_once('/Users/mozilla/...')
+#2 /Users/mozilla/Sites/ezoehunt/index.php(17): require('/Users/mozilla/...')
+#3 {main}
+  thrown in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 43
+[20-Mar-2017 03:31:39 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 39
+[20-Mar-2017 03:31:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function prev_image_link() in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php:43
+Stack trace:
+#0 /Users/mozilla/Sites/ezoehunt/e/wp-includes/template-loader.php(74): include()
+#1 /Users/mozilla/Sites/ezoehunt/e/wp-blog-header.php(19): require_once('/Users/mozilla/...')
+#2 /Users/mozilla/Sites/ezoehunt/index.php(17): require('/Users/mozilla/...')
+#3 {main}
+  thrown in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 43
+[20-Mar-2017 03:31:56 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 39
+[20-Mar-2017 03:31:56 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 56
+[20-Mar-2017 03:32:09 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 39
+[20-Mar-2017 03:32:09 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 56
+[20-Mar-2017 03:32:20 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 39
+[20-Mar-2017 03:32:20 UTC] PHP Notice:  Undefined variable: image_title in /Users/mozilla/Sites/ezoehunt/e/wp-content/themes/ehtheme/attachment.php on line 56

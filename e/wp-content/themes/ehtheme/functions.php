@@ -110,10 +110,18 @@ register_taxonomy("project_tags", array("work"), array(
 ));
 
 
-// Add Headline and Subhead boxes to regular Post and Page Types
+
+// ADD REGULAR TAGS TO ATTACHMENTS
+function eh_add_tags_to_attachments() {
+    register_taxonomy_for_object_type( 'post_tag', 'attachment' );
+}
+add_action( 'init' , 'eh_add_tags_to_attachments' );
+
+
+
+// ADD HEADLINE + SUBHEAD TO REGULAR POST / PAGE TYPES
 function eh_register_meta_boxes( $meta_boxes ) {
     $prefix = 'eh_';
-
     $meta_boxes[] = array(
         'id'         => 'titles',
         'title'      => __( 'Post Titles', 'textdomain' ),
@@ -140,6 +148,7 @@ function eh_register_meta_boxes( $meta_boxes ) {
     return $meta_boxes;
 }
 add_filter( 'rwmb_meta_boxes', 'eh_register_meta_boxes' );
+
 
 
 // Misc Functions
@@ -176,6 +185,7 @@ function mygetcatname($post_id) {
 }
 
 
+
 function mygetcatslug($post_id) {
   $post_categories = wp_get_post_categories( $post_id );
   $cats = array();
@@ -187,6 +197,14 @@ function mygetcatslug($post_id) {
 }
 
 
+function mygetimageid($image_url) {
+	global $wpdb;
+	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));
+  return $attachment;
+}
+
+
+// For Page to Page navigation
 function mynextprevious( $post_id, $type ) {
   global $post;
   // Get the category
@@ -221,12 +239,6 @@ function mynextprevious( $post_id, $type ) {
 }
 
 
-function mygetimageid($image_url) {
-	global $wpdb;
-	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));
-  return $attachment;
-}
-
 
 function mypaginate($query) {
   $big = 999999999;
@@ -257,3 +269,105 @@ function break_text($text){
     $visible = substr($text, 0, $break_pos);
     return balanceTags($visible) . " […]";
 }
+
+
+
+
+/*Get the link of an adjacent image
+ *
+ * @param bool $prev Whether or not there is a previous image
+ * @return string URL of an adjacent image
+ *
+**/
+function cfct_get_adjacent_image_link($prev = true) {
+	global $post;
+
+	$attachments = array_values(get_children( array(
+    'post_parent' => $post->post_parent,
+    'post_status' => 'inherit',
+    'post_type' => 'attachment',
+    //'post_mime_type' => 'image',
+    'orderby' => 'date',
+    'order' => 'ASC',
+    'tax_query' => array(
+      array(
+        'taxonomy' => 'post_tag',
+        'terms' => 'image-attach',
+        'field' => 'slug',
+        'operator' => 'IN'
+      )
+    )
+  ) ));
+
+  /*foreach ( $attachments as $attach ) {
+    echo $attach->ID.'<br/>';
+
+    if ($attach->ID == $post->ID ) {
+      echo 'match';
+    }
+    $images = get_post_meta($post->post_parent,'project_details_images',true);
+    foreach ( $images as $image ) {
+      echo '<pre>';
+      var_dump($image);
+      echo '</pre>';
+    }
+
+    $title = $attach->post_title;
+  }*/
+
+	foreach ( $attachments as $k => $attachment ) {
+
+		if ( $attachment->ID == $post->ID ) {
+			break;
+		}
+
+	$k = $prev ? $k - 1 : $k + 1;
+
+  echo $prev;
+
+	if ( isset($attachments[$k]) )
+		//return wp_get_attachment_link($attachments[$k]->ID, 'thumbnail', true);
+    echo wp_get_attachment_link($attachments[$k]->ID, 'thumbnail', true);
+	}
+}
+
+
+
+
+/*
+function mynextimage($post_id) {
+  global $post_id;
+  $tmpit = previous_image_link('','');
+  if ( !empty( previous_image_link('','') ) ) {
+
+    $newid = url_to_postid( $tmpit );
+
+    $testit = wp_get_post_tags( $post_id, $args );
+    echo '<pre>';
+    var_dump($tmpit);
+    echo '</pre>';
+
+    //$newlink = previous_image_link('','previous image');
+    //echo $newlink;
+  }
+}
+*/
+
+// DELETE ?
+/*
+function mynextimage($thispostid, $array) {
+
+  echo '<pre>';
+  var_dump($array);
+  echo '</pre>';
+
+    //$currentkey = array_search($thispostid, $array);
+    //$nextID = $array[$currentkey+1];
+    //return $nextID;
+}
+function myprevimage($thispostid, $array) {
+    $currentkey = array_search($thispostid, $array);
+    $prevID = $array[$currentkey-1];
+    return $prevID;
+}
+*/
