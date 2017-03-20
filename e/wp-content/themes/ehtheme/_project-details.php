@@ -10,7 +10,6 @@ function project_details_register_meta_boxes( $meta_boxes ) {
   $meta_boxes[] = array(
 
     'title'  => __( 'Project Details' ),
-
     'post_types' => array( 'work' ),
     'context'    => 'normal',
     'priority'   => 'high',
