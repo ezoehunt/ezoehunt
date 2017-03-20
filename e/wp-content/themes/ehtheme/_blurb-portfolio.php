@@ -16,7 +16,7 @@ $find = new WP_Query($args );
   <h2 class="see-all col col-xs-100 col-sm-60">Recent Work</h2>
 
   <p class="see-all col col-xs-100 col-sm-40">
-    <a class="work" title="See all Work" href="<?php echo esc_url( home_url('/work') ); ?>">see all Work <span class="link-raquo">&raquo;</span></a>
+    <a class="home" title="See all Work" href="<?php echo esc_url( home_url('/work') ); ?>">see all Work <span class="link-raquo">&raquo;</span></a>
   </p>
 
 </div>

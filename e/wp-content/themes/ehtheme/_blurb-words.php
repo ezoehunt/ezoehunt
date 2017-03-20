@@ -16,7 +16,7 @@ $find = new WP_Query($args );
   <h2 class="see-all col col-xs-100 col-sm-60">Recent Thoughts</h2>
 
   <p class="see-all col col-xs-100 col-sm-40">
-    <a class="work" title="See all Words" href="<?php echo esc_url( home_url('/words') ); ?>">see all Words <span class="link-raquo">&raquo;</span></a>
+    <a class="home" title="See all Words" href="<?php echo esc_url( home_url('/words') ); ?>">see all Words <span class="link-raquo">&raquo;</span></a>
   </p>
 
 </div>
@@ -28,7 +28,7 @@ if ( $find->have_posts() ) :
 ?>
 
 <p class="article-title">
-  <a class="work" title="View <?php echo get_post_meta($post->ID,'eh_headline',true); ?>" href="<?php the_permalink() ?>">
+  <a class="home" title="View <?php echo get_post_meta($post->ID,'eh_headline',true); ?>" href="<?php the_permalink() ?>">
     <?php echo get_post_meta($post->ID,'eh_headline',true); ?>
   </a>
 </p>
@@ -41,7 +41,7 @@ if ( $find->have_posts() ) :
     </a>
     <?php echo get_the_excerpt(); ?>
     <br/>
-    <span class="smaller-90"><a class="work" title="Continue reading this article" href="<?php the_permalink() ?>">{ continue reading }</a></span>
+    <span class="smaller-90"><a class="home" title="Continue reading this article" href="<?php the_permalink() ?>">{ continue reading }</a></span>
   </p>
 
 </div>
