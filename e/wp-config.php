@@ -80,6 +80,15 @@ $table_prefix  = 'q3_';
 define('WP_DEBUG', true);
 define('WP_DEBUG_LOG', true);
 
+// Revise revision schedule - in seconds
+define('AUTOSAVE_INTERVAL', 300 );
+
+// Only save certain number of revisions
+//define( ‘WP_POST_REVISIONS’, 3 );
+
+// Completely disable revisions
+//define('WP_POST_REVISIONS', false );
+
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */

@@ -70,13 +70,14 @@ $mynext = mynextprevious($post->ID, 'next');
 <?php while ( have_posts() ) : the_post(); ?>
 
 <?php if ( get_post_meta($post->ID,'eh_subhead') ) : ?>
-
       <p class="subhead">
-
 <?php echo get_post_meta($post->ID,'eh_subhead',true); ?>
       </p>
-
 <? endif; ?>
+
+      <p class="entry-meta" style="text-align:right;">
+        <?php echo the_date(); ?>
+      </p>
 
       <p>
         <?php the_content(); ?>

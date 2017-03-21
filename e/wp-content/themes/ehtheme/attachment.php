@@ -15,16 +15,18 @@
 <?php get_header(); ?>
 
 <?php
-$thispostid = $post->ID;
-$parentid = $post->post_parent;
+//$thispostid = $post->ID;
+//$parent_id = $post->post_parent;
+$parent_id = wp_get_post_parent_id( $post->ID );
 
-$parentcat = get_the_category($parentid);
-$parentcatslug = $parentcat[0]->slug;
+//$parentcat = get_the_category($parent_id);
+//$parentcatslug = $parentcat[0]->slug;
+$parent_cat_slug = mygetcatslug( $parent_id );
 
-if ( $parentcatslug == 'words') {
+if ( $parent_cat_slug == 'words' ) {
   $image_title = get_the_title();
 }
-else {
+elseif ( $parent_cat_slug == 'work' ) {
   $images = get_post_meta($parentid,'project_details_images',true);
   foreach ( $images as $image ) {
     $title = $image['project_details_image_title'];
@@ -33,19 +35,10 @@ else {
     }
   }
 }
-/*
-$images = get_post_meta($parentid,'project_details_images',true);
-foreach ( $images as $image ) {
-  $title = $image['project_details_image_title'];
-  if ($title === $post->post_title ) {
-    $image_title = $title;
-  }
-}
-*/
 ?>
-<?php if ( $parentcatslug == 'work' ) : ?>
+<?php if ( $parent_cat_slug == 'work' ) : ?>
 <div id="leftcol" class="col col-sm-5 col-md-15 bg-work"></div>
-<?php elseif ( $parentcatslug == 'words' ) : ?>
+<?php elseif ( $parent_cat_slug == 'words' ) : ?>
 <div id="leftcol" class="col col-sm-5 col-md-15 bg-words"></div>
 <?php endif; ?>
 
@@ -54,10 +47,10 @@ foreach ( $images as $image ) {
 
   <div id="breadcrumb">
     <p class="page-breadcrumb">
-<?php if ( $parentcatslug == 'work' ) : ?>
-      <a class="work" href="<?php echo get_permalink($parentid); ?>" title="Return to Project page"><span class="link-raquo">&laquo;</span> Return to Project page</a>
-<?php elseif ( $parentcatslug == 'words' ) : ?>
-      <a class="words" href="<?php echo get_permalink($parentid); ?>" title="Return to Words article"><span class="link-raquo">&laquo;</span> Return to Words article</a>
+<?php if ( $parent_cat_slug == 'work' ) : ?>
+      <a class="work" href="<?php echo get_permalink($parent_id); ?>" title="Back to Project page"><span class="link-raquo">&laquo;</span> Back to project page</a>
+<?php elseif ( $parent_cat_slug == 'words' ) : ?>
+      <a class="words" href="<?php echo get_permalink($parent_id); ?>" title="Back to Words article"><span class="link-raquo">&laquo;</span> Back to article</a>
 <?php endif; ?>
     </p>
   </div>
@@ -91,9 +84,9 @@ foreach ( $images as $image ) {
 </div><!-- end #maincol -->
 
 
-<?php if ( $parentcatslug == 'work' ) : ?>
+<?php if ( $parent_cat_slug == 'work' ) : ?>
 <div id="rightcol" class="col col-sm-5 col-md-15 bg-work"></div>
-<?php elseif ( $parentcatslug == 'words' ) : ?>
+<?php elseif ( $parent_cat_slug == 'words' ) : ?>
 <div id="rightcol" class="col col-sm-5 col-md-15 bg-words"></div>
 <?php endif; ?>
 

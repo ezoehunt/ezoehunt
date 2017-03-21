@@ -92,18 +92,24 @@ add_shortcode('wp_caption', 'fixed_img_caption_shortcode');
       $href_class = 'work';
     }
 
+    // Replace | with line breaks in caption
+    $new_caption = str_replace('|', '<br />', $caption);
+
     // EH - Add attribution to caption if available
     if ( is_numeric($att_id[0]) && !empty( $attach_url ) ) {
-  		$caption .= '<br/>(attr: <a class="'.$href_class.'" title="View orginal image" target="_blank" href="'.$attach_url.'" target="">'.$attach_name.'</a>)';
+  		$new_caption .= '<br/>(attr: <a class="'.$href_class.'" title="View orginal image" target="_blank" href="'.$attach_url.'" target="">'.$attach_name.'</a>)';
   	}
+    elseif ( is_numeric($att_id[0]) && empty( $attach_url ) && !empty( $attach_name) ) {
+      $new_caption .= '<br/>(attr: '.$attach_name.')';
+    }
 
-    if ( 1 > (int) $width || empty($caption) )
+    if ( 1 > (int) $width || empty($new_caption) )
 			return $content;
 
 		if ( $id ) $id = 'id="' . esc_attr($id) . '" ';
 
     return '<div ' . $id . 'class="wp-caption '.$class . ' ' . esc_attr($align) . '">'
-		. do_shortcode( $content ) . '<p class="wp-caption-text">' . $caption . '<br/></p></div>';
+		. do_shortcode( $content ) . '<p class="wp-caption-text">' . $new_caption . '</p></div>';
 
 	}
 
