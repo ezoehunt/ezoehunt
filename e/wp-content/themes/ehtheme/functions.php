@@ -57,7 +57,7 @@ add_shortcode( 'myemail', 'email_encode_function' );
 
 
 
-// CREATE CUSTOM CAPTION SHORTCODE
+// CREATE CUSTOM CAPTION SHORTCODE FOR POSTS + PAGES
 add_shortcode('mycaption', 'eh_caption');
 function eh_caption($attr, $content = NUll ) {
 
@@ -273,26 +273,6 @@ add_filter( 'rwmb_meta_boxes', 'eh_register_meta_boxes_posts' );
 
 
 // MISC FUNCTIONS
-
-/*
-function eh_get_parentimages_from_attachID( $attach_id, $type ) {
-  $parent_id = get_post_ancestors( $attach_id[0] );
-
-  $attachments = get_post_meta($parent_id[0], $type);
-
-  foreach ( $attachments as $attach ) {
-    foreach ( $attach as $image ) {
-      if ( $image[$type.'_image_images'] == $att_id ) {
-        return $image;
-      }
-      else {
-        return false;
-      }
-    }
-  }
-}
-*/
-
 
 function eh_sluggify($string) {
   # Prep string with some basic normalization
