@@ -8,7 +8,6 @@ function project_details_register_meta_boxes( $meta_boxes ) {
   $prefix = 'project_details_';
 
   $meta_boxes[] = array(
-
     'title'  => __( 'Project Details' ),
     'post_types' => array( 'work' ),
     'context'    => 'normal',
@@ -78,13 +77,8 @@ function project_details_register_meta_boxes( $meta_boxes ) {
 				'sort_clone' => true,
 				// Sub-fields
 				'fields' => array(
+          /* Easier to deal with changes to Title or Alt in Portfolio Post context vs. Media Library context */
 					array(
-						'id'      => $prefix.'image_order',
-            'name'    => __( 'Image Display Order', 'rwmb' ),
-						'type'    => 'number',
-            'class'  => 'ez-admin-text'
-					),
-          array(
 						'id'      => $prefix.'image_title',
             'name'    => __( 'Image Title', 'rwmb' ),
 						'type'    => 'text',

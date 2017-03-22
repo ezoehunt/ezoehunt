@@ -6,6 +6,8 @@
 *
 */
 global $post;
+$cat_slug = eh_get_cat_slug($post->ID);
+$cat_name = eh_get_cat_name($post->ID);
 ?>
 
 <div id="leftcol" class="col col-sm-5 col-md-15 bg-words"></div>
@@ -17,7 +19,7 @@ global $post;
     <p class="page-breadcrumb">
       <a class="words" href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
-      <a class="words" href="/<?php echo eh_get_cat_slug($post->ID);?>" title="Go to <?php echo eh_get_cat_name($post->ID);?> section"><?php echo eh_get_cat_name($post->ID);?></a>
+      <a class="words" href="/<?php echo $cat_slug;?>" title="Go to <?php echo $cat_name;?> section"><?php echo $cat_name;?></a>
       &nbsp; / &nbsp;
       <?php echo get_the_title(); ?>
     </p>
@@ -32,8 +34,8 @@ global $post;
         <h1 class="page-headline"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></h1>
       </li>
 <?php
-$myprev = eh_next_previous($post->ID, 'previous');
-$mynext = eh_next_previous($post->ID, 'next');
+$myprev = eh_next_previous($post->ID, 'previous', $cat_slug);
+$mynext = eh_next_previous($post->ID, 'next', $cat_slug);
 ?>
       <li class="item-left">
 <?php

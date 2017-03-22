@@ -6,6 +6,8 @@
 *
 */
 global $post;
+$cat_slug = eh_get_cat_slug($post->ID);
+$cat_name = eh_get_cat_name($post->ID);
 ?>
 
 <div id="leftcol" class="col col-sm-5 col-md-15 bg-work"></div>
@@ -17,7 +19,7 @@ global $post;
     <p class="page-breadcrumb">
       <a class="work" href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
-      <a class="work" href="/<?php echo eh_get_cat_slug($post->ID);?>" title="Go to <?php echo eh_get_cat_name($post->ID);?> section"><?php echo eh_get_cat_name($post->ID);?></a>
+      <a class="work" href="/<?php echo $cat_slug;?>" title="Go to <?php echo $cat_name;?> section"><?php echo $cat_name;?></a>
       &nbsp; / &nbsp;
       <?php echo get_the_title(); ?>
     </p>
@@ -32,8 +34,8 @@ global $post;
         <h1 class="page-headline"><?php echo get_post_meta($post->ID,'project_details_headline',true); ?></h1>
       </li>
 <?php
-$myprev = eh_next_previous($post->ID, 'previous');
-$mynext = eh_next_previous($post->ID, 'next');
+$myprev = eh_next_previous($post->ID, 'previous', $cat_slug);
+$mynext = eh_next_previous($post->ID, 'next', $cat_slug);
 ?>
       <li class="item-left">
 <?php
@@ -157,7 +159,7 @@ foreach ( $design as $image ) :
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
 
-              <a class="work" title="View larger image" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
+              <a class="work" title="View larger image" href="<?php echo $attach_url;?>"><img alt="View larger image" src="<?php echo $image_url;?>"></a>
 
             </div>
 

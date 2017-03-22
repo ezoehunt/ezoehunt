@@ -48,23 +48,13 @@ function admin_style() {
 add_action('admin_enqueue_scripts', 'admin_style');
 
 
-// CREATE MAILTO SHORTCODE
 
+// CREATE MAILTO SHORTCODE = [myemail]
 function email_encode_function( $atts, $content ) {
   return antispambot($content);
 }
 add_shortcode( 'myemail', 'email_encode_function' );
-/*
-function eh_mailto( $atts ){
-	//return "foo and bar";
-  $tmp = antispambot("eh@ezoehunt.com");
-  return $tmp;
-  echo '<pre>';
-  var_dump($tmp);
-  echo '</pre>';
-}
-add_shortcode( 'mymailto', 'eh_mailto' );
-*/
+
 
 
 // CREATE CUSTOM CAPTION SHORTCODE
@@ -206,8 +196,7 @@ add_action( 'init' , 'eh_add_tags_to_attachments' );
 function eh_register_meta_boxes_posts( $meta_boxes ) {
   $prefix = 'eh_';
   $meta_boxes[] = array(
-    //'id'         => 'headlines',
-    'title'      => __( 'Post Headlines', 'textdomain' ),
+    'title'      => __( 'Post Details', 'textdomain' ),
     'post_types' => array( 'post', 'page' ),
     'context'    => 'normal',
     'priority'   => 'high',
@@ -236,12 +225,6 @@ function eh_register_meta_boxes_posts( $meta_boxes ) {
 				'sort_clone' => true,
 				// Sub-fields
 				'fields' => array(
-					array(
-						'id'      => $prefix.'image_order',
-            'name'    => __( 'Image Display Order', 'rwmb' ),
-						'type'    => 'number',
-            'class'  => 'ez-admin-text'
-					),
           array(
 						'id'      => $prefix.'image_caption',
             'name'    => __( 'Image Caption', 'rwmb' ),
@@ -362,17 +345,12 @@ function eh_get_image_id($image_url) {
 
 
 // For Page to Page navigation
-function eh_next_previous( $post_id, $type ) {
-  global $post;
-  // Get the category
-  $cat_name = eh_get_cat_name($post_id);
-  $cat_slug = eh_sluggify($cat_name);
-
+function eh_next_previous( $post_id, $type, $cat_slug ) {
   // Adjust output
-  if ( $cat_name == 'Work' ) {
+  if ( $cat_slug == 'work' ) {
     $cat_alt = $type.' Porfolio project';
   }
-  if ( $cat_name == 'Words' ) {
+  if ( $cat_slug == 'words' ) {
     $cat_alt = $type.' post in Words';
   }
   // Get next/previous in the same category
@@ -397,16 +375,14 @@ function eh_next_previous( $post_id, $type ) {
 
 
 // For Attachment to Attachment Navigation
-function eh_nextprev_img_link( $post_id, $array, $type, $cat, $count ) {
+function eh_nextprev_img_link( $post_id, $array, $type, $cat_slug, $count ) {
 
   if ( $count === 1 ) {
     return false;
   }
-
-  // Key for this image = its image display order
-  $currentkey = array_search($post_id, $array);
   // Zero index count
   $count = $count-1;
+  $currentkey = array_search($post_id, $array);
 
   if ( $currentkey != 0 ) {
     $prevID = $array[$currentkey-1];
@@ -417,16 +393,15 @@ function eh_nextprev_img_link( $post_id, $array, $type, $cat, $count ) {
 
   if ( !empty( $prevID ) && $type == 'previous' ) {
     $link = get_attachment_link($prevID);
-    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat.'" aria-hidden="true"></i><i class="fa fa-arrow-left fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
+    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat_slug.'" aria-hidden="true"></i><i class="fa fa-arrow-left fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
   }
   elseif ( !empty( $nextID ) && $type == 'next' ) {
     $link = get_attachment_link($nextID);
-    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat.'" aria-hidden="true"></i><i class="fa fa-arrow-right fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
+    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat_slug.'" aria-hidden="true"></i><i class="fa fa-arrow-right fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
   }
 
-  // If none, return false (empty)
   if( !empty( $link ) ) {
-    return '<a class="'.$cat.'" title="See '.$type.' image" href="'.esc_url($link).'">'.$icon.'</a>';
+    return '<a class="'.$cat_slug.'" title="See '.$type.' image" href="'.esc_url($link).'">'.$icon.'</a>';
   }
   else {
     return false;
@@ -453,6 +428,7 @@ function eh_paginate($query) {
 }
 
 
+// NOT USING
 function eh_break_text($text){
     $length = 500;
     //don't cut if too short
@@ -461,20 +437,4 @@ function eh_break_text($text){
     $break_pos = strpos($text, ' ', $length);
     $visible = substr($text, 0, $break_pos);
     return balanceTags($visible) . " […]";
-}
-
-
-function eh_get_class_href() {
-  global $bodyclass;
-  //if ( $cat == 'words') {
-  if ( in_array('words', $bodyclass) ) {
-    return $class = 'words';
-  }
-  //elseif ( $cat == 'work') {
-  elseif ( in_array('work', $bodyclass) ) {
-    return $class = 'work';
-  }
-  else {
-    return false;
-  }
 }
