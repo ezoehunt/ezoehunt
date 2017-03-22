@@ -14,7 +14,7 @@ if ( have_posts() ) :
   $parent_id = wp_get_post_parent_id( $post->ID );
   $cat_slug = eh_get_cat_slug( $parent_id );
   if ( $cat_slug == 'work' ) {
-    $prefix = 'portfolio_';
+    $prefix = '_portfolio_';
   }
   elseif ( $cat_slug == 'words' ) {
     $prefix = '_blog_';
@@ -51,9 +51,9 @@ if ( $cat_slug == 'words' ) {
   echo $image_title;
 }
 elseif ( $cat_slug == 'work' ) {
-  $imgtitles = get_post_meta($parent_id,'project_details_images',true);
+  $imgtitles = get_post_meta($parent_id,'_portfolio_images',true);
   foreach ( $imgtitles as $imgtitle ) {
-    $image_title = $imgtitle['project_details_image_title'];
+    $image_title = $imgtitle['_portfolio_image_title'];
     if ($image_title === $post->post_title ) {
       echo $image_title;
     }

@@ -48,13 +48,11 @@ function admin_style() {
 add_action('admin_enqueue_scripts', 'admin_style');
 
 
-
 // CREATE MAILTO SHORTCODE = [myemail]
 function email_encode_function( $atts, $content ) {
   return antispambot($content);
 }
 add_shortcode( 'myemail', 'email_encode_function' );
-
 
 
 // CREATE IMAGE ALT SHORTCODE = [myimagealt]
@@ -152,40 +150,7 @@ function eh_caption($attr, $content = NUll ) {
       }
     }
   }
-  /*
-  if ($attr['caption'] == 'yes' && $att_id[0] == $newID ) {
-
-    if (!empty ( $attachments[0][0]['_blog_image_title'] ) ) {
-      $image_title = $attachments[0][0]['_blog_image_title'];
-    }
-    if (!empty ( $attachments[0][0]['_blog_image_alt'] ) ) {
-      $image_alt = $attachments[0][0]['_blog_image_alt'];
-    }
-    if (!empty ( $attachments[0][0]['_blog_image_caption'] ) ) {
-      $image_caption = $attachments[0][0]['_blog_image_caption'];
-    }
-    if (!empty ( $attachments[0][0]['_blog_image_attr_name'] ) ) {
-      $image_attr_name = $attachments[0][0]['_blog_image_attr_name'];
-    }
-    if (!empty ( $attachments[0][0]['_blog_image_attr_url'] ) ) {
-      $image_attr_url = $attachments[0][0]['_blog_image_attr_url'];
-    }
-
-    if ( is_numeric($att_id[0]) && !empty( $image_attr_url ) ) {
-  		$image_caption .= '<br/>(attr: <a class="'.$href_class.'" title="View orginal image" target="_blank" href="'.$image_attr_url.'" target="">'.$image_attr_name.'</a>)';
-  	}
-    elseif ( is_numeric($att_id[0]) && empty( $image_attr_url ) && !empty( $image_attr_name) ) {
-      $image_caption .= '<br/>(attr: '.$image_attr_name.')';
-    }
-    return '<div ' . $id . 'class="wp-caption '. esc_attr($class) . ' ' . esc_attr($align) . '">' . do_shortcode( $content ) . '<p class="wp-caption-text">' . $image_caption . '</p></div>';
-  }
-  //if ($attr['caption'] == 'yes' && $att_id[0] == $newID ) {
-  elseif ($attr['caption'] == 'no') {
-    return '<div ' . $id . 'class="wp-caption '. esc_attr($class) . ' ' . esc_attr($align) . '">' . do_shortcode( $content ) . '</div>';
-  }
-  */
 }
-
 
 
 

@@ -8,6 +8,7 @@
 *
 */
 global $post;
+$parent_id = wp_get_post_parent_id( $post->ID );
 
 get_header();
 
@@ -50,16 +51,17 @@ $count_posts = $wp_query->found_posts;
       <ul class="gridit">
 
 <?php while ( have_posts() ) : the_post();
+
 $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
 ?>
 
         <li <?php post_class(); ?> id="post-<?php the_ID(); ?>">
           <a class="work" title="View project" href="<?php the_permalink() ?>">
 
-            <img class="grid-image" src="<?php echo $featuredImage[0];?>">
+            <img alt="" class="grid-image" src="<?php echo $featuredImage[0];?>">
 
             <figcaption class="grid-img-overlay">
-              <p><?php echo the_title(); ?>
+              <p><?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?>
                 <br/><span>&#8212; view project &#8212;</span></p>
             </figcaption>
           </a>

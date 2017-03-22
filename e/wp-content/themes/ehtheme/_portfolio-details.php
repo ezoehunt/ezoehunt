@@ -5,7 +5,7 @@
  */
 
 function project_details_register_meta_boxes( $meta_boxes ) {
-  $prefix = 'project_details_';
+  $prefix = '_portfolio_';
 
   $meta_boxes[] = array(
     'title'  => __( 'Project Details' ),

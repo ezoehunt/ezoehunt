@@ -31,7 +31,7 @@ $cat_name = eh_get_cat_name($post->ID);
     <ul class="page-pagination">
 
       <li class="item-middle">
-        <h1 class="page-headline"><?php echo get_post_meta($post->ID,'project_details_headline',true); ?></h1>
+        <h1 class="page-headline"><?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?></h1>
       </li>
 <?php
 $myprev = eh_next_previous($post->ID, 'previous', $cat_slug);
@@ -81,8 +81,8 @@ $mynext = eh_next_previous($post->ID, 'next', $cat_slug);
 if ( have_posts() ) :
   while ( have_posts() ) : the_post();
   // collect types into separate arrays
-  $prefix = 'project_details_image_';
-  $images = rwmb_meta( 'project_details_images' );
+  $prefix = '_portfolio_image_';
+  $images = rwmb_meta( '_portfolio_images' );
   $design = [];
   $process = [];
   if ( ! empty($images) ) {
@@ -105,12 +105,12 @@ if ( have_posts() ) :
 
           <p class="overview">
             <span>Challenge</span>
-            <br/><?php echo get_post_meta($post->ID,'project_details_challenge',true); ?>
+            <br/><?php echo get_post_meta($post->ID,'_portfolio_challenge',true); ?>
           </p>
 
           <p class="overview">
             <span>Solution</span>
-            <br/><?php echo get_post_meta($post->ID,'project_details_solution',true); ?>
+            <br/><?php echo get_post_meta($post->ID,'_portfolio_solution',true); ?>
           </p>
 
           <p class="overview">
@@ -118,10 +118,10 @@ if ( have_posts() ) :
             <br/>
             <ul>
               <li>
-                <?php echo get_post_meta($post->ID,'project_details_role',true); ?> at <a class="work" href="<?php echo get_post_meta($post->ID,'project_details_employer_website',true);?>" title="Go to <?php echo get_post_meta($post->ID,'project_details_employer',true);?>" target="_blank"><?php echo get_post_meta($post->ID,'project_details_employer',true); ?></a>
+                <?php echo get_post_meta($post->ID,'_portfolio_role',true); ?> at <a class="work" href="<?php echo get_post_meta($post->ID,'_portfolio_employer_website',true);?>" title="Go to <?php echo get_post_meta($post->ID,'_portfolio_employer',true);?>" target="_blank"><?php echo get_post_meta($post->ID,'_portfolio_employer',true); ?></a>
               </li>
               <li>
-                For <a class="work" href="<?php echo get_post_meta($post->ID,'project_details_website',true);?>" title="Go to <?php echo get_post_meta($post->ID,'project_details_client',true);?>" target="_blank"><?php echo get_post_meta($post->ID,'project_details_client',true); ?></a>
+                For <a class="work" href="<?php echo get_post_meta($post->ID,'_portfolio_website',true);?>" title="Go to <?php echo get_post_meta($post->ID,'_portfolio_client',true);?>" target="_blank"><?php echo get_post_meta($post->ID,'_portfolio_client',true); ?></a>
               </li>
             </ul>
           </p>
@@ -159,7 +159,7 @@ foreach ( $design as $image ) :
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
 
-              <a class="work" title="View larger image" href="<?php echo $attach_url;?>"><img alt="View larger image" src="<?php echo $image_url;?>"></a>
+              <a class="work" title="View larger image" href="<?php echo $attach_url;?>"><img alt="<?php echo $image[$prefix.'title']; ?>" src="<?php echo $image_url;?>"></a>
 
             </div>
 
@@ -209,7 +209,7 @@ foreach ( $process as $image ) :
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
 
-              <a class="work" title="View larger" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt;?>" src="<?php echo $image_url;?>"></a>
+              <a class="work" title="View larger" href="<?php echo $attach_url;?>"><img alt="<?php echo $image[$prefix.'title']; ?>" src="<?php echo $image_url;?>"></a>
 
             </div>
 
