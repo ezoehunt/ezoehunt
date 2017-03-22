@@ -12,7 +12,7 @@ $findwords = new WP_Query($argswords );
 
 <div class="row section-row">
 
-  <h2 class="see-all col col-xs-100 col-sm-60">Recent Thoughts</h2>
+  <h2 class="see-all col col-xs-100 col-sm-60">Recent Words</h2>
 
   <p class="see-all col col-xs-100 col-sm-40">
     <a class="home" title="See all Words" href="<?php echo esc_url( home_url('/words') ); ?>">see all Words <span class="link-raquo">&raquo;</span></a>

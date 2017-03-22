@@ -82,7 +82,7 @@ if ( have_posts() ) :
   while ( have_posts() ) : the_post();
   // collect types into separate arrays
   $prefix = '_portfolio_image_';
-  $images = rwmb_meta( '_portfolio_images' );
+  $images = rwmb_meta('_portfolio_images' );
   $design = [];
   $process = [];
   if ( ! empty($images) ) {
@@ -172,13 +172,14 @@ foreach ( $design as $image ) :
         </div><!-- end #design tab -->
 
         <div id="process" class="tab-pane" role="tabpanel">
-
-<?php if ( ! empty($process) ) : ?>
-
+<?php if ( !empty(get_the_content() ) ) : ?>
           <p class="overview">
             <span>Overview</span>
             <br/><?php echo get_the_content(); ?>
           </p>
+<?php endif; ?>
+
+<?php if ( ! empty($process) ) : ?>
 
 <?php
 foreach ( $process as $image ) :

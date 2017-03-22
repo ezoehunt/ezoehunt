@@ -46,6 +46,10 @@ if ( have_posts() ) :
       <li class="item-middle">
         <h1 class="page-headline">
 <?php
+/* Title Info
+*  Get titles for everything except Portfolio from the post's content area, i.e., "<img title="" ...>.
+*  For Portfolio items, get the title from the post's metabox input area, i.e., the "Image Title" input field.
+*/
 if ( $cat_slug == 'words' ) {
   $image_title = get_the_title($post->ID);
   echo $image_title;
@@ -53,8 +57,9 @@ if ( $cat_slug == 'words' ) {
 elseif ( $cat_slug == 'work' ) {
   $imgtitles = get_post_meta($parent_id,'_portfolio_images',true);
   foreach ( $imgtitles as $imgtitle ) {
+    $image_id = $imgtitle['_portfolio_image_images'][0];
     $image_title = $imgtitle['_portfolio_image_title'];
-    if ($image_title === $post->post_title ) {
+    if ($image_id == $post->ID ) {
       echo $image_title;
     }
   }
