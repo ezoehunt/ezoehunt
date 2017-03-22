@@ -42,7 +42,7 @@ get_header();
 
     <div class="blog-center blog-grid col-xs-100 col-sm-90 col-md-85 col-lg-80">
 <?php
-query_posts( $query_string . '&orderby=date&order=desc' );
+query_posts( $query_string . '&orderby=date&order=asc' );
 if ( have_posts() ) :
 $count_posts = $wp_query->found_posts;
 ?>
@@ -71,7 +71,7 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
 
 <?php if ($count_posts > 10) : ?>
       <div id="list-pagination">
-        <?php echo mypaginate($wp_query); ?>
+        <?php echo eh_paginate($wp_query); ?>
       </div>
 <?php endif; ?>
 

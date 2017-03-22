@@ -15,7 +15,7 @@ if ( have_posts() ) :
   while ( have_posts() ) : the_post();
 
   $parent_id = wp_get_post_parent_id( $post->ID );
-  $parent_cat_slug = mygetcatslug( $parent_id );
+  $parent_cat_slug = eh_get_cat_slug( $parent_id );
   //$type = $parent_cat_slug;
 
   // Get count for next/prev img links
@@ -77,8 +77,8 @@ foreach ( $myattachments as $myattach ) {
     $newmedia[] += $attach['eh_image_images'][0];
   }
 }
-$previmg = mynextprevimglink($post->ID, $newmedia, 'previous', $parent_cat_slug, $count);
-$nextimg = mynextprevimglink($post->ID, $newmedia, 'next', $parent_cat_slug, $count);
+$previmg = eh_nextprev_img_link($post->ID, $newmedia, 'previous', $parent_cat_slug, $count);
+$nextimg = eh_nextprev_img_link($post->ID, $newmedia, 'next', $parent_cat_slug, $count);
 wp_reset_postdata();
 ?>
       <li class="item-left">

@@ -16,15 +16,29 @@
   <div id="page-column">
 
     <div id="blurb-about" class="subsection sub-about">
-      <?php include '_blurb-about.php'; ?>
+<?php
+$argsabout = array(
+  'post_type'       =>  'post',
+  'name'            =>  'aside-about',
+  'post_status'     =>  'publish',
+  'posts_per_page'  =>  1
+);
+$findabout = new WP_Query($argsabout );
+if ( $findabout->have_posts() ) :
+  while ( $findabout->have_posts() ) : $findabout->the_post();
+  echo the_content();
+endwhile;
+endif;
+wp_reset_postdata();
+?>
     </div>
 
     <div id="blurb-words" class="subsection">
-      <?php include '_blurb-words.php'; ?>
+      <?php include '_include-words.php'; ?>
     </div>
 
     <div id="blurb-work" class="subsection">
-      <?php include '_blurb-portfolio.php'; ?>
+      <?php include '_include-portfolio.php'; ?>
     </div>
 
   </div>

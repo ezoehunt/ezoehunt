@@ -20,12 +20,12 @@ if ( is_front_page() ) {
 }
 
 if ( is_single() ) {
-  $cat_slug = mygetcatslug($post->ID);
+  $cat_slug = eh_get_cat_slug($post->ID);
   include 'content-single-'.$cat_slug.'.php';
 }
 
 if ( is_category() ) {
-  $cat_slug = sluggify( single_cat_title('', false) );
+  $cat_slug = eh_sluggify( single_cat_title('', false) );
   include 'content-cat-'.$cat_slug.'.php';
 }
 

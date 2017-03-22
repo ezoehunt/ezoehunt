@@ -1,5 +1,5 @@
 <?php
-$args = array(
+$argswords = array(
   'post_type'       =>  'post',
   'post_status'     =>  'publish',
   'category_name'   =>  'words',
@@ -7,8 +7,7 @@ $args = array(
   'orderby'         =>  'date',
   'order'           =>  'DESC'
 );
-
-$find = new WP_Query($args );
+$findwords = new WP_Query($argswords );
 ?>
 
 <div class="row section-row">
@@ -22,9 +21,9 @@ $find = new WP_Query($args );
 </div>
 
 <?php
-if ( $find->have_posts() ) :
-  while ( $find->have_posts() ) : $find->the_post();
-  $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
+if ( $findwords->have_posts() ) :
+  while ( $findwords->have_posts() ) : $findwords->the_post();
+  $featuredWordsImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
 ?>
 
 <p class="article-title">
@@ -37,7 +36,7 @@ if ( $find->have_posts() ) :
 
   <p class="last">
     <a class="work" title="View <?php echo get_post_meta($post->ID,'eh_headline',true); ?>" href="<?php the_permalink() ?>">
-      <img title="Featured image from this article" class="floatleft image-home" src="<?php echo $featuredImage[0];?>">
+      <img title="Featured image from this article" class="floatleft image-home" src="<?php echo $featuredWordsImage[0];?>">
     </a>
     <?php echo get_the_excerpt(); ?>
     <br/>
@@ -49,4 +48,5 @@ if ( $find->have_posts() ) :
 <?php
 endwhile;
 endif;
+wp_reset_postdata();
 ?>

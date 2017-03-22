@@ -1,5 +1,5 @@
 <?php
-$args = array(
+$argswork = array(
   'post_type'       =>  'work',
   'post_status'     =>  'publish',
   'project_tags'    =>  'featured-post',
@@ -7,8 +7,7 @@ $args = array(
   'orderby'         =>  'date',
   'order'           =>  'ASC'
 );
-
-$find = new WP_Query($args );
+$findwork = new WP_Query($argswork );
 ?>
 
 <div class="row section-row">
@@ -21,19 +20,19 @@ $find = new WP_Query($args );
 
 </div>
 
-<?php if ( $find->have_posts() ) : ?>
+<?php if ( $findwork->have_posts() ) : ?>
 
 <ul class="gridit">
 
 <?php
-while ( $find->have_posts() ) : $find->the_post();
-  $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
+while ( $findwork->have_posts() ) : $findwork->the_post();
+  $featuredWorkImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
 ?>
 
   <li id="post-<?php the_ID(); ?>">
     <a class="home" title="View project" href="<?php the_permalink() ?>">
 
-      <img class="grid-image" src="<?php echo $featuredImage[0];?>">
+      <img class="grid-image" src="<?php echo $featuredWorkImage[0];?>">
 
       <figcaption class="grid-img-overlay">
         <p>
@@ -49,4 +48,6 @@ while ( $find->have_posts() ) : $find->the_post();
 
 </ul>
 
-<?php endif; ?>
+<?php endif;
+wp_reset_postdata();
+?>

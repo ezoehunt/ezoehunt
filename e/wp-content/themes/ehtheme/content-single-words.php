@@ -17,7 +17,7 @@ global $post;
     <p class="page-breadcrumb">
       <a class="words" href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
-      <a class="words" href="/<?php echo mygetcatslug($post->ID);?>" title="Go to <?php echo mygetcatname($post->ID);?> section"><?php echo mygetcatname($post->ID);?></a>
+      <a class="words" href="/<?php echo eh_get_cat_slug($post->ID);?>" title="Go to <?php echo eh_get_cat_name($post->ID);?> section"><?php echo eh_get_cat_name($post->ID);?></a>
       &nbsp; / &nbsp;
       <?php echo get_the_title(); ?>
     </p>
@@ -32,8 +32,8 @@ global $post;
         <h1 class="page-headline"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></h1>
       </li>
 <?php
-$myprev = mynextprevious($post->ID, 'previous');
-$mynext = mynextprevious($post->ID, 'next');
+$myprev = eh_next_previous($post->ID, 'previous');
+$mynext = eh_next_previous($post->ID, 'next');
 ?>
       <li class="item-left">
 <?php

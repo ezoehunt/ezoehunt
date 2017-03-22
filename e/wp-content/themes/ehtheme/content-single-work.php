@@ -17,7 +17,7 @@ global $post;
     <p class="page-breadcrumb">
       <a class="work" href="/" title="Return to home page">Home</a>
       &nbsp; / &nbsp;
-      <a class="work" href="/<?php echo mygetcatslug($post->ID);?>" title="Go to <?php echo mygetcatname($post->ID);?> section"><?php echo mygetcatname($post->ID);?></a>
+      <a class="work" href="/<?php echo eh_get_cat_slug($post->ID);?>" title="Go to <?php echo eh_get_cat_name($post->ID);?> section"><?php echo eh_get_cat_name($post->ID);?></a>
       &nbsp; / &nbsp;
       <?php echo get_the_title(); ?>
     </p>
@@ -32,8 +32,8 @@ global $post;
         <h1 class="page-headline"><?php echo get_post_meta($post->ID,'project_details_headline',true); ?></h1>
       </li>
 <?php
-$myprev = mynextprevious($post->ID, 'previous');
-$mynext = mynextprevious($post->ID, 'next');
+$myprev = eh_next_previous($post->ID, 'previous');
+$mynext = eh_next_previous($post->ID, 'next');
 ?>
       <li class="item-left">
 <?php
@@ -131,7 +131,7 @@ foreach ( $design as $image ) :
     $image_url = wp_get_attachment_image_src( $newimage, 'full' );
     $image_url = $image_url[0];
 
-    $image_id = mygetimageid($image_url);
+    $image_id = eh_get_image_id($image_url);
     $image_id = $image_id[0];
 
     // Get url to the attachment page for the image
@@ -185,7 +185,7 @@ foreach ( $process as $image ) :
     $image_url = wp_get_attachment_image_src( $newimage, 'full' );
     $image_url = $image_url[0];
 
-    $image_id = mygetimageid($image_url);
+    $image_id = eh_get_image_id($image_url);
     $image_id = $image_id[0];
 
     // Get url to the attachment page for the image

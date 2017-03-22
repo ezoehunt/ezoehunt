@@ -107,7 +107,7 @@ if ( !empty($projectit) ) : ?>
 
 <?php if ($count_posts > 10) : ?>
       <div id="list-pagination" class="pag-other">
-        <?php echo mypaginate($wp_query); ?>
+        <?php echo eh_paginate($wp_query); ?>
       </div>
 <?php endif; ?>
 
