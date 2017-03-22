@@ -14,10 +14,10 @@ if ( have_posts() ) :
   $parent_id = wp_get_post_parent_id( $post->ID );
   $cat_slug = eh_get_cat_slug( $parent_id );
   if ( $cat_slug == 'work' ) {
-    $prefix = 'project_details_';
+    $prefix = 'portfolio_';
   }
   elseif ( $cat_slug == 'words' ) {
-    $prefix = 'eh_';
+    $prefix = '_blog_';
   }
 
   // Get count for next/prev function

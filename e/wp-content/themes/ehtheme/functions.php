@@ -57,7 +57,42 @@ add_shortcode( 'myemail', 'email_encode_function' );
 
 
 
+// CREATE IMAGE ALT SHORTCODE = [myimagealt]
+// [myimagealt attach_id="valueA" type="valueB"]
+function my_image_alt_function( $attr ) {
+  extract(shortcode_atts(array(
+    'attach_id' => 'something more',
+    'type'      => 'something else'
+  ), $attr ));
+  $parent_id = get_post_ancestors( $attr['attach_id'] );
+
+  $getattach = get_post_meta($parent_id[0], '_blog_images');
+  $attachments = $getattach[0];
+
+  foreach ( $attachments as $image ) {
+    $newID = $image['_blog_image_images'][0];
+    if ( $newID == $attr['attach_id'] ) {
+      if (!empty ( $image['_blog_image_alt'] ) ) {
+        $image_alt = $image['_blog_image_alt'];
+      }
+      if (!empty ( $image['_blog_image_title'] ) ) {
+        $image_title = $image['_blog_image_title'];
+      }
+    }
+  }
+  if ( $attr['type'] == 'title' ) {
+    return 'title="'.$image_title.'"';
+  }
+  if ( $attr['type'] == 'alt' ) {
+    return 'alt="'.$image_alt.'"';
+  }
+}
+add_shortcode( 'myimagealt', 'my_image_alt_function' );
+
+
+
 // CREATE CUSTOM CAPTION SHORTCODE FOR POSTS + PAGES
+// Does not apply to Custom Post Types
 add_shortcode('mycaption', 'eh_caption');
 function eh_caption($attr, $content = NUll ) {
 
@@ -73,33 +108,69 @@ function eh_caption($attr, $content = NUll ) {
   if ( $id ) {
     $id = 'id="' . esc_attr($id) . '" ';
   }
-  $parent_id = get_post_ancestors( $att_id[0] );
-  $parent_cat_slug = eh_get_cat_slug($parent_id[0]);
-  $href_class = $parent_cat_slug;
 
-  if ($attr['caption'] == 'yes') {
+  if ( !empty( $attr['caption'] ) && $attr['caption'] == 'no' ) {
+    return '<div ' . $id . 'class="wp-caption '. esc_attr($class) . ' ' . esc_attr($align) . '">' . do_shortcode( $content ) . '</div>';
+  }
 
-    $attachments = get_post_meta($parent_id[0], 'eh_images');
+  if ( !empty( $attr['caption'] ) && $attr['caption'] == 'yes') {
+    $parent_id = get_post_ancestors( $att_id[0] );
+    $parent_cat_slug = eh_get_cat_slug($parent_id[0]);
+    $href_class = $parent_cat_slug;
 
-    foreach ( $attachments as $attach ) {
-      foreach ( $attach as $image ) {
-        if ( $image['eh_image_images'] == $att_id ) {
+    $getattach = get_post_meta($parent_id[0], '_blog_images');
+    $attachments = $getattach[0];
 
-          $image_caption = $image['eh_image_caption'];
-          $image_caption = str_replace('|', '<br/>', $image_caption);
+    foreach ( $attachments as $image ) {
+      $newID = $image['_blog_image_images'][0];
 
-          if (!empty ( $image['eh_attribution_name'] ) ) {
-            $image_attr_name = $image['eh_attribution_name'];
-          }
-
-          if (!empty ( $image['eh_attribution_url'] ) ) {
-            $image_attr_url = $image['eh_attribution_url'];
-          }
-
+      if ( $newID == $att_id[0] ) {
+        /*if (!empty ( $image['_blog_image_title'] ) ) {
+          $image_title = $image['_blog_image_title'];
         }
+        if (!empty ( $image['_blog_image_alt'] ) ) {
+          $image_alt = $image['_blog_image_alt'];
+        }*/
+        if (!empty ( $image['_blog_image_caption'] ) ) {
+          $image_caption = $image['_blog_image_caption'];
+          $image_caption = str_replace('|', '<br/>', $image_caption);
+        }
+        if (!empty ( $image['_blog_image_attr_name'] ) ) {
+          $image_attr_name = $image['_blog_image_attr_name'];
+        }
+        if (!empty ( $image['_blog_image_attr_url'] ) ) {
+          $image_attr_url = $image['_blog_image_attr_url'];
+        }
+        if ( is_numeric($att_id[0]) && !empty( $image_attr_url ) ) {
+      		$image_caption .= '<br/>(attr: <a class="'.$href_class.'" title="View orginal image" target="_blank" href="'.$image_attr_url.'">'.$image_attr_name.'</a>)';
+      	}
+        elseif ( is_numeric($att_id[0]) && empty( $image_attr_url ) && !empty( $image_attr_name) ) {
+          $image_caption .= '<br/>(attr: '.$image_attr_name.')';
+        }
+
+        return '<div ' . $id . 'class="wp-caption '. esc_attr($class) . ' ' . esc_attr($align) . '">' . do_shortcode( $content ) . '<p class="wp-caption-text">' . $image_caption . '</p></div>';
       }
     }
-    // Add attribution to caption if available
+  }
+  /*
+  if ($attr['caption'] == 'yes' && $att_id[0] == $newID ) {
+
+    if (!empty ( $attachments[0][0]['_blog_image_title'] ) ) {
+      $image_title = $attachments[0][0]['_blog_image_title'];
+    }
+    if (!empty ( $attachments[0][0]['_blog_image_alt'] ) ) {
+      $image_alt = $attachments[0][0]['_blog_image_alt'];
+    }
+    if (!empty ( $attachments[0][0]['_blog_image_caption'] ) ) {
+      $image_caption = $attachments[0][0]['_blog_image_caption'];
+    }
+    if (!empty ( $attachments[0][0]['_blog_image_attr_name'] ) ) {
+      $image_attr_name = $attachments[0][0]['_blog_image_attr_name'];
+    }
+    if (!empty ( $attachments[0][0]['_blog_image_attr_url'] ) ) {
+      $image_attr_url = $attachments[0][0]['_blog_image_attr_url'];
+    }
+
     if ( is_numeric($att_id[0]) && !empty( $image_attr_url ) ) {
   		$image_caption .= '<br/>(attr: <a class="'.$href_class.'" title="View orginal image" target="_blank" href="'.$image_attr_url.'" target="">'.$image_attr_name.'</a>)';
   	}
@@ -108,11 +179,14 @@ function eh_caption($attr, $content = NUll ) {
     }
     return '<div ' . $id . 'class="wp-caption '. esc_attr($class) . ' ' . esc_attr($align) . '">' . do_shortcode( $content ) . '<p class="wp-caption-text">' . $image_caption . '</p></div>';
   }
-
-  elseif (is_numeric($att_id[0]) && $attr['caption'] == 'no') {
+  //if ($attr['caption'] == 'yes' && $att_id[0] == $newID ) {
+  elseif ($attr['caption'] == 'no') {
     return '<div ' . $id . 'class="wp-caption '. esc_attr($class) . ' ' . esc_attr($align) . '">' . do_shortcode( $content ) . '</div>';
   }
+  */
 }
+
+
 
 
 
@@ -170,6 +244,7 @@ add_action( 'init', 'create_project_post_type' );
 
 
 // CREATE CUSTOM TAXONOMY FOR CUSTOM POST TYPE = PROJECT
+/* Use to indicate which posts to show on home page with tag = featured */
 register_taxonomy("project_tags", array("work"), array(
 	"hierarchical" => false,
 	"label" => "Project Tags",
@@ -180,7 +255,7 @@ register_taxonomy("project_tags", array("work"), array(
 
 
 // INLCUDE REGISTER METABOXES FOR CUSTOM POST TYPE = PROJECT
-include '_project-details.php';
+include '_portfolio-details.php';
 
 
 
@@ -194,7 +269,7 @@ add_action( 'init' , 'eh_add_tags_to_attachments' );
 
 // ADD META BOXES TO REGULAR POSTS + PAGES
 function eh_register_meta_boxes_posts( $meta_boxes ) {
-  $prefix = 'eh_';
+  $prefix = '_blog_';
   $meta_boxes[] = array(
     'title'      => __( 'Post Details', 'textdomain' ),
     'post_types' => array( 'post', 'page' ),
@@ -214,7 +289,15 @@ function eh_register_meta_boxes_posts( $meta_boxes ) {
           'id'    => $prefix . 'subhead',
           'type'  => 'text',
           'clone' => false,
-      ),
+      )
+    )
+  );
+  $meta_boxes[] = array(
+    'title'      => __( 'Image Details', 'textdomain' ),
+    'post_types' => array( 'post', 'page' ),
+    'context'    => 'normal',
+    'priority'   => 'high',
+    'fields' => array(
       array(
 				'id'     => $prefix.'images',
 				// Group field
@@ -226,23 +309,32 @@ function eh_register_meta_boxes_posts( $meta_boxes ) {
 				// Sub-fields
 				'fields' => array(
           array(
+						'id'      => $prefix.'image_title',
+            'name'    => __( 'Image Title', 'rwmb' ),
+						'type'    => 'text',
+            'class'  => 'ez-admin-text'
+					),
+          array(
+						'id'      => $prefix.'image_alt',
+            'name'    => __( 'Image Alt Text', 'rwmb' ),
+						'type'    => 'text',
+            'class'  => 'ez-admin-text'
+					),
+          array(
 						'id'      => $prefix.'image_caption',
             'name'    => __( 'Image Caption', 'rwmb' ),
-            'desc'  => 'Short descriptive caption for this image.',
 						'type'    => 'textarea',
             'class'  => 'ez-admin-textarea'
 					),
           array(
-            'id'    => $prefix . 'attribution_name',
+            'id'    => $prefix . 'image_attr_name',
             'name'  => __( 'Attribution Name', 'textdomain' ),
-            'desc'  => 'Name for attribution',
             'type'  => 'text',
             'class' => 'ez-admin-text'
           ),
           array(
-            'id'    => $prefix . 'attribution_url',
+            'id'    => $prefix . 'image_attr_url',
             'name'  => __( 'Attribution URL', 'textdomain' ),
-            'desc'  => 'URL for attribution',
             'type'  => 'text',
             'class' => 'ez-admin-text'
           ),

@@ -51,8 +51,8 @@ $featured_image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID),
         <li <?php post_class('entry-foto'); ?> id="post-<?php the_ID(); ?>">
 
           <div class="col-sm-20 floatleft fotos fotos-img">
-            <a class="words" title="View <?php echo the_title(); ?>" href="<?php the_permalink(); ?>">
-              <img title="Image of this post" src="<?php echo $featured_image[0];?>">
+            <a class="words" title="View <?php echo get_post_meta($post->ID,'_blog_headline',true); ?>" href="<?php the_permalink(); ?>">
+              <img title="Featured image from this article" src="<?php echo $featured_image[0];?>">
             </a>
           </div>
 
@@ -63,7 +63,7 @@ $featured_image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID),
             </p>
 
             <p>
-              <a class="words" title="View <?php echo get_post_meta($post->ID,'eh_headline',true); ?>" href="<?php the_permalink() ?>"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></a>
+              <a class="words" title="View <?php echo get_post_meta($post->ID,'_blog_headline',true); ?>" href="<?php the_permalink() ?>"><?php echo get_post_meta($post->ID,'_blog_headline',true); ?></a>
             </p>
 
             <p class="entry-excerpt">

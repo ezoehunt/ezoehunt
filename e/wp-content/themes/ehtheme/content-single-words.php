@@ -31,7 +31,7 @@ $cat_name = eh_get_cat_name($post->ID);
     <ul class="page-pagination">
 
       <li class="item-middle">
-        <h1 class="page-headline"><?php echo get_post_meta($post->ID,'eh_headline',true); ?></h1>
+        <h1 class="page-headline"><?php echo get_post_meta($post->ID,'_blog_headline',true); ?></h1>
       </li>
 <?php
 $myprev = eh_next_previous($post->ID, 'previous', $cat_slug);
@@ -71,9 +71,9 @@ $mynext = eh_next_previous($post->ID, 'next', $cat_slug);
 <?php if ( have_posts() ) : ?>
 <?php while ( have_posts() ) : the_post(); ?>
 
-<?php if ( get_post_meta($post->ID,'eh_subhead') ) : ?>
+<?php if ( get_post_meta($post->ID,'_blog_subhead') ) : ?>
       <p class="subhead">
-<?php echo get_post_meta($post->ID,'eh_subhead',true); ?>
+<?php echo get_post_meta($post->ID,'_blog_subhead',true); ?>
       </p>
 <? endif; ?>
 

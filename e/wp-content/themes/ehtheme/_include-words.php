@@ -27,15 +27,15 @@ if ( $findwords->have_posts() ) :
 ?>
 
 <p class="article-title">
-  <a class="home" title="View <?php echo get_post_meta($post->ID,'eh_headline',true); ?>" href="<?php the_permalink() ?>">
-    <?php echo get_post_meta($post->ID,'eh_headline',true); ?>
+  <a class="home" title="View <?php echo get_post_meta($post->ID,'_blog_headline',true); ?>" href="<?php the_permalink() ?>">
+    <?php echo get_post_meta($post->ID,'_blog_headline',true); ?>
   </a>
 </p>
 
 <div class="row section-words" style="margin-top:-.5rem;">
 
   <p class="last">
-    <a class="work" title="View <?php echo get_post_meta($post->ID,'eh_headline',true); ?>" href="<?php the_permalink() ?>">
+    <a class="work" title="View <?php echo get_post_meta($post->ID,'_blog_headline',true); ?>" href="<?php the_permalink() ?>">
       <img title="Featured image from this article" class="floatleft image-home" src="<?php echo $featuredWordsImage[0];?>">
     </a>
     <?php echo get_the_excerpt(); ?>

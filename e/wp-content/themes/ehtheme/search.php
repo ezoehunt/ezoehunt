@@ -66,13 +66,21 @@ get_header();
 
 <?php while ( have_posts() ) : the_post();
 $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
+$projectit = get_post_meta($post->ID,'_portfolio_headline',true);
+$postit = get_post_meta($post->ID,'_blog_headline',true);
+if ( !empty ( $projectit ) ) {
+  $headline = $projectit;
+}
+elseif ( !empty ( $postit ) ) {
+  $headline = $postit;
+}
 ?>
 
         <li <?php post_class('entry-foto'); ?> id="post-<?php the_ID(); ?>">
 
           <div class="col-sm-20 floatleft fotos fotos-img">
-            <a class="other" title="View <?php echo the_title(); ?>" href="<?php the_permalink(); ?>">
-              <img title="Image of this post" src="<?php echo $featuredImage[0];?>">
+            <a class="other" title="View <?php echo $headline; ?>" href="<?php the_permalink(); ?>">
+              <img alt="<?php echo $headline; ?>" src="<?php echo $featuredImage[0];?>">
             </a>
           </div>
 
@@ -84,13 +92,12 @@ $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 
 
             <p>
 <?php
-$projectit = get_post_meta($post->ID,'project_details_headline',true);
-$postit = get_post_meta($post->ID,'eh_headline',true);
-if ( !empty($projectit) ) : ?>
-            <a class="other" title="View <?php echo $projectit; ?>" href="<?php the_permalink() ?>"><?php echo $projectit; ?></a>
-<?php elseif ( !empty($postit) ) : ?>
-            <a class="other" title="View <?php echo $postit; ?>" href="<?php the_permalink() ?>"><?php echo $postit; ?></a>
-<?php endif; ?>
+
+//if ( !empty($projectit) ) : ?>
+            <a class="other" title="View <?php echo $headline; ?>" href="<?php the_permalink() ?>"><?php echo $headline; ?></a>
+<?php //elseif ( !empty($postit) ) : ?>
+            <!--a class="other" title="View <?php //echo $headline; ?>" href="<?php the_permalink() ?>"><?php //echo $headline; ?></a-->
+<?php //endif; ?>
             </p>
 
             <p class="entry-excerpt">
