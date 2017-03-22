@@ -46,72 +46,63 @@ add_action('admin_enqueue_scripts', 'admin_style');
 
 
 
-/* REMOVE CAPTION INLINE STYLES INSERTED BY WORDPRESS
-*  AND ADD ATTRIBUTION TO CAPTION
-*  From -- https://gist.github.com/johndugan/4359828 and
-*  https://kaspars.net/blog/wordpress/how-to-automatically-add-image-credit-or-source-url-to-photo-captions-in-wordpress
-*
-*/
-add_shortcode('wp_caption', 'fixed_img_caption_shortcode');
-	add_shortcode('caption', 'fixed_img_caption_shortcode');
-	function fixed_img_caption_shortcode($attr, $content = null) {
-		// New-style shortcode w caption inside shortcode w link + image tags
-		if ( ! isset( $attr['caption'] ) ) {
-			if ( preg_match( '#((?:<a [^>]+>\s*)?<img [^>]+>(?:\s*</a>)?)(.*)#is', $content, $matches ) ) {
-				$content = $matches[1];
-				$attr['caption'] = trim( $matches[2] );
-			}
-		}
 
-		// Allow plugins/themes to override the default caption template
-		$output = apply_filters('img_caption_shortcode', '', $attr, $content);
-		if ( $output != '' )
-			return $output;
+// CREATE CUSTOM CAPTION SHORTCODE
+add_shortcode('mycaption', 'eh_caption');
+function eh_caption($attr, $content = NUll ) {
 
-    // EH - Include caption class for responsive styles
-		extract(shortcode_atts(array(
-			'id'	    => '',
-			'align'	  => '',
-			'width'	  => '',
-			'caption' => '',
-      'class'   => ''
-		), $attr));
+  extract(shortcode_atts(array(
+    'id'	    => '',
+    'align'	  => '',
+    'caption' => '',
+    'class'   => ''
+  ), $attr));
 
-  	preg_match('/\d+/', $id, $att_id);
+  // Set up
+  preg_match('/\d+/', $id, $att_id);
+  if ( $id ) {
+    $id = 'id="' . esc_attr($id) . '" ';
+  }
+  $parent_id = get_post_ancestors( $att_id[0] );
+  $parent_cat_slug = mygetcatslug($parent_id[0]);
+  $href_class = $parent_cat_slug;
 
-    // EH - Set up for attaching attribution to caption
-    $attach_name = get_post_meta($att_id[0], 'eh_attribution_name', true);
-    $attach_url = get_post_meta($att_id[0], 'eh_attribution_url', true);
-    $parent_id = get_post_ancestors($att_id[0]);
-    $parent_cat_slug = mygetcatslug($parent_id[0]);
+  if ($attr['caption'] == 'yes') {
 
-    if ( $parent_cat_slug == 'words') {
-      $href_class = 'words';
+    $attachments = get_post_meta($parent_id[0], 'eh_images');
+
+    foreach ( $attachments as $attach ) {
+      foreach ( $attach as $image ) {
+        if ( $image['eh_image_images'] == $att_id ) {
+
+          $image_caption = $image['eh_image_caption'];
+          $image_caption = str_replace('|', '<br/>', $image_caption);
+
+          if (!empty ( $image['eh_attribution_name'] ) ) {
+            $image_attr_name = $image['eh_attribution_name'];
+          }
+
+          if (!empty ( $image['eh_attribution_url'] ) ) {
+            $image_attr_url = $image['eh_attribution_url'];
+          }
+
+        }
+      }
     }
-    elseif ( $parent_cat_slug == 'work') {
-      $href_class = 'work';
-    }
-
-    // Replace | with line breaks in caption
-    $new_caption = str_replace('|', '<br />', $caption);
-
-    // EH - Add attribution to caption if available
-    if ( is_numeric($att_id[0]) && !empty( $attach_url ) ) {
-  		$new_caption .= '<br/>(attr: <a class="'.$href_class.'" title="View orginal image" target="_blank" href="'.$attach_url.'" target="">'.$attach_name.'</a>)';
+    // Add attribution to caption if available
+    if ( is_numeric($att_id[0]) && !empty( $image_attr_url ) ) {
+  		$image_caption .= '<br/>(attr: <a class="'.$href_class.'" title="View orginal image" target="_blank" href="'.$image_attr_url.'" target="">'.$image_attr_name.'</a>)';
   	}
-    elseif ( is_numeric($att_id[0]) && empty( $attach_url ) && !empty( $attach_name) ) {
-      $new_caption .= '<br/>(attr: '.$attach_name.')';
+    elseif ( is_numeric($att_id[0]) && empty( $image_attr_url ) && !empty( $image_attr_name) ) {
+      $image_caption .= '<br/>(attr: '.$image_attr_name.')';
     }
+    return '<div ' . $id . 'class="wp-caption '. esc_attr($class) . ' ' . esc_attr($align) . '">' . do_shortcode( $content ) . '<p class="wp-caption-text">' . $image_caption . '</p></div>';
+  }
 
-    if ( 1 > (int) $width || empty($new_caption) )
-			return $content;
-
-		if ( $id ) $id = 'id="' . esc_attr($id) . '" ';
-
-    return '<div ' . $id . 'class="wp-caption '.$class . ' ' . esc_attr($align) . '">'
-		. do_shortcode( $content ) . '<p class="wp-caption-text">' . $new_caption . '</p></div>';
-
-	}
+  elseif ($attr['caption'] == 'no') {
+    return '<div ' . $id . 'class="wp-caption '. esc_attr($class) . ' ' . esc_attr($align) . '">' . do_shortcode( $content ) . '</div>';
+  }
+}
 
 
 
@@ -129,11 +120,6 @@ function add_category_to_single($classes) {
   // return the $classes array
   return $classes;
 }
-
-
-
-// INLCUDE NEW FIELDS FOR CUSTOM POST TYPE = PROJECT
-include '_project-details.php';
 
 
 
@@ -183,6 +169,11 @@ register_taxonomy("project_tags", array("work"), array(
 
 
 
+// INLCUDE REGISTER METABOXES FOR CUSTOM POST TYPE = PROJECT
+include '_project-details.php';
+
+
+
 /* --- Add Post Tags to Attachment Post Type -- */
 function eh_add_tags_to_attachments() {
   register_taxonomy_for_object_type( 'post_tag', 'attachment' );
@@ -193,71 +184,113 @@ add_action( 'init' , 'eh_add_tags_to_attachments' );
 
 // ADD META BOXES TO REGULAR POSTS + PAGES
 function eh_register_meta_boxes_posts( $meta_boxes ) {
-    $prefix = 'eh_';
-    $meta_boxes[] = array(
-        //'id'         => 'headlines',
-        'title'      => __( 'Post Headlines', 'textdomain' ),
-        'post_types' => array( 'post', 'page' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-            array(
-                'name'  => __( 'Post Headline', 'textdomain' ),
-                'desc'  => 'The Post Headline appears in magazine header area.',
-                'id'    => $prefix . 'headline',
-                'type'  => 'text',
-                'clone' => false,
-            ),
-            array(
-                'name'  => __( 'Post Subhead', 'textdomain' ),
-                'desc'  => 'The Post Subhead appears in the body copy aera.',
-                'id'    => $prefix . 'subhead',
-                'type'  => 'text',
-                'clone' => false,
-            ),
-        )
-    );
-    return $meta_boxes;
+  $prefix = 'eh_';
+  $meta_boxes[] = array(
+    //'id'         => 'headlines',
+    'title'      => __( 'Post Headlines', 'textdomain' ),
+    'post_types' => array( 'post', 'page' ),
+    'context'    => 'normal',
+    'priority'   => 'high',
+    'fields' => array(
+      array(
+          'name'  => __( 'Post Headline', 'textdomain' ),
+          'desc'  => 'The Post Headline appears in magazine header area.',
+          'id'    => $prefix . 'headline',
+          'type'  => 'text',
+          'clone' => false,
+      ),
+      array(
+          'name'  => __( 'Post Subhead', 'textdomain' ),
+          'desc'  => 'The Post Subhead appears in the body copy aera.',
+          'id'    => $prefix . 'subhead',
+          'type'  => 'text',
+          'clone' => false,
+      ),
+      array(
+				'id'     => $prefix.'images',
+				// Group field
+				'type'   => 'group',
+				// Clone whole group?
+				'clone'  => true,
+				// Drag and drop clones to reorder them?
+				'sort_clone' => true,
+				// Sub-fields
+				'fields' => array(
+					array(
+						'id'      => $prefix.'image_order',
+            'name'    => __( 'Image Display Order', 'rwmb' ),
+						'type'    => 'number',
+            'class'  => 'ez-admin-text'
+					),
+          array(
+						'id'      => $prefix.'image_caption',
+            'name'    => __( 'Image Caption', 'rwmb' ),
+            'desc'  => 'Short descriptive caption for this image.',
+						'type'    => 'textarea',
+            'class'  => 'ez-admin-textarea'
+					),
+          array(
+            'id'    => $prefix . 'attribution_name',
+            'name'  => __( 'Attribution Name', 'textdomain' ),
+            'desc'  => 'Name for attribution',
+            'type'  => 'text',
+            'class' => 'ez-admin-text'
+          ),
+          array(
+            'id'    => $prefix . 'attribution_url',
+            'name'  => __( 'Attribution URL', 'textdomain' ),
+            'desc'  => 'URL for attribution',
+            'type'  => 'text',
+            'class' => 'ez-admin-text'
+          ),
+          array(
+    				'id'      => $prefix.'image_images',
+            'name'    => esc_html__( 'Image', 'rwmb' ),
+    				'type'    => 'image_advanced',
+            'class'  => 'ez-admin-imginput',
+
+    				// Delete image from Media Library when remove it from post meta? Note: it might affect other posts if you use same image for multiple posts
+    				'force_delete'     => false,
+
+    				// Maximum image uploads PER CLONED PART
+    				'max_file_uploads' => 1,
+
+    				// Display the "Uploaded 1/2 files" status
+    				'max_status'       => true,
+    			)
+				)
+			)
+    )
+  );
+  return $meta_boxes;
 }
 add_filter( 'rwmb_meta_boxes', 'eh_register_meta_boxes_posts' );
 
 
 
-// ADD META BOXES TO ATTACHMENTS
-function eh_register_meta_boxes_attachments( $meta_boxes ) {
-    $prefix = 'eh_';
-    $meta_boxes[] = array(
-        //'id'         => 'attachments',
-        'title'      => __( 'Attachment Details', 'textdomain' ),
-        'post_types' => array( 'attachment' ),
-        'context'    => 'normal',
-        'priority'   => 'high',
-        'fields' => array(
-            array(
-                'name'  => __( 'Attribution Name', 'textdomain' ),
-                'desc'  => 'Name for attribution',
-                'id'    => $prefix . 'attribution_name',
-                'type'  => 'text',
-                'clone' => false,
-                'class' => 'ez-admin-text'
-            ),
-            array(
-                'name'  => __( 'Attribution URL', 'textdomain' ),
-                'desc'  => 'URL for attribution',
-                'id'    => $prefix . 'attribution_url',
-                'type'  => 'text',
-                'clone' => false,
-                'class' => 'ez-admin-text'
-            )
-        )
-    );
-    return $meta_boxes;
-}
-add_filter( 'rwmb_meta_boxes', 'eh_register_meta_boxes_attachments' );
-
-
 
 // MISC FUNCTIONS
+
+/*
+function eh_get_parentimages_from_attachID( $attach_id, $type ) {
+  $parent_id = get_post_ancestors( $attach_id[0] );
+
+  $attachments = get_post_meta($parent_id[0], $type);
+
+  foreach ( $attachments as $attach ) {
+    foreach ( $attach as $image ) {
+      if ( $image[$type.'_image_images'] == $att_id ) {
+        return $image;
+      }
+      else {
+        return false;
+      }
+    }
+  }
+}
+*/
+
+
 function sluggify($string) {
   # Prep string with some basic normalization
   $string = strtolower($string);
@@ -288,7 +321,6 @@ function mygetcatname($post_id) {
   }
   return $cat_name;
 }
-
 
 
 function mygetcatslug($post_id) {
@@ -344,6 +376,43 @@ function mynextprevious( $post_id, $type ) {
 }
 
 
+// For Attachment to Attachment Navigation
+function mynextprevimglink( $post_id, $array, $type, $cat, $count ) {
+
+  if ( $count === 1 ) {
+    return false;
+  }
+
+  // Key for this image = its image display order
+  $currentkey = array_search($post_id, $array);
+  // Zero index count
+  $count = $count-1;
+
+  if ( $currentkey != 0 ) {
+    $prevID = $array[$currentkey-1];
+  }
+  if ( $currentkey != $count ) {
+    $nextID = $array[$currentkey+1];
+  }
+
+  if ( !empty( $prevID ) && $type == 'previous' ) {
+    $link = get_attachment_link($prevID);
+    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat.'" aria-hidden="true"></i><i class="fa fa-arrow-left fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
+  }
+  elseif ( !empty( $nextID ) && $type == 'next' ) {
+    $link = get_attachment_link($nextID);
+    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat.'" aria-hidden="true"></i><i class="fa fa-arrow-right fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
+  }
+
+  // If none, return false (empty)
+  if( !empty( $link ) ) {
+    return '<a class="'.$cat.'" title="See '.$type.' image" href="'.esc_url($link).'">'.$icon.'</a>';
+  }
+  else {
+    return false;
+  }
+}
+
 
 function mypaginate($query) {
   $big = 999999999;
@@ -364,7 +433,6 @@ function mypaginate($query) {
 }
 
 
-
 function break_text($text){
     $length = 500;
     //don't cut if too short
@@ -376,103 +444,17 @@ function break_text($text){
 }
 
 
-
-
-/*Get the link of an adjacent image
- *
- * @param bool $prev Whether or not there is a previous image
- * @return string URL of an adjacent image
- *
-**/
-function cfct_get_adjacent_image_link($prev = true) {
-	global $post;
-
-	$attachments = array_values(get_children( array(
-    'post_parent' => $post->post_parent,
-    'post_status' => 'inherit',
-    'post_type' => 'attachment',
-    //'post_mime_type' => 'image',
-    'orderby' => 'date',
-    'order' => 'ASC',
-    'tax_query' => array(
-      array(
-        'taxonomy' => 'post_tag',
-        'terms' => 'image-attach',
-        'field' => 'slug',
-        'operator' => 'IN'
-      )
-    )
-  ) ));
-
-  /*foreach ( $attachments as $attach ) {
-    echo $attach->ID.'<br/>';
-
-    if ($attach->ID == $post->ID ) {
-      echo 'match';
-    }
-    $images = get_post_meta($post->post_parent,'project_details_images',true);
-    foreach ( $images as $image ) {
-      echo '<pre>';
-      var_dump($image);
-      echo '</pre>';
-    }
-
-    $title = $attach->post_title;
-  }*/
-
-	foreach ( $attachments as $k => $attachment ) {
-
-		if ( $attachment->ID == $post->ID ) {
-			break;
-		}
-
-	$k = $prev ? $k - 1 : $k + 1;
-
-  echo $prev;
-
-	if ( isset($attachments[$k]) )
-		//return wp_get_attachment_link($attachments[$k]->ID, 'thumbnail', true);
-    echo wp_get_attachment_link($attachments[$k]->ID, 'thumbnail', true);
-	}
-}
-
-
-
-
-/*
-function mynextimage($post_id) {
-  global $post_id;
-  $tmpit = previous_image_link('','');
-  if ( !empty( previous_image_link('','') ) ) {
-
-    $newid = url_to_postid( $tmpit );
-
-    $testit = wp_get_post_tags( $post_id, $args );
-    echo '<pre>';
-    var_dump($tmpit);
-    echo '</pre>';
-
-    //$newlink = previous_image_link('','previous image');
-    //echo $newlink;
+function eh_get_class_href() {
+  global $bodyclass;
+  //if ( $cat == 'words') {
+  if ( in_array('words', $bodyclass) ) {
+    return $class = 'words';
+  }
+  //elseif ( $cat == 'work') {
+  elseif ( in_array('work', $bodyclass) ) {
+    return $class = 'work';
+  }
+  else {
+    return false;
   }
 }
-*/
-
-// DELETE ?
-/*
-function mynextimage($thispostid, $array) {
-
-  echo '<pre>';
-  var_dump($array);
-  echo '</pre>';
-
-    //$currentkey = array_search($thispostid, $array);
-    //$nextID = $array[$currentkey+1];
-    //return $nextID;
-}
-function myprevimage($thispostid, $array) {
-    $currentkey = array_search($thispostid, $array);
-    $prevID = $array[$currentkey-1];
-    return $prevID;
-}
-*/

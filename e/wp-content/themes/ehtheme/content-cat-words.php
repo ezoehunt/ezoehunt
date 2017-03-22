@@ -105,6 +105,7 @@ if ( $attachments ) {
 
             <p class="entry-excerpt">
               <?php echo get_the_excerpt(); ?>
+              <br/><span class="smaller-90"><a class="words" title="Continue reading this article" href="<?php the_permalink() ?>">{ continue&nbsp;reading }</a></span>
             </p>
 
           </div>

@@ -1,8 +1,3 @@
-<!--
-[caption id="attachment_35" align="alignright" width="876" class="col col-xs-100 col-sm-60"]<a href="http://localhost/words/a-love-letter-to-cities/attachment/mission-creek-houseboats/" rel="attachment wp-att-35"><img src="http://localhost/e/wp-content/uploads/2017/03/Mission-Creek-Houseboats.jpg" alt="Mission Creek Houseboats" class="wp-image-35" style="width:auto;" /></a> Mission Creek Houseboats[/caption]
--->
-
-
 <?php
 /**
 * @package eztheme
@@ -12,30 +7,24 @@
 */
 ?>
 
-<?php get_header(); ?>
-
 <?php
-//$thispostid = $post->ID;
-//$parent_id = $post->post_parent;
-$parent_id = wp_get_post_parent_id( $post->ID );
 
-//$parentcat = get_the_category($parent_id);
-//$parentcatslug = $parentcat[0]->slug;
-$parent_cat_slug = mygetcatslug( $parent_id );
+get_header();
 
-if ( $parent_cat_slug == 'words' ) {
-  $image_title = get_the_title();
-}
-elseif ( $parent_cat_slug == 'work' ) {
-  $images = get_post_meta($parentid,'project_details_images',true);
-  foreach ( $images as $image ) {
-    $title = $image['project_details_image_title'];
-    if ($title === $post->post_title ) {
-      $image_title = $title;
-    }
-  }
-}
+if ( have_posts() ) :
+  while ( have_posts() ) : the_post();
+
+  $parent_id = wp_get_post_parent_id( $post->ID );
+  $parent_cat_slug = mygetcatslug( $parent_id );
+  //$type = $parent_cat_slug;
+
+  // Get count for next/prev img links
+  /* Subtract the featured image b/c it shouldn't be displayed as an attachment here */
+  $countit = get_children( array( 'post_parent' => $parent_id ) );
+  $count = count( $countit );
+  $count = $count-1;
 ?>
+
 <?php if ( $parent_cat_slug == 'work' ) : ?>
 <div id="leftcol" class="col col-sm-5 col-md-15 bg-work"></div>
 <?php elseif ( $parent_cat_slug == 'words' ) : ?>
@@ -55,20 +44,63 @@ elseif ( $parent_cat_slug == 'work' ) {
     </p>
   </div>
 
+
   <div id="page-title">
 
     <ul class="page-pagination">
 
       <li class="item-middle">
-        <h1 class="page-headline"><?php echo $image_title; ?></h1>
+        <h1 class="page-headline">
+<?php
+if ( $parent_cat_slug == 'words' ) {
+  $image_title = get_the_title($post->ID);
+  echo $image_title;
+}
+elseif ( $parent_cat_slug == 'work' ) {
+  $imgtitles = get_post_meta($parent_id,'project_details_images',true);
+  foreach ( $imgtitles as $imgtitle ) {
+    $image_title = $imgtitle['project_details_image_title'];
+    if ($image_title === $post->post_title ) {
+      echo $image_title;
+    }
+  }
+}
+?>
+        </h1>
       </li>
 
+<?php
+$newmedia = '';
+$myattachments = get_post_meta($parent_id,'eh_images');
+foreach ( $myattachments as $myattach ) {
+  foreach ($myattach as $attach) {
+    $newmedia[] += $attach['eh_image_images'][0];
+  }
+}
+$previmg = mynextprevimglink($post->ID, $newmedia, 'previous', $parent_cat_slug, $count);
+$nextimg = mynextprevimglink($post->ID, $newmedia, 'next', $parent_cat_slug, $count);
+wp_reset_postdata();
+?>
       <li class="item-left">
-        <?php //previous_image_link('none', 'previous image' ); ?>
+<?php
+  if ( !empty( $previmg ) ) {
+    echo $previmg;
+  }
+  else {
+    echo '&nbsp;';
+  }
+?>
       </li>
 
       <li class="item-right">
-        <?php //next_image_link('none', 'next image' ); ?>
+<?php
+  if ( !empty( $nextimg ) ) {
+    echo $nextimg;
+  }
+  else {
+    echo '&nbsp;';
+  }
+?>
       </li>
 
     </ul>
@@ -90,4 +122,8 @@ elseif ( $parent_cat_slug == 'work' ) {
 <div id="rightcol" class="col col-sm-5 col-md-15 bg-words"></div>
 <?php endif; ?>
 
-<?php get_footer(); ?>
+<?php
+endwhile;
+endif;
+get_footer();
+?>

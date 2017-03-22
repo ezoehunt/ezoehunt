@@ -40,9 +40,9 @@ get_header();
 
   <div id="page-column">
 
-    <div class="blog-center col-xs-100 col-sm-90 col-md-85 col-lg-80">
+    <div class="blog-center blog-grid col-xs-100 col-sm-90 col-md-85 col-lg-80">
 <?php
-query_posts( $query_string . '&orderby=date&order=asc' );
+query_posts( $query_string . '&orderby=date&order=desc' );
 if ( have_posts() ) :
 $count_posts = $wp_query->found_posts;
 ?>
