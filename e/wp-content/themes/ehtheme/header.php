@@ -23,8 +23,6 @@ remove_action('wp_head', 'wp_generator');
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
-$generalKeys ='Elizabeth Hunt, Making Things and Thinking About Them, UX, UX designer, user experience designer, interaction designer, experience designer';
-
 ?>
 <!doctype html>
 <!--[if IE 8] <html class="no-js lt-ie9"> ![endif]-->

@@ -155,14 +155,13 @@ function eh_caption($attr, $content = NUll ) {
 
 
 
-// ADD CATEGORIES TO BODYCLASS FOR SINGLE POSTS
+// ADD CATEGORIES TO BODYCLASS ARRAY FOR SINGLE POSTS
 /* -- Needed to use bodyclass to indicate "active" state in nav for all posts. By default Wordpress doesn't include category name for Single Posts in bodyclass -- */
 add_filter('body_class','add_category_to_single');
 function add_category_to_single($classes) {
   if (is_single() ) {
     global $post;
     foreach((get_the_category($post->ID)) as $category) {
-      // add category slug to the $classes array
       $classes[] = $category->category_nicename;
     }
   }
@@ -250,8 +249,15 @@ function eh_register_meta_boxes_posts( $meta_boxes ) {
       ),
       array(
           'name'  => __( 'Post Subhead', 'textdomain' ),
-          'desc'  => 'The Post Subhead appears in the body copy aera.',
+          'desc'  => 'The Post Subhead appears in the body copy area.',
           'id'    => $prefix . 'subhead',
+          'type'  => 'text',
+          'clone' => false,
+      ),
+      array(
+          'name'  => __( 'Post Keywords', 'textdomain' ),
+          'desc'  => 'The Post Keywords appears in the metadata.',
+          'id'    => $prefix . 'keywords',
           'type'  => 'text',
           'clone' => false,
       )
@@ -401,7 +407,6 @@ function eh_next_previous( $post_id, $type, $cat_slug ) {
     $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat_slug.'" aria-hidden="true"></i><i class="fa fa-arrow-right fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
 
   }
-  // If none, return false (empty)
   if( $function ) {
     return '<a class="" title="See '.$cat_alt.'" href="'.esc_url(get_permalink($function->ID)).'">'.$icon.'</a>';
   }
@@ -419,6 +424,7 @@ function eh_nextprev_img_link( $post_id, $array, $type, $cat_slug, $count ) {
   }
   // Zero index count
   $count = $count-1;
+
   $currentkey = array_search($post_id, $array);
 
   if ( $currentkey != 0 ) {
@@ -436,7 +442,6 @@ function eh_nextprev_img_link( $post_id, $array, $type, $cat_slug, $count ) {
     $link = get_attachment_link($nextID);
     $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat_slug.'" aria-hidden="true"></i><i class="fa fa-arrow-right fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
   }
-
   if( !empty( $link ) ) {
     return '<a class="'.$cat_slug.'" title="See '.$type.' image" href="'.esc_url($link).'">'.$icon.'</a>';
   }

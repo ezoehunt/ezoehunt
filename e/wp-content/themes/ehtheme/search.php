@@ -30,22 +30,22 @@ get_header();
 
     <ul class="page-nopag">
       <li class="item-middle">
-        <?php if ( have_posts() ) :
-          $count_posts = $wp_query->found_posts;
-        ?>
+<?php if ( have_posts() ) :
+$count_posts = $wp_query->found_posts;
+?>
         <h1 class="page-headline-nopag">
-          <?php
-            printf( _n( '%s result', '%s results', $count_posts, 'ehtheme' ), $count_posts );
-            echo ' for <br/><span class="search-query">' . get_search_query() . '</span>';
-          ?>
+<?php
+printf( _n( '%s result', '%s results', $count_posts, 'ehtheme' ), $count_posts );
+echo ' for <br/><span class="search-query">' . get_search_query() . '</span>';
+?>
         </h1>
-        <?php else : ?>
+<?php else : ?>
         <h1 class="page-headline-nopag">
-          <?php
-            printf( __( 'No Results for<br/>%s', 'ehtheme' ), '<span class="search-query">' . get_search_query() . '</span>' );
-          ?>
+<?php
+printf( __( 'No Results for<br/>%s', 'ehtheme' ), '<span class="search-query">' . get_search_query() . '</span>' );
+?>
         </h1>
-        <?php endif; ?>
+<?php endif; ?>
       </li>
     </ul>
 
@@ -66,14 +66,18 @@ get_header();
 
 <?php while ( have_posts() ) : the_post();
 $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
+
 $projectit = get_post_meta($post->ID,'_portfolio_headline',true);
+
 $postit = get_post_meta($post->ID,'_blog_headline',true);
+
 if ( !empty ( $projectit ) ) {
   $headline = $projectit;
 }
 elseif ( !empty ( $postit ) ) {
   $headline = $postit;
 }
+
 ?>
 
         <li <?php post_class('entry-foto'); ?> id="post-<?php the_ID(); ?>">
@@ -91,13 +95,7 @@ elseif ( !empty ( $postit ) ) {
             </p>
 
             <p>
-<?php
-
-//if ( !empty($projectit) ) : ?>
-            <a class="other" title="View <?php echo $headline; ?>" href="<?php the_permalink() ?>"><?php echo $headline; ?></a>
-<?php //elseif ( !empty($postit) ) : ?>
-            <!--a class="other" title="View <?php //echo $headline; ?>" href="<?php the_permalink() ?>"><?php //echo $headline; ?></a-->
-<?php //endif; ?>
+              <a class="other" title="View <?php echo $headline; ?>" href="<?php the_permalink() ?>"><?php echo $headline; ?></a>
             </p>
 
             <p class="entry-excerpt">

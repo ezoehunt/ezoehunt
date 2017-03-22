@@ -7,18 +7,8 @@
 * Sidebar template
 *
 * NOT USING THIS TEMPLATE --
-* It's required for Wordpress, so can't be deleted from theme.
+* It's required for Wordpress to run, so can't be deleted from theme.
 *
 */
 
-/*
-if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-	return;
-}
-*/
-
 ?>
-
-<!--aside id="secondary" class="widget-area" role="complementary">
-	<?php //dynamic_sidebar( 'sidebar-1' ); ?>
-</aside-->

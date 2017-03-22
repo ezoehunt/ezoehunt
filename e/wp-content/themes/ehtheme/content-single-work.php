@@ -159,7 +159,7 @@ foreach ( $design as $image ) :
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
 
-              <a class="work" title="View larger image" href="<?php echo $attach_url;?>"><img alt="<?php echo $image[$prefix.'title']; ?>" src="<?php echo $image_url;?>"></a>
+              <a class="work" title="View larger image" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt; ?>" src="<?php echo $image_url;?>"></a>
 
             </div>
 
@@ -191,6 +191,7 @@ foreach ( $process as $image ) :
     $image_id = $image_id[0];
 
     // Get url to the attachment page for the image
+    // Note: images can't be shared across Portfolio posts, otherwise the "back to project" link breaks
     $attach_url = get_permalink($image_id);
 
     $image_alt = $image[$prefix.'alt'];
@@ -209,7 +210,7 @@ foreach ( $process as $image ) :
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
 
-              <a class="work" title="View larger" href="<?php echo $attach_url;?>"><img alt="<?php echo $image[$prefix.'title']; ?>" src="<?php echo $image_url;?>"></a>
+              <a class="work" title="View larger" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt; ?>" src="<?php echo $image_url;?>"></a>
 
             </div>
 
