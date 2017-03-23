@@ -62,18 +62,21 @@ $mynext = eh_next_previous($post->ID, 'next', $cat_slug);
     </ul>
 
   </div>
-
+<?php
+// onclick="changeIt('see-design');"
+// onclick="changeIt('see-process');"
+?>
 
   <div id="page-column">
 
     <div class="blog-center col-sm-95">
 
-      <ul class="nav nav-tabs" role="tablist">
+      <ul id="myTab" class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-          <a class="nav-link laquo active" data-toggle="tab" data-target="#design" role="tab" onclick="changeIt('see-design');">Viewing Designs</a>
+          <a class="nav-link laquo active" data-toggle="tab" data-selected="design" href="#design" role="tab" onclick="changeIt('design');" >Viewing Designs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link raquo" data-toggle="tab" data-target="#process" role="tab" onclick="changeIt('see-process');">See Process</a>
+          <a class="nav-link raquo" data-toggle="tab" data-selected="process" href="#process" role="tab" onclick="changeIt('process');">See Process</a>
         </li>
       </ul>
 
@@ -175,8 +178,10 @@ foreach ( $design as $image ) :
 <?php if ( !empty(get_the_content() ) ) : ?>
           <p class="overview">
             <span>Overview</span>
-            <br/><?php echo get_the_content(); ?>
           </p>
+            <p>
+              <?php echo get_the_content(); ?>
+            </p>
 <?php endif; ?>
 
 <?php if ( ! empty($process) ) : ?>
@@ -206,6 +211,8 @@ foreach ( $process as $image ) :
               <p class="item-text-title"><?php echo $image[$prefix.'title']; ?></p>
 
               <p class="item-text-copy"><?php echo $image[$prefix.'description']?></p>
+
+              <p class="item-text-copy"><a class="work" title="View larger image" href="<?php echo $attach_url;?>/#process">View larger image &raquo;</a></p>
 
             </div>
 
@@ -241,3 +248,23 @@ foreach ( $process as $image ) :
 
 
 <div id="rightcol" class="col col-sm-5 col-md-15 bg-work"></div>
+
+<script>
+/*
+* Store most recent selected tab so when we can come back to it from the Attachment Page
+*/
+$(document).ready(function(){
+  $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+      localStorage.setItem('activeTab', $(e.target).attr('href'));
+  });
+  var activeTab = localStorage.getItem('activeTab');
+  if(activeTab){
+      $('#myTab a[href="' + activeTab + '"]').tab('show');
+      // Update selected style
+      if (activeTab) {
+        newActiveTab = activeTab.substring(1);
+        changeIt(newActiveTab);
+      }
+  }
+});
+</script>

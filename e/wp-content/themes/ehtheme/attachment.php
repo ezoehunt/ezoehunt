@@ -25,6 +25,24 @@ if ( have_posts() ) :
   $countit = get_children( array( 'post_parent' => $parent_id ) );
   $count = count( $countit );
   $count = $count-1;
+
+  /* Title Info
+  *  Get titles for everything except Portfolio from the post's content area, i.e., "<img title="" ...>.
+  *  For Portfolio items, get the title from the post's metabox input area, i.e., the "Image Title" input field.
+  */
+  if ( $cat_slug == 'words' ) {
+    $image_title = get_the_title($post->ID);
+  }
+  elseif ( $cat_slug == 'work' ) {
+    $imgtitles = get_post_meta($parent_id,'_portfolio_images',true);
+    foreach ( $imgtitles as $imgtitle ) {
+      $image_id = $imgtitle['_portfolio_image_images'][0];
+      if ($image_id == $post->ID ) {
+        $image_title = $imgtitle['_portfolio_image_title'];
+      }
+    }
+  }
+
 ?>
 
 <div id="leftcol" class="col col-sm-5 col-md-15 bg-<?php echo $cat_slug;?>"></div>
@@ -34,6 +52,7 @@ if ( have_posts() ) :
 
   <div id="breadcrumb">
     <p class="page-breadcrumb">
+
       <a class="<?php echo $cat_slug;?>" href="<?php echo get_permalink($parent_id); ?>" title="<?php echo ($cat_slug == 'work') ? 'Back to Project page' : 'Back to Article page' ?>"><span class="link-raquo">&laquo;</span> <?php echo ($cat_slug == 'work') ? 'Back to Project page' : 'Back to Article page' ?></a>
     </p>
   </div>
@@ -45,26 +64,7 @@ if ( have_posts() ) :
 
       <li class="item-middle">
         <h1 class="page-headline">
-<?php
-/* Title Info
-*  Get titles for everything except Portfolio from the post's content area, i.e., "<img title="" ...>.
-*  For Portfolio items, get the title from the post's metabox input area, i.e., the "Image Title" input field.
-*/
-if ( $cat_slug == 'words' ) {
-  $image_title = get_the_title($post->ID);
-  echo $image_title;
-}
-elseif ( $cat_slug == 'work' ) {
-  $imgtitles = get_post_meta($parent_id,'_portfolio_images',true);
-  foreach ( $imgtitles as $imgtitle ) {
-    $image_id = $imgtitle['_portfolio_image_images'][0];
-    $image_title = $imgtitle['_portfolio_image_title'];
-    if ($image_id == $post->ID ) {
-      echo $image_title;
-    }
-  }
-}
-?>
+          <?php echo $image_title; ?>
         </h1>
       </li>
 
