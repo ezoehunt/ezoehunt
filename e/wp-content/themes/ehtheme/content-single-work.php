@@ -255,14 +255,14 @@ foreach ( $process as $image ) :
 */
 $(document).ready(function(){
   $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
-      localStorage.setItem('activeTab', $(e.target).attr('href'));
+      localStorage.setItem('eh_activeTab', $(e.target).attr('href'));
   });
-  var activeTab = localStorage.getItem('activeTab');
-  if(activeTab){
-      $('#myTab a[href="' + activeTab + '"]').tab('show');
+  var eh_activeTab = localStorage.getItem('eh_activeTab');
+  if(eh_activeTab){
+      $('#myTab a[href="' + eh_activeTab + '"]').tab('show');
       // Update selected style
-      if (activeTab) {
-        newActiveTab = activeTab.substring(1);
+      if (eh_activeTab) {
+        newActiveTab = eh_activeTab.substring(1);
         changeIt(newActiveTab);
       }
   }
