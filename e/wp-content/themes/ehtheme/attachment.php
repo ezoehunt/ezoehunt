@@ -8,41 +8,46 @@
 
 get_header();
 
-if ( have_posts() ) :
-  while ( have_posts() ) : the_post();
+$mediaids = '';
 
-  $parent_id = wp_get_post_parent_id( $post->ID );
-  $cat_slug = eh_get_cat_slug( $parent_id );
-  if ( $cat_slug == 'work' ) {
-    $prefix = '_portfolio_';
-  }
-  elseif ( $cat_slug == 'words' ) {
-    $prefix = '_blog_';
-  }
+$parent_id = wp_get_post_parent_id( $post->ID );
 
-  // Get count for next/prev function
-  /* Subtract the featured image b/c it shouldn't be displayed as an attachment here */
-  $countit = get_children( array( 'post_parent' => $parent_id ) );
-  $count = count( $countit );
-  $count = $count-1;
+$cat_slug = eh_get_cat_slug( $parent_id );
+if ( $cat_slug == 'work' ) {
+  $prefix = '_portfolio_';
+}
+elseif ( $cat_slug == 'words' ) {
+  $prefix = '_blog_';
+}
 
-  /* Title Info
-  *  Get titles for everything except Portfolio from the post's content area, i.e., "<img title="" ...>.
-  *  For Portfolio items, get the title from the post's metabox input area, i.e., the "Image Title" input field.
-  */
-  if ( $cat_slug == 'words' ) {
-    $image_title = get_the_title($post->ID);
-  }
-  elseif ( $cat_slug == 'work' ) {
-    $imgtitles = get_post_meta($parent_id,'_portfolio_images',true);
-    foreach ( $imgtitles as $imgtitle ) {
-      $image_id = $imgtitle['_portfolio_image_images'][0];
-      if ($image_id == $post->ID ) {
-        $image_title = $imgtitle['_portfolio_image_title'];
+$myimages = get_post_meta($parent_id, $prefix.'images');
+
+foreach ( $myimages as $myimage ) {
+  foreach ($myimage as $theimage) {
+    if ( $theimage[$prefix.'image_display'] == 'y' ) {
+      // For comparison purposes
+      $image_id = $theimage[$prefix.'image_images'][0];
+
+      // For use in next/previous function
+      $mediaids[] += $theimage[$prefix.'image_images'][0];
+      $count = count( $mediaids );
+
+      /* For titles
+      *  Get titles for regular Posts/Pages from the post's content area, i.e., "<img title="" ...>.
+      *  For Portfolio items, get the title from the post's metabox input area, i.e., the "Image Title" input field.
+      */
+      if ( $cat_slug == 'words' && $image_id == $post->ID ) {
+        $image_title = get_the_title($post->ID);
+      }
+      elseif ( $cat_slug == 'work'  && $image_id == $post->ID ) {
+        $image_title = $theimage[$prefix.'image_title'];
       }
     }
   }
+}
 
+if ( have_posts() ) :
+  while ( have_posts() ) : the_post();
 ?>
 
 <div id="leftcol" class="col col-sm-5 col-md-15 bg-<?php echo $cat_slug;?>"></div>
@@ -69,16 +74,8 @@ if ( have_posts() ) :
       </li>
 
 <?php
-$media = '';
-$myattachments = get_post_meta($parent_id, $prefix.'images');
-foreach ( $myattachments as $myattach ) {
-  foreach ($myattach as $attach) {
-    $media[] += $attach[$prefix.'image_images'][0];
-  }
-}
-$previmg = eh_nextprev_img_link($post->ID, $media, 'previous', $cat_slug, $count);
-$nextimg = eh_nextprev_img_link($post->ID, $media, 'next', $cat_slug, $count);
-wp_reset_postdata();
+$previmg = eh_nextprev_img_link($post->ID, $mediaids, 'previous', $cat_slug, $count);
+$nextimg = eh_nextprev_img_link($post->ID, $mediaids, 'next', $cat_slug, $count);
 ?>
       <li class="item-left">
 <?php

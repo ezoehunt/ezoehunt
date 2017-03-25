@@ -79,6 +79,16 @@ function project_details_register_meta_boxes( $meta_boxes ) {
 				'fields' => array(
           /* Easier to deal with changes to Title or Alt in Portfolio Post context vs. Media Library context */
 					array(
+						'id'      => $prefix.'image_display',
+            'name'    => __( 'Display Image ?', 'rwmb' ),
+						'type'    => 'radio',
+            'class'  => 'ez-admin-radio',
+            'options' => array(
+                'y' => __( 'Yes', 'rwmb' ),
+                'n' => __( 'No', 'rwmb' ),
+            ),
+					),
+          array(
 						'id'      => $prefix.'image_title',
             'name'    => __( 'Image Title', 'rwmb' ),
 						'type'    => 'text',

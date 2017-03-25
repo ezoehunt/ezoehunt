@@ -90,10 +90,10 @@ if ( have_posts() ) :
   $process = [];
   if ( ! empty($images) ) {
     foreach ( $images as $image ) {
-      if ( $image[$prefix.'type'] == 'd' ) {
+      if ( $image[$prefix.'type'] == 'd' && $image[$prefix.'display'] == 'y' ) {
         array_push($design, $image);
       }
-      elseif ( $image[$prefix.'type'] == 'p' ) {
+      elseif ( $image[$prefix.'type'] == 'p'  && $image[$prefix.'display'] == 'y' ) {
         array_push($process, $image);
       }
     }
