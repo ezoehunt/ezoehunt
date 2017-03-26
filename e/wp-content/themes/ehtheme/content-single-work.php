@@ -62,10 +62,7 @@ $mynext = eh_next_previous($post->ID, 'next', $cat_slug);
     </ul>
 
   </div>
-<?php
-// onclick="changeIt('see-design');"
-// onclick="changeIt('see-process');"
-?>
+
 
   <div id="page-column">
 
@@ -83,18 +80,17 @@ $mynext = eh_next_previous($post->ID, 'next', $cat_slug);
 <?php
 if ( have_posts() ) :
   while ( have_posts() ) : the_post();
-  // collect types into separate arrays
-  $prefix = '_portfolio_image_';
-  $images = rwmb_meta('_portfolio_images' );
+  $prefix = '_portfolio_attach_';
   $design = [];
   $process = [];
-  if ( ! empty($images) ) {
-    foreach ( $images as $image ) {
-      if ( $image[$prefix.'type'] == 'd' && $image[$prefix.'display'] == 'y' ) {
-        array_push($design, $image);
+  $attachments = rwmb_meta('_portfolio_attachments' );
+  if ( ! empty($attachments) ) {
+    foreach ( $attachments as $attachment ) {
+      if ( $attachment[$prefix.'type'] == 'd' && $attachment[$prefix.'display'] == 'y' ) {
+        array_push($design, $attachment);
       }
-      elseif ( $image[$prefix.'type'] == 'p'  && $image[$prefix.'display'] == 'y' ) {
-        array_push($process, $image);
+      elseif ( $attachment[$prefix.'type'] == 'p'  && $attachment[$prefix.'display'] == 'y' ) {
+        array_push($process, $attachment);
       }
     }
   }
@@ -130,39 +126,66 @@ if ( have_posts() ) :
           </p>
 
 <?php
-foreach ( $design as $image ) :
-  foreach ( $image[$prefix.'images'] as $newimage ) :
+foreach ( $design as $attachment ) :
 
-    $image_url = wp_get_attachment_image_src( $newimage, 'full' );
-    $image_url = $image_url[0];
+  $attach_title = $attachment[$prefix.'title'];
+  $attach_alt = $attachment[$prefix.'alt'];
+  $attach_description = $attachment[$prefix.'description'];
 
-    $image_id = eh_get_image_id($image_url);
-    $image_id = $image_id[0];
+  if ( $attachment[$prefix.'format'] == 'i' ) :
+
+    $attach_id = $attachment[$prefix.'images'];
+    $attach_id = $attach_id[0];
+
+    $attach_src = wp_get_attachment_image_src( $attach_id, 'full' );
+    $attach_src = $attach_src[0];
 
     // Get url to the attachment page for the image
-    // Note: images can't be shared across Portfolio posts, otherwise the "back to project" link breaks
-    $attach_url = get_permalink($image_id);
+    // Note that images can't be shared across Portfolio posts, otherwise the "back to project" link breaks
+    $page_url = get_permalink($attach_id);
 
-    $image_alt = $image[$prefix.'alt'];
+  elseif ( $attachment[$prefix.'format'] == 'p' ) :
+
+    $attach_id = $attachment[$prefix.'pdf'];
+    $attach_id = $attach_id[0];
+
+    // Find image that represents the PDF
+    $pdf_image = get_the_title($attach_id);
+    $pdf_image = 'image-'.eh_sluggify($pdf_image);
+    $tmp_post = get_page_by_title($pdf_image, '', 'attachment');
+    $attach_src = $tmp_post->guid;
+
+    // Open PDFs directly instead of using attachment page.
+    $page_url = wp_get_attachment_url( $attach_id );
+
+  endif;
 
 ?>
-<?php endforeach; ?>
-
           <div class="row item-row">
 
             <div class="col-sm-100 col-md-40 floatleft item-text">
 
-              <p class="item-text-title"><?php echo $image[$prefix.'title']; ?></p>
+              <p class="item-text-title"><?php echo $attach_title; ?></p>
 
-              <p class="item-text-copy"><?php echo $image[$prefix.'description']?></p>
+              <p class="item-text-copy"><?php echo $attach_description; ?></p>
 
-              <p class="item-text-copy"><a class="work" title="View larger image" href="<?php echo $attach_url;?>">View larger image &raquo;</a></p>
+              <p class="item-text-copy">
+<?php if ( $attachment[$prefix.'format'] == 'p' ) : ?>
+                <a class="work" target="_blank" title="View PDF" href="<?php echo $page_url;?>">View PDF &raquo;</a>
+<?php elseif ( $attachment[$prefix.'format'] == 'i' ) : ?>
+                <a class="work" title="View larger" href="<?php echo $page_url;?>">View larger image &raquo;</a>
+<?php endif; ?>
+              </p>
 
             </div>
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
 
-              <a class="work" title="View larger image" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt; ?>" src="<?php echo $image_url;?>"></a>
+<?php if ( $attachment[$prefix.'format'] == 'p' ) : ?>
+              <a class="work" title="View PDF" target="_blank" href="<?php echo $page_url;?>"><img alt="<?php echo $attach_alt; ?>" src="<?php echo $attach_src;?>"></a>
+<?php elseif ( $attachment[$prefix.'format'] == 'i' ) : ?>
+              <a class="work" title="View larger image" href="<?php echo $page_url;?>"><img alt="<?php echo $attach_alt; ?>" src="<?php echo $attach_src;?>"></a>
+<?php endif; ?>
 
             </div>
 
@@ -187,38 +210,65 @@ foreach ( $design as $image ) :
 <?php if ( ! empty($process) ) : ?>
 
 <?php
-foreach ( $process as $image ) :
-  foreach ( $image[$prefix.'images'] as $newimage ) :
+foreach ( $process as $attachment ) :
 
-    $image_url = wp_get_attachment_image_src( $newimage, 'full' );
-    $image_url = $image_url[0];
+  $attach_title = $attachment[$prefix.'title'];
+  $attach_alt = $attachment[$prefix.'alt'];
+  $attach_description = $attachment[$prefix.'description'];
 
-    $image_id = eh_get_image_id($image_url);
-    $image_id = $image_id[0];
+  if ( $attachment[$prefix.'format'] == 'i' ) :
+
+    $attach_id = $attachment[$prefix.'images'];
+    $attach_id = $attach_id[0];
+
+    $attach_src = wp_get_attachment_image_src( $attach_id, 'full' );
+    $attach_src = $attach_src[0];
 
     // Get url to the attachment page for the image
-    // Note: images can't be shared across Portfolio posts, otherwise the "back to project" link breaks
-    $attach_url = get_permalink($image_id);
+    // Note that images can't be shared across Portfolio posts, otherwise the "back to project" link breaks
+    $page_url = get_permalink($attach_id);
 
-    $image_alt = $image[$prefix.'alt'];
+  elseif ( $attachment[$prefix.'format'] == 'p' ) :
+
+    $attach_id = $attachment[$prefix.'pdf'];
+    $attach_id = $attach_id[0];
+
+    // Find image that represents the PDF
+    $pdf_image = get_the_title($attach_id);
+    $pdf_image = 'image-'.eh_sluggify($pdf_image);
+    $tmp_post = get_page_by_title($pdf_image, '', 'attachment');
+    $attach_src = $tmp_post->guid;
+
+    // Open PDFs directly instead of using attachment page.
+    $page_url = wp_get_attachment_url( $attach_id );
+
+  endif;
 ?>
-<?php endforeach; ?>
-
           <div class="row item-row">
 
             <div class="col-sm-100 col-md-40 floatleft item-text">
 
-              <p class="item-text-title"><?php echo $image[$prefix.'title']; ?></p>
+              <p class="item-text-title"><?php echo $attach_title; ?></p>
 
-              <p class="item-text-copy"><?php echo $image[$prefix.'description']?></p>
+              <p class="item-text-copy"><?php echo $attach_description; ?></p>
 
-              <p class="item-text-copy"><a class="work" title="View larger image" href="<?php echo $attach_url;?>/#process">View larger image &raquo;</a></p>
+              <p class="item-text-copy">
+<?php if ( $attachment[$prefix.'format'] == 'p' ) : ?>
+                <a class="work" target="_blank" title="View PDF" href="<?php echo $page_url;?>">View PDF &raquo;</a>
+<?php elseif ( $attachment[$prefix.'format'] == 'i' ) : ?>
+                <a class="work" title="View larger" href="<?php echo $page_url;?>">View larger image &raquo;</a>
+<?php endif; ?>
+              </p>
 
             </div>
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
 
-              <a class="work" title="View larger" href="<?php echo $attach_url;?>"><img alt="<?php echo $image_alt; ?>" src="<?php echo $image_url;?>"></a>
+<?php if ( $attachment[$prefix.'format'] == 'p' ) : ?>
+              <a class="work" title="View PDF" target="_blank" href="<?php echo $page_url;?>"><img alt="<?php echo $attach_alt; ?>" src="<?php echo $attach_src;?>"></a>
+<?php elseif ( $attachment[$prefix.'format'] == 'i' ) : ?>
+              <a class="work" title="View larger image" href="<?php echo $page_url;?>"><img alt="<?php echo $attach_alt; ?>" src="<?php echo $attach_src;?>"></a>
+<?php endif; ?>
 
             </div>
 

@@ -8,7 +8,7 @@
 
 get_header();
 
-$mediaids = '';
+$attachids = [];
 
 $parent_id = wp_get_post_parent_id( $post->ID );
 
@@ -20,27 +20,37 @@ elseif ( $cat_slug == 'words' ) {
   $prefix = '_blog_';
 }
 
-$myimages = get_post_meta($parent_id, $prefix.'images');
+$attachments = get_post_meta($parent_id, $prefix.'attachments');
 
-foreach ( $myimages as $myimage ) {
-  foreach ($myimage as $theimage) {
-    if ( $theimage[$prefix.'image_display'] == 'y' ) {
-      // For comparison purposes
-      $image_id = $theimage[$prefix.'image_images'][0];
+foreach ( $attachments as $attach ) {
 
-      // For use in next/previous function
-      $mediaids[] += $theimage[$prefix.'image_images'][0];
-      $count = count( $mediaids );
+  foreach ($attach as $single) {
+
+    if ( $single[$prefix.'attach_display'] == 'y' ) {
+
+      if ( $single[$prefix.'attach_format'] == 'i' ) {
+        $format = 'images';
+
+      }
+      if ( $single[$prefix.'attach_format'] == 'p' ) {
+        $format = 'pdf';
+      }
+
+      $attach_id = $single[$prefix.'attach_'.$format][0];
+      $attachids[] += $attach_id;
+      $count = count($attachids);
 
       /* For titles
       *  Get titles for regular Posts/Pages from the post's content area, i.e., "<img title="" ...>.
       *  For Portfolio items, get the title from the post's metabox input area, i.e., the "Image Title" input field.
       */
-      if ( $cat_slug == 'words' && $image_id == $post->ID ) {
-        $image_title = get_the_title($post->ID);
+      if ( $cat_slug == 'words' && $attach_id == $post->ID ) {
+        $attach_title = get_the_title($post->ID);
+        $attach_format = $single[$prefix.'attach_format'];
       }
-      elseif ( $cat_slug == 'work'  && $image_id == $post->ID ) {
-        $image_title = $theimage[$prefix.'image_title'];
+      elseif ( $cat_slug == 'work'  && $attach_id == $post->ID ) {
+        $attach_title = $single[$prefix.'attach_title'];
+        $attach_format = $single[$prefix.'attach_format'];
       }
     }
   }
@@ -69,13 +79,13 @@ if ( have_posts() ) :
 
       <li class="item-middle">
         <h1 class="page-headline">
-          <?php echo $image_title; ?>
+          <?php echo $attach_title; ?>
         </h1>
       </li>
 
 <?php
-$previmg = eh_nextprev_img_link($post->ID, $mediaids, 'previous', $cat_slug, $count);
-$nextimg = eh_nextprev_img_link($post->ID, $mediaids, 'next', $cat_slug, $count);
+$previmg = eh_nextprev_img_link($post->ID, $attachids, 'previous', $cat_slug, $count);
+$nextimg = eh_nextprev_img_link($post->ID, $attachids, 'next', $cat_slug, $count);
 ?>
       <li class="item-left">
 <?php
@@ -102,12 +112,28 @@ $nextimg = eh_nextprev_img_link($post->ID, $mediaids, 'next', $cat_slug, $count)
     </ul>
 
   </div>
-<?php if ( wp_attachment_is_image( $post->id ) ) : $att_image = wp_get_attachment_image_src( $post->id, "full"); ?>
-
+<?php
+if ( $attach_format == 'i' ) {
+  // Get image
+  $tmp_image = wp_get_attachment_image_src( $post->id, "full");
+  $attach_src = $tmp_image[0];
+}
+if ( $attach_format == 'p' ) {
+  // Find image that represents the PDF
+  $pdf_image = get_the_title($post->id);
+  $pdf_image = eh_sluggify($pdf_image);
+  $pdf_image = 'image-'.$pdf_image;
+  $tmp_post = get_page_by_title($pdf_image, '', 'attachment');
+  $attach_src = $tmp_post->guid;
+  $page_url = wp_get_attachment_url( $post->id );
+}
+?>
   <div class="image-attach">
-      <img title="<?php echo $image_title; ?>" src="<?php echo $att_image[0];?>" />
-  </div>
+<?php if ( $attach_format == 'p' ) : ?>
+      This is a preview image of a PDF file.<br/><a class="work" title="" target="_blank" href="<?php echo $page_url; ?>">View the complete PDF &raquo;</a><br/><br/>
 <?php endif; ?>
+      <img title="<?php echo $attach_title; ?>" src="<?php echo $attach_src;?>" />
+  </div>
 
 </div><!-- end #maincol -->
 

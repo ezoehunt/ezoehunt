@@ -48,6 +48,7 @@ function admin_style() {
 add_action('admin_enqueue_scripts', 'admin_style');
 
 
+
 // CREATE MAILTO SHORTCODE = [myemail]
 function email_encode_function( $atts, $content ) {
   return antispambot($content);
@@ -390,7 +391,7 @@ function eh_get_cat_slug($post_id) {
 }
 
 
-function eh_get_image_id($image_url) {
+function eh_image_id_from_url($image_url) {
 	global $wpdb;
 	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));
   return $attachment;
@@ -490,3 +491,20 @@ function eh_break_text($text){
     $visible = substr($text, 0, $break_pos);
     return balanceTags($visible) . " […]";
 }
+
+
+// NOT USING
+/* Force PDF permalink to link to pdf file vs attach page */
+/*
+function eh_force_direct_pdf_links( $permalink ){
+	global $post;
+	//if ( is_search() && 'application/pdf' == get_post_mime_type( $post->ID ) ) {
+  if ( 'application/pdf' == get_post_mime_type( $post->ID ) ) {
+		// if the result is a PDF, link directly to the file not the attachment page
+		$permalink = wp_get_attachment_url( $post->ID );
+	}
+	return esc_url( $permalink );
+}
+add_filter( 'the_permalink', 'eh_force_direct_pdf_links' );
+add_filter( 'attachment_link', 'eh_force_direct_pdf_links' );
+*/
