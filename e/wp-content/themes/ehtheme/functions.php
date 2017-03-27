@@ -265,13 +265,13 @@ function eh_register_meta_boxes_posts( $meta_boxes ) {
     )
   );
   $meta_boxes[] = array(
-    'title'      => __( 'Image Details', 'textdomain' ),
+    'title'      => __( 'Attachment Details', 'textdomain' ),
     'post_types' => array( 'post', 'page' ),
     'context'    => 'normal',
     'priority'   => 'high',
     'fields' => array(
       array(
-				'id'     => $prefix.'images',
+				'id'     => $prefix.'attachments',
 				// Group field
 				'type'   => 'group',
 				// Clone whole group?
@@ -281,8 +281,38 @@ function eh_register_meta_boxes_posts( $meta_boxes ) {
 				// Sub-fields
 				'fields' => array(
           array(
-						'id'      => $prefix.'image_display',
-            'name'    => __( 'Display Image ?', 'rwmb' ),
+						'id'      => $prefix.'attach_title',
+            'name'    => __( 'Attachment Title', 'rwmb' ),
+						'type'    => 'text',
+            'class'  => 'ez-admin-text'
+					),
+          array(
+						'id'      => $prefix.'attach_alt',
+            'name'    => __( 'Attachment Alt Text', 'rwmb' ),
+						'type'    => 'text',
+            'class'  => 'ez-admin-text'
+					),
+          array(
+						'id'      => $prefix.'attach_caption',
+            'name'    => __( 'Attachment Caption', 'rwmb' ),
+						'type'    => 'textarea',
+            'class'  => 'ez-admin-textarea'
+					),
+          array(
+            'id'    => $prefix . 'attach_attr_name',
+            'name'  => __( 'Attribution Name', 'textdomain' ),
+            'type'  => 'text',
+            'class' => 'ez-admin-text'
+          ),
+          array(
+            'id'    => $prefix . 'attach_attr_url',
+            'name'  => __( 'Attribution URL', 'textdomain' ),
+            'type'  => 'text',
+            'class' => 'ez-admin-text'
+          ),
+          array(
+						'id'      => $prefix.'attach_display',
+            'name'    => __( 'Display Attachment ?', 'rwmb' ),
 						'type'    => 'radio',
             'class'  => 'ez-admin-radio',
             'options' => array(
@@ -291,37 +321,20 @@ function eh_register_meta_boxes_posts( $meta_boxes ) {
             ),
 					),
           array(
-						'id'      => $prefix.'image_title',
-            'name'    => __( 'Image Title', 'rwmb' ),
-						'type'    => 'text',
-            'class'  => 'ez-admin-text'
-					),
-          array(
-						'id'      => $prefix.'image_alt',
-            'name'    => __( 'Image Alt Text', 'rwmb' ),
-						'type'    => 'text',
-            'class'  => 'ez-admin-text'
-					),
-          array(
-						'id'      => $prefix.'image_caption',
-            'name'    => __( 'Image Caption', 'rwmb' ),
-						'type'    => 'textarea',
-            'class'  => 'ez-admin-textarea'
-					),
-          array(
-            'id'    => $prefix . 'image_attr_name',
-            'name'  => __( 'Attribution Name', 'textdomain' ),
-            'type'  => 'text',
-            'class' => 'ez-admin-text'
+            'id'      => $prefix.'attach_format',
+            'name'    => __( 'Image or PDF ?', 'rwmb' ),
+            'type'    => 'radio',
+            'class'  => 'ez-admin-radio',
+            'options' => array(
+                'i' => __( 'Image', 'rwmb' ),
+                'p' => __( 'PDF', 'rwmb' ),
+            ),
+            // Set the default value here
+            'std'         => 'i'
           ),
+          // Displays only if attach_format = i
           array(
-            'id'    => $prefix . 'image_attr_url',
-            'name'  => __( 'Attribution URL', 'textdomain' ),
-            'type'  => 'text',
-            'class' => 'ez-admin-text'
-          ),
-          array(
-    				'id'      => $prefix.'image_images',
+    				'id'      => $prefix.'attach_images',
             'name'    => esc_html__( 'Image', 'rwmb' ),
     				'type'    => 'image_advanced',
             'class'  => 'ez-admin-imginput',
@@ -334,7 +347,18 @@ function eh_register_meta_boxes_posts( $meta_boxes ) {
 
     				// Display the "Uploaded 1/2 files" status
     				'max_status'       => true,
-    			)
+            'hidden' => array( 'attach_format', '!=', 'i' )
+    			),
+          // Displays only if attach_format = p
+          array(
+            'id'               => $prefix.'attach_pdf',
+            'name'             => esc_html__( 'PDF', 'rwmb' ),
+            'type'             => 'file_advanced',
+            'max_file_uploads' => 1,
+            // Leave blank for all file types
+            'mime_type'        => '',
+            'hidden' => array( 'attach_format', '!=', 'p' )
+          )
 				)
 			)
     )
