@@ -84,7 +84,7 @@ define('WP_DEBUG_LOG', true);
 define('AUTOSAVE_INTERVAL', 300 );
 
 // Only save certain number of revisions
-//define( ‘WP_POST_REVISIONS’, 3 );
+define( ‘WP_POST_REVISIONS’, 3 );
 
 // Completely disable revisions
 //define('WP_POST_REVISIONS', false );

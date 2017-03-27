@@ -65,17 +65,17 @@ function my_image_alt_function( $attr ) {
   ), $attr ));
   $parent_id = get_post_ancestors( $attr['attach_id'] );
 
-  $getattach = get_post_meta($parent_id[0], '_blog_images');
+  $getattach = get_post_meta($parent_id[0], '_blog_attachments');
   $attachments = $getattach[0];
 
   foreach ( $attachments as $image ) {
-    $newID = $image['_blog_image_images'][0];
+    $newID = $image['_blog_attach_images'][0];
     if ( $newID == $attr['attach_id'] ) {
-      if (!empty ( $image['_blog_image_alt'] ) ) {
-        $image_alt = $image['_blog_image_alt'];
+      if (!empty ( $image['_blog_attach_alt'] ) ) {
+        $image_alt = $image['_blog_attach_alt'];
       }
-      if (!empty ( $image['_blog_image_title'] ) ) {
-        $image_title = $image['_blog_image_title'];
+      if (!empty ( $image['_blog_attach_title'] ) ) {
+        $image_title = $image['_blog_attach_title'];
       }
     }
   }
@@ -117,28 +117,28 @@ function eh_caption($attr, $content = NUll ) {
     $parent_cat_slug = eh_get_cat_slug($parent_id[0]);
     $href_class = $parent_cat_slug;
 
-    $getattach = get_post_meta($parent_id[0], '_blog_images');
+    $getattach = get_post_meta($parent_id[0], '_blog_attachments');
     $attachments = $getattach[0];
 
     foreach ( $attachments as $image ) {
-      $newID = $image['_blog_image_images'][0];
+      $newID = $image['_blog_attach_images'][0];
 
       if ( $newID == $att_id[0] ) {
-        /*if (!empty ( $image['_blog_image_title'] ) ) {
-          $image_title = $image['_blog_image_title'];
+        /*if (!empty ( $image['_blog_attach_title'] ) ) {
+          $image_title = $image['_blog_attach_title'];
         }
-        if (!empty ( $image['_blog_image_alt'] ) ) {
-          $image_alt = $image['_blog_image_alt'];
+        if (!empty ( $image['_blog_attach_alt'] ) ) {
+          $image_alt = $image['_blog_attach_alt'];
         }*/
-        if (!empty ( $image['_blog_image_caption'] ) ) {
-          $image_caption = $image['_blog_image_caption'];
+        if (!empty ( $image['_blog_attach_caption'] ) ) {
+          $image_caption = $image['_blog_attach_caption'];
           $image_caption = str_replace('|', '<br/>', $image_caption);
         }
-        if (!empty ( $image['_blog_image_attr_name'] ) ) {
-          $image_attr_name = $image['_blog_image_attr_name'];
+        if (!empty ( $image['_blog_attach_attr_name'] ) ) {
+          $image_attr_name = $image['_blog_attach_attr_name'];
         }
-        if (!empty ( $image['_blog_image_attr_url'] ) ) {
-          $image_attr_url = $image['_blog_image_attr_url'];
+        if (!empty ( $image['_blog_attach_attr_url'] ) ) {
+          $image_attr_url = $image['_blog_attach_attr_url'];
         }
         if ( is_numeric($att_id[0]) && !empty( $image_attr_url ) ) {
       		$image_caption .= '<br/>(attr: <a class="'.$href_class.'" title="View orginal image" target="_blank" href="'.$image_attr_url.'">'.$image_attr_name.'</a>)';
@@ -208,27 +208,28 @@ add_action( 'init', 'create_project_post_type' );
 
 
 
-// CREATE CUSTOM TAXONOMY FOR CUSTOM POST TYPE = PROJECT
+// CREATE CUSTOM TAXONOMY FOR IMAGES + PROJECT CPT
 /* Use to indicate which posts to show on home page with tag = featured */
-register_taxonomy("project_tags", array("work"), array(
+register_taxonomy("image_tags", array("attachment"), array(
 	"hierarchical" => false,
-	"label" => "Project Tags",
-	"singular_label" => "Project Tag",
-	"rewrite" => true
+	"label" => "Image Tags",
+	"singular_label" => "Image Tag",
+	"rewrite" => true,
+  'show_admin_column' => true,
+  'query_var' => true,
 ));
+
+/* --- Add Image Tags to Attachment Post Type -- */
+function eh_add_tags_to_attachments() {
+  //register_taxonomy_for_object_type( 'post_tag', 'attachment' );
+  register_taxonomy_for_object_type( 'image_tags', 'attachment' );
+}
+add_action( 'init' , 'eh_add_tags_to_attachments' );
 
 
 
 // INLCUDE REGISTER METABOXES FOR CUSTOM POST TYPE = PROJECT
 include '_portfolio-details.php';
-
-
-
-/* --- Add Post Tags to Attachment Post Type -- */
-function eh_add_tags_to_attachments() {
-  register_taxonomy_for_object_type( 'post_tag', 'attachment' );
-}
-add_action( 'init' , 'eh_add_tags_to_attachments' );
 
 
 

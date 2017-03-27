@@ -45,7 +45,8 @@ foreach ( $attachments as $attach ) {
       *  For Portfolio items, get the title from the post's metabox input area, i.e., the "Image Title" input field.
       */
       if ( $cat_slug == 'words' && $attach_id == $post->ID ) {
-        $attach_title = get_the_title($post->ID);
+        //$attach_title = get_the_title($post->ID);
+        $attach_title = $single[$prefix.'attach_title'];
         $attach_format = $single[$prefix.'attach_format'];
       }
       elseif ( $cat_slug == 'work'  && $attach_id == $post->ID ) {
