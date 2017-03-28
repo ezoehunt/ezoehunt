@@ -34,14 +34,15 @@ foreach($environments as $environment => $hostname) {
     break;
   }
 }
+//echo ABSPATH;
 
 if (!defined('ENVIRONMENT')) exit('No database configured for this host.');
 
-if ( ENVIRONMENT == 'local' && file_exists( 'env/local.php' ) ) {
-  require_once('env/local.php');
+if ( ENVIRONMENT == 'local' && file_exists( ABSPATH . '/env/local.php' ) ) {
+  require_once( ABSPATH . '/env/local.php' );
 }
-elseif ( ENVIRONMENT == 'production' && file_exists( 'env/production.php' ) )  {
-  require_once('env/production.php');
+elseif ( ENVIRONMENT == 'production' && file_exists( ABSPATH . '/env/production.php' ) )  {
+  require_once( ABSPATH . '/env/production.php' );
 }
 else {
   exit('No database configuration found for this host.');
