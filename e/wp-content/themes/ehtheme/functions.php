@@ -48,6 +48,12 @@ function admin_style() {
 add_action('admin_enqueue_scripts', 'admin_style');
 
 
+/* --- Add Excerpt to Pages --- */
+add_action( 'init', 'eh_add_excerpts_to_pages' );
+function eh_add_excerpts_to_pages() {
+  add_post_type_support( 'page', 'excerpt' );
+}
+
 
 // CREATE MAILTO SHORTCODE = [myemail]
 function email_encode_function( $atts, $content ) {
