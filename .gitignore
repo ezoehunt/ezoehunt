@@ -5,6 +5,7 @@ _keep
 /e/wp-content/uploads
 /e/wp-content/debug.log
 /e/env/production.php
+/e/env/general.php
 connectToWP.php
 comments_fix.php
 /e/wp-config-sample.php
