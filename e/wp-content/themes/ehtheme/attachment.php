@@ -8,7 +8,8 @@
 
 get_header();
 
-$attachids = [];
+//$attachids = [];
+$attachids = array();
 
 $parent_id = wp_get_post_parent_id( $post->ID );
 
@@ -30,7 +31,6 @@ foreach ( $attachments as $attach ) {
 
       if ( $single[$prefix.'attach_format'] == 'i' ) {
         $format = 'images';
-
       }
       if ( $single[$prefix.'attach_format'] == 'p' ) {
         $format = 'pdf';
@@ -40,16 +40,7 @@ foreach ( $attachments as $attach ) {
       $attachids[] += $attach_id;
       $count = count($attachids);
 
-      /* For titles
-      *  Get titles for regular Posts/Pages from the post's content area, i.e., "<img title="" ...>.
-      *  For Portfolio items, get the title from the post's metabox input area, i.e., the "Image Title" input field.
-      */
-      if ( $cat_slug == 'words' && $attach_id == $post->ID ) {
-        //$attach_title = get_the_title($post->ID);
-        $attach_title = $single[$prefix.'attach_title'];
-        $attach_format = $single[$prefix.'attach_format'];
-      }
-      elseif ( $cat_slug == 'work'  && $attach_id == $post->ID ) {
+      if ( $attach_id == $post->ID ) {
         $attach_title = $single[$prefix.'attach_title'];
         $attach_format = $single[$prefix.'attach_format'];
       }
@@ -131,7 +122,7 @@ if ( $attach_format == 'p' ) {
 ?>
   <div class="image-attach">
 <?php if ( $attach_format == 'p' ) : ?>
-      This is a preview image of a PDF file.<br/><a class="work" title="" target="_blank" href="<?php echo $page_url; ?>">View the complete PDF &raquo;</a><br/><br/>
+      This is a preview image of a PDF file.<br/><a class="work" title="View PDF" target="_blank" href="<?php echo $page_url; ?>">View the complete PDF &raquo;</a><br/><br/>
 <?php endif; ?>
       <img title="<?php echo $attach_title; ?>" src="<?php echo $attach_src;?>" />
   </div>

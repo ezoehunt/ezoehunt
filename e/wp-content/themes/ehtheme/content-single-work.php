@@ -155,6 +155,10 @@ foreach ( $design as $attachment ) :
     $tmp_post = get_page_by_title($pdf_image, '', 'attachment');
     $attach_src = $tmp_post->guid;
 
+    // If using built-in PDF thumbnails
+    //$attach_src = wp_get_attachment_image_src( $attach_id, '' );
+    //$attach_src = $attach_src[0];
+
     // Open PDFs directly instead of using attachment page.
     $page_url = wp_get_attachment_url( $attach_id );
 
@@ -170,23 +174,15 @@ foreach ( $design as $attachment ) :
               <p class="item-text-copy"><?php echo $attach_description; ?></p>
 
               <p class="item-text-copy">
-<?php if ( $attachment[$prefix.'format'] == 'p' ) : ?>
-                <a class="work" target="_blank" title="View PDF" href="<?php echo $page_url;?>">View PDF &raquo;</a>
-<?php elseif ( $attachment[$prefix.'format'] == 'i' ) : ?>
-                <a class="work" title="View larger" href="<?php echo $page_url;?>">View larger image &raquo;</a>
-<?php endif; ?>
+<a class="work" <?php echo ($attachment[$prefix.'format'] == 'p') ? 'title="View PDF" target="_blank"' : 'title="View larger image"' ?> href="<?php echo $page_url;?>"><?php echo ($attachment[$prefix.'format'] == 'p') ? 'View PDF &raquo;' : 'View larger image &raquo;' ?></a>
               </p>
 
             </div>
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
-
-<?php if ( $attachment[$prefix.'format'] == 'p' ) : ?>
-              <a class="work" title="View PDF" target="_blank" href="<?php echo $page_url;?>"><img alt="<?php echo $attach_alt; ?>" src="<?php echo $attach_src;?>"></a>
-<?php elseif ( $attachment[$prefix.'format'] == 'i' ) : ?>
-              <a class="work" title="View larger image" href="<?php echo $page_url;?>"><img alt="<?php echo $attach_alt; ?>" src="<?php echo $attach_src;?>"></a>
-<?php endif; ?>
-
+<a class="work" <?php echo ($attachment[$prefix.'format'] == 'p') ? 'title="View PDF" target="_blank"' : 'title="View larger image"' ?> href="<?php echo $page_url;?>">
+  <img alt="<?php echo $attach_alt; ?>" src="<?php echo $attach_src;?>">
+</a>
             </div>
 
           </div>
@@ -239,6 +235,10 @@ foreach ( $process as $attachment ) :
     $tmp_post = get_page_by_title($pdf_image, '', 'attachment');
     $attach_src = $tmp_post->guid;
 
+    // If using built-in PDF thumbnails
+    //$attach_src = wp_get_attachment_image_src( $attach_id, '' );
+    //$attach_src = $attach_src[0];
+
     // Open PDFs directly instead of using attachment page.
     $page_url = wp_get_attachment_url( $attach_id );
 
@@ -253,23 +253,15 @@ foreach ( $process as $attachment ) :
               <p class="item-text-copy"><?php echo $attach_description; ?></p>
 
               <p class="item-text-copy">
-<?php if ( $attachment[$prefix.'format'] == 'p' ) : ?>
-                <a class="work" target="_blank" title="View PDF" href="<?php echo $page_url;?>">View PDF &raquo;</a>
-<?php elseif ( $attachment[$prefix.'format'] == 'i' ) : ?>
-                <a class="work" title="View larger" href="<?php echo $page_url;?>">View larger image &raquo;</a>
-<?php endif; ?>
+<a class="work" <?php echo ($attachment[$prefix.'format'] == 'p') ? 'title="View PDF" target="_blank"' : 'title="View larger image"' ?> href="<?php echo $page_url;?>"><?php echo ($attachment[$prefix.'format'] == 'p') ? 'View PDF &raquo;' : 'View larger image &raquo;' ?></a>
               </p>
 
             </div>
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
-
-<?php if ( $attachment[$prefix.'format'] == 'p' ) : ?>
-              <a class="work" title="View PDF" target="_blank" href="<?php echo $page_url;?>"><img alt="<?php echo $attach_alt; ?>" src="<?php echo $attach_src;?>"></a>
-<?php elseif ( $attachment[$prefix.'format'] == 'i' ) : ?>
-              <a class="work" title="View larger image" href="<?php echo $page_url;?>"><img alt="<?php echo $attach_alt; ?>" src="<?php echo $attach_src;?>"></a>
-<?php endif; ?>
-
+<a class="work" <?php echo ($attachment[$prefix.'format'] == 'p') ? 'title="View PDF" target="_blank"' : 'title="View larger image"' ?> href="<?php echo $page_url;?>">
+  <img alt="<?php echo $attach_alt; ?>" src="<?php echo $attach_src;?>">
+</a>
             </div>
 
           </div>
