@@ -34,8 +34,6 @@ foreach($environments as $environment => $hostname) {
     break;
   }
 }
-//echo ABSPATH;
-
 if (!defined('ENVIRONMENT')) exit('No database configured for this host.');
 
 if ( ENVIRONMENT == 'local' && file_exists( ABSPATH . '/env/local.php' ) ) {

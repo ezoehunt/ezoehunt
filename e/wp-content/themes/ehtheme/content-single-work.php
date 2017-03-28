@@ -153,7 +153,8 @@ foreach ( $design as $attachment ) :
     $pdf_image = get_the_title($attach_id);
     $pdf_image = 'image-'.eh_sluggify($pdf_image);
     $tmp_post = get_page_by_title($pdf_image, '', 'attachment');
-    $attach_src = $tmp_post->guid;
+    $attach_src = wp_get_attachment_image_src( $tmp_post->ID, '' );
+    $attach_src = $attach_src[0];
 
     // If using built-in PDF thumbnails
     //$attach_src = wp_get_attachment_image_src( $attach_id, '' );
@@ -194,7 +195,7 @@ foreach ( $design as $attachment ) :
         </div><!-- end #design tab -->
 
         <div id="process" class="tab-pane" role="tabpanel">
-<?php if ( !empty(get_the_content() ) ) : ?>
+<?php if ( get_the_content() != false ) : ?>
           <p class="overview">
             <span>Overview</span>
           </p>
@@ -233,7 +234,8 @@ foreach ( $process as $attachment ) :
     $pdf_image = get_the_title($attach_id);
     $pdf_image = 'image-'.eh_sluggify($pdf_image);
     $tmp_post = get_page_by_title($pdf_image, '', 'attachment');
-    $attach_src = $tmp_post->guid;
+    $attach_src = wp_get_attachment_image_src( $tmp_post->ID, '' );
+    $attach_src = $attach_src[0];
 
     // If using built-in PDF thumbnails
     //$attach_src = wp_get_attachment_image_src( $attach_id, '' );
