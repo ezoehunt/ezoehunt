@@ -7,5 +7,5 @@ gulpfile.js
 package.json
 /e/wp-content/uploads
 e/wp-content/debug.log
-e/wp-config
+/env
 connectToWP.php

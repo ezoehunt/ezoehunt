@@ -18,40 +18,33 @@
  * @package WordPress
  */
 
-require_once('wp-config/general.php');
-
 // Setup for Environments
 $environments = array(
   'local'       => 'localhost',
   'production'  => 'ezoehunt.com'
 );
 
-// Get the hostname
+// Get hostname
 $http_host = $_SERVER['HTTP_HOST'];
 
 // Loop through $environments to see if there’s a match
 foreach($environments as $environment => $hostname) {
   if (stripos($http_host, $hostname) !== FALSE) {
     define('ENVIRONMENT', $environment);
-    //echo $environment;
     break;
   }
 }
 
-// Exit if ENVIRONMENT is undefined
-if (!defined('ENVIRONMENT')) exit('No database configured for this host');
+if (!defined('ENVIRONMENT')) exit('No database configured for this host.');
 
-// Location of environment-specific configuration
-$wp_db_config = 'wp-config/' . ENVIRONMENT . '.php';
-
-// Check to see if configuration file exists
-if (file_exists(__DIR__ . '/' . $wp_db_config)) {
-  // Require general + environment vars
-  require_once('wp-config/general.php');
-  require_once($wp_db_config);
-} else {
-  // Exit if configuration file does not exist
-  exit('No database configuration found for this host');
+if ( ENVIRONMENT == 'local' && file_exists( 'env/local.php' ) ) {
+  require_once('env/local.php');
+}
+elseif ( ENVIRONMENT == 'production' && file_exists( 'env/production.php' ) )  {
+  require_once('env/production.php');
+}
+else {
+  exit('No database configuration found for this host.');
 }
 
 /** The name of the database for WordPress */
