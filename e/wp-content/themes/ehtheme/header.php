@@ -11,10 +11,6 @@
 global $bodyclass;
 $bodyclass = get_body_class();
 
-// Connect to DB
-include('/Users/mozilla/Sites/ezoehunt/connectToWP.php');
-//include('/home/rkxgktjc/db/connectToWP.php');
-
 // Remove some things from wp_head()
 //remove_action('wp_head', 'rsd_link');
 remove_action('wp_head', 'wlwmanifest_link');
