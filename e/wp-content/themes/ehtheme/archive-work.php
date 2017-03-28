@@ -47,6 +47,7 @@ query_posts( $query_string . '&orderby=date&order=asc' );
 if ( have_posts() ) :
 $count_posts = $wp_query->found_posts;
 ?>
+      <p class="grid-before"><a class="work" title="View my resume" href="<?php echo home_url('/files/ehunt_resume.pdf'); ?>">View my resume &raquo;</a></p>
 
       <ul class="gridit">
 

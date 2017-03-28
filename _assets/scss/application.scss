@@ -576,6 +576,9 @@ ul.entries {
 ul.entries-search {
   margin-top: 1.5rem;
 }
+p.grid-before {
+  text-align: center;
+}
 
 
 /* ========== PORTFOLIO SPECIFIC ========== */
@@ -1138,6 +1141,9 @@ figure {
   }
   p.overview { // Better reading
     padding-right: 20%;
+  }
+  p.grid-before {
+    margin-bottom: 1.75rem;
   }
 }
 
