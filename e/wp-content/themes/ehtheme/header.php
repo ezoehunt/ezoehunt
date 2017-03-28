@@ -11,7 +11,7 @@
 global $bodyclass;
 $bodyclass = get_body_class();
 
-// Remove some things from wp_head()
+// Remove the following from wp_head()
 //remove_action('wp_head', 'rsd_link');
 remove_action('wp_head', 'wlwmanifest_link');
 remove_action('wp_head', 'wp_generator');

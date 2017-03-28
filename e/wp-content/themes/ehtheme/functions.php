@@ -9,9 +9,6 @@
 */
 
 function ehtheme_setup() {
-	/*
-  * TODO - if rss doesnt show up correctly in head, turn this on and delete manual stuff from head
-  */
 	//add_theme_support( 'automatic-feed-links' );
   /* --- Add featured image to posts --- */
   add_theme_support( 'post-thumbnails' );
@@ -55,7 +52,7 @@ function eh_add_excerpts_to_pages() {
 }
 
 
-/* --- Add Asides from Search --- */
+/* --- Remove Asides from Search --- */
 function eh_search_filter( $query ) {
   if ( ! $query->is_admin && $query->is_search && $query->is_main_query() ) {
     $query->set( 'post__not_in', array( 1 ) );
@@ -64,16 +61,30 @@ function eh_search_filter( $query ) {
 add_action( 'pre_get_posts', 'eh_search_filter' );
 
 
+/*
+* Removing action below b/c of the following error for single_work.php on production server --
+* "Notice: ob_end_flush(): failed to send buffer of zlib output compression (0) in /home/rkxgktjc/public_html/e/wp-includes/functions.php on line 3719"
+*/
+remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
+
+
 // CREATE MAILTO SHORTCODE = [myemail]
-function email_encode_function( $atts, $content ) {
+/*
+* Use as: [myemail]eh@ezoehunt.com[/myemail]
+*/
+function eh_email_encode_function( $atts, $content ) {
   return antispambot($content);
 }
-add_shortcode( 'myemail', 'email_encode_function' );
+add_shortcode( 'myemail', 'eh_email_encode_function' );
 
 
 // CREATE IMAGE ALT SHORTCODE = [myimagealt]
-// [myimagealt attach_id="valueA" type="valueB"]
-function my_image_alt_function( $attr ) {
+/*
+* Only used for Posts + Pages (not CPTs)
+* Use as: [myimagealt attach_id="ID" type="value"]
+* where "value" = "alt" for images and "title" for hrefs
+*/
+function eh_image_alt_function( $attr ) {
   extract(shortcode_atts(array(
     'attach_id' => 'something more',
     'type'      => 'something else'
@@ -101,13 +112,19 @@ function my_image_alt_function( $attr ) {
     return 'alt="'.$image_alt.'"';
   }
 }
-add_shortcode( 'myimagealt', 'my_image_alt_function' );
+add_shortcode( 'myimagealt', 'eh_image_alt_function' );
 
 
 
 // CREATE CUSTOM CAPTION SHORTCODE FOR POSTS + PAGES
-// Does not apply to Custom Post Types
-add_shortcode('mycaption', 'eh_caption');
+/*
+* Only used for Posts + Pages (not CPTs)
+* Use as: [mycaption id="attachment_XXX" align="alignright" caption="yes" class="col col-xs-100 col-sm-60"]...[/mycaption]
+* where "id" is the attachment ID
+* where "align" can be alignright, alignleft, or aligncenter
+* where "caption" is "yes" or "no"
+* where "class" is width used for the column
+*/
 function eh_caption($attr, $content = NUll ) {
 
   extract(shortcode_atts(array(
@@ -167,28 +184,29 @@ function eh_caption($attr, $content = NUll ) {
     }
   }
 }
-
+add_shortcode('mycaption', 'eh_caption');
 
 
 
 // ADD CATEGORIES TO BODYCLASS ARRAY FOR SINGLE POSTS
-/* -- Needed to use bodyclass to indicate "active" state in nav for all posts. By default Wordpress doesn't include category name for Single Posts in bodyclass -- */
-add_filter('body_class','add_category_to_single');
-function add_category_to_single($classes) {
+/*
+* Needed to use bodyclass to indicate "active" state in nav for all posts. By default Wordpress doesn't include category name for Single Posts in bodyclass
+*/
+function eh_add_category_to_single($classes) {
   if (is_single() ) {
     global $post;
     foreach((get_the_category($post->ID)) as $category) {
       $classes[] = $category->category_nicename;
     }
   }
-  // return the $classes array
   return $classes;
 }
+add_filter('body_class','eh_add_category_to_single');
 
 
 
 // CREATE NEW CUSTOM POST TYPE = PROJECT
-function create_project_post_type() {
+function eh_create_project_post_type() {
   // post type name shown in URL, eg /work/post-1
 	register_post_type( 'work',
 		array(
@@ -219,7 +237,7 @@ function create_project_post_type() {
 		)
 	);
 }
-add_action( 'init', 'create_project_post_type' );
+add_action( 'init', 'eh_create_project_post_type' );
 
 
 
@@ -236,7 +254,6 @@ register_taxonomy("image_tags", array("attachment"), array(
 
 /* --- Add Image Tags to Attachment Post Type -- */
 function eh_add_tags_to_attachments() {
-  //register_taxonomy_for_object_type( 'post_tag', 'attachment' );
   register_taxonomy_for_object_type( 'image_tags', 'attachment' );
 }
 add_action( 'init' , 'eh_add_tags_to_attachments' );

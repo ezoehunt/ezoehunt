@@ -5,7 +5,6 @@
 
 
 // Change names of Portfolio tabs
-
 function changeIt(item) {
 
   //console.log(item);

@@ -19,13 +19,11 @@ $generalKeys ='Elizabeth Hunt, Making Things and Thinking About Them, UX, UX des
 <meta name="copyright" content="Elizabeth Hunt 2006-<?php echo date('Y');?>" />
 <meta name="rating" content="general" />
 <meta name="keywords" content="<?php
-  if ( get_post_meta($post->ID,'_portfolio_keywords',true) ) {
-    echo $generalKeys. ', '. get_post_meta($post->ID,'_portfolio_keywords',true);
-  }
-  elseif ( get_post_meta($post->ID,'_blog_keywords',true) ) {
-    echo $generalKeys. ', '. get_post_meta($post->ID,'_blog_keywords',true);
-  }
-  else { echo $generalKeys; }
+  echo $generalKeys. ', ';
+  $keysBlog = get_post_meta( $post->ID, '_blog_keywords');
+  $keysPortfolio = get_post_meta( $post->ID, '_portfolio_keywords');
+  if ( !empty( $keysBlog ) ) { echo $keysBlog[0]; }
+  if ( !empty( $keysPortfolio ) ) { echo $keysPortfolio[0]; }
   ?>"/>
 
 <!-- Meta Social -->
