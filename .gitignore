@@ -9,3 +9,4 @@ package.json
 e/wp-content/debug.log
 e/env/production.php
 connectToWP.php
+comments_fix.php
