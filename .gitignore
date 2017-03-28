@@ -1,10 +1,7 @@
 .DS_Store
 _keep
 .sass-cache
-_assets
 /node_modules
-gulpfile.js
-package.json
 /e/wp-content/uploads
 /e/wp-content/debug.log
 /e/env/production.php
