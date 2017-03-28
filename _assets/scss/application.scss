@@ -10,6 +10,7 @@
 @import "navbar";
 @import "forms";
 @import "font-awesome";
+@import "colors";
 
 @-ms-viewport { width: device-width; }
 @-o-viewport  { width: device-width; }
@@ -60,49 +61,44 @@ a:hover { text-decoration: underline; }
 
 // Href Details
 a.white { color: white; border-bottom: 1px dotted white; }
-a.white:hover { color: hotpink; border-color: hotpink; }
-a.home { color: #FE524F; } //darkorchid
-a.home:hover { color: crimson; } //orchid
-a.work { color: #FE524F; } //#FD5673
-a.work:hover { color: crimson; } //crimson
-a.words { color: #FE524F; } //hotpink
-a.words:hover { color: crimson; } //deeppink
-a.about { color: #FE524F; } //#FE7572
-a.about:hover { color: crimson; } //tomato
-a.other { color: #FE524F; } //lightseagreen
-a.other:hover { color: crimson; } //darkcyan
+a.white:hover { color: $link_red; border-color: $link_red; }
+a.home { color: $link_red; }
+a.home:hover { color: $link_hover_red; }
+a.work { color: $link_red; }
+a.work:hover { color: $link_hover_red; }
+a.words { color: $link_red; }
+a.words:hover { color: $link_hover_red; }
+a.about { color: $link_red; }
+a.about:hover { color: $link_hover_red; }
+a.other { color: $link_red; }
+a.other:hover { color: $link_hover_red; }
 a.noborder:hover { text-decoration: none; }
 
 /* ========== COLORS ========== */
-// red FD5673 + fd3e52
-// violet tints = F5B4F5 F7C3F7 EE82EE FFCCFF FF66FF FF99FF
-// purple E0A0E0
-// orange FE524F + lt orange FE7371 + about FE7572
-// pink FF87C3 + FD7DD5 hotpink violet mediumorchid fd6fb2 fc3fa2
-// green 6DDAD6
+
 .bg-white { background-color: white; }
-.bg-home { background-color: #FE7371; }
-.bg-words { background-color: #FE7371; }
-.bg-work { background-color: #FE7371; }
-.bg-about { background-color: #FE7371; }
-.bg-other { background-color: #FE7371; }
+.bg-home { background-color: $red; }
+.bg-words { background-color: $red; }
+.bg-work { background-color: $red; }
+.bg-about { background-color: $red; }
+.bg-other { background-color: $red; }
 
 // Next + Previous Font Awesome icon colors
 .icon-color-black { color: black; }
 .icon-color-inverse { color: white; }
-.icon-bg-work { color: #FE7371; } //FD5673
-.icon-bg-words { color: #FE7371; } //FF87C3
+.icon-bg-work { color: $icon_red; }
+.icon-bg-words { color: $icon_red; }
 
 // Pagination colors
 .pag-words {
-  span.current { background-color: #FE524F; color: white; }
-  a { color: #FE524F; } //hotpink
-  a:hover { color: crimson; } //deeppink
+  span.current { background-color: $red; color: white; }
+  a { color: $link_red; }
+  a:hover { color: $link_hover_red; }
 }
 .pag-other {
-  span.current { background-color: #FE524F; color: white; } //mediumturquoise
-  a { color: #FE524F; } //lightseagreen
-  a:hover { color: crimson; } //darkcyan
+  span.current { background-color: $red; color: white; }
+  a { color: $link_red; }
+  a:hover { color: $link_hover_red; }
 }
 
 /* ========== FLOATS + ALIGNMENT ========== */
@@ -139,7 +135,6 @@ a.noborder:hover { text-decoration: none; }
   width: 100%;
   padding: 0;
   margin: 0;
-  //border: 3px solid black;
 }
 .row {
   margin: 0 auto 0 auto;
@@ -245,7 +240,7 @@ nav {
     a.nav-link {
       display: block;
       font-size: .9rem;
-      color: #333;
+      color: $topnav_text_sm;
       font-weight: 600;
       padding: 0;
       line-height: 1;
@@ -255,7 +250,7 @@ nav {
     }
   }
   li.active a.nav-link {
-    color: #FE524F; //red
+    color: $link_red;
     font-weight: 600;
   }
 }
@@ -386,7 +381,7 @@ p.see-all {
   max-width: 130px;
   height: auto;
   margin: .35rem 1rem .25rem 0;
-  border: 3px solid #FE524F; //orchid
+  border: 3px solid $red;
   -webkit-border-radius: 200px;
   -moz-border-radius: 200px;
   -ms-border-radius: 200px;
@@ -461,7 +456,7 @@ blockquote {
   border-bottom-right-radius: 3px;
 }
 .form-control:focus {
-  border-color: #FE524F; //mediumturquoise
+  border-color: $red;
 }
 .btn-search {
   position: absolute;
@@ -472,15 +467,15 @@ blockquote {
   padding-right:.5rem;
   padding-left: .5rem;
   margin-left: -2px;
-  color: #FFF;
-  background-color: #FE524F; //mediumturquoise
-  border: 1px solid #FE524F; //mediumturquoise
+  color: white;
+  background-color: $red;
+  border: 1px solid $red;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
 .btn-search:hover {
-  background-color: #FE7371; //darkcyan
-  border-color: #FE7371; //darkcyan
+  background-color: $red_bg_hover;
+  border-color: $red_bg_hover;
 }
 
 
@@ -514,11 +509,11 @@ ul.gridit {
   font-weight: 700;
   padding: 0;
   line-height: 1;
-  color: #777;
+  color: $meta;
 }
 .entry-excerpt {
   font-style: italic;
-  color: #777;
+  color: $meta;
 }
 ul.entries {
   list-style: none;
@@ -582,11 +577,11 @@ ul.entries-search {
   }
   a {
     padding: .5rem 1.25rem;
-    color: #FE7371; //#FD5673
-    border: 1px solid #FE7371; //#FD5673
+    color: $red;
+    border: 1px solid $red;
   }
   a:hover {
-    color: crimson;
+    color: $link_hover_red;
   }
   a.raquo:after {
     content: "\00a0\00BB";
@@ -595,11 +590,11 @@ ul.entries-search {
     content: "\00AB\00a0";
   }
   a.active {
-    background-color: #FE7371; //#FD5673
+    background-color: $red;
     color: white;
   }
   a.active:hover {
-    color: crimson; //mistyrose
+    color: $red_bg_text_hover;
   }
   a.active:before,
   a.active:after {
@@ -678,15 +673,8 @@ img {
   height: 100%;
   width: 100%;
   padding: 20px;
-  color: #FFF;
-  //background: rgba(0,0,0, 0.8);
+  color: white;
   background: rgba(68,68,68, 0.92);
-
-  //-webkit-filter: grayscale(.85);
-  //-webkit-filter: grayscale(85%);
-  //filter: gray;
-  //filter: grayscale(85%);
-  //opacity: .85;
   p {
     position: relative;
     top: 50%;
@@ -730,7 +718,7 @@ figure {
 	margin: 1rem 0;
 }
 .wp-caption {
-	color: #666;
+	color: $meta;
 	font-size: .85rem;
 	font-style: italic;
 	max-width: 100%;
@@ -1001,8 +989,8 @@ figure {
     margin-right: 2rem;
   }
   .sub-about {
-    padding: 1.5rem;
-    border: 4px double darkorchid; //#FD5673;
+    //padding: 1.5rem;
+    //border: 4px double darkorchid;
   }
   h2.see-all {
     //margin-bottom: 1rem;
@@ -1047,7 +1035,7 @@ figure {
     .navbar-nav {
       flex-direction: row;
       text-align: center;
-      background-color: #FEF94F;
+      background-color: $topnav_bg;
       display: inline-block;
       margin: 0px auto;
       padding: 0.5rem 0px;
@@ -1062,7 +1050,7 @@ figure {
         text-transform: uppercase;
       }
       .nav-link {
-        color: #8E7B01;
+        color: $topnav_text;
         font-size: .85rem;
       }
       li.active a.nav-link {
@@ -1147,9 +1135,6 @@ figure {
 
 // Extra Large Devices (large desktops, 1200px and up)
 @media (min-width: 1200px) { }
-
-
-// KEEP
 
 
 .desaturate{
