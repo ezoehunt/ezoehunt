@@ -55,6 +55,15 @@ function eh_add_excerpts_to_pages() {
 }
 
 
+/* --- Add Asides from Search --- */
+function eh_search_filter( $query ) {
+  if ( ! $query->is_admin && $query->is_search && $query->is_main_query() ) {
+    $query->set( 'post__not_in', array( 1 ) );
+  }
+}
+add_action( 'pre_get_posts', 'eh_search_filter' );
+
+
 // CREATE MAILTO SHORTCODE = [myemail]
 function email_encode_function( $atts, $content ) {
   return antispambot($content);
@@ -509,6 +518,9 @@ function eh_paginate($query) {
   	'total'     => $query->max_num_pages,
     'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
     ) );
+    echo '<pre>';
+    var_dump($query);
+    echo '</pre>';
 }
 
 

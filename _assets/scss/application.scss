@@ -61,46 +61,48 @@ a:hover { text-decoration: underline; }
 // Href Details
 a.white { color: white; border-bottom: 1px dotted white; }
 a.white:hover { color: hotpink; border-color: hotpink; }
-a.home { color: darkorchid; } //orchid
-a.home:hover { color: orchid; } //#F5B4F5
-a.work { color: #FD5673; }
-a.work:hover { color: crimson; }
-a.words { color: hotpink; }
-a.words:hover { color: deeppink; }
-a.about { color: #FE7572; }
-a.about:hover { color: tomato; }
-a.other { color: lightseagreen; }
-a.other:hover { color: darkcyan; }
+a.home { color: #FE524F; } //darkorchid
+a.home:hover { color: crimson; } //orchid
+a.work { color: #FE524F; } //#FD5673
+a.work:hover { color: crimson; } //crimson
+a.words { color: #FE524F; } //hotpink
+a.words:hover { color: crimson; } //deeppink
+a.about { color: #FE524F; } //#FE7572
+a.about:hover { color: crimson; } //tomato
+a.other { color: #FE524F; } //lightseagreen
+a.other:hover { color: crimson; } //darkcyan
 a.noborder:hover { text-decoration: none; }
 
 /* ========== COLORS ========== */
-//fd3e52
-//violet tints = EE82EE = F5B4F5 F7C3F7 old orange FE524F
-// Page backgrounds  pink FD7DD5 orange FE524F red FE355E hotpink violet mediumorchid fc4e62 FE524F #fd6fb2 #fc3fa2
+// red FD5673 + fd3e52
+// violet tints = F5B4F5 F7C3F7 EE82EE FFCCFF FF66FF FF99FF
+// purple E0A0E0
+// orange FE524F + lt orange FE7371 + about FE7572
+// pink FF87C3 + FD7DD5 hotpink violet mediumorchid fd6fb2 fc3fa2
+// green 6DDAD6
 .bg-white { background-color: white; }
-.bg-home { background-color: #E0A0E0; } //#F5B4F5
-.bg-words { background-color: #FF87C3; }
-.bg-work { background-color: #FD5673; }
-.bg-about { background-color: #FE7572; }
-.bg-other { background-color: #6DDAD6; }
-//FF66FF FF99FF FFCCFF
+.bg-home { background-color: #FE7371; }
+.bg-words { background-color: #FE7371; }
+.bg-work { background-color: #FE7371; }
+.bg-about { background-color: #FE7371; }
+.bg-other { background-color: #FE7371; }
 
 // Next + Previous Font Awesome icon colors
 .icon-color-black { color: black; }
 .icon-color-inverse { color: white; }
-.icon-bg-work { color: #FD5673; }
-.icon-bg-words { color: #FF87C3; }
+.icon-bg-work { color: #FE7371; } //FD5673
+.icon-bg-words { color: #FE7371; } //FF87C3
 
 // Pagination colors
 .pag-words {
-  span.current { background-color: #FF87C3; color: white; }
-  a { color: hotpink; }
-  a:hover { color: deeppink; }
+  span.current { background-color: #FE524F; color: white; }
+  a { color: #FE524F; } //hotpink
+  a:hover { color: crimson; } //deeppink
 }
 .pag-other {
-  span.current { background-color: mediumturquoise; color: white; }
-  a { color: lightseagreen; }
-  a:hover { color: darkcyan; }
+  span.current { background-color: #FE524F; color: white; } //mediumturquoise
+  a { color: #FE524F; } //lightseagreen
+  a:hover { color: crimson; } //darkcyan
 }
 
 /* ========== FLOATS + ALIGNMENT ========== */
@@ -145,7 +147,6 @@ a.noborder:hover { text-decoration: none; }
   display: -webkit-flex;
   display: flex;
   flex-wrap: wrap;
-  //border: 3px solid blue;
 }
 .row::after {
   // TODO
@@ -254,7 +255,7 @@ nav {
     }
   }
   li.active a.nav-link {
-    color: red;
+    color: #FE524F; //red
     font-weight: 600;
   }
 }
@@ -385,7 +386,7 @@ p.see-all {
   max-width: 130px;
   height: auto;
   margin: .35rem 1rem .25rem 0;
-  border: 3px solid orchid;
+  border: 3px solid #FE524F; //orchid
   -webkit-border-radius: 200px;
   -moz-border-radius: 200px;
   -ms-border-radius: 200px;
@@ -460,7 +461,7 @@ blockquote {
   border-bottom-right-radius: 3px;
 }
 .form-control:focus {
-  border-color: mediumturquoise;
+  border-color: #FE524F; //mediumturquoise
 }
 .btn-search {
   position: absolute;
@@ -472,14 +473,14 @@ blockquote {
   padding-left: .5rem;
   margin-left: -2px;
   color: #FFF;
-  background-color: mediumturquoise;
-  border: 1px solid mediumturquoise;
+  background-color: #FE524F; //mediumturquoise
+  border: 1px solid #FE524F; //mediumturquoise
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
 .btn-search:hover {
-  background-color: darkcyan;
-  border-color: darkcyan;
+  background-color: #FE7371; //darkcyan
+  border-color: #FE7371; //darkcyan
 }
 
 
@@ -581,8 +582,8 @@ ul.entries-search {
   }
   a {
     padding: .5rem 1.25rem;
-    color: #FD5673;
-    border: 1px solid #FD5673;
+    color: #FE7371; //#FD5673
+    border: 1px solid #FE7371; //#FD5673
   }
   a:hover {
     color: crimson;
@@ -594,11 +595,11 @@ ul.entries-search {
     content: "\00AB\00a0";
   }
   a.active {
-    background-color: #FD5673;
+    background-color: #FE7371; //#FD5673
     color: white;
   }
   a.active:hover {
-    color: mistyrose;
+    color: crimson; //mistyrose
   }
   a.active:before,
   a.active:after {
