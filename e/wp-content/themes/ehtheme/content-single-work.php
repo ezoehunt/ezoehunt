@@ -34,8 +34,11 @@ $cat_name = eh_get_cat_name($post->ID);
         <h1 class="page-headline"><?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?></h1>
       </li>
 <?php
-$myprev = eh_next_previous($post->ID, 'previous', $cat_slug);
-$mynext = eh_next_previous($post->ID, 'next', $cat_slug);
+//$myprev = eh_next_previous($post->ID, 'previous', $cat_slug);
+//$mynext = eh_next_previous($post->ID, 'next', $cat_slug);
+// REVERSE arrows so posts are displayed in DESC by date
+$mynext = eh_next_previous($post->ID, 'previous', $cat_slug);
+$myprev = eh_next_previous($post->ID, 'next', $cat_slug);
 ?>
       <li class="item-left">
 <?php

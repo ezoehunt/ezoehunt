@@ -241,8 +241,129 @@ add_action( 'init', 'eh_create_project_post_type' );
 
 
 
-// CREATE CUSTOM TAXONOMY FOR IMAGES + PROJECT CPT
-/* Use to indicate which posts to show on home page with tag = featured */
+// INLCUDE REGISTER METABOXES FOR CUSTOM POST TYPE = PROJECT
+include '_portfolio-details.php';
+
+
+
+// INCLUDE DISPLAY ORDER AS A COLUMN IN PORTFOLIO ADMIN
+add_filter( 'manage_edit-work_columns', 'eh_manage_work_custom_columns' );
+
+function eh_manage_work_custom_columns($columns) {
+  $columns['display_order'] = __( 'Display Order' );
+  return $columns;
+}
+
+add_action( 'manage_work_posts_custom_column' , 'eh_custom_work_column', 10, 2 );
+
+function eh_custom_work_column( $column, $post_id ) {
+  switch ( $column ) {
+    case 'display_order' :
+    $order = get_post_meta( $post_id, '_portfolio_display_order', true );
+    if ( !empty( $order ) )
+      echo $order;
+    else
+        _e( 'No display order' );
+    break;
+  }
+}
+
+// MAKE DISPLAY ORDER SORTABLE
+add_filter( 'manage_edit-work_sortable_columns', 'eh_work_manage_sortable_columns' );
+
+function eh_work_manage_sortable_columns($columns) {
+  $columns['display_order'] = 'display_order';
+  return $columns;
+}
+
+add_filter( 'pre_get_posts', 'eh_work_admin_sort_columns_by');
+
+function eh_work_admin_sort_columns_by( $query ) {
+  if( ! is_admin() ) {
+    return;
+  }
+  $orderby = $query->get( 'orderby');
+  if( 'display_order' == $orderby ) {
+    $query->set('meta_key', '_portfolio_display_order');
+    $query->set('orderby','meta_value_num');
+  }
+}
+
+
+
+// INCLUDE DISPLAY ORDER IN THE PORFOLIO QUICK EDIT
+add_action( 'quick_edit_custom_box', 'eh_display_custom_quickedit_work', 10, 2 );
+function eh_display_custom_quickedit_work( $column_name, $post_type ) {
+  static $printNonce = TRUE;
+  if ( $printNonce ) {
+    $printNonce = FALSE;
+    wp_nonce_field( plugin_basename( __FILE__ ), 'work_edit_nonce' );
+  }
+
+  ?>
+  <fieldset class="inline-edit-col-right inline-edit-work">
+    <div class="inline-edit-col column-<?php echo $column_name; ?>">
+      <label class="inline-edit-group">
+      <?php
+       switch ( $column_name ) {
+       case 'display_order':
+           ?><span class="title">Display Order</span><input name="display_order" /><?php
+           break;
+       }
+      ?>
+      </label>
+    </div>
+  </fieldset>
+  <?php
+}
+
+
+add_action( 'save_post', 'eh_save_work_meta' );
+function eh_save_work_meta( $post_id ) {
+  /* in production code, $slug should be set only once in the plugin,
+     preferably as a class property, rather than in each function that needs it.
+   */
+  $slug = 'work';
+  if ( $slug !== $_POST['post_type'] ) {
+    return;
+  }
+  if ( !current_user_can( 'edit_post', $post_id ) ) {
+    return;
+  }
+  $_POST += array("{$slug}_edit_nonce" => '');
+  if ( !wp_verify_nonce( $_POST["{$slug}_edit_nonce"], plugin_basename( __FILE__ ) ) ) {
+    return;
+  }
+  if ( isset( $_REQUEST['display_order'] ) ) {
+    update_post_meta( $post_id, '_portfolio_display_order', $_REQUEST['display_order'] );
+  }
+}
+
+/* load script in admin footer */
+if ( ! function_exists('wp_my_admin_enqueue_scripts') ):
+  function wp_my_admin_enqueue_scripts( $hook ) {
+  	if ( 'edit.php' === $hook && isset( $_GET['post_type'] ) && 'work' === $_GET['post_type'] ) {
+  		wp_enqueue_script( 'my_custom_script', plugins_url('admin_eztheme.js'), false, null, true );
+  	}
+  }
+endif;
+add_action( 'admin_enqueue_scripts', 'wp_my_admin_enqueue_scripts' );
+
+
+
+// CREATE CUSTOM TAXONOMY FOR PORTFOLIO CPT
+register_taxonomy("project_tags", array("work"), array(
+	"hierarchical" => false,
+	"label" => "Project Tags",
+	"singular_label" => "Project Tag",
+	"rewrite" => true,
+  'show_admin_column' => true,
+  'query_var' => true,
+));
+
+
+
+// CREATE CUSTOM TAXONOMY FOR IMAGES
 register_taxonomy("image_tags", array("attachment"), array(
 	"hierarchical" => false,
 	"label" => "Image Tags",
@@ -252,16 +373,13 @@ register_taxonomy("image_tags", array("attachment"), array(
   'query_var' => true,
 ));
 
-/* --- Add Image Tags to Attachment Post Type -- */
-function eh_add_tags_to_attachments() {
+/* NOT NEEDED ANYMORE
+* --- Add Image Tags to Attachment Post Type -- */
+/*function eh_add_tags_to_attachments() {
   register_taxonomy_for_object_type( 'image_tags', 'attachment' );
 }
 add_action( 'init' , 'eh_add_tags_to_attachments' );
-
-
-
-// INLCUDE REGISTER METABOXES FOR CUSTOM POST TYPE = PROJECT
-include '_portfolio-details.php';
+*/
 
 
 
@@ -464,6 +582,7 @@ function eh_next_previous( $post_id, $type, $cat_slug ) {
   if ( $cat_slug == 'words' ) {
     $cat_alt = $type.' post in Words';
   }
+
   // Get next/previous in the same category
   // Match type to icons + function
   if ( $type == 'previous' ) {

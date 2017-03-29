@@ -14,6 +14,11 @@ function project_details_register_meta_boxes( $meta_boxes ) {
     'priority'   => 'high',
     'fields'     => array(
       array(
+        'id'   => $prefix.'display_order',
+        'name' => __( 'Display Order', 'rwmb' ),
+        'type' => 'number'
+      ),
+      array(
         'id'   => $prefix.'keywords',
         'name' => __( 'Keywords', 'rwmb' ),
         'type' => 'text',
