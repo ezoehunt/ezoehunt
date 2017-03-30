@@ -34,8 +34,8 @@ $cat_name = eh_get_cat_name($post->ID);
         <h1 class="page-headline"><?php echo get_post_meta($post->ID,'_blog_headline',true); ?></h1>
       </li>
 <?php
-$myprev = eh_next_previous($post->ID, 'previous', $cat_slug);
-$mynext = eh_next_previous($post->ID, 'next', $cat_slug);
+$myprev = eh_nextprev($post->ID, $cat_slug, 'blog', 'previous', '', '');
+$mynext = eh_nextprev($post->ID, $cat_slug, 'blog', 'next', '', '');
 ?>
       <li class="item-left">
 <?php

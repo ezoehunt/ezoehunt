@@ -8,6 +8,31 @@
 global $post;
 $cat_slug = eh_get_cat_slug($post->ID);
 $cat_name = eh_get_cat_name($post->ID);
+
+/*  Get portfolio ids for sorting next/previous based on Portfolio Display Order  */
+$portfolio_ids = array();
+$argswork = array(
+  'post_type'       =>  'work',
+  'post_status'     =>  'publish',
+  'orderby'         =>  'meta_value_num',
+  'meta_key'        =>  '_portfolio_display_order',
+  'order'           =>  'ASC',
+  /*  Exclude old or uninteresting projects - these have display order = "99"   */
+  'meta_query' => array(
+    array(
+      'key' => '_portfolio_display_order',
+      'value' => '99',
+      'compare' => '!='
+    )
+  ),
+);
+$findwork = new WP_Query($argswork );
+if ( $findwork->have_posts() ) : $count = $findwork->found_posts;
+  while ( $findwork->have_posts() ) : $findwork->the_post();
+    $portfolio_ids[] += $post->ID;
+  endwhile;
+endif;
+wp_reset_postdata();
 ?>
 
 <div id="leftcol" class="col col-sm-5 col-md-15 bg-work"></div>
@@ -34,11 +59,8 @@ $cat_name = eh_get_cat_name($post->ID);
         <h1 class="page-headline"><?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?></h1>
       </li>
 <?php
-//$myprev = eh_next_previous($post->ID, 'previous', $cat_slug);
-//$mynext = eh_next_previous($post->ID, 'next', $cat_slug);
-// REVERSE arrows so posts are displayed in DESC by date
-$mynext = eh_next_previous($post->ID, 'previous', $cat_slug);
-$myprev = eh_next_previous($post->ID, 'next', $cat_slug);
+$myprev = eh_nextprev($post->ID, $cat_slug, 'work', 'previous', $count, $portfolio_ids);
+$mynext = eh_nextprev($post->ID, $cat_slug, 'work', 'next', $count, $portfolio_ids);
 ?>
       <li class="item-left">
 <?php

@@ -8,7 +8,6 @@
 
 get_header();
 
-//$attachids = [];
 $attachids = array();
 
 $parent_id = wp_get_post_parent_id( $post->ID );
@@ -76,13 +75,16 @@ if ( have_posts() ) :
       </li>
 
 <?php
-$previmg = eh_nextprev_img_link($post->ID, $attachids, 'previous', $cat_slug, $count);
-$nextimg = eh_nextprev_img_link($post->ID, $attachids, 'next', $cat_slug, $count);
+$myprev = eh_nextprev($post->ID, $cat_slug, 'attachment', 'previous', $count, $attachids);
+
+$mynext = eh_nextprev($post->ID, $cat_slug, 'attachment', 'next', $count, $attachids);
+
+
 ?>
       <li class="item-left">
 <?php
-  if ( !empty( $previmg ) ) {
-    echo $previmg;
+  if ( !empty( $myprev ) ) {
+    echo $myprev;
   }
   else {
     echo '&nbsp;';
@@ -92,8 +94,8 @@ $nextimg = eh_nextprev_img_link($post->ID, $attachids, 'next', $cat_slug, $count
 
       <li class="item-right">
 <?php
-  if ( !empty( $nextimg ) ) {
-    echo $nextimg;
+  if ( !empty( $mynext ) ) {
+    echo $mynext;
   }
   else {
     echo '&nbsp;';

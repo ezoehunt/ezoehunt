@@ -573,69 +573,81 @@ function eh_image_id_from_url($image_url) {
 }
 
 
-// For Page to Page navigation
-function eh_next_previous( $post_id, $type, $cat_slug ) {
-  // Adjust output
-  if ( $cat_slug == 'work' ) {
-    $cat_alt = $type.' Porfolio project';
+// FOR NEXT PREVIOUS NAVIGATION
+function eh_nextprev( $post_id, $cat_slug, $format, $type, $count, $array ) {
+  if ( $type == 'previous' ) {
+    $arrow = 'left';
   }
-  if ( $cat_slug == 'words' ) {
+  elseif ( $type == 'next' ) {
+    $arrow = 'right';
+  }
+
+  // BLOG
+  if ( $format == 'blog' ) {
+    if ( $type == 'previous' ) {
+      $link = get_previous_post(true,'');
+    }
+    elseif ( $type == 'next' ) {
+      $link = get_next_post(true,'');
+    }
+    if ( !empty( $link ) ) {
+      $url = esc_url(get_permalink($link->ID));
+    }
+  }
+
+  // WORK + ATTACHMENT
+  if ( $format == 'work' OR $format == 'attachment') {
+    if ( $count === 1 ) {
+      return false;
+    }
+    // Zero index $count to match array keys
+    $count = $count-1;
+    $currentkey = array_search($post_id, $array);
+    if ( $currentkey != 0 ) {
+      $prevID = $array[$currentkey-1];
+    }
+    if ( $currentkey != $count ) {
+      $nextID = $array[$currentkey+1];
+    }
+    // WORK
+    if ( $format == 'work' && $type == 'previous' && !empty($prevID) ) {
+      $link = get_permalink($prevID);
+    }
+    elseif ($format == 'work' && $type == 'next'  && !empty($nextID) ) {
+      $link = get_permalink($nextID);
+    }
+    if ( $format == 'attachment' && $type == 'previous'  && !empty($prevID) ) {
+      $link = get_attachment_link($prevID);
+    }
+    elseif ($format == 'attachment' && $type == 'next'  && !empty($nextID) ) {
+      $link = get_attachment_link($nextID);
+    }
+    if ( !empty($link) ) {
+      $url = esc_url( $link );
+    }
+  }
+
+  // Final setup
+  if ( $format == 'work' ) {
+    $cat_alt = $type.' project';
+  }
+  elseif ( $format == 'attachment' ) {
+    $cat_alt = $type.' image';
+  }
+  elseif ( $format == 'blog' ) {
     $cat_alt = $type.' post in Words';
   }
 
-  // Get next/previous in the same category
-  // Match type to icons + function
-  if ( $type == 'previous' ) {
-    $function = get_previous_post(true,'');
-    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat_slug.'" aria-hidden="true"></i><i class="fa fa-arrow-left fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
-  }
-  elseif ( $type == 'next' ) {
-    $function = get_next_post(true,'');
-    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat_slug.'" aria-hidden="true"></i><i class="fa fa-arrow-right fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
+  $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat_slug.'" aria-hidden="true"></i><i class="fa fa-arrow-'.$arrow.' fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
 
-  }
-  if( $function ) {
-    return '<a class="" title="See '.$cat_alt.'" href="'.esc_url(get_permalink($function->ID)).'">'.$icon.'</a>';
+  if ( !empty( $url ) ) {
+    return '<a class="'.$cat_slug.'" title="See '.$cat_alt.'" href="'.$url.'">'.$icon.'</a>';
   }
   else {
     return false;
   }
 }
 
-
-// For Attachment to Attachment Navigation
-function eh_nextprev_img_link( $post_id, $array, $type, $cat_slug, $count ) {
-
-  if ( $count === 1 ) {
-    return false;
-  }
-  // Zero index count
-  $count = $count-1;
-
-  $currentkey = array_search($post_id, $array);
-
-  if ( $currentkey != 0 ) {
-    $prevID = $array[$currentkey-1];
-  }
-  if ( $currentkey != $count ) {
-    $nextID = $array[$currentkey+1];
-  }
-
-  if ( !empty( $prevID ) && $type == 'previous' ) {
-    $link = get_attachment_link($prevID);
-    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat_slug.'" aria-hidden="true"></i><i class="fa fa-arrow-left fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
-  }
-  elseif ( !empty( $nextID ) && $type == 'next' ) {
-    $link = get_attachment_link($nextID);
-    $icon = '<span class="fa fa-stack"><i class="fa fa-circle fa-stack-1x icon-a icon-bg-'.$cat_slug.'" aria-hidden="true"></i><i class="fa fa-arrow-right fa-stack-1x icon-b icon-color-inverse" aria-hidden="true"></i></span>';
-  }
-  if( !empty( $link ) ) {
-    return '<a class="'.$cat_slug.'" title="See '.$type.' image" href="'.esc_url($link).'">'.$icon.'</a>';
-  }
-  else {
-    return false;
-  }
-}
 
 
 function eh_paginate($query) {

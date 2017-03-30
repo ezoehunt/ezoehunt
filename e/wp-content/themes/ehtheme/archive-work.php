@@ -43,15 +43,31 @@ get_header();
 
     <div class="blog-center blog-grid col-xs-100 col-sm-90 col-md-85 col-lg-80">
 <?php
-query_posts( $query_string . '&orderby=date&order=desc' );
-if ( have_posts() ) :
-$count_posts = $wp_query->found_posts;
+$argswork = array(
+  'post_type'       =>  'work',
+  'post_status'     =>  'publish',
+  'orderby'         =>  'meta_value_num',
+  'meta_key'        =>  '_portfolio_display_order',
+  'order'           =>  'ASC',
+  /*  Exclude old or uninteresting projects - these have display order = "99"   */
+  'meta_query' => array(
+    array(
+      'key' => '_portfolio_display_order',
+      'value' => '99',
+      'compare' => '!='
+    )
+  ),
+);
+$findwork = new WP_Query($argswork );
+
+if ( $findwork->have_posts() ) :
+$count_posts = $findwork->found_posts;
 ?>
       <p class="grid-before"><a class="work" title="View my resume" target="_blank" href="<?php echo home_url('/files/ehunt_resume.pdf'); ?>">View my resume &raquo;</a></p>
 
       <ul class="gridit">
 
-<?php while ( have_posts() ) : the_post();
+<?php while ( $findwork->have_posts() ) : $findwork->the_post();
 
 $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
 ?>
