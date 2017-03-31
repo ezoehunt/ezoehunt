@@ -134,6 +134,19 @@ function project_details_register_meta_boxes( $meta_boxes ) {
             'std'         => 'y',
           ),
           array(
+            'id'      => $prefix.'attach_preview',
+            'name'    => __( 'Is a preview ?', 'rwmb' ),
+            'desc'  => esc_html__( 'If yes, the attachment is a preview of something else, e.g., a web page or pdf file.', 'rwmb' ),
+            'type'    => 'radio',
+            'class'  => 'ez-admin-radio',
+            'options' => array(
+                'y' => __( 'Yes', 'rwmb' ),
+                'n' => __( 'No', 'rwmb' ),
+            ),
+            // Set the default value here
+            'std'         => 'n'
+          ),
+          array(
             'id'      => $prefix.'attach_format',
             'name'    => __( 'Image or PDF ?', 'rwmb' ),
             'type'    => 'radio',
@@ -145,7 +158,7 @@ function project_details_register_meta_boxes( $meta_boxes ) {
             // Set the default value here
             'std'         => 'i'
           ),
-          // Displays only if attach_format = i
+          // Display only if attach_format = i
           array(
             'id'      => $prefix.'attach_images',
             'name'    => esc_html__( 'Image', 'rwmb' ),
@@ -158,9 +171,9 @@ function project_details_register_meta_boxes( $meta_boxes ) {
             'max_file_uploads' => 1,
             // Display the "Uploaded 1/2 files" status
             'max_status'       => true,
-            'hidden' => array( 'attach_format', '!=', 'i' )
+            'visible' => array( 'attach_format', '=', 'i' )
           ),
-          // Displays only if attach_format = p
+          // Display only if attach_format = p
           array(
             'id'               => $prefix.'attach_pdf',
             'name'             => esc_html__( 'PDF', 'rwmb' ),
@@ -168,8 +181,41 @@ function project_details_register_meta_boxes( $meta_boxes ) {
             'max_file_uploads' => 1,
             // Leave blank for all file types
             'mime_type'        => '',
-            'hidden' => array( 'attach_format', '!=', 'p' )
+            'visible' => array( 'attach_format', '=', 'p' )
+          ),
+          // Display only if attach_preview = y
+          array(
+            'id'      => $prefix.'attach_preview_url',
+            'name'    => __( 'Link for Preview Item', 'rwmb' ),
+            'desc'  => esc_html__( 'Provide the URL for the live image or pdf or website to which we should link.', 'rwmb' ),
+            'type'    => 'text',
+            'class'  => 'ez-admin-text',
+            'visible'  => [
+              ['attach_preview', '=', 'y' ]
+            ]
+          ),
+          array(
+            'id'      => $prefix.'attach_preview_title',
+            'name'    => __( 'Preview Item Link Text', 'rwmb' ),
+            'desc'  => esc_html__( 'Provide link text. Appears in both "title" and "href" contexts.', 'rwmb' ),
+            'type'    => 'text',
+            'class'  => 'ez-admin-text',
+            'visible'  => [
+              ['attach_preview', '=', 'y' ]
+            ]
           )
+          // Display only if attach_format = p AND attach_preview = y
+          /*array(
+            'id'      => $prefix.'attach_preview_pdf_url',
+            'name'    => __( 'Link for Preview PDF', 'rwmb' ),
+            'desc'  => esc_html__( 'Provide the URL for the PDF to which we should link.', 'rwmb' ),
+            'type'    => 'text',
+            'class'  => 'ez-admin-text',
+            'visible'  => [
+              ['attach_format', '=', 'p'],
+              ['attach_preview', '=', 'y' ]
+            ]
+          )*/
         )
       )
     )

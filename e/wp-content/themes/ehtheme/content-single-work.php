@@ -157,23 +157,24 @@ foreach ( $design as $attachment ) :
   $attach_alt = $attachment[$prefix.'alt'];
   $attach_description = $attachment[$prefix.'description'];
 
-  if ( $attachment[$prefix.'format'] == 'i' ) :
-
+  if ( $attachment[$prefix.'format'] == 'i' ) {
     $attach_id = $attachment[$prefix.'images'];
     $attach_id = $attach_id[0];
-
     $attach_src = wp_get_attachment_image_src( $attach_id, 'full' );
     $attach_src = $attach_src[0];
 
-    // Get url to the attachment page for the image
-    // Note that images can't be shared across Portfolio posts, otherwise the "back to project" link breaks
-    $page_url = get_permalink($attach_id);
-
-  elseif ( $attachment[$prefix.'format'] == 'p' ) :
-
+    if ( $attachment[$prefix.'preview'] == 'y' ) {
+      $page_url = $attachment[$prefix.'preview_url'];
+      $attach_link_title = $attachment[$prefix.'preview_title'];
+    }
+    elseif ( $attachment[$prefix.'preview'] == 'n' ) {
+      $page_url = get_permalink($attach_id);
+      $attach_link_title = 'View larger image';
+    }
+  }
+  elseif ( $attachment[$prefix.'format'] == 'p' ) {
     $attach_id = $attachment[$prefix.'pdf'];
     $attach_id = $attach_id[0];
-
     // Find image that represents the PDF
     $pdf_image = get_the_title($attach_id);
     $pdf_image = 'image-'.eh_sluggify($pdf_image);
@@ -181,15 +182,10 @@ foreach ( $design as $attachment ) :
     $attach_src = wp_get_attachment_image_src( $tmp_post->ID, '' );
     $attach_src = $attach_src[0];
 
-    // If using built-in PDF thumbnails
-    //$attach_src = wp_get_attachment_image_src( $attach_id, '' );
-    //$attach_src = $attach_src[0];
-
-    // Open PDFs directly instead of using attachment page.
-    $page_url = wp_get_attachment_url( $attach_id );
-
-  endif;
-
+    // PDFs ALWAYS have preview image, so they open directly vs going to attachment page
+    $page_url = $attachment[$prefix.'preview_url'];
+    $attach_link_title = $attachment[$prefix.'preview_title'];
+  }
 ?>
           <div class="row item-row">
 
@@ -200,14 +196,14 @@ foreach ( $design as $attachment ) :
               <p class="item-text-copy"><?php echo $attach_description; ?></p>
 
               <p class="item-text-copy">
-<a class="work" <?php echo ($attachment[$prefix.'format'] == 'p') ? 'title="View PDF" target="_blank"' : 'title="View larger image"' ?> href="<?php echo $page_url;?>"><?php echo ($attachment[$prefix.'format'] == 'p') ? 'View PDF &raquo;' : 'View larger image &raquo;' ?></a>
+<a class="work" title="<?php echo $attach_link_title;?>"<?php if ($attachment[$prefix.'preview'] == 'y') { echo ' target="_blank"';}?> href="<?php echo $page_url;?>"><?php echo $attach_link_title.' &raquo;'; ?></a>
               </p>
 
             </div>
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
-<a class="work" <?php echo ($attachment[$prefix.'format'] == 'p') ? 'title="View PDF" target="_blank"' : 'title="View larger image"' ?> href="<?php echo $page_url;?>">
-  <img alt="<?php echo $attach_alt; ?>" src="<?php echo $attach_src;?>">
+<a class="work" title="<?php echo $attach_link_title;?>"<?php if ($attachment[$prefix.'preview'] == 'y') { echo ' target="_blank"';}?> href="<?php echo $page_url;?>">
+    <img alt="<?php echo $attach_alt;?>" src="<?php echo $attach_src;?>">
 </a>
             </div>
 
@@ -238,23 +234,24 @@ foreach ( $process as $attachment ) :
   $attach_alt = $attachment[$prefix.'alt'];
   $attach_description = $attachment[$prefix.'description'];
 
-  if ( $attachment[$prefix.'format'] == 'i' ) :
-
+  if ( $attachment[$prefix.'format'] == 'i' ) {
     $attach_id = $attachment[$prefix.'images'];
     $attach_id = $attach_id[0];
-
     $attach_src = wp_get_attachment_image_src( $attach_id, 'full' );
     $attach_src = $attach_src[0];
 
-    // Get url to the attachment page for the image
-    // Note that images can't be shared across Portfolio posts, otherwise the "back to project" link breaks
-    $page_url = get_permalink($attach_id);
-
-  elseif ( $attachment[$prefix.'format'] == 'p' ) :
-
+    if ( $attachment[$prefix.'preview'] == 'y' ) {
+      $page_url = $attachment[$prefix.'preview_url'];
+      $attach_link_title = $attachment[$prefix.'preview_title'];
+    }
+    elseif ( $attachment[$prefix.'preview'] == 'n' ) {
+      $page_url = get_permalink($attach_id);
+      $attach_link_title = 'View larger image';
+    }
+  }
+  elseif ( $attachment[$prefix.'format'] == 'p' ) {
     $attach_id = $attachment[$prefix.'pdf'];
     $attach_id = $attach_id[0];
-
     // Find image that represents the PDF
     $pdf_image = get_the_title($attach_id);
     $pdf_image = 'image-'.eh_sluggify($pdf_image);
@@ -262,14 +259,10 @@ foreach ( $process as $attachment ) :
     $attach_src = wp_get_attachment_image_src( $tmp_post->ID, '' );
     $attach_src = $attach_src[0];
 
-    // If using built-in PDF thumbnails
-    //$attach_src = wp_get_attachment_image_src( $attach_id, '' );
-    //$attach_src = $attach_src[0];
-
-    // Open PDFs directly instead of using attachment page.
-    $page_url = wp_get_attachment_url( $attach_id );
-
-  endif;
+    // PDFs ALWAYS have preview image, so they open directly vs going to attachment page
+    $page_url = $attachment[$prefix.'preview_url'];
+    $attach_link_title = $attachment[$prefix.'preview_title'];
+  }
 ?>
           <div class="row item-row">
 
@@ -280,14 +273,14 @@ foreach ( $process as $attachment ) :
               <p class="item-text-copy"><?php echo $attach_description; ?></p>
 
               <p class="item-text-copy">
-<a class="work" <?php echo ($attachment[$prefix.'format'] == 'p') ? 'title="View PDF" target="_blank"' : 'title="View larger image"' ?> href="<?php echo $page_url;?>"><?php echo ($attachment[$prefix.'format'] == 'p') ? 'View PDF &raquo;' : 'View larger image &raquo;' ?></a>
+<a class="work" title="<?php echo $attach_link_title;?>"<?php if ($attachment[$prefix.'preview'] == 'y') { echo ' target="_blank"';}?> href="<?php echo $page_url;?>"><?php echo $attach_link_title.' &raquo;'; ?></a>
               </p>
 
             </div>
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
-<a class="work" <?php echo ($attachment[$prefix.'format'] == 'p') ? 'title="View PDF" target="_blank"' : 'title="View larger image"' ?> href="<?php echo $page_url;?>">
-  <img alt="<?php echo $attach_alt; ?>" src="<?php echo $attach_src;?>">
+<a class="work" title="<?php echo $attach_link_title;?>"<?php if ($attachment[$prefix.'preview'] == 'y') { echo ' target="_blank"';}?> href="<?php echo $page_url;?>">
+    <img alt="<?php echo $attach_alt;?>" src="<?php echo $attach_src;?>">
 </a>
             </div>
 

@@ -35,6 +35,11 @@ foreach ( $attachments as $attach ) {
         $format = 'pdf';
       }
 
+      if ( $single[$prefix.'attach_preview'] == 'y' ) {
+        $tmpurl = $single[$prefix.'attach_preview_url'];
+        $tmptitle = $single[$prefix.'attach_preview_title'];
+      }
+
       $attach_id = $single[$prefix.'attach_'.$format][0];
       $attachids[] += $attach_id;
       $count = count($attachids);
@@ -42,6 +47,12 @@ foreach ( $attachments as $attach ) {
       if ( $attach_id == $post->ID ) {
         $attach_title = $single[$prefix.'attach_title'];
         $attach_format = $single[$prefix.'attach_format'];
+        if ( !empty( $tmpurl ) ) {
+          $page_url = $tmpurl;
+        }
+        if ( !empty ( $tmptitle ) ) {
+          $attach_link_title = $tmptitle;
+        }
       }
     }
   }
@@ -107,24 +118,25 @@ $mynext = eh_nextprev($post->ID, $cat_slug, 'attachment', 'next', $count, $attac
 
   </div>
 <?php
+
 if ( $attach_format == 'i' ) {
-  // Get image
-  $tmp_image = wp_get_attachment_image_src( $post->id, "full");
-  $attach_src = $tmp_image[0];
+  $attach_src = wp_get_attachment_image_src( $post->id, "full");
+  $attach_src = $attach_src[0];
 }
 if ( $attach_format == 'p' ) {
-  // Find image that represents the PDF
+  // Find PDF preview image
   $pdf_image = get_the_title($post->id);
-  $pdf_image = eh_sluggify($pdf_image);
-  $pdf_image = 'image-'.$pdf_image;
+  $pdf_image = 'image-'.eh_sluggify($pdf_image);
   $tmp_post = get_page_by_title($pdf_image, '', 'attachment');
   $attach_src = $tmp_post->guid;
-  $page_url = wp_get_attachment_url( $post->id );
 }
 ?>
   <div class="image-attach">
-<?php if ( $attach_format == 'p' ) : ?>
-      This is a preview image of a PDF file.<br/><a class="work" title="View PDF" target="_blank" href="<?php echo $page_url; ?>">View the complete PDF &raquo;</a><br/><br/>
+<?php if ( !empty( $page_url ) ) : ?>
+      This is a preview image.<br/>
+      <a class="work" title="<?php echo $attach_link_title;?>" target="_blank" href="<?php echo $page_url; ?>">
+        <?php echo $attach_link_title;?> &raquo;
+      </a><br/><br/>
 <?php endif; ?>
       <img title="<?php echo $attach_title; ?>" src="<?php echo $attach_src;?>" />
   </div>
