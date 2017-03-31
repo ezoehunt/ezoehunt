@@ -4,8 +4,17 @@ $argswork = array(
   'post_status'     =>  'publish',
   'project_tags'    =>  'featured-post',
   'posts_per_page'  =>  2,
-  'orderby'         =>  'date',
-  'order'           =>  'ASC'
+  'orderby'         =>  'meta_value_num',
+  'meta_key'        =>  '_portfolio_display_order',
+  'order'           =>  'ASC',
+  /*  Exclude old or uninteresting projects - these have display order = "99"   */
+  'meta_query' => array(
+    array(
+      'key' => '_portfolio_display_order',
+      'value' => '99',
+      'compare' => '!='
+    )
+  )
 );
 $findwork = new WP_Query($argswork );
 ?>

@@ -34,8 +34,8 @@ foreach ( $attachments as $attach ) {
       if ( $single[$prefix.'attach_format'] == 'p' ) {
         $format = 'pdf';
       }
-
-      if ( $single[$prefix.'attach_preview'] == 'y' ) {
+      // Blog doesn't use "preview" features, so check if exists
+      if ( !empty($single[$prefix.'attach_preview']) && $single[$prefix.'attach_preview'] == 'y' ) {
         $tmpurl = $single[$prefix.'attach_preview_url'];
         $tmptitle = $single[$prefix.'attach_preview_title'];
       }
