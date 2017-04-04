@@ -248,14 +248,12 @@ include '_portfolio-details.php';
 
 // INCLUDE DISPLAY ORDER AS A COLUMN IN PORTFOLIO ADMIN
 add_filter( 'manage_edit-work_columns', 'eh_manage_work_custom_columns' );
-
 function eh_manage_work_custom_columns($columns) {
   $columns['display_order'] = __( 'Display Order' );
   return $columns;
 }
 
 add_action( 'manage_work_posts_custom_column' , 'eh_custom_work_column', 10, 2 );
-
 function eh_custom_work_column( $column, $post_id ) {
   switch ( $column ) {
     case 'display_order' :
@@ -270,14 +268,12 @@ function eh_custom_work_column( $column, $post_id ) {
 
 // MAKE DISPLAY ORDER SORTABLE
 add_filter( 'manage_edit-work_sortable_columns', 'eh_work_manage_sortable_columns' );
-
 function eh_work_manage_sortable_columns($columns) {
   $columns['display_order'] = 'display_order';
   return $columns;
 }
 
 add_filter( 'pre_get_posts', 'eh_work_admin_sort_columns_by');
-
 function eh_work_admin_sort_columns_by( $query ) {
   if( ! is_admin() ) {
     return;
@@ -316,7 +312,6 @@ function eh_display_custom_quickedit_work( $column_name, $post_type ) {
   </fieldset>
   <?php
 }
-
 
 add_action( 'save_post', 'eh_save_work_meta' );
 function eh_save_work_meta( $post_id ) {
@@ -372,14 +367,6 @@ register_taxonomy("image_tags", array("attachment"), array(
   'show_admin_column' => true,
   'query_var' => true,
 ));
-
-/* NOT NEEDED ANYMORE
-* --- Add Image Tags to Attachment Post Type -- */
-/*function eh_add_tags_to_attachments() {
-  register_taxonomy_for_object_type( 'image_tags', 'attachment' );
-}
-add_action( 'init' , 'eh_add_tags_to_attachments' );
-*/
 
 
 
@@ -518,6 +505,39 @@ function eh_register_meta_boxes_posts( $meta_boxes ) {
 }
 add_filter( 'rwmb_meta_boxes', 'eh_register_meta_boxes_posts' );
 
+
+
+// REMOVE EXCLUDED TAGS FROM TAGLIST
+function eh_exclude_from_taglist( $post_id, $taxonomy, $exclude ) {
+
+  $terms = get_the_terms( $post_id, $taxonomy );
+  $countExclude = count($exclude);
+  $countTerms = count($terms);
+  $array = array();
+
+  for ( $i = 0; $i<$countTerms; $i++ ) {
+    for ( $j = 0; $j<$countExclude; $j++ ) {
+      // Replace excluded tags with NULL
+      if ( $terms[$i]->slug == $exclude[$j] ) {
+        $terms[$i]->name = NULL;
+      }
+    }
+    // Remove "none" string from the array
+    if ( $terms[$i]->name != NULL ) {
+      $array[] .= $terms[$i]->name;
+    }
+    $newterms = array_unique($array);
+    $newterms = join( '&nbsp;&nbsp;/&nbsp;&nbsp;', $array );
+
+  }
+
+  if ( !empty( $newterms ) ) {
+    return $newterms;
+  }
+  else {
+    return false;
+  }
+}
 
 
 
@@ -682,20 +702,3 @@ function eh_break_text($text){
     $visible = substr($text, 0, $break_pos);
     return balanceTags($visible) . " […]";
 }
-
-
-// NOT USING
-/* Force PDF permalink to link to pdf file vs attach page */
-/*
-function eh_force_direct_pdf_links( $permalink ){
-	global $post;
-	//if ( is_search() && 'application/pdf' == get_post_mime_type( $post->ID ) ) {
-  if ( 'application/pdf' == get_post_mime_type( $post->ID ) ) {
-		// if the result is a PDF, link directly to the file not the attachment page
-		$permalink = wp_get_attachment_url( $post->ID );
-	}
-	return esc_url( $permalink );
-}
-add_filter( 'the_permalink', 'eh_force_direct_pdf_links' );
-add_filter( 'attachment_link', 'eh_force_direct_pdf_links' );
-*/

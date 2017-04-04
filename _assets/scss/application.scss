@@ -572,6 +572,9 @@ ul.entries {
     margin-bottom: 0;
   }
 }
+ul.entries-home {
+  margin-bottom: 0;
+}
 
 ul.entries-search {
   margin-top: 1.5rem;
@@ -856,6 +859,11 @@ figure {
 
 /* ========== MEDIA QUERIES ========== */
 // Visibility
+@media (max-width: 400px) {
+  .hidden-xs-down {
+    display: none;
+  }
+}
 @media (max-width: 767px) {
   .hidden-sm-down {
     display: none;
@@ -872,6 +880,12 @@ figure {
 @media (max-width: 400px) {
   .image-me {
     max-width: 90px !important;
+  }
+  .col-xs-20 {
+    width: 20%;
+  }
+  .col-xs-80 {
+    width: 80%;
   }
   .col-xs-100 {
     width: 100%;

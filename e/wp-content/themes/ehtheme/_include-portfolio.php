@@ -31,26 +31,33 @@ $findwork = new WP_Query($argswork );
 
 <?php if ( $findwork->have_posts() ) : ?>
 
-<ul class="gridit">
+<ul class="entries">
 
 <?php
 while ( $findwork->have_posts() ) : $findwork->the_post();
   $featuredWorkImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
 ?>
 
-  <li id="post-<?php the_ID(); ?>">
-    <a class="home" title="View project" href="<?php the_permalink() ?>">
+  <li <?php post_class('entry-foto'); ?> id="post-<?php the_ID(); ?>">
 
-      <img class="grid-image" src="<?php echo $featuredWorkImage[0];?>">
+    <div class="col col-xs-30 col-sm-40 floatleft fotos fotos-img">
+      <a class="work" title="View <?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?>" href="<?php the_permalink(); ?>">
+        <img title="View <?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?>" src="<?php echo $featuredWorkImage[0];?>">
+      </a>
+    </div>
 
-      <figcaption class="grid-img-overlay">
-        <p>
-          <?php echo the_title(); ?>
-          <br/><span>&#8212; view project &#8212;</span>
-        </p>
-      </figcaption>
+    <div class="col col-xs-70 col-sm-60 floatleft fotos fotos-text">
 
-    </a>
+      <p>
+        <a class="work" title="View <?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?>" href="<?php the_permalink() ?>"><?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?></a>
+      </p>
+
+      <p class="entry-excerpt hidden-xs-down">
+        <?php echo get_the_excerpt(); ?>
+      </p>
+
+    </div>
+
   </li>
 
 <?php endwhile; ?>

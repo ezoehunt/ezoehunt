@@ -50,25 +50,26 @@ $featured_image = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID),
 
         <li <?php post_class('entry-foto'); ?> id="post-<?php the_ID(); ?>">
 
-          <div class="col-sm-20 floatleft fotos fotos-img">
+          <div class="col col-xs-30 col-sm-40 floatleft fotos fotos-img">
             <a class="words" title="View <?php echo get_post_meta($post->ID,'_blog_headline',true); ?>" href="<?php the_permalink(); ?>">
               <img title="Featured image from this article" src="<?php echo $featured_image[0];?>">
             </a>
           </div>
 
-          <div class="col-sm-80 floatleft fotos fotos-text">
-
-            <p class="entry-meta">
-              <?php echo get_the_date( 'j M Y' ); ?>
-            </p>
+          <div class="col col-xs-70 col-sm-60 floatleft fotos fotos-text">
 
             <p>
               <a class="words" title="View <?php echo get_post_meta($post->ID,'_blog_headline',true); ?>" href="<?php the_permalink() ?>"><?php echo get_post_meta($post->ID,'_blog_headline',true); ?></a>
             </p>
 
-            <p class="entry-excerpt">
+            <p class="entry-excerpt hidden-xs-down">
               <?php echo get_the_excerpt(); ?>
-              <br/><span class="smaller-90"><a class="words" title="Continue reading this article" href="<?php the_permalink() ?>">{ continue&nbsp;reading }</a></span>
+              <!--br/><span class="smaller-90"><a class="words" title="Continue reading this article" href="<?php the_permalink() ?>">{ continue&nbsp;reading }</a></span-->
+              <!--br/><p class="entry-meta">
+                <?php echo get_the_date( 'j M Y' ); ?>
+              </p-->
+
+
             </p>
 
           </div>

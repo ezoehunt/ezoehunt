@@ -21,32 +21,43 @@ $findwords = new WP_Query($argswords );
 </div>
 
 <?php
-if ( $findwords->have_posts() ) :
-  while ( $findwords->have_posts() ) : $findwords->the_post();
+if ( $findwords->have_posts() ) : ?>
+
+<ul class="entries entries-home">
+
+<?php
+while ( $findwords->have_posts() ) : $findwords->the_post();
   $featuredWordsImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
 ?>
 
-<p class="article-title">
-  <a class="home" title="View <?php echo get_post_meta($post->ID,'_blog_headline',true); ?>" href="<?php the_permalink() ?>">
-    <?php echo get_post_meta($post->ID,'_blog_headline',true); ?>
-  </a>
-</p>
+  <li <?php post_class('entry-foto'); ?> id="post-<?php the_ID(); ?>">
 
-<div class="row section-words" style="margin-top:-.5rem;">
+    <div class="col col-xs-30 col-sm-40 floatleft fotos fotos-img">
+      <a class="words" title="View <?php echo get_post_meta($post->ID,'_blog_headline',true); ?>" href="<?php the_permalink(); ?>">
+        <img title="View <?php echo get_post_meta($post->ID,'_blog_headline',true); ?>" src="<?php echo $featuredWordsImage[0];?>">
+      </a>
+    </div>
 
-  <p class="last">
-    <a class="work" title="View <?php echo get_post_meta($post->ID,'_blog_headline',true); ?>" href="<?php the_permalink() ?>">
-      <img title="Featured image from this article" class="floatleft image-home" src="<?php echo $featuredWordsImage[0];?>">
-    </a>
-    <?php echo get_the_excerpt(); ?>
-    <br/>
-    <span class="smaller-90"><a class="home" title="Continue reading this article" href="<?php the_permalink() ?>">{ continue reading }</a></span>
-  </p>
+    <div class="col col-xs-70 col-sm-60 floatleft fotos fotos-text">
 
-</div>
+      <p>
+        <a class="words" title="View <?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?>" href="<?php the_permalink() ?>"><?php echo get_post_meta($post->ID,'_blog_headline',true); ?></a>
+      </p>
+
+      <p class="entry-excerpt hidden-xs-down">
+        <?php echo get_the_excerpt(); ?>
+      </p>
+
+    </div>
+
+</li>
+
+
+<?php endwhile; ?>
+
+</ul>
 
 <?php
-endwhile;
 endif;
 wp_reset_postdata();
 ?>

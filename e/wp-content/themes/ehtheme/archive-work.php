@@ -63,25 +63,43 @@ $findwork = new WP_Query($argswork );
 if ( $findwork->have_posts() ) :
 $count_posts = $findwork->found_posts;
 ?>
-      <p class="grid-before"><a class="work" title="View my resume" target="_blank" href="<?php echo home_url('/files/ehunt_resume.pdf'); ?>">View my resume &raquo;</a></p>
 
-      <ul class="gridit">
+      <ul class="entries">
+
+        <li>
+          <a class="work" title="View my resume" target="_blank" href="<?php echo home_url('/files/ehunt_resume.pdf'); ?>">View my resume &raquo;</a>
+        </li>
 
 <?php while ( $findwork->have_posts() ) : $findwork->the_post();
 
 $featuredImage = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), array(400,400) );
+
+$myterms = eh_exclude_from_taglist($post->ID, 'project_tags', array('featured-post'));
+
 ?>
 
-        <li <?php post_class(); ?> id="post-<?php the_ID(); ?>">
-          <a class="work" title="View project" href="<?php the_permalink() ?>">
+        <li <?php post_class('entry-foto'); ?> id="post-<?php the_ID(); ?>">
 
-            <img alt="" class="grid-image" src="<?php echo $featuredImage[0];?>">
+          <div class="col col-xs-30 col-sm-40 floatleft fotos fotos-img">
+            <a class="work" title="View <?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?>" href="<?php the_permalink(); ?>">
+              <img title="View <?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?>" src="<?php echo $featuredImage[0];?>">
+            </a>
+          </div>
 
-            <figcaption class="grid-img-overlay">
-              <p><?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?>
-                <br/><span>&#8212; view project &#8212;</span></p>
-            </figcaption>
-          </a>
+          <div class="col col-xs-70 col-sm-60 floatleft fotos fotos-text">
+
+            <p>
+              <a class="work" title="View <?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?>" href="<?php the_permalink() ?>"><?php echo get_post_meta($post->ID,'_portfolio_headline',true); ?></a>
+            </p>
+
+            <p class="entry-excerpt hidden-xs-down">
+              <?php echo get_the_excerpt(); ?>
+            </p>
+
+            <p class="entry-meta hidden-xs-down"><?php echo $myterms; ?></p>
+
+          </div>
+
         </li>
 
 <?php endwhile; ?>
