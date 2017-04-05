@@ -319,7 +319,7 @@ function eh_save_work_meta( $post_id ) {
      preferably as a class property, rather than in each function that needs it.
    */
   $slug = 'work';
-  if ( $slug !== $_POST['post_type'] ) {
+  if ( !empty($_POST['post_type']) && $slug !== $_POST['post_type'] ) {
     return;
   }
   if ( !current_user_can( 'edit_post', $post_id ) ) {
