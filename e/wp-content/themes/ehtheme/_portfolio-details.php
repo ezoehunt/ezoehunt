@@ -134,19 +134,6 @@ function project_details_register_meta_boxes( $meta_boxes ) {
             'std'         => 'y',
           ),
           array(
-            'id'      => $prefix.'attach_preview',
-            'name'    => __( 'Is a preview ?', 'rwmb' ),
-            'desc'  => esc_html__( 'If yes, the attachment is a preview of something else, e.g., a web page or pdf file.', 'rwmb' ),
-            'type'    => 'radio',
-            'class'  => 'ez-admin-radio',
-            'options' => array(
-                'y' => __( 'Yes', 'rwmb' ),
-                'n' => __( 'No', 'rwmb' ),
-            ),
-            // Set the default value here
-            'std'         => 'n'
-          ),
-          array(
             'id'      => $prefix.'attach_format',
             'name'    => __( 'Image or PDF ?', 'rwmb' ),
             'type'    => 'radio',
@@ -158,13 +145,25 @@ function project_details_register_meta_boxes( $meta_boxes ) {
             // Set the default value here
             'std'         => 'i'
           ),
+          array(
+            'id'      => $prefix.'attach_preview',
+            'name'    => __( 'Has thumbnail?', 'rwmb' ),
+            'desc'  => esc_html__( 'If yes, the thumbnail is a preview of something else, e.g., a very large image, a web page, or a pdf file. Remember to upload the thumbnail image!', 'rwmb' ),
+            'type'    => 'radio',
+            'class'  => 'ez-admin-radio',
+            'options' => array(
+                'y' => __( 'Yes', 'rwmb' ),
+                'n' => __( 'No', 'rwmb' ),
+            ),
+            // Set the default value here
+            'std'         => 'n'
+          ),
           // Display only if attach_format = i
           array(
             'id'      => $prefix.'attach_images',
             'name'    => esc_html__( 'Image', 'rwmb' ),
             'type'    => 'image_advanced',
             'class'  => 'ez-admin-imginput',
-
             // Delete image from Media Library when remove it from post meta? Note: it might affect other posts if you use same image for multiple posts
             'force_delete'     => false,
             // Maximum image uploads PER CLONED PART
@@ -187,35 +186,24 @@ function project_details_register_meta_boxes( $meta_boxes ) {
           array(
             'id'      => $prefix.'attach_preview_url',
             'name'    => __( 'Link for Preview Item', 'rwmb' ),
-            'desc'  => esc_html__( 'Provide the URL for the live image or pdf or website to which we should link.', 'rwmb' ),
+            'desc'  => esc_html__( 'Only provide URL if thumbnail should link to external file or web page.', 'rwmb' ),
             'type'    => 'text',
             'class'  => 'ez-admin-text',
             'visible'  => [
-              ['attach_preview', '=', 'y' ]
+              ['attach_preview', '=', 'y']
             ]
           ),
+          // Display only if attach_preview = y
           array(
             'id'      => $prefix.'attach_preview_title',
             'name'    => __( 'Preview Item Link Text', 'rwmb' ),
-            'desc'  => esc_html__( 'Provide link text. Appears in both "title" and "href" contexts.', 'rwmb' ),
+            'desc'  => esc_html__( 'Only provide Link Text if thumbnail should link to external file or web page. Appears in both "title" and "href" contexts. E.g., "View PDF".', 'rwmb' ),
             'type'    => 'text',
             'class'  => 'ez-admin-text',
             'visible'  => [
-              ['attach_preview', '=', 'y' ]
+              ['attach_preview', '=', 'y']
             ]
           )
-          // Display only if attach_format = p AND attach_preview = y
-          /*array(
-            'id'      => $prefix.'attach_preview_pdf_url',
-            'name'    => __( 'Link for Preview PDF', 'rwmb' ),
-            'desc'  => esc_html__( 'Provide the URL for the PDF to which we should link.', 'rwmb' ),
-            'type'    => 'text',
-            'class'  => 'ez-admin-text',
-            'visible'  => [
-              ['attach_format', '=', 'p'],
-              ['attach_preview', '=', 'y' ]
-            ]
-          )*/
         )
       )
     )
