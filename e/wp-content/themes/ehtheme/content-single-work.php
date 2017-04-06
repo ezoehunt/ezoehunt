@@ -157,57 +157,50 @@ foreach ( $design as $attachment ) :
   $attach_alt = $attachment[$prefix.'alt'];
   $attach_description = $attachment[$prefix.'description'];
 
-  // IMAGES
+  // Set up attach_id
   if ( $attachment[$prefix.'format'] == 'i' ) {
-    $attach_id = $attachment[$prefix.'images'];
-    $attach_id = $attach_id[0];
+    $format = 'images';
+  }
+  elseif ( $attachment[$prefix.'format'] == 'p' ) {
+    $format = 'pdf';
+  }
+  $attach_id = $attachment[$prefix.$format];
+  $attach_id = $attach_id[0];
 
+  // Set up links to things other than attachment pages
+  if ( $attachment[$prefix.'preview'] == 'y' ) {
+    $preview = 'yes';
     if ( !empty( $attachment[$prefix.'preview_url'] ) ) {
-      $attach_url = $attachment[$prefix.'preview_url'];
+      $tmp_url = $attachment[$prefix.'preview_url'];
     }
     if ( !empty( $attachment[$prefix.'preview_title'] ) ) {
-      $attach_url_title = $attachment[$prefix.'preview_title'];
+      $tmp_url_title = $attachment[$prefix.'preview_title'];
     }
+  }
+  elseif ( $attachment[$prefix.'preview'] == 'n' ) {
+    $preview = 'no';
+  }
 
-    // If image has a thumbnail
-    if ( $attachment[$prefix.'preview'] == 'y' ) {
-      $image = get_the_title($attach_id);
-      $image = 'image-'.eh_sluggify($image);
-      $image_post = get_page_by_title($image, '', 'attachment');
-      $attach_src = wp_get_attachment_image_src( $image_post->ID, '' );
-      $attach_src = $attach_src[0];
-    }
-    elseif ( $attachment[$prefix.'preview'] == 'n' ) {
-      $attach_src = wp_get_attachment_image_src( $attach_id, 'full' );
-      $attach_src = $attach_src[0];
-    }
-
-    // If image has external link
-    if ( !empty( $attach_url ) && !empty( $attach_url_title ) ) {
-      $page_url = $attach_url;
-      $attach_link_title = $attach_url_title;
+  if ( $preview == 'yes' ) {
+    $image = get_the_title($attach_id);
+    $image = 'image-'.eh_sluggify($image);
+    $image_post = get_page_by_title($image, '', 'attachment');
+    $attach_src = wp_get_attachment_image_src( $image_post->ID, '' );
+    $attach_src = $attach_src[0];
+    if ( !empty( $tmp_url ) && !empty( $tmp_url_title ) ) {
+      $page_url = $tmp_url;
+      $attach_link_title = $tmp_url_title;
     }
     else {
       $page_url = get_permalink($attach_id);
       $attach_link_title = 'View larger image';
     }
   }
-
-  // PDFs
-  elseif ( $attachment[$prefix.'format'] == 'p' ) {
-    $attach_id = $attachment[$prefix.'pdf'];
-    $attach_id = $attach_id[0];
-    // Find image that represents the PDF
-    $pdf = get_the_title($attach_id);
-    $pdf = 'image-'.eh_sluggify($pdf);
-    $pdf_post = get_page_by_title($pdf, '', 'attachment');
-    $attach_src = wp_get_attachment_image_src( $pdf_post->ID, '' );
+  elseif ( $preview == 'no' ) {
+    $attach_src = wp_get_attachment_image_src( $attach_id, 'full' );
     $attach_src = $attach_src[0];
-
-    // PDFs ALWAYS have preview image
-    // So they open directly instead of going to attachment pg
-    $page_url = $attachment[$prefix.'preview_url'];
-    $attach_link_title = $attachment[$prefix.'preview_title'];
+    $page_url = get_permalink($attach_id);
+    $attach_link_title = 'View larger image';
   }
 ?>
           <div class="row item-row">
@@ -219,13 +212,13 @@ foreach ( $design as $attachment ) :
               <p class="item-text-copy"><?php echo $attach_description; ?></p>
 
               <p class="item-text-copy">
-<a class="work" title="<?php echo $attach_link_title;?>"<?php if ($attachment[$prefix.'preview'] == 'y' && !empty($attachment[$prefix.'preview_url'])) { echo ' target="_blank"';}?> href="<?php echo $page_url;?>"><?php echo $attach_link_title.' &raquo;'; ?></a>
+<a class="work" title="<?php echo $attach_link_title;?>"<?php if ($preview == 'yes' && !empty($attachment[$prefix.'preview_url'])) { echo ' target="_blank"';}?> href="<?php echo $page_url;?>"><?php echo $attach_link_title.' &raquo;'; ?></a>
               </p>
 
             </div>
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
-<a class="work" title="<?php echo $attach_link_title;?>"<?php if ($attachment[$prefix.'preview'] == 'y' && !empty($attachment[$prefix.'preview_url'])) { echo ' target="_blank"';}?> href="<?php echo $page_url;?>">
+<a class="work" title="<?php echo $attach_link_title;?>"<?php if ($preview == 'yes' && !empty($attachment[$prefix.'preview_url'])) { echo ' target="_blank"';}?> href="<?php echo $page_url;?>">
     <img alt="<?php echo $attach_alt;?>" src="<?php echo $attach_src;?>">
 </a>
             </div>
@@ -257,55 +250,50 @@ foreach ( $process as $attachment ) :
   $attach_alt = $attachment[$prefix.'alt'];
   $attach_description = $attachment[$prefix.'description'];
 
-  // IMAGES
+  // Set up attach_id
   if ( $attachment[$prefix.'format'] == 'i' ) {
-    $attach_id = $attachment[$prefix.'images'];
-    $attach_id = $attach_id[0];
+    $format = 'images';
+  }
+  elseif ( $attachment[$prefix.'format'] == 'p' ) {
+    $format = 'pdf';
+  }
+  $attach_id = $attachment[$prefix.$format];
+  $attach_id = $attach_id[0];
 
+  // Set up links to things other than attachment pages
+  if ( $attachment[$prefix.'preview'] == 'y' ) {
+    $preview = 'yes';
     if ( !empty( $attachment[$prefix.'preview_url'] ) ) {
-      $attach_url = $attachment[$prefix.'preview_url'];
+      $tmp_url = $attachment[$prefix.'preview_url'];
     }
     if ( !empty( $attachment[$prefix.'preview_title'] ) ) {
-      $attach_url_title = $attachment[$prefix.'preview_title'];
+      $tmp_url_title = $attachment[$prefix.'preview_title'];
     }
+  }
+  elseif ( $attachment[$prefix.'preview'] == 'n' ) {
+    $preview = 'no';
+  }
 
-    // If image has a thumbnail
-    if ( $attachment[$prefix.'preview'] == 'y' ) {
-      $image = get_the_title($attach_id);
-      $image = 'image-'.eh_sluggify($image);
-      $image_post = get_page_by_title($image, '', 'attachment');
-      $attach_src = wp_get_attachment_image_src( $image_post->ID, '' );
-      $attach_src = $attach_src[0];
-    }
-    elseif ( $attachment[$prefix.'preview'] == 'n' ) {
-      $attach_src = wp_get_attachment_image_src( $attach_id, 'full' );
-      $attach_src = $attach_src[0];
-    }
-
-    // If image has external link
-    if ( !empty( $attach_url ) && !empty( $attach_url_title ) ) {
-      $page_url = $attach_url;
-      $attach_link_title = $attach_url_title;
+  if ( $preview == 'yes' ) {
+    $image = get_the_title($attach_id);
+    $image = 'image-'.eh_sluggify($image);
+    $image_post = get_page_by_title($image, '', 'attachment');
+    $attach_src = wp_get_attachment_image_src( $image_post->ID, '' );
+    $attach_src = $attach_src[0];
+    if ( !empty( $tmp_url ) && !empty( $tmp_url_title ) ) {
+      $page_url = $tmp_url;
+      $attach_link_title = $tmp_url_title;
     }
     else {
       $page_url = get_permalink($attach_id);
       $attach_link_title = 'View larger image';
     }
   }
-  // PDFs
-  elseif ( $attachment[$prefix.'format'] == 'p' ) {
-    $attach_id = $attachment[$prefix.'pdf'];
-    $attach_id = $attach_id[0];
-    // Find image that represents the PDF
-    $pdf = get_the_title($attach_id);
-    $pdf = 'image-'.eh_sluggify($pdf);
-    $pdf_post = get_page_by_title($pdf, '', 'attachment');
-    $attach_src = wp_get_attachment_image_src( $pdf_post->ID, '' );
+  elseif ( $preview == 'no' ) {
+    $attach_src = wp_get_attachment_image_src( $attach_id, 'full' );
     $attach_src = $attach_src[0];
-
-    // PDFs ALWAYS have preview image, so they open directly vs going to attachment page
-    $page_url = $attachment[$prefix.'preview_url'];
-    $attach_link_title = $attachment[$prefix.'preview_title'];
+    $page_url = get_permalink($attach_id);
+    $attach_link_title = 'View larger image';
   }
 ?>
           <div class="row item-row">
@@ -317,13 +305,13 @@ foreach ( $process as $attachment ) :
               <p class="item-text-copy"><?php echo $attach_description; ?></p>
 
               <p class="item-text-copy">
-<a class="work" title="<?php echo $attach_link_title;?>"<?php if ($attachment[$prefix.'preview'] == 'y'  && !empty($attachment[$prefix.'preview_url'])) { echo ' target="_blank"';}?> href="<?php echo $page_url;?>"><?php echo $attach_link_title.' &raquo;'; ?></a>
+<a class="work" title="<?php echo $attach_link_title;?>"<?php if ($preview == 'yes' && !empty($attachment[$prefix.'preview_url'])) { echo ' target="_blank"';}?> href="<?php echo $page_url;?>"><?php echo $attach_link_title.' &raquo;'; ?></a>
               </p>
 
             </div>
 
             <div class="col-sm-100 col-md-60 floatleft item-image">
-<a class="work" title="<?php echo $attach_link_title;?>"<?php if ($attachment[$prefix.'preview'] == 'y' && !empty($attachment[$prefix.'preview_url'])) { echo ' target="_blank"';}?> href="<?php echo $page_url;?>">
+<a class="work" title="<?php echo $attach_link_title;?>"<?php if ($preview == 'yes' && !empty($attachment[$prefix.'preview_url'])) { echo ' target="_blank"';}?> href="<?php echo $page_url;?>">
     <img alt="<?php echo $attach_alt;?>" src="<?php echo $attach_src;?>">
 </a>
             </div>

@@ -31,14 +31,14 @@ foreach ( $attachments as $attach ) {
       if ( $single[$prefix.'attach_format'] == 'i' ) {
         $format = 'images';
       }
-      if ( $single[$prefix.'attach_format'] == 'p' ) {
+      elseif ( $single[$prefix.'attach_format'] == 'p' ) {
         $format = 'pdf';
       }
       if ( $single[$prefix.'attach_preview'] == 'y' && !empty( $single[$prefix.'attach_preview_url'] ) ) {
-        $attach_url = $single[$prefix.'attach_preview_url'];
+        $tmp_url = $single[$prefix.'attach_preview_url'];
       }
       if ( $single[$prefix.'attach_preview'] == 'y' && !empty( $single[$prefix.'attach_preview_title'] ) ) {
-        $attach_url_title = $single[$prefix.'attach_preview_title'];
+        $tmp_url_title = $single[$prefix.'attach_preview_title'];
       }
 
       $attach_id = $single[$prefix.'attach_'.$format][0];
@@ -48,11 +48,11 @@ foreach ( $attachments as $attach ) {
       if ( $attach_id == $post->ID ) {
         $attach_title = $single[$prefix.'attach_title'];
         $attach_format = $single[$prefix.'attach_format'];
-        if ( !empty( $attach_url ) ) {
-          $page_url = $attach_url;
+        if ( !empty( $tmp_url ) ) {
+          $page_url = $tmp_url;
         }
-        if ( !empty ( $attach_url ) ) {
-          $attach_link_title = $attach_url_title;
+        if ( !empty ( $tmp_url ) ) {
+          $attach_link_title = $tmp_url_title;
         }
       }
     }
