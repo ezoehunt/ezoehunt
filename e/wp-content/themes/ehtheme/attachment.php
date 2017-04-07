@@ -29,40 +29,20 @@ foreach ( $attachments as $attach ) {
     if ( $single[$prefix.'attach_display'] == 'y' ) {
 
       if ( $single[$prefix.'attach_format'] == 'i' ) {
-        $format = 'images';
+        $attach_id = $single[$prefix.'attach_images'][0];
       }
       elseif ( $single[$prefix.'attach_format'] == 'p' ) {
-        $format = 'pdf';
+        $attach_id = $single[$prefix.'attach_pdf'][0];
       }
 
-      $attach_id = $single[$prefix.'attach_'.$format][0];
       $attachids[] += $attach_id;
       $count = count($attachids);
 
-      /*
-      if ( $single[$prefix.'attach_preview'] == 'y' && !empty( $single[$prefix.'attach_preview_url'] ) ) {
-        $tmp_url = $single[$prefix.'attach_preview_url'];
-      }
-      if ( $single[$prefix.'attach_preview'] == 'y' && !empty( $single[$prefix.'attach_preview_title'] ) ) {
-        $tmp_url_title = $single[$prefix.'attach_preview_title'];
-      }
-      */
-
-      //$attach_id = $single[$prefix.'attach_'.$format][0];
-      //$attachids[] += $attach_id;
-      //$count = count($attachids);
-
       if ( $attach_id == $post->ID ) {
+        $format = $single[$prefix.'attach_format'];
+
         $attach_title = $single[$prefix.'attach_title'];
-        //$attach_format = $single[$prefix.'attach_format'];
-        /*
-        if ( !empty( $tmp_url ) ) {
-          $page_url = $tmp_url;
-        }
-        if ( !empty ( $tmp_url ) ) {
-          $attach_link_title = $tmp_url_title;
-        }
-        */
+
         if ( $single[$prefix.'attach_preview'] == 'y' && !empty( $single[$prefix.'attach_preview_url'] ) ) {
           $page_url = $single[$prefix.'attach_preview_url'];
         }
@@ -132,12 +112,12 @@ $mynext = eh_nextprev($post->ID, $cat_slug, 'attachment', 'next', $count, $attac
   </div>
 <?php
 // For Images, show the full-size image
-if ( $format == 'images' ) {
+if ( $format == 'i' ) {
   $attach_src = wp_get_attachment_image_src( $post->id, "full");
   $attach_src = $attach_src[0];
 }
 // For PDFs, show the Thumbnail
-if ( $format == 'pdf' ) {
+if ( $format == 'p' ) {
   $pdf_image = get_the_title($post->id);
   $pdf_image = 'image-'.eh_sluggify($pdf_image);
   $tmp_post = get_page_by_title($pdf_image, '', 'attachment');

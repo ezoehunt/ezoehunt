@@ -457,6 +457,8 @@ function eh_register_meta_boxes_posts( $meta_boxes ) {
                 'y' => __( 'Yes', 'rwmb' ),
                 'n' => __( 'No', 'rwmb' ),
             ),
+            // Set the default value here
+            'std'         => 'y',
 					),
           array(
             'id'      => $prefix.'attach_format',
@@ -469,6 +471,19 @@ function eh_register_meta_boxes_posts( $meta_boxes ) {
             ),
             // Set the default value here
             'std'         => 'i'
+          ),
+          array(
+            'id'      => $prefix.'attach_preview',
+            'name'    => __( 'Has thumbnail?', 'rwmb' ),
+            'desc'  => esc_html__( 'If yes, the thumbnail is a preview of something else, e.g., a very large image, a web page, or a pdf file. Remember to upload the thumbnail image!', 'rwmb' ),
+            'type'    => 'radio',
+            'class'  => 'ez-admin-radio',
+            'options' => array(
+                'y' => __( 'Yes', 'rwmb' ),
+                'n' => __( 'No', 'rwmb' ),
+            ),
+            // Set the default value here
+            'std'         => 'n'
           ),
           // Displays only if attach_format = i
           array(
@@ -496,6 +511,28 @@ function eh_register_meta_boxes_posts( $meta_boxes ) {
             // Leave blank for all file types
             'mime_type'        => '',
             'hidden' => array( 'attach_format', '!=', 'p' )
+          ),
+          // Display only if attach_preview = y
+          array(
+            'id'      => $prefix.'attach_preview_url',
+            'name'    => __( 'Link for Preview Item', 'rwmb' ),
+            'desc'  => esc_html__( 'Only provide URL if thumbnail should link to external file or web page.', 'rwmb' ),
+            'type'    => 'text',
+            'class'  => 'ez-admin-text',
+            'visible'  => [
+              ['attach_preview', '=', 'y']
+            ]
+          ),
+          // Display only if attach_preview = y
+          array(
+            'id'      => $prefix.'attach_preview_title',
+            'name'    => __( 'Preview Item Link Text', 'rwmb' ),
+            'desc'  => esc_html__( 'Only provide Link Text if thumbnail should link to external file or web page. Appears in both "title" and "href" contexts. E.g., "View PDF".', 'rwmb' ),
+            'type'    => 'text',
+            'class'  => 'ez-admin-text',
+            'visible'  => [
+              ['attach_preview', '=', 'y']
+            ]
           )
 				)
 			)
