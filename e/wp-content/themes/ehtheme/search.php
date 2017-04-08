@@ -77,7 +77,6 @@ if ( !empty ( $projectit ) ) {
 elseif ( !empty ( $postit ) ) {
   $headline = $postit;
 }
-
 ?>
 
         <li <?php post_class('entry-foto'); ?> id="post-<?php the_ID(); ?>">
@@ -97,7 +96,7 @@ elseif ( !empty ( $postit ) ) {
             <p class="entry-excerpt hidden-xs-down">
               <?php echo get_the_excerpt(); ?>
               <!--br/><p class="entry-meta">
-                <?php echo get_the_date( 'j M Y' ); ?>
+                <?php //echo get_the_date( 'j M Y' ); ?>
               </p-->
             </p>
 

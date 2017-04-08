@@ -565,7 +565,6 @@ function eh_exclude_from_taglist( $post_id, $taxonomy, $exclude ) {
     }
     $newterms = array_unique($array);
     $newterms = join( '&nbsp;&nbsp;/&nbsp;&nbsp;', $array );
-
   }
 
   if ( !empty( $newterms ) ) {
@@ -578,56 +577,34 @@ function eh_exclude_from_taglist( $post_id, $taxonomy, $exclude ) {
 
 
 
-// MISC FUNCTIONS
+// REMOVE ITEMS FROM SEARCH QUERY
+/* Excludes published Portfolio items with display_order = 99 */
+function eh_remove_from_search( $query ) {
+  if( ! is_admin() && $query->is_search() ) {
+    // Get orig query
+    $meta_query = $query->get('meta_query');
 
-function eh_sluggify($string) {
-  # Prep string with some basic normalization
-  $string = strtolower($string);
-  $string = strip_tags($string);
-  $string = stripslashes($string);
-  $string = html_entity_decode($string);
-
-  # Remove quotes (can't, etc.)
-  $string = str_replace('\'', '', $string);
-
-  # Replace non-alpha numeric with hyphens
-  $match = '/[^a-z0-9]+/';
-  $replace = '-';
-  $string = preg_replace($match, $replace, $string);
-
-  $string = trim($string, '-');
-
-  return $string;
-}
-
-
-function eh_get_cat_name($post_id) {
-  $post_categories = wp_get_post_categories( $post_id );
-  $cats = array();
-  foreach ( $post_categories as $c ) {
-    $cat = get_category( $c );
-    $cat_name = $cat->name;
+    if ( $query->get('post_type') == 'work' ) {
+      echo 'fuck yes';
+    }
+    // Include items without the key + exclude items with the key = 99
+    $meta_query[] = array(
+      'relation' => 'OR',
+      array(
+    		'key' => '_portfolio_display_order',
+    		'compare' => 'NOT EXISTS'
+    	),
+  		array(
+    		'key'	=> '_portfolio_display_order',
+    		'value' => '99',
+    		'compare' => '!='
+    	)
+    );
+    $query->set('meta_query',$meta_query);
   }
-  return $cat_name;
 }
+add_action('pre_get_posts','eh_remove_from_search');
 
-
-function eh_get_cat_slug($post_id) {
-  $post_categories = wp_get_post_categories( $post_id );
-  $cats = array();
-  foreach ( $post_categories as $c ) {
-    $cat = get_category( $c );
-    $cat_slug = $cat->slug;
-  }
-  return $cat_slug;
-}
-
-
-function eh_image_id_from_url($image_url) {
-	global $wpdb;
-	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));
-  return $attachment;
-}
 
 
 // FOR NEXT PREVIOUS NAVIGATION
@@ -705,6 +682,58 @@ function eh_nextprev( $post_id, $cat_slug, $format, $type, $count, $array ) {
   }
 }
 
+
+
+// MISC FUNCTIONS
+
+function eh_sluggify($string) {
+  # Prep string with some basic normalization
+  $string = strtolower($string);
+  $string = strip_tags($string);
+  $string = stripslashes($string);
+  $string = html_entity_decode($string);
+
+  # Remove quotes (can't, etc.)
+  $string = str_replace('\'', '', $string);
+
+  # Replace non-alpha numeric with hyphens
+  $match = '/[^a-z0-9]+/';
+  $replace = '-';
+  $string = preg_replace($match, $replace, $string);
+
+  $string = trim($string, '-');
+
+  return $string;
+}
+
+
+function eh_get_cat_name($post_id) {
+  $post_categories = wp_get_post_categories( $post_id );
+  $cats = array();
+  foreach ( $post_categories as $c ) {
+    $cat = get_category( $c );
+    $cat_name = $cat->name;
+  }
+  return $cat_name;
+}
+
+
+function eh_get_cat_slug($post_id) {
+  $post_categories = wp_get_post_categories( $post_id );
+  $cats = array();
+  foreach ( $post_categories as $c ) {
+    $cat = get_category( $c );
+    $cat_slug = $cat->slug;
+  }
+  return $cat_slug;
+}
+
+
+function eh_image_id_from_url($image_url) {
+	global $wpdb;
+	$attachment = $wpdb->get_col($wpdb->prepare("SELECT ID FROM $wpdb->posts WHERE guid='%s';", $image_url ));
+  return $attachment;
+}
 
 
 function eh_paginate($query) {
