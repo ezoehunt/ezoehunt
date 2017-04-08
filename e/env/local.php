@@ -3,12 +3,12 @@
 require_once('general.php');
 
 // LOCAL ENV VARS
-$HOST = 'localhost';
-$DBNAME = 'newezoehunt';
-$DBUSER = 'root';
-$DBPWD = 'root';
+$EH_HOST = 'localhost';
+$EH_DBNAME = 'newezoehunt';
+$EH_DBUSER = 'root';
+$EH_DBPWD = 'root';
 
-$DEBUG = 'true';
-$DEBUG_LOG = 'true';
+$EH_DEBUG = 'true';
+$EH_DEBUG_LOG = 'true';
 
 ?>
