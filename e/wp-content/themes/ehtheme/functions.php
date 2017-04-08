@@ -578,16 +578,13 @@ function eh_exclude_from_taglist( $post_id, $taxonomy, $exclude ) {
 
 
 // REMOVE ITEMS FROM SEARCH QUERY
-/* Excludes published Portfolio items with display_order = 99 */
+/* Excludes published Portfolio items with display_order = NULL */
 function eh_remove_from_search( $query ) {
   if( ! is_admin() && $query->is_search() ) {
     // Get orig query
     $meta_query = $query->get('meta_query');
 
-    if ( $query->get('post_type') == 'work' ) {
-      echo 'fuck yes';
-    }
-    // Include items without the key + exclude items with the key = 99
+    // Include items without the key AND items where key != NULL
     $meta_query[] = array(
       'relation' => 'OR',
       array(
@@ -596,7 +593,7 @@ function eh_remove_from_search( $query ) {
     	),
   		array(
     		'key'	=> '_portfolio_display_order',
-    		'value' => '99',
+    		'value' => 'NULL',
     		'compare' => '!='
     	)
     );

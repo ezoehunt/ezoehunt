@@ -6,12 +6,12 @@ $argswork = array(
   'posts_per_page'  =>  2,
   'orderby'         =>  'meta_value_num',
   'meta_key'        =>  '_portfolio_display_order',
-  'order'           =>  'ASC',
+  'order'           =>  'DESC',
   /*  Exclude old or uninteresting projects - these have display order = "99"   */
   'meta_query' => array(
     array(
       'key' => '_portfolio_display_order',
-      'value' => '99',
+      'value' => 'NULL',
       'compare' => '!='
     )
   )

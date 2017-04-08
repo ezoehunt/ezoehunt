@@ -16,7 +16,11 @@ function project_details_register_meta_boxes( $meta_boxes ) {
       array(
         'id'   => $prefix.'display_order',
         'name' => __( 'Display Order', 'rwmb' ),
-        'type' => 'number'
+        //'type' => 'number'
+        'type' => 'text',
+        'class'   => 'ez-admin-text',
+        // Set the default value here
+        'std'         => 'NULL',
       ),
       array(
         'id'   => $prefix.'keywords',
