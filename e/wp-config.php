@@ -20,7 +20,7 @@
 
 // Setup for Environments
 $environments = array(
-  'local'       => 'localhost',
+  'local'       => 'ezoehunt.dev',
   'production'  => 'ezoehunt.com'
 );
 
