@@ -235,10 +235,8 @@ foreach ( $design as $attachment ) :
 <?php if ( get_the_content() != false ) : ?>
           <p class="overview">
             <span>Overview</span>
+            <br/><?php echo get_the_content(); ?>
           </p>
-            <p>
-              <?php echo get_the_content(); ?>
-            </p>
 <?php endif; ?>
 
 <?php if ( ! empty($process) ) : ?>
