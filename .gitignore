@@ -9,6 +9,7 @@ _keep
 /e/wp-content/uploads
 /e/wp-content/debug.log
 /e/wp-config-sample.php
+/e/wp-content/wflogs
 
 #/e/wp-content/plugins
 #/e/wp-content/themes/twentyfifteen
