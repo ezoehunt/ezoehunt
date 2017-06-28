@@ -585,7 +585,8 @@ function eh_remove_from_search( $query ) {
     $meta_query = $query->get('meta_query');
 
     // Include items without the key AND items where key != NULL
-    $meta_query[] = array(
+    //$meta_query[] = array( 
+    $meta_query = array(
       'relation' => 'OR',
       array(
     		'key' => '_portfolio_display_order',

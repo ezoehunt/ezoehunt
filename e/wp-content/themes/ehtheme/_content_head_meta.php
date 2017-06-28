@@ -10,21 +10,25 @@ $generalKeys ='Elizabeth Hunt, Making Things and Thinking About Them, UX, UX des
 
 <!-- Meta Data -->
 <title><?php
-  if ( is_single() )
-  { echo 'Elizabeth Hunt &#187; '.get_the_title(); }
-  else { echo 'Elizabeth Hunt &#187; Making Things &#38; Thinking About Them'; }?></title>
+  if ( is_single() ) { echo 'Elizabeth Hunt &#187; '.get_the_title(); }
+  else { echo 'Elizabeth Hunt &#187; Making Things &#38; Thinking About Them'; }?>
+</title>
 <meta name="description" content="Making Things &#38; Thinking About Them: Work &#38; Words from Elizabeth Hunt"
 <meta name="designed_by" content="Elizabeth Hunt" />
 <meta name="author" content="Elizabeth Hunt" />
 <meta name="copyright" content="Elizabeth Hunt 2006-<?php echo date('Y');?>" />
 <meta name="rating" content="general" />
 <meta name="keywords" content="<?php
-  echo $generalKeys. ', ';
+if ( is_single() ) {
   $keysBlog = get_post_meta( $post->ID, '_blog_keywords');
   $keysPortfolio = get_post_meta( $post->ID, '_portfolio_keywords');
-  if ( !empty( $keysBlog ) ) { echo $keysBlog[0]; }
-  if ( !empty( $keysPortfolio ) ) { echo $keysPortfolio[0]; }
-  ?>"/>
+  if ( !empty( $keysBlog ) ) { echo $generalKeys.', '.$keysBlog[0]; }
+  if ( !empty( $keysPortfolio ) ) { echo $generalKeys.', '.$keysPortfolio[0]; }
+}
+else {
+  echo $generalKeys. ', ';
+}
+?>"/>
 
 <!-- Meta Social -->
 
